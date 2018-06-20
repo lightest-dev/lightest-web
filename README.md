@@ -1,2 +1,2 @@
-# zetester-web
-Web part of zetester.
+# lightest-web
+Web part of lightest.
