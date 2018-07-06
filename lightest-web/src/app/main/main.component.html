@@ -1,0 +1,9 @@
+<span class="text-position">lighTest</span>
+<div class="navigation-buttons">
+  <a mat-button 
+    *ngFor="let link of links" 
+    [routerLink]="link.path" 
+    [routerLinkActive]="link.active"> {{link.label}}
+  </a>
+</div>
+  

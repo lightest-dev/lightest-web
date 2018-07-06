@@ -1,0 +1,13 @@
+
+.text-position{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 18%;
+    font-size: 17vh;
+}
+.navigation-buttons{
+    display: flex;
+    justify-content: center;
+    margin-top: 3%;
+}
