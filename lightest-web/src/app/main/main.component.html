@@ -1,9 +1,12 @@
-<span class="text-position">lighTest</span>
-<div class="navigation-buttons">
-  <a mat-button 
-    *ngFor="let link of links" 
-    [routerLink]="link.path" 
-    [routerLinkActive]="link.active"> {{link.label}}
-  </a>
+<div>
+  <span class="text-position"><span class="part-text-style">ligh</span>Test</span>
+  <div class="navigation-buttons">
+    <a mat-button 
+      class="buttons-style"
+      *ngFor="let link of links" 
+      [routerLink]="link.path" 
+      [routerLinkActive]="link.active"> {{link.label}}
+    </a>
+  </div>
 </div>
   

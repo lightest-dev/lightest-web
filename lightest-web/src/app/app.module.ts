@@ -7,13 +7,15 @@ import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { SharedModule } from './shared/shared.module';
 import { MainComponent } from './main/main.component';
+import { ErrorComponent } from './error/error.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegistrationComponent,
-    MainComponent
+    MainComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
