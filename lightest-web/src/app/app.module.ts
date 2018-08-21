@@ -9,6 +9,8 @@ import { SharedModule } from './shared/shared.module';
 import { MainComponent } from './main/main.component';
 import { ErrorComponent } from './error/error.component';
 
+import {MatFormFieldModule} from '@angular/material/form-field';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +22,8 @@ import { ErrorComponent } from './error/error.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SharedModule
+    SharedModule,
+    MatFormFieldModule
   ],
   providers: [],
   bootstrap: [AppComponent]
