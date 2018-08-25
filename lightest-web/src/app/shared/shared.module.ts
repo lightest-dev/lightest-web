@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule, MatProgressSpinnerModule } from '@angular/material';
+import { MatInputModule, MatProgressSpinnerModule, MatRadioModule } from '@angular/material';
 import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
@@ -22,7 +22,8 @@ import { MatCardModule } from '@angular/material/card';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    MatCardModule
+    MatCardModule,
+    MatRadioModule
   ],
   declarations: [],
   exports: [
@@ -35,7 +36,8 @@ import { MatCardModule } from '@angular/material/card';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    MatCardModule
+    MatCardModule,
+    MatRadioModule
   ]
 })
 export class SharedModule { }

@@ -1,0 +1,51 @@
+<div class="link-back">
+        <a routerLink="/main"><i class="material-icons">arrow_back</i>  На Головну</a>
+    </div>
+    
+    <div class="form-wrapper">
+      <form>
+
+        <div class="form-header">
+          <p>Реєстрація</p>
+        </div>
+
+        <mat-radio-group>
+            <mat-radio-button value="student">Студент</mat-radio-button>
+            <mat-radio-button value="teacher">Вчитель</mat-radio-button>
+        </mat-radio-group>
+
+        <div class="double-inputs">
+            <mat-form-field >
+                <input matInput placeholder="Ім'я">
+            </mat-form-field>
+            <mat-form-field >
+                <input matInput placeholder="Прізвище">
+            </mat-form-field>
+        </div>
+
+        <mat-form-field >
+            <input matInput placeholder="E-mail">
+        </mat-form-field>
+
+        <mat-form-field >
+          <input matInput placeholder="Логін">
+        </mat-form-field>
+      
+        <div class="double-inputs">
+            <mat-form-field>
+                <input matInput placeholder="Пароль" [type]="hide ? 'password' : 'text'">
+                <mat-icon matSuffix color="primary" (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Повторіть пароль" [type]="hide ? 'password' : 'text'">
+                <mat-icon matSuffix color="primary" (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+            </mat-form-field>
+        </div>
+        
+    
+        <a mat-button class="c-button">Зареєструватись</a>
+    
+        <a routerLink="/login" class="link">У мене вже є акаунт</a>
+
+      </form>
+    </div>
