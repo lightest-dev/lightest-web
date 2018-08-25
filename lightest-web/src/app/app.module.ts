@@ -9,7 +9,8 @@ import { SharedModule } from './shared/shared.module';
 import { MainComponent } from './main/main.component';
 import { ErrorComponent } from './error/error.component';
 
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,6 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     ErrorComponent
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
     SharedModule,
     MatFormFieldModule
@@ -28,4 +28,5 @@ import {MatFormFieldModule} from '@angular/material/form-field';
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

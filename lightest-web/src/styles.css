@@ -1,16 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
-html{
+
+html {
     height: 100%;
+    color: #ccffee;
+    font-family: 'Quicksand', sans-serif;
 }
 
 .background{
-    background: linear-gradient(to bottom right, #001a13, #00664d); 
+     background: linear-gradient(to bottom right, #001a13, #00664d);  
 }
 
 * {
     margin: 0;
     padding: 0;
+}
+
+.c-button{
+    color: #ccffee;
+    font-family: 'Quicksand', sans-serif;
+    background-color: #003326;
+    margin-right: 2%;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
 }
