@@ -3,7 +3,7 @@
     </div>
     
     <div class="form-wrapper">
-      <form>
+      <form [formGroup]="registrationUserForm" (ngSubmit)="register()">
 
         <div class="form-header">
           <p>Реєстрація</p>
@@ -11,34 +11,66 @@
 
         <div class="double-inputs">
             <mat-form-field >
-                <input matInput placeholder="Ім'я">
+                <input matInput 
+                name="firstName"
+                 formControlName="firstName" 
+                 placeholder="Ім'я">
             </mat-form-field>
+
             <mat-form-field >
-                <input matInput placeholder="Прізвище">
+                <input matInput 
+                name="secondName"
+                formControlName="secondName" 
+                placeholder="Прізвище">
             </mat-form-field>
         </div>
 
         <mat-form-field >
-            <input matInput placeholder="E-mail">
+            <input matInput 
+            name="email"
+            formControlName="email" 
+            placeholder="E-mail">
         </mat-form-field>
 
         <mat-form-field >
-          <input matInput placeholder="Логін">
+          <input matInput 
+            name="login"
+            formControlName="login" 
+            placeholder="Логін">
         </mat-form-field>
       
         <div class="double-inputs">
             <mat-form-field>
-                <input matInput placeholder="Пароль" [type]="hide ? 'password' : 'text'">
-                <mat-icon matSuffix color="primary" (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                <input matInput 
+                name="password"
+                formControlName="password" 
+                placeholder="Пароль" 
+                [type]="hide1 ? 'text' : 'password'">
+
+                <mat-icon matSuffix 
+                color="primary" 
+                (click)="hide1 = !hide1">
+                {{hide1 ? 'visibility' : 'visibility_off'}}
+                </mat-icon>
             </mat-form-field>
+
             <mat-form-field>
-                <input matInput placeholder="Повторіть пароль" [type]="hide ? 'password' : 'text'">
-                <mat-icon matSuffix color="primary" (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                <input matInput 
+                name="passwordRepeat"
+                formControlName="passwordRepeat"
+                placeholder="Повторіть пароль" 
+                [type]="hide2 ? 'text' : 'password'">
+                
+                <mat-icon matSuffix
+                 color="primary" 
+                 (click)="hide2 = !hide2">
+                 {{hide2 ? 'visibility' : 'visibility_off'}}
+                </mat-icon>
             </mat-form-field>
         </div>
         
     
-        <a mat-button class="c-button">Зареєструватись</a>
+        <button mat-button type="submit" class="c-button">Зареєструватись</button>
     
         <a routerLink="/login" class="link">У мене вже є акаунт</a>
 
