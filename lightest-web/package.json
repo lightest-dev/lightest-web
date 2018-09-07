@@ -23,6 +23,7 @@
     "@angular/platform-browser": "^6.0.5",
     "@angular/platform-browser-dynamic": "^6.0.3",
     "@angular/router": "^6.0.3",
+    "@moebius/ng-validators": "^1.1.1",
     "@webcomponents/custom-elements": "^1.0.0",
     "bootstrap": "^4.0.0-alpha.5",
     "core-js": "^2.5.4",

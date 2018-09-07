@@ -10,6 +10,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class RegistrationComponent implements OnInit {
 
   registrationUserForm: FormGroup;
+  password;
 
   constructor(
     private router: Router,
@@ -39,20 +40,25 @@ export class RegistrationComponent implements OnInit {
       login: ['',[
         Validators.required,
         Validators.minLength(3),
-        Validators.maxLength(25)
+        Validators.maxLength(25),
+        Validators.pattern(/^[0-9a-z-\.]+\@[0-9a-z-]{2,}\.[a-z]{2,}$/)
       ]],
-      password: ['',[
-        Validators.required,
-        // find regualar expr for this field !!!
-      ]],
-      passwordRepeat: ['',[
-        Validators.required
-      ]]
+        password: ['',[
+          Validators.required,
+          Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/)
+        ]],
+        passwordRepeat: ['',[
+          Validators.required,
+          Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/),
+       // compare with password 
+        ]]
     })
   }
 
   register() {
     console.log("Iam register");
   }
+
+
 
 }
