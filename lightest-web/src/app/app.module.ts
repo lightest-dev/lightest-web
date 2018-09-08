@@ -8,9 +8,11 @@ import { RegistrationComponent } from './registration/registration.component';
 import { SharedModule } from './shared/shared.module';
 import { MainComponent } from './main/main.component';
 import { ErrorComponent } from './error/error.component';
-
+import { HttpClientModule } from '@angular/common/http';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuthComponent } from './auth/auth.component';
+import { AuthService } from './api/services/auth.service';
 
 @NgModule({
   declarations: [
@@ -18,14 +20,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     LoginComponent,
     RegistrationComponent,
     MainComponent,
-    ErrorComponent
+    ErrorComponent,
+    AuthComponent
   ],
   imports: [
     AppRoutingModule,
     SharedModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    AuthService
+  ],
   bootstrap: [AppComponent]
 })
 

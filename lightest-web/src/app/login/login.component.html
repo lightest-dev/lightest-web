@@ -3,20 +3,27 @@
 </div>
 
 <div class="form-wrapper">
-  <form>
+  <form [formGroup]="loginUserForm" (ngSubmit)="login()">
     <div class="form-header">
       <p>Увійдіть в систему</p>
     </div>
     <mat-form-field >
-      <input matInput placeholder="Логін">
+      <input matInput
+       placeholder="Логін"
+       name="login"
+       formControlName="login">
     </mat-form-field>
   
     <mat-form-field>
-      <input matInput placeholder="Пароль" [type]="hide ? 'password' : 'text'">
+      <input matInput 
+      placeholder="Пароль" 
+      name="password"
+      formControlName="password"
+      [type]="hide ? 'password' : 'text'">
       <mat-icon matSuffix color="primary" (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
     </mat-form-field>
 
-    <a mat-button class="c-button">Увійти</a>
+    <button mat-button type="submit" class="c-button">Увійти</button>
 
     <a class="link-register">Неможу увійти</a>
     <a routerLink="/registration" class="link-register">У мене немає акаунта</a>
