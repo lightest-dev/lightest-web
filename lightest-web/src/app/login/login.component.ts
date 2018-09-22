@@ -34,11 +34,12 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    console.log("I am login");
-    // this.authService.login(this.loginUserForm.value.login, this.loginUserForm.value.password, true).subscribe(
-    //    data => {console.log(data) }
-    // )
-    this.router.navigate(['/account/student']);
+   this.authService.login(this.loginUserForm.value.login, this.loginUserForm.value.password, true)
+    .subscribe(data => { 
+      //  this.authService.getToken();
+    }, (err) => {
+        console.log(err);
+    });
   }
 
 }
