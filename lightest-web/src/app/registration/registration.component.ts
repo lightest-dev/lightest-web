@@ -35,13 +35,13 @@ export class RegistrationComponent implements OnInit {
         Validators.maxLength(25)
       ]],
       email: ['',[
-        Validators.required
+        Validators.required,
+        Validators.pattern(/^[0-9a-z-\.]+\@[0-9a-z-]{2,}\.[a-z]{2,}$/)
       ]],
       login: ['',[
         Validators.required,
         Validators.minLength(3),
-        Validators.maxLength(25),
-        Validators.pattern(/^[0-9a-z-\.]+\@[0-9a-z-]{2,}\.[a-z]{2,}$/)
+        Validators.maxLength(25)
       ]],
         password: ['',[
           Validators.required,

@@ -1,0 +1,7 @@
+
+    {
+      "context": "/https://login.lightest.tk",
+      "target": "http://localhost:4200",
+      "secure": false                   
+    }
+  

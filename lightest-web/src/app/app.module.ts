@@ -13,6 +13,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthComponent } from './auth/auth.component';
 import { AuthService } from './api/services/auth.service';
+import { AuthGuardService } from './shared/guards/auth-guard.service';
+import { StudentComponent } from './student/student.component';
+import { AccountModule } from './account/account.module';
 
 @NgModule({
   declarations: [
@@ -27,10 +30,12 @@ import { AuthService } from './api/services/auth.service';
     AppRoutingModule,
     SharedModule,
     MatFormFieldModule,
-    HttpClientModule
+    HttpClientModule,
+    AccountModule
   ],
   providers: [
-    AuthService
+    AuthService,
+    AuthGuardService
   ],
   bootstrap: [AppComponent]
 })
