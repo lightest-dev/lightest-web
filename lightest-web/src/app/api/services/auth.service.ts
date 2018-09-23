@@ -34,20 +34,41 @@ export class AuthService {
                       )              
   }
 
-  getToken() {
-    let body = new HttpParams();
-    body.set('client_id', "client");
-    body.set('response_type', "code id_token token");
-    body.set('redirect_uri', "http://localhost:4200/auth");
-    body.set('scope', "openid profile api");
-    body.set("nonce", "1244452");
-
-    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+  authorize() {
+    let body = new FormData();
+    body.append('client_id', "client");
+    body.append('response_type', "code id_token token");
+    body.append('redirect_uri', "http://localhost:4200/auth");
+    body.append('scope', "openid profile api");
+    body.append("nonce", Math.floor(Math.random()* 2147483647).toString());
     
-    this.http.post('https://login.lightest.tk/connect/authorize', body, { headers: headers })
-              .subscribe(
-                data => console.log(data)
-              );
+    return this.http.post('https://login.lightest.tk/connect/authorize', body)
+      .pipe(
+        catchError((err: HttpErrorResponse) => {
+          if (err.status === 400) {
+            return throwError('Bad Request');
+          } 
+        })
+      );
+  }
+
+  getToken(code: string) {
+    let body = new FormData();
+    body.append('client_id', "client");
+    body.append('client_secret', 'secret');
+    body.append('grant_type', 'authorization_code')
+    body.append('redirect_uri', "http://localhost:4200/auth");
+    body.append('scope', "openid profile api");
+    body.append('code', code);
+    
+    return this.http.post('https://login.lightest.tk/connect/token', body)
+      .pipe(
+        catchError((err: HttpErrorResponse) => {
+          if (err.status === 400) {
+            return throwError('Bad Request');
+          } 
+        })
+      );
   }
 
   register(userName: string, password: string, email: string) {
