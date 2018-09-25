@@ -7,11 +7,10 @@ import { ErrorComponent } from './error/error.component';
 import { AuthComponent } from './auth/auth.component';
 
 const routes: Routes = [
-  { path: "", pathMatch: "full", redirectTo: "main" }, 
+  { path: "", pathMatch: "full", component: AuthComponent, }, 
   { path: "main", component: MainComponent},
   { path: "login", component: LoginComponent},
-  { path: "registration", component: RegistrationComponent},
-  { path: "auth", component: AuthComponent }
+  { path: "registration", component: RegistrationComponent}
 ];
 
 @NgModule({

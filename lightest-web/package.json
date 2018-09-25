@@ -25,6 +25,7 @@
     "@angular/router": "^6.0.3",
     "@moebius/ng-validators": "^1.1.1",
     "@webcomponents/custom-elements": "^1.0.0",
+    "angular-oauth2-oidc": "^4.0.3",
     "bootstrap": "^4.0.0-alpha.5",
     "core-js": "^2.5.4",
     "node-pre-gyp": "^0.10.0",

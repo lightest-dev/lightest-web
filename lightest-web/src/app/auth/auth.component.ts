@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../api/services/auth.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { OAuthService } from 'angular-oauth2-oidc';
 
 
 
@@ -9,15 +10,22 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AuthComponent implements OnInit {
 
-  constructor(    
-    private authService: AuthService,
-    private route: ActivatedRoute
-  ) { }
+  constructor(private oauthService: OAuthService, private router: Router,
+    private authService: AuthService) {}
 
   ngOnInit() {
-    const code: string = this.route.snapshot.queryParamMap.get('code');
-    this.authService.getToken(code)
-      .subscribe(data => console.log(data));
+    if (!this.authService.isLoggedIn()) {
+        this.router.navigate(["/main"]);
+    }
+    else {
+        this.oauthService.loadDiscoveryDocumentAndTryLogin().then(_ => {
+            if (!this.oauthService.hasValidIdToken() || !this.oauthService.hasValidAccessToken()) {
+                this.oauthService.initImplicitFlow('some-state');
+            } else {
+                this.router.navigate(["/home"]);
+            }
+        });
+    }
   }
 
 }

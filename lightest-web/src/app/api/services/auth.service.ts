@@ -12,7 +12,8 @@ export class AuthService {
 
   constructor(private http: HttpClient) {
     // при обновлении страницы смотрим в localStorage чтоб проверить есть ли токен
-    this.loggedIn = !!localStorage.getItem('access_token');
+    //this.loggedIn = !!localStorage.getItem('access_token');
+    this.loggedIn = !!localStorage.getItem('logged_in');
   }
 
   ngOnInit() {
@@ -31,44 +32,12 @@ export class AuthService {
                             return throwError('Bad Request');
                           } 
                         })
-                      )              
-  }
+                      )
+  } 
 
-  authorize() {
-    let body = new FormData();
-    body.append('client_id', "client");
-    body.append('response_type', "code id_token token");
-    body.append('redirect_uri', "http://localhost:4200/auth");
-    body.append('scope', "openid profile api");
-    body.append("nonce", Math.floor(Math.random()* 2147483647).toString());
-    
-    return this.http.post('https://login.lightest.tk/connect/authorize', body)
-      .pipe(
-        catchError((err: HttpErrorResponse) => {
-          if (err.status === 400) {
-            return throwError('Bad Request');
-          } 
-        })
-      );
-  }
-
-  getToken(code: string) {
-    let body = new FormData();
-    body.append('client_id', "client");
-    body.append('client_secret', 'secret');
-    body.append('grant_type', 'authorization_code')
-    body.append('redirect_uri', "http://localhost:4200/auth");
-    body.append('scope', "openid profile api");
-    body.append('code', code);
-    
-    return this.http.post('https://login.lightest.tk/connect/token', body)
-      .pipe(
-        catchError((err: HttpErrorResponse) => {
-          if (err.status === 400) {
-            return throwError('Bad Request');
-          } 
-        })
-      );
+  confirmLogin() {
+    this.loggedIn = true;
+    localStorage.setItem('logged_in', "true");
   }
 
   register(userName: string, password: string, email: string) {
