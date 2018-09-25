@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { OAuthModule } from 'angular-oauth2-oidc';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './login/login.component';
@@ -31,7 +31,8 @@ import { AccountModule } from './account/account.module';
     SharedModule,
     MatFormFieldModule,
     HttpClientModule,
-    AccountModule
+    AccountModule,
+    OAuthModule.forRoot(),
   ],
   providers: [
     AuthService,
