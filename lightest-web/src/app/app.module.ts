@@ -10,12 +10,13 @@ import { MainComponent } from './main/main.component';
 import { ErrorComponent } from './error/error.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthComponent } from './auth/auth.component';
 import { AuthService } from './api/services/auth.service';
 import { AuthGuardService } from './shared/guards/auth-guard.service';
-import { StudentComponent } from './student/student.component';
 import { AccountModule } from './account/account.module';
+import {EditorComponent} from './editor/editor.component';
+import { MonacoEditorModule } from 'ngx-monaco-editor';
+
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AccountModule } from './account/account.module';
     RegistrationComponent,
     MainComponent,
     ErrorComponent,
-    AuthComponent
+    AuthComponent,
+    EditorComponent
   ],
   imports: [
     AppRoutingModule,
@@ -33,6 +35,7 @@ import { AccountModule } from './account/account.module';
     HttpClientModule,
     AccountModule,
     OAuthModule.forRoot(),
+    MonacoEditorModule.forRoot()
   ],
   providers: [
     AuthService,
