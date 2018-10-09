@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AuthService } from '../api/services/auth.service';
+import { AuthService } from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-registration',
@@ -52,16 +52,16 @@ export class RegistrationComponent implements OnInit {
         passwordRepeat: ['',[
           Validators.required,
           Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/),
-       // compare with password 
+       // compare with password
         ]]
     })
   }
 
   register() {
-    this.authService.register(this.registrationUserForm.value.login, 
+    this.authService.register(this.registrationUserForm.value.login,
                               this.registrationUserForm.value.password,
                               this.registrationUserForm.value.email)
-    .subscribe(data => { 
+    .subscribe(data => {
       //  this.authService.getToken();
     }, (err) => {
         console.log(err);

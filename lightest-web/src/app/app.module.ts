@@ -11,11 +11,12 @@ import { ErrorComponent } from './error/error.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { AuthComponent } from './auth/auth.component';
-import { AuthService } from './api/services/auth.service';
+import { AuthService } from './shared/services/auth.service';
 import { AuthGuardService } from './shared/guards/auth-guard.service';
 import { AccountModule } from './account/account.module';
 import {EditorComponent} from './editor/editor.component';
 import { MonacoEditorModule } from 'ngx-monaco-editor';
+import {EditorService} from './shared/services/editor.service';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { MonacoEditorModule } from 'ngx-monaco-editor';
   ],
   providers: [
     AuthService,
-    AuthGuardService
+    AuthGuardService,
+    EditorService
   ],
   bootstrap: [AppComponent]
 })

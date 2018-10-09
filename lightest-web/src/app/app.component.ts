@@ -3,7 +3,7 @@ import {  AuthConfig } from "angular-oauth2-oidc";
 import { OAuthService, JwksValidationHandler} from "angular-oauth2-oidc";
 import { isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
-import { AuthService } from './api/services/auth.service';
+import { AuthService } from './shared/services/auth.service';
 
 
 @Component({
@@ -16,7 +16,7 @@ export class AppComponent {
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: Object,
     private oauthService: OAuthService,
-    private authService: AuthService) 
+    private authService: AuthService)
 {
     if (isPlatformBrowser(this.platformId)) {
         this.oauthService.configure(authConfig);
@@ -51,7 +51,7 @@ export const authConfig: AuthConfig = {
   // Url of the Identity Provider
   issuer: "http://login.lightest.tk",
   requireHttps: false,
-  
+
 
   // URL of the SPA to redirect the user to after login
   redirectUri: "http://localhost:4200/index.html",

@@ -4,7 +4,7 @@ import {Observable, throwError, of} from 'rxjs';
 import {retry, tap, map, filter, catchError, pluck} from 'rxjs/operators';
 
 @Injectable()
-export class AuthService {
+export class AuthService{
 
   private loggedIn = false;
   request_token;
@@ -17,7 +17,7 @@ export class AuthService {
   }
 
   ngOnInit() {
-   
+
   }
 
   isLoggedIn() {
@@ -30,10 +30,10 @@ export class AuthService {
                         catchError((err: HttpErrorResponse) => {
                           if (err.status === 400) {
                             return throwError('Bad Request');
-                          } 
+                          }
                         })
                       )
-  } 
+  }
 
   confirmLogin() {
     this.loggedIn = true;
@@ -46,15 +46,15 @@ export class AuthService {
                       catchError((err: HttpErrorResponse) => {
                         if (err.status === 400) {
                           return throwError('Bad Request');
-                        } 
+                        }
                       })
-                    )   
+                    )
   }
 
   logout() {
     localStorage.removeItem('access_token');
     this.loggedIn = false;
-    // запит на logout 
+    // запит на logout
   }
 
   loadRegisterObject(userName: string, password: string, email: string) {

@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import {EditorService} from '../shared/services/editor.service';
 
 @Component({
   selector: 'app-editor',
@@ -7,15 +8,13 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 })
 
 export class EditorComponent implements OnInit {
-  options = {
-    theme: 'vs-dark',
-    language: 'java'
-  };
-  code = `function hello() {
-	 alert('Hello world!');
-  }`;
-  constructor() { }
+  options;
+  code = `/* write your code here*/ `;
+  constructor(public editorService: EditorService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.options = this.editorService.options;
+    console.log(this.options);
+  }
 
 }
