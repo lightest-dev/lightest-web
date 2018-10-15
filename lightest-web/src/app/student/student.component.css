@@ -29,3 +29,22 @@ h1.example-app-name {
      `<body>` to be our scrolling element for mobile layouts. */
   flex: 1 0 auto;
 }
+
+mat-toolbar.mat-toolbar {
+  background-color: transparent;
+}
+
+.main-content {
+  background: #001a13;
+  color: white;
+}
+
+mat-nav-list {
+  background: #001a13;
+}
+
+div.mat-drawer-backdrop.mat-drawer-shown {
+  background-color: red;
+  opacity: 0.8;
+}
+

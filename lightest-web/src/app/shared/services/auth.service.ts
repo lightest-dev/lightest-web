@@ -4,7 +4,7 @@ import {Observable, throwError, of} from 'rxjs';
 import {retry, tap, map, filter, catchError, pluck} from 'rxjs/operators';
 
 @Injectable()
-export class AuthService{
+export class AuthService {
 
   private loggedIn = false;
   request_token;
@@ -12,12 +12,9 @@ export class AuthService{
 
   constructor(private http: HttpClient) {
     // при обновлении страницы смотрим в localStorage чтоб проверить есть ли токен
-    //this.loggedIn = !!localStorage.getItem('access_token');
-    this.loggedIn = !!localStorage.getItem('logged_in');
-  }
-
-  ngOnInit() {
-
+    // this.loggedIn = !!localStorage.getItem('access_token');
+    //this.loggedIn = !!localStorage.getItem('logged_in');
+    this.loggedIn = true;
   }
 
   isLoggedIn() {
@@ -32,12 +29,12 @@ export class AuthService{
                             return throwError('Bad Request');
                           }
                         })
-                      )
+                      );
   }
 
   confirmLogin() {
     this.loggedIn = true;
-    localStorage.setItem('logged_in', "true");
+    localStorage.setItem('logged_in', 'true');
   }
 
   register(userName: string, password: string, email: string) {
@@ -48,7 +45,7 @@ export class AuthService{
                           return throwError('Bad Request');
                         }
                       })
-                    )
+                    );
   }
 
   logout() {
@@ -59,17 +56,17 @@ export class AuthService{
 
   loadRegisterObject(userName: string, password: string, email: string) {
     return {
-      "username": userName,
-      "password": password,
-      "email": email
-    }
+      'username': userName,
+      'password': password,
+      'email': email
+    };
   }
 
   loadLoginObject(login: string, password: string, rememberMe: boolean) {
     return {
-      "login": login,
-      "password": password,
-      "rememberMe": rememberMe
-    }
+      'login': login,
+      'password': password,
+      'rememberMe': rememberMe
+    };
   }
 }
