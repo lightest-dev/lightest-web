@@ -4,13 +4,24 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-//angular-material
+// angular-material
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule, MatProgressSpinnerModule, MatRadioModule, MatOptionModule, MatSelectModule, MatToolbar, MatToolbarModule, MatListModule } from '@angular/material';
+import {
+  MatInputModule,
+  MatProgressSpinnerModule,
+  MatRadioModule,
+  MatOptionModule,
+  MatSelectModule,
+  MatToolbar,
+  MatToolbarModule,
+  MatListModule,
+  MatTabsModule
+} from '@angular/material';
 import { MatCardModule } from '@angular/material/card';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import {StudentInfoComponent} from '../student/student-info/student-info.component';
 
 @NgModule({
   imports: [
@@ -29,9 +40,12 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     MatOptionModule,
     MatSelectModule,
     MatToolbarModule,
-    MatListModule
+    MatListModule,
+    MatTabsModule
   ],
-  declarations: [],
+  declarations: [
+    StudentInfoComponent
+  ],
   exports: [
     BrowserModule,
     CommonModule,
@@ -48,7 +62,9 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     MatOptionModule,
     MatSelectModule,
     MatToolbarModule,
-    MatListModule
+    MatListModule,
+    StudentInfoComponent,
+    MatTabsModule
   ]
 })
 export class SharedModule { }

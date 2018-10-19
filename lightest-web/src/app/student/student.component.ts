@@ -9,14 +9,30 @@ import { MediaMatcher } from '@angular/cdk/layout';
 export class StudentComponent implements OnInit {
   mobileQuery: MediaQueryList;
 
-  fillerNav = Array.from({length: 50}, (_, i) => `Nav Item ${i + 1}`);
+  // fillerNav = ['Моя сторінка', 'Список курсів', 'Список завдань', 'Вихід'];
 
-  fillerContent = Array.from({length: 50}, () =>
-    `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-       labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-       laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-       voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-       cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`);
+  fillerNav = [
+    {
+      name: 'Моя сторінка',
+      icon: 'account_circle',
+      link: ''
+    },
+    {
+      name: 'Список курсів',
+      icon: 'import_contacts',
+      link: ''
+    },
+    {
+      name: 'Список завдань',
+      icon: 'list',
+      link: ''
+    },
+    {
+      name: 'Вихід',
+      icon: 'rowing',
+      link: ''
+    }
+  ];
 
   private _mobileQueryListener: () => void;
 
@@ -31,6 +47,7 @@ export class StudentComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // get data about student from service accountService
   }
 
 }
