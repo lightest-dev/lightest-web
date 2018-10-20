@@ -1,0 +1,19 @@
+<mat-accordion class="example-headers-align">
+  <mat-expansion-panel *ngFor="let task of tasks; let i = index" [expanded]="step === i" (opened)="setStep(i)" hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{task.name}}
+      </mat-panel-title>
+      <mat-panel-description>
+        {{task.courseName}}
+        <mat-icon>{{task.icon}}</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    {{task.description}}
+
+    <mat-action-row>
+      <button mat-button color="primary" (click)="nextStep()">Next</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>

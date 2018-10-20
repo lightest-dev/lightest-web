@@ -1,0 +1,13 @@
+
+
+.photo-wrapper img{ border-radius: 5px; }
+
+.tabs {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.work-info { width: 100% }
+
+i { padding: 0 7px; }

@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="wrapper personal-info">
+    <div class="photo-wrapper">
+      <img width="230" height="230"
+           src="https://avatars1.githubusercontent.com/u/23261377?s=400&u=8df1d796999633af6b2665a3c173b7c3c6743115&v=4"
+           alt="">
+    </div>
+    <div class="title-name">
+      <h3>Олена Рожко</h3>
+    </div>
+  </div>
+  <div class="wrapper work-info">
+    <mat-tab-group>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <i class="material-icons">import_contacts</i>
+          Курси
+        </ng-template>
+        Content 1
+      </mat-tab>
+      <mat-tab *ngFor="let tab of tabsForTasks" >
+        <ng-template mat-tab-label>
+          <i class="material-icons">{{tab.icon}}</i>
+          {{tab.tabName}}
+        </ng-template>
+        <ng-container >
+          <app-task [tasks]="tasks"></app-task>
+        </ng-container>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>
+
