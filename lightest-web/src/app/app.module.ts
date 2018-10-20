@@ -13,7 +13,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { AuthComponent } from './auth/auth.component';
 import { AuthService } from './shared/services/auth.service';
 import { AuthGuardService } from './shared/guards/auth-guard.service';
-import { AccountModule } from './account/account.module';
+import { AccountStudentModule } from './student/accountStudent.module';
 import {EditorComponent} from './editor/editor.component';
 import { MonacoEditorModule } from 'ngx-monaco-editor';
 import {EditorService} from './shared/services/editor.service';
@@ -34,7 +34,7 @@ import {EditorService} from './shared/services/editor.service';
     SharedModule,
     MatFormFieldModule,
     HttpClientModule,
-    AccountModule,
+    AccountStudentModule,
     OAuthModule.forRoot(),
     MonacoEditorModule.forRoot()
   ],

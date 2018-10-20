@@ -17,11 +17,12 @@ import {
   MatToolbar,
   MatToolbarModule,
   MatListModule,
-  MatTabsModule
+  MatTabsModule, MatNativeDateModule
 } from '@angular/material';
 import { MatCardModule } from '@angular/material/card';
 import {MatSidenavModule} from '@angular/material/sidenav';
-import {StudentInfoComponent} from '../student/student-info/student-info.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 @NgModule({
   imports: [
@@ -41,11 +42,12 @@ import {StudentInfoComponent} from '../student/student-info/student-info.compone
     MatSelectModule,
     MatToolbarModule,
     MatListModule,
-    MatTabsModule
+    MatTabsModule,
+    MatExpansionModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
-  declarations: [
-    StudentInfoComponent
-  ],
+  declarations: [],
   exports: [
     BrowserModule,
     CommonModule,
@@ -63,8 +65,10 @@ import {StudentInfoComponent} from '../student/student-info/student-info.compone
     MatSelectModule,
     MatToolbarModule,
     MatListModule,
-    StudentInfoComponent,
-    MatTabsModule
+    MatTabsModule,
+    MatDatepickerModule,
+    MatExpansionModule,
+    MatNativeDateModule
   ]
 })
 export class SharedModule { }

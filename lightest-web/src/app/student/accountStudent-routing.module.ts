@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuardService } from '../shared/guards/auth-guard.service';
-import { StudentComponent } from '../student/student.component';
+import { StudentComponent } from './student.component';
 
 const routes: Routes = [
     {
@@ -35,5 +35,5 @@ const routes: Routes = [
     ]
   })
 
-  export class AccountRoutingModule {
+  export class AccountStudentRoutingModule {
   }

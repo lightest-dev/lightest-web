@@ -9,13 +9,11 @@ import { MediaMatcher } from '@angular/cdk/layout';
 export class StudentComponent implements OnInit {
   mobileQuery: MediaQueryList;
 
-  // fillerNav = ['Моя сторінка', 'Список курсів', 'Список завдань', 'Вихід'];
-
   fillerNav = [
     {
       name: 'Моя сторінка',
       icon: 'account_circle',
-      link: ''
+      link: 'account/student'
     },
     {
       name: 'Список курсів',
