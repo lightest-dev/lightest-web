@@ -4,14 +4,16 @@ import { AuthGuardService } from '../shared/guards/auth-guard.service';
 import { StudentComponent } from '../student/student.component';
 
 const routes: Routes = [
-    // canActivate: [AuthGuardService],
-    { path: 'account/student', component: StudentComponent},
-    { path: "**", redirectTo: "main" }
-   
+    {
+      path: 'account/student', component: StudentComponent,
+      canActivate: [AuthGuardService]
+    },
+    { path: '**', redirectTo: 'main' }
+
     //   children: [
-    //    { 
+    //    {
     //       path: 'student',
-    //       component: StudentComponent 
+    //       component: StudentComponent
     //    }
     //   //  {
     //   //    path: 'teacher',

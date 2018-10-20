@@ -29,3 +29,34 @@ h1.example-app-name {
      `<body>` to be our scrolling element for mobile layouts. */
   flex: 1 0 auto;
 }
+
+mat-toolbar.mat-toolbar {
+  background-color: transparent;
+}
+
+.main-content {
+  background: #001a13;
+  color: white;
+  opacity: 0.79999;
+}
+
+mat-sidenav,
+mat-nav-list {
+  background: #001a13;
+}
+
+mat-sidenav { width: 250px; }
+
+mat-nav-list {
+  text-align: center;
+  height: -webkit-fill-available;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+i {
+  padding: 0 7px;
+}
+
+
