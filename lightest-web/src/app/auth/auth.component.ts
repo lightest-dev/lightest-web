@@ -7,6 +7,7 @@ import { OAuthService } from 'angular-oauth2-oidc';
 
 @Component({
   template: '',
+  selector: 'app-auth'
 })
 export class AuthComponent implements OnInit {
 
@@ -14,7 +15,7 @@ export class AuthComponent implements OnInit {
     private authService: AuthService) {}
 
   ngOnInit() {
-    if (!this.authService.isLoggedIn()) {
+    if (!this.authService.loginPossible()) {
         this.router.navigate(["/main"]);
     }
     else {
@@ -22,7 +23,8 @@ export class AuthComponent implements OnInit {
             if (!this.oauthService.hasValidIdToken() || !this.oauthService.hasValidAccessToken()) {
                 this.oauthService.initImplicitFlow('some-state');
             } else {
-                this.router.navigate(["/home"]);
+                // todo: should be changed to actual main page after login
+                this.router.navigate(["/registration"]);
             }
         });
     }

@@ -1,8 +1,6 @@
 import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import {  AuthConfig } from 'angular-oauth2-oidc';
-import { OAuthService, JwksValidationHandler} from 'angular-oauth2-oidc';
 import { isPlatformBrowser } from '@angular/common';
-import { Router } from '@angular/router';
 import { AuthService } from './shared/services/auth.service';
 
 
@@ -13,34 +11,10 @@ import { AuthService } from './shared/services/auth.service';
 })
 export class AppComponent {
   constructor(
-    private router: Router,
     @Inject(PLATFORM_ID) private platformId: Object,
-    private oauthService: OAuthService,
     private authService: AuthService) {
     if (isPlatformBrowser(this.platformId)) {
-      this.oauthService.configure(authConfig);
-      this.oauthService.tokenValidationHandler = new JwksValidationHandler();
-      /*if (this.authService.isLoggedIn()) {
-          this.oauthService.loadDiscoveryDocumentAndTryLogin();
-      }*/
-    }
-  }
-
-  ngOnInit() {
-    if (isPlatformBrowser(this.platformId)) {
-    //  debugger;
-      if (!this.authService.isLoggedIn()) {
-        this.router.navigate(['/main']);
-      } else {
-        this.oauthService.loadDiscoveryDocumentAndTryLogin().then(_ => {
-          if (
-            !this.oauthService.hasValidIdToken() ||
-            !this.oauthService.hasValidAccessToken()
-          ) {
-            this.oauthService.initImplicitFlow('some-state');
-          }
-        });
-      }
+      this.authService.configureLogin(authConfig)     
     }
   }
 }
@@ -52,7 +26,7 @@ export const authConfig: AuthConfig = {
 
 
   // URL of the SPA to redirect the user to after login
-  redirectUri: 'http://localhost:4200/index.html',
+  redirectUri: 'http://localhost:4200',
 
   // URL of the SPA to redirect the user after silent refresh
   // silentRefreshRedirectUri: 'http://localhost:2020/silent-refresh.html',

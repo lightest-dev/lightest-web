@@ -2,23 +2,33 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHandler, HttpHeaders, HttpErrorResponse, HttpParams} from '@angular/common/http';
 import {Observable, throwError, of} from 'rxjs';
 import {retry, tap, map, filter, catchError, pluck} from 'rxjs/operators';
+import { OAuthService, AuthConfig, JwksValidationHandler } from 'angular-oauth2-oidc';
 
 @Injectable()
 export class AuthService {
 
-  private loggedIn = false;
+  private passwordLogged = false;
   request_token;
   headers;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+    private oauthService: OAuthService) {
     // при обновлении страницы смотрим в localStorage чтоб проверить есть ли токен
     // this.loggedIn = !!localStorage.getItem('access_token');
-    //this.loggedIn = !!localStorage.getItem('logged_in');
-    this.loggedIn = true;
+    this.passwordLogged = !!localStorage.getItem('logged_in');
+  }
+
+  configureLogin(config: AuthConfig) {
+    this.oauthService.configure(config);
+    this.oauthService.tokenValidationHandler = new JwksValidationHandler(); 
   }
 
   isLoggedIn() {
-    return this.loggedIn;
+    return this.oauthService.hasValidAccessToken();
+  }
+
+  loginPossible() {
+    return this.passwordLogged;
   }
 
   login(login: string, password: string, rememberMe: boolean) {
@@ -33,7 +43,7 @@ export class AuthService {
   }
 
   confirmLogin() {
-    this.loggedIn = true;
+    this.passwordLogged = true;
     localStorage.setItem('logged_in', 'true');
   }
 
@@ -50,8 +60,10 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('access_token');
-    this.loggedIn = false;
-    // запит на logout
+    this.passwordLogged = false;
+    this.oauthService.logOut(true);
+    this.http.post(`https://login.lightest.tk/api/Account/Logout`, "client")
+      .subscribe();
   }
 
   loadRegisterObject(userName: string, password: string, email: string) {
