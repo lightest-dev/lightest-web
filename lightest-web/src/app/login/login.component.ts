@@ -24,20 +24,20 @@ export class LoginComponent implements OnInit {
 
   initFormValidators() {
     this.loginUserForm = this.formBuilder.group({
-      login: ['',[
+      login: ['', [
         Validators.required
       ]],
-      password: ['',[
+      password: ['', [
         Validators.required
       ]]
-    })
+    });
   }
 
   login() {
    this.authService.login(this.loginUserForm.value.login, this.loginUserForm.value.password, true)
     .subscribe(data => {
       this.authService.confirmLogin();
-      this.router.navigate([""]);
+      this.router.navigate(['']);
     }, (err) => {
         console.log(err);
     });

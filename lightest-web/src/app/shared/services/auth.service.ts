@@ -20,7 +20,7 @@ export class AuthService {
 
   configureLogin(config: AuthConfig) {
     this.oauthService.configure(config);
-    this.oauthService.tokenValidationHandler = new JwksValidationHandler(); 
+    this.oauthService.tokenValidationHandler = new JwksValidationHandler();
   }
 
   isLoggedIn() {
@@ -62,8 +62,7 @@ export class AuthService {
     localStorage.removeItem('access_token');
     this.passwordLogged = false;
     this.oauthService.logOut(true);
-    this.http.post(`https://login.lightest.tk/api/Account/Logout`, "client")
-      .subscribe();
+    return this.http.post(`https://login.lightest.tk/api/Account/Logout`,{});
   }
 
   loadRegisterObject(userName: string, password: string, email: string) {

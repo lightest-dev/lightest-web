@@ -14,7 +14,7 @@ export class AppComponent {
     @Inject(PLATFORM_ID) private platformId: Object,
     private authService: AuthService) {
     if (isPlatformBrowser(this.platformId)) {
-      this.authService.configureLogin(authConfig)     
+      this.authService.configureLogin(authConfig);
     }
   }
 }

@@ -1,7 +1,7 @@
 <div class="link-back">
         <a routerLink="/main"><i class="material-icons">arrow_back</i>  На Головну</a>
     </div>
-    
+
     <div class="form-wrapper">
       <form [formGroup]="registrationUserForm" (ngSubmit)="register()">
 
@@ -11,67 +11,72 @@
 
         <div class="double-inputs">
             <mat-form-field >
-                <input matInput 
+                <input matInput
                  name="firstName"
-                 formControlName="firstName" 
+                 formControlName="firstName"
                  placeholder="Ім'я">
+              <mat-error *ngIf="formErrors.firstName">{{formErrors.firstName}}</mat-error>
             </mat-form-field>
 
             <mat-form-field >
-                <input matInput 
+                <input matInput
                 name="secondName"
-                formControlName="secondName" 
+                formControlName="secondName"
                 placeholder="Прізвище">
+              <mat-error *ngIf="formErrors.secondName">{{formErrors.secondName}}</mat-error>
             </mat-form-field>
         </div>
 
         <mat-form-field >
-            <input matInput 
+            <input matInput
             name="email"
-            formControlName="email" 
+            formControlName="email"
             placeholder="E-mail">
+          <mat-error *ngIf="formErrors.email">{{formErrors.email}}</mat-error>
         </mat-form-field>
 
         <mat-form-field >
-          <input matInput 
+          <input matInput
             name="login"
-            formControlName="login" 
+            formControlName="login"
             placeholder="Логін">
+          <mat-error *ngIf="formErrors.login">{{formErrors.login}}</mat-error>
         </mat-form-field>
-      
+
         <div class="double-inputs">
             <mat-form-field>
-                <input matInput 
+                <input matInput
                 name="password"
-                formControlName="password" 
-                placeholder="Пароль" 
+                formControlName="password"
+                placeholder="Пароль"
                 [type]="hide1 ? 'text' : 'password'">
-
-                <mat-icon matSuffix 
-                color="primary" 
+              <mat-error *ngIf="formErrors.password">{{formErrors.password}}</mat-error>
+                <mat-icon matSuffix
+                color="primary"
                 (click)="hide1 = !hide1">
                 {{hide1 ? 'visibility' : 'visibility_off'}}
                 </mat-icon>
             </mat-form-field>
 
             <mat-form-field>
-                <input matInput 
+                <input matInput
                 name="passwordRepeat"
                 formControlName="passwordRepeat"
-                placeholder="Повторіть пароль" 
+                placeholder="Повторіть пароль"
                 [type]="hide2 ? 'text' : 'password'">
-                
-                <mat-icon matSuffix
-                 color="primary" 
+              <mat-error *ngIf="registrationUserForm.value.password!==registrationUserForm.value.passwordRepeat">Паролі не збігаються</mat-error>
+
+              <mat-icon matSuffix
+                 color="primary"
                  (click)="hide2 = !hide2">
                  {{hide2 ? 'visibility' : 'visibility_off'}}
                 </mat-icon>
             </mat-form-field>
         </div>
-        
-    
+
+
         <button mat-button type="submit" class="c-button">Зареєструватись</button>
-    
+
         <a routerLink="/login" class="link">У мене вже є акаунт</a>
 
       </form>

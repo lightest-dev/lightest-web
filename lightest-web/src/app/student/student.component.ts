@@ -1,5 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
+import { AuthService } from '../shared/services/auth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-student',
@@ -24,17 +26,22 @@ export class StudentComponent implements OnInit {
       name: 'Список завдань',
       icon: 'list',
       link: ''
-    },
-    {
-      name: 'Вихід',
-      icon: 'rowing',
-      link: ''
     }
+    // {
+    //   name: 'Вихід',
+    //   icon: 'rowing',
+    //   link: ''
+    // }
   ];
 
   private _mobileQueryListener: () => void;
 
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
+  constructor(
+    changeDetectorRef: ChangeDetectorRef,
+    media: MediaMatcher,
+    private authService: AuthService,
+    private routerLink: Router
+  ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
@@ -48,4 +55,14 @@ export class StudentComponent implements OnInit {
     // get data about student from service accountService
   }
 
+  logout() {
+    console.log('logout');
+    this.authService.logout().subscribe(data => {
+        console.log(data);
+      }, (err) => {
+      console.log(err.status);
+    }, () => {
+    //  this.routerLink.routerL(\main);/
+    });
+  }
 }

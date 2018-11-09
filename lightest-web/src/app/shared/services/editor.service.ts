@@ -1,25 +1,29 @@
 import { Injectable, Inject } from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {THEMES} from '../constants/themes';
 
 @Injectable()
 export class EditorService {
-  options;
-  languages = ['c++', 'python', 'pascal', 'c'];
-  themes = ['vs-dark', 'hc-black'];
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json',
+      'Bearer': `${sessionStorage.access_token}`
+    })
+  };
 
-  constructor() {
-    this.options = {
-      theme: this.themes[0],
-      language: this.languages[0]
-    };
-  }
+  constructor(private http: HttpClient) {}
 
   getLanguages () {
-    return this.languages;
+    return this.http.get('https://lightest.tk/api/Languages', this.httpOptions);
   }
 
-  getThemes () {
-    return this.themes;
+  getDefaultTheme () {
+    return THEMES[0];
   }
 
-
+  getThemes() {
+    return THEMES;
+  }
 }
+
+

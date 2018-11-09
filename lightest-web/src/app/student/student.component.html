@@ -11,6 +11,9 @@
         <a mat-list-item routerLink="." *ngFor="let nav of fillerNav">{{nav.name}}
           <i class="material-icons">{{nav.icon}}</i>
         </a>
+        <a mat-list-item (click)="logout()">Вихід
+          <i class="material-icons">rowing</i>
+        </a>
       </mat-nav-list>
     </mat-sidenav>
 
