@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {EditorService} from '../shared/services/editor.service';
+import {Language} from '../api/models/language';
 
 @Component({
   selector: 'app-editor',
@@ -9,31 +10,32 @@ import {EditorService} from '../shared/services/editor.service';
 
 export class EditorComponent implements OnInit {
   options;
-  language;
+  languages;
   theme;
   code = `/* write your code here*/ `;
   constructor(public editorService: EditorService) { }
 
   ngOnInit() {
-    this.initLanguageType();
     this.initTheme();
-    this.loadOption();
+    this.initLanguages();
+    //this.loadEditorOptions(this.theme[0], this.languages[0]);
   }
 
-  initLanguageType () {
+  initLanguages () {
     this.editorService.getLanguages().subscribe(data => {
-     console.log(data);
-    }, error => { console.log(error); });
+      this.languages = data;
+    }, error => console.log(error));
   }
+
 
   initTheme() {
-    this.theme = this.editorService.getDefaultTheme();
+    this.theme = this.editorService.getThemes();
   }
 
-  loadOption() {
+  loadEditorOptions(theme: string, language: string) {
     this.options = {
-      theme: this.theme,
-      language: this.language
+      theme: theme,
+      language: language
     };
   }
 
