@@ -17,7 +17,7 @@ import {
   MatToolbar,
   MatToolbarModule,
   MatListModule,
-  MatTabsModule, MatNativeDateModule
+  MatTabsModule, MatNativeDateModule, MatCheckboxModule
 } from '@angular/material';
 import { MatCardModule } from '@angular/material/card';
 import {MatSidenavModule} from '@angular/material/sidenav';
@@ -68,7 +68,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     MatTabsModule,
     MatDatepickerModule,
     MatExpansionModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatCheckboxModule
   ]
 })
 export class SharedModule { }

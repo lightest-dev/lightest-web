@@ -16,15 +16,15 @@ export class AuthComponent implements OnInit {
 
   ngOnInit() {
     if (!this.authService.loginPossible()) {
-        this.router.navigate(["/main"]);
-    }
-    else {
+        this.router.navigate(['/main']);
+    } else {
         this.oauthService.loadDiscoveryDocumentAndTryLogin().then(_ => {
             if (!this.oauthService.hasValidIdToken() || !this.oauthService.hasValidAccessToken()) {
                 this.oauthService.initImplicitFlow('some-state');
             } else {
                 // todo: should be changed to actual main page after login
-                this.router.navigate(["/registration"]);
+              // get id and role from accountService
+                this.router.navigate(['/account/student']);
             }
         });
     }

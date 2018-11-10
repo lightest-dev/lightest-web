@@ -11,6 +11,7 @@ import { AuthService } from '../shared/services/auth.service';
 export class LoginComponent implements OnInit {
 
   loginUserForm: FormGroup;
+  checkedRememberMe = false;
 
   constructor(
     private router: Router,
@@ -34,7 +35,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-   this.authService.login(this.loginUserForm.value.login, this.loginUserForm.value.password, true)
+   this.authService.login(this.loginUserForm.value.login, this.loginUserForm.value.password, this.checkedRememberMe)
     .subscribe(data => {
       this.authService.confirmLogin();
       this.router.navigate(['']);

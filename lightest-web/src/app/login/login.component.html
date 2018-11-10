@@ -22,6 +22,8 @@
       [type]="hide ? 'text' : 'password'">
       <mat-icon matSuffix color="primary" (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
     </mat-form-field>
+    <p><mat-checkbox  [ngModelOptions]="{standalone: true}" [(ngModel)]="checkedRememberMe">Запам'ятати мене</mat-checkbox></p>
+
 
     <button mat-button type="submit" class="c-button">Увійти</button>
 
