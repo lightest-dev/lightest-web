@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {EditorService} from '../shared/services/editor.service';
-import {Language} from '../api/models/language';
 
 @Component({
   selector: 'app-editor',
@@ -18,13 +17,13 @@ export class EditorComponent implements OnInit {
   ngOnInit() {
     this.initTheme();
     this.initLanguages();
-    //this.loadEditorOptions(this.theme[0], this.languages[0]);
   }
 
   initLanguages () {
     this.editorService.getLanguages().subscribe(data => {
       this.languages = data;
-    }, error => console.log(error));
+    }, error => console.log(error),
+      () =>  this.loadEditorOptions(this.theme[0], this.languages[0].name));
   }
 
 
@@ -34,8 +33,8 @@ export class EditorComponent implements OnInit {
 
   loadEditorOptions(theme: string, language: string) {
     this.options = {
-      theme: theme,
-      language: language
+      theme: theme.toLocaleLowerCase(),
+      language: language.toLocaleLowerCase()
     };
   }
 
