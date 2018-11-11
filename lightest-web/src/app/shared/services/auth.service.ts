@@ -11,6 +11,7 @@ export class AuthService {
   private loggedInTime : number;
   request_token;
   headers;
+  userID;
 
   constructor(private http: HttpClient,
     private oauthService: OAuthService) {
@@ -48,6 +49,7 @@ export class AuthService {
     sessionStorage.setItem('admin', data.isAdmin);
     sessionStorage.setItem('teacher', data.isTeacher);
     sessionStorage.setItem('userId', data.id);
+    this.userID = data.id;
   }
 
   register(userName: string, password: string, email: string) {
@@ -85,5 +87,5 @@ export class AuthService {
       'password': password,
       'rememberMe': rememberMe
     };
-  }  
+  }
 }

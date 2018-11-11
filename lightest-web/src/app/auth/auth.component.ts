@@ -25,7 +25,7 @@ export class AuthComponent implements OnInit {
             } else {
                 // todo: should be changed to actual main page after login
               // get id and role from accountService
-                this.router.navigate(['/account/student']);
+                this.router.navigate([`/account/student/:${this.authService.userID}`]);
             }
         });
     }
