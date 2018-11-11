@@ -3,19 +3,18 @@ import {HttpClient, HttpHandler, HttpHeaders, HttpErrorResponse, HttpParams} fro
 import {Observable, throwError, of} from 'rxjs';
 import {retry, tap, map, filter, catchError, pluck} from 'rxjs/operators';
 import { OAuthService, AuthConfig, JwksValidationHandler } from 'angular-oauth2-oidc';
+import { LOGIN_TIMEOUT_MS } from '../constants/loginTimeout';
 
 @Injectable()
 export class AuthService {
 
-  private passwordLogged = false;
+  private loggedInTime : number;
   request_token;
   headers;
 
   constructor(private http: HttpClient,
     private oauthService: OAuthService) {
-    // при обновлении страницы смотрим в localStorage чтоб проверить есть ли токен
-    // this.loggedIn = !!localStorage.getItem('access_token');
-    this.passwordLogged = !!localStorage.getItem('logged_in');
+    this.loggedInTime = Number(sessionStorage.getItem('logged_in')) || 0;
   }
 
   configureLogin(config: AuthConfig) {
@@ -28,7 +27,8 @@ export class AuthService {
   }
 
   loginPossible() {
-    return this.passwordLogged;
+    const difference = Date.now() - this.loggedInTime;
+    return difference < LOGIN_TIMEOUT_MS;
   }
 
   login(login: string, password: string, rememberMe: boolean) {
@@ -42,9 +42,12 @@ export class AuthService {
                       );
   }
 
-  confirmLogin() {
-    this.passwordLogged = true;
-    localStorage.setItem('logged_in', 'true');
+  confirmLogin(data) {
+    this.loggedInTime = Date.now();
+    sessionStorage.setItem('logged_in', this.loggedInTime.toString());
+    sessionStorage.setItem('admin', data.isAdmin);
+    sessionStorage.setItem('teacher', data.isTeacher);
+    sessionStorage.setItem('userId', data.id);
   }
 
   register(userName: string, password: string, email: string) {
@@ -59,8 +62,11 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.removeItem('access_token');
-    this.passwordLogged = false;
+    sessionStorage.removeItem('logged_in');
+    sessionStorage.removeItem('admin');
+    sessionStorage.removeItem('teacher');
+    sessionStorage.removeItem('userId');
+    this.loggedInTime = 0;
     this.oauthService.logOut(true);
     return this.http.post(`https://login.lightest.tk/api/Account/Logout`,{});
   }
@@ -79,5 +85,5 @@ export class AuthService {
       'password': password,
       'rememberMe': rememberMe
     };
-  }
+  }  
 }

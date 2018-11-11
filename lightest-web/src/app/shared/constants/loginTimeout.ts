@@ -1,0 +1,1 @@
+export const LOGIN_TIMEOUT_MS = 1000 * 60 * 60;
