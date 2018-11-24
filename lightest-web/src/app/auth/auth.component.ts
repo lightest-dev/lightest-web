@@ -15,7 +15,6 @@ export class AuthComponent implements OnInit {
     private authService: AuthService) {}
 
   ngOnInit() {
-    //todo: fix login after browser closing
     if (!this.authService.loginPossible()) {
         this.router.navigate(['/main']);
     } else {

@@ -3,12 +3,14 @@ import {HttpClient, HttpHandler, HttpHeaders, HttpErrorResponse, HttpParams} fro
 import {Observable, throwError, of} from 'rxjs';
 import {retry, tap, map, filter, catchError, pluck} from 'rxjs/operators';
 import { OAuthService, AuthConfig, JwksValidationHandler } from 'angular-oauth2-oidc';
-import { LOGIN_TIMEOUT_MS } from '../constants/loginTimeout';
+import { UserInfo } from '../models/userInfo';
+import { LOGIN_TIMEOUT_MS, LOGIN_URL } from 'src/config/apiConfig';
+import * as jwt_decode from 'jwt-decode';
 
 @Injectable()
 export class AuthService {
 
-  private loggedInTime : number;
+  private loggedInTime: number;
   request_token;
   headers;
   userID;
@@ -18,22 +20,26 @@ export class AuthService {
     this.loggedInTime = Number(sessionStorage.getItem('logged_in')) || 0;
   }
 
-  configureLogin(config: AuthConfig) {
+  configureLogin(config: AuthConfig): void {
     this.oauthService.configure(config);
     this.oauthService.tokenValidationHandler = new JwksValidationHandler();
   }
 
-  isLoggedIn() {
+  isLoggedIn(): boolean {
     return this.oauthService.hasValidAccessToken();
   }
 
-  loginPossible() {
+  getAccessToken(): string {
+    return this.oauthService.getAccessToken();
+  }
+
+  loginPossible(): boolean {
     const difference = Date.now() - this.loggedInTime;
     return difference < LOGIN_TIMEOUT_MS;
   }
 
-  login(login: string, password: string, rememberMe: boolean) {
-    return this.http.post(`https://login.lightest.tk/api/Account/Login`, this.loadLoginObject(login, password, rememberMe))
+  login(login: string, password: string, rememberMe: boolean): Observable<Object> {
+    return this.http.post(`${LOGIN_URL}/api/Account/Login`, this.loadLoginObject(login, password, rememberMe))
                       .pipe(
                         catchError((err: HttpErrorResponse) => {
                           if (err.status === 400) {
@@ -43,17 +49,23 @@ export class AuthService {
                       );
   }
 
-  confirmLogin(data) {
+  confirmLogin(): void {
     this.loggedInTime = Date.now();
     sessionStorage.setItem('logged_in', this.loggedInTime.toString());
-    sessionStorage.setItem('admin', data.isAdmin);
-    sessionStorage.setItem('teacher', data.isTeacher);
-    sessionStorage.setItem('userId', data.id);
-    this.userID = data.id;
   }
 
-  register(userName: string, password: string, email: string) {
-    return this.http.post(`https://login.lightest.tk/api/Account/Register`, this.loadRegisterObject(userName, password, email))
+  getUserInfo(): UserInfo {
+    const token = this.oauthService.getAccessToken();
+    const claims = jwt_decode(token);
+    const result = new UserInfo();
+    result.id = claims['sub'];
+    result.isAdmin = claims['Admin'] && claims['Admin'].toLowerCase() === 'true';
+    result.isTeacher = claims['Teacher'] && claims['Teacher'].toLowerCase() === 'true';
+    return result;
+  }
+
+  register(userName: string, password: string, email: string): Observable<Object> {
+    return this.http.post(`${LOGIN_URL}/api/Account/Register`, this.loadRegisterObject(userName, password, email))
                     .pipe(
                       catchError((err: HttpErrorResponse) => {
                         if (err.status === 400) {
@@ -63,14 +75,11 @@ export class AuthService {
                     );
   }
 
-  logout() {
+  logout(): Observable<Object> {
     sessionStorage.removeItem('logged_in');
-    sessionStorage.removeItem('admin');
-    sessionStorage.removeItem('teacher');
-    sessionStorage.removeItem('userId');
     this.loggedInTime = 0;
     this.oauthService.logOut(true);
-    return this.http.post(`https://login.lightest.tk/api/Account/Logout`,{});
+    return this.http.post(`${LOGIN_URL}/api/Account/Logout`, {});
   }
 
   loadRegisterObject(userName: string, password: string, email: string) {

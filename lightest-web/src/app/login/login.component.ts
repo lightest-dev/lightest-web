@@ -36,10 +36,10 @@ export class LoginComponent implements OnInit {
 
   login() {
    this.authService.login(this.loginUserForm.value.login, this.loginUserForm.value.password, this.checkedRememberMe)
-    .subscribe(data => {
-      this.authService.confirmLogin(data);
-      this.router.navigate(['']);
-    }, (err) => {
+    .subscribe(() => {
+        this.authService.confirmLogin();
+        this.router.navigate(['']);
+      }, (err) => {
         console.log(err);
     });
   }

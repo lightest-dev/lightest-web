@@ -1,4 +1,3 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { AppComponent } from './app.component';
@@ -17,6 +16,7 @@ import { AccountStudentModule } from './student/accountStudent.module';
 import {EditorComponent} from './editor/editor.component';
 import { MonacoEditorModule } from 'ngx-monaco-editor';
 import {EditorService} from './shared/services/editor.service';
+import { API_URL } from 'src/config/apiConfig';
 
 
 @NgModule({
@@ -35,7 +35,12 @@ import {EditorService} from './shared/services/editor.service';
     MatFormFieldModule,
     HttpClientModule,
     AccountStudentModule,
-    OAuthModule.forRoot(),
+    OAuthModule.forRoot({
+      resourceServer: {
+        allowedUrls: [API_URL],
+        sendAccessToken: true
+      }
+    }),
     MonacoEditorModule.forRoot()
   ],
   providers: [

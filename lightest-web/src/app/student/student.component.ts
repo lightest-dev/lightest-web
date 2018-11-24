@@ -52,6 +52,7 @@ export class StudentComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const userInfo = this.authService.getUserInfo();
     // get data about student from service accountService
   }
 
