@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../shared/services/auth.service';
+import {MatSnackBar} from '@angular/material';
+import {MessageComponent} from '../message/message.component';
+import {Message} from '../shared/models/Message';
 
 @Component({
   selector: 'app-login',
@@ -11,12 +14,13 @@ import { AuthService } from '../shared/services/auth.service';
 export class LoginComponent implements OnInit {
 
   loginUserForm: FormGroup;
-  checkedRememberMe = false;
+  messageInfo: Message = {message: '', isError: false};
 
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    public snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -30,18 +34,31 @@ export class LoginComponent implements OnInit {
       ]],
       password: ['', [
         Validators.required
-      ]]
+      ]],
+      rememberMe: [false]
     });
   }
 
   login() {
-   this.authService.login(this.loginUserForm.value.login, this.loginUserForm.value.password, this.checkedRememberMe)
-    .subscribe(() => {
+   this.authService.login(this.loginUserForm.value)
+    .subscribe(data => {
+        console.log(data);
         this.authService.confirmLogin();
+        this.messageInfo.message = 'Успішно';
+        this.messageInfo.isError = true;
+        this.openSnackBar();
         this.router.navigate(['']);
-      }, (err) => {
-        console.log(err);
+      }, (error) => {
+        if(error) {
+          this.messageInfo.message = 'Вхід відхилено. Щось пішло не так';
+          this.messageInfo.isError = true;
+          this.openSnackBar();
+        }
     });
+  }
+
+  openSnackBar() {
+    this.snackBar.openFromComponent(MessageComponent,{data: this.messageInfo, panelClass: ['customCl']} );
   }
 
 }

@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {
+  MatSnackBarModule,
   MatInputModule,
   MatProgressSpinnerModule,
   MatRadioModule,
@@ -45,7 +46,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     MatTabsModule,
     MatExpansionModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatSnackBarModule
   ],
   declarations: [],
   exports: [
@@ -69,7 +71,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     MatDatepickerModule,
     MatExpansionModule,
     MatNativeDateModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatSnackBarModule
   ]
 })
 export class SharedModule { }

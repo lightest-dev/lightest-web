@@ -38,15 +38,15 @@ export class AuthService {
     return difference < LOGIN_TIMEOUT_MS;
   }
 
-  login(login: string, password: string, rememberMe: boolean): Observable<Object> {
-    return this.http.post(`${LOGIN_URL}/api/Account/Login`, this.loadLoginObject(login, password, rememberMe))
-                      .pipe(
-                        catchError((err: HttpErrorResponse) => {
-                          if (err.status === 400) {
-                            return throwError('Bad Request');
-                          }
-                        })
-                      );
+  login(data): Observable<Object> {
+    return this.http.post(`${LOGIN_URL}/api/Account/Login`, data);
+                      // .pipe(
+                      //   catchError((err: HttpErrorResponse) => {
+                      //     if (err.status === 400) {
+                      //       return throwError('Bad Request');
+                      //     }
+                      //   })
+                      // );
   }
 
   confirmLogin(): void {

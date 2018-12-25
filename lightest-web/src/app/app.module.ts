@@ -13,10 +13,13 @@ import { AuthComponent } from './auth/auth.component';
 import { AuthService } from './shared/services/auth.service';
 import { AuthGuardService } from './shared/guards/auth-guard.service';
 import { AccountStudentModule } from './student/accountStudent.module';
-import {EditorComponent} from './editor/editor.component';
+import { EditorComponent } from './editor/editor.component';
 import { MonacoEditorModule } from 'ngx-monaco-editor';
-import {EditorService} from './shared/services/editor.service';
+import { EditorService } from './shared/services/editor.service';
 import { API_URL } from 'src/config/apiConfig';
+import { MessageComponent } from './message/message.component';
+import {MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material';
+import {OverlayModule} from '@angular/cdk/overlay';
 
 
 @NgModule({
@@ -27,7 +30,8 @@ import { API_URL } from 'src/config/apiConfig';
     MainComponent,
     ErrorComponent,
     AuthComponent,
-    EditorComponent
+    EditorComponent,
+    MessageComponent
   ],
   imports: [
     AppRoutingModule,
@@ -41,14 +45,19 @@ import { API_URL } from 'src/config/apiConfig';
         sendAccessToken: true
       }
     }),
-    MonacoEditorModule.forRoot()
+    MonacoEditorModule.forRoot(),
+    OverlayModule
   ],
   providers: [
     AuthService,
     AuthGuardService,
-    EditorService
+    EditorService,
+    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}}
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents:[
+    MessageComponent
+  ],
 })
 
 export class AppModule { }
