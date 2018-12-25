@@ -39,7 +39,7 @@ export class AuthService {
   }
 
   login(data): Observable<Object> {
-    return this.http.post(`${LOGIN_URL}/api/Account/Login`, data);
+    return this.http.post(`${LOGIN_URL}/Account/Login`, data);
                       // .pipe(
                       //   catchError((err: HttpErrorResponse) => {
                       //     if (err.status === 400) {
@@ -65,7 +65,7 @@ export class AuthService {
   }
 
   register(userName: string, password: string, email: string): Observable<Object> {
-    return this.http.post(`${LOGIN_URL}/api/Account/Register`, this.loadRegisterObject(userName, password, email))
+    return this.http.post(`${LOGIN_URL}/Account/Register`, this.loadRegisterObject(userName, password, email))
                     .pipe(
                       catchError((err: HttpErrorResponse) => {
                         if (err.status === 400) {
@@ -79,7 +79,7 @@ export class AuthService {
     sessionStorage.removeItem('logged_in');
     this.loggedInTime = 0;
     this.oauthService.logOut(true);
-    return this.http.post(`${LOGIN_URL}/api/Account/Logout`, {});
+    return this.http.post(`${LOGIN_URL}/Account/Logout`, {});
   }
 
   loadRegisterObject(userName: string, password: string, email: string) {
