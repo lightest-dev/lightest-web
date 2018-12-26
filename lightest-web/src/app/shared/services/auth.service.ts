@@ -65,7 +65,7 @@ export class AuthService {
   }
 
   register(userName: string, password: string, email: string): Observable<Object> {
-    return this.http.post(`${LOGIN_URL}/Account/Register`, this.loadRegisterObject(userName, password, email))
+    return this.http.post(`${LOGIN_URL}/account/register`, this.loadRegisterObject(userName, password, email))
                     .pipe(
                       catchError((err: HttpErrorResponse) => {
                         if (err.status === 400) {
