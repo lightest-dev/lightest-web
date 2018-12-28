@@ -89,12 +89,4 @@ export class AuthService {
       'email': email
     };
   }
-
-  loadLoginObject(login: string, password: string, rememberMe: boolean) {
-    return {
-      'login': login,
-      'password': password,
-      'rememberMe': rememberMe
-    };
-  }
 }
