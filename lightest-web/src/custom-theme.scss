@@ -9,7 +9,9 @@ $custom-warn: mat-palette($mat-deep-orange, 400);
 
 $custom-theme: mat-dark-theme($custom-primary, $custom-accent, $custom-warn);
 
+$custom-warn-secondary: mat-palette($mat-deep-orange, A700);
+
 @include angular-material-theme($custom-theme);
 
-.snackbar-success-message {background-color: mat-color($custom-primary);}
-.snackbar-error-message {background-color:  mat-color($custom-warn);}
+.snackbar-success-message {background-color: mat-color($custom-primary); color: black;}
+.snackbar-error-message {background-color: mat-color($custom-warn-secondary); color: white;}

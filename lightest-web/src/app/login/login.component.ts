@@ -59,8 +59,8 @@ export class LoginComponent implements OnInit {
 
   openSnackBar(isError) {
       isError ?
-          this.snackBar.openFromComponent(MessageComponent, { data: this.messageInfo, panelClass: ['snackbar-success-message'] } ) :
-          this.snackBar.openFromComponent(MessageComponent, { data: this.messageInfo, panelClass: ['snackbar-error-message'] } );
+          this.snackBar.openFromComponent(MessageComponent, { data: this.messageInfo, panelClass: ['snackbar-error-message'] } ) :
+          this.snackBar.openFromComponent(MessageComponent, { data: this.messageInfo, panelClass: ['snackbar-success-message'] } );
   }
 
 }
