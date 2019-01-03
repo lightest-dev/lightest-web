@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {ErrorHandler, NgModule} from '@angular/core';
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -20,6 +20,7 @@ import { API_URL } from 'src/config/apiConfig';
 import { MessageComponent } from './message/message.component';
 import {MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material';
 import {OverlayModule} from '@angular/cdk/overlay';
+import {AuthErrorMsgService} from './shared/services/authErrorMsg.service';
 
 
 @NgModule({
@@ -52,8 +53,9 @@ import {OverlayModule} from '@angular/cdk/overlay';
     AuthService,
     AuthGuardService,
     EditorService,
+    AuthErrorMsgService,
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}}
-  ],
+    ],
   bootstrap: [AppComponent],
   entryComponents:[
     MessageComponent

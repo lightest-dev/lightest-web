@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../shared/services/auth.service';
+import {AuthErrorMsgService} from '../shared/services/authErrorMsg.service';
 
 @Component({
   selector: 'app-registration',
@@ -52,11 +53,11 @@ export class RegistrationComponent implements OnInit {
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private authErrorMsgService: AuthErrorMsgService
   ) { }
 
   ngOnInit() {
-    // check if already logged in if yes redirect to PP (personal page)
     this.initFormValidators();
   }
 
@@ -103,7 +104,7 @@ export class RegistrationComponent implements OnInit {
     .subscribe(data => {
       //  this.authService.getToken();
     }, (err) => {
-        console.log(err);
+        this.authErrorMsgService.handleRegistrationError(err);
     });
   }
 

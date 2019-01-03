@@ -40,13 +40,6 @@ export class AuthService {
 
   login(data): Observable<Object> {
     return this.http.post(`${LOGIN_URL}/Account/Login`, data);
-                      // .pipe(
-                      //   catchError((err: HttpErrorResponse) => {
-                      //     if (err.status === 400) {
-                      //       return throwError('Bad Request');
-                      //     }
-                      //   })
-                      // );
   }
 
   confirmLogin(): void {

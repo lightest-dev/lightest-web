@@ -5,6 +5,7 @@ import { AuthService } from '../shared/services/auth.service';
 import {MatSnackBar} from '@angular/material';
 import {MessageComponent} from '../message/message.component';
 import {Message} from '../shared/models/Message';
+import {AuthErrorMsgService} from '../shared/services/authErrorMsg.service';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    public authErrorMsgService: AuthErrorMsgService
   ) { }
 
   ngOnInit() {
@@ -45,22 +47,18 @@ export class LoginComponent implements OnInit {
         console.log(data);
         this.authService.confirmLogin();
         this.messageInfo.message = 'Успішно';
-        this.messageInfo.isError = true;
+        this.messageInfo.isError = false;
         this.openSnackBar(false);
         this.router.navigate(['']);
       }, (error) => {
-        if(error) {
-          this.messageInfo.message = 'Вхід відхилено. Щось пішло не так';
-          this.messageInfo.isError = true;
-          this.openSnackBar(true);
-        }
+        this.authErrorMsgService.handleLoginError(error);
     });
   }
 
   openSnackBar(isError) {
-      isError ?
-          this.snackBar.openFromComponent(MessageComponent, { data: this.messageInfo, panelClass: ['snackbar-error-message'] } ) :
-          this.snackBar.openFromComponent(MessageComponent, { data: this.messageInfo, panelClass: ['snackbar-success-message'] } );
+    if(!isError) {
+      this.snackBar.openFromComponent(MessageComponent, { data: this.messageInfo, panelClass: ['snackbar-success-message'] } )
+    }
   }
 
 }
