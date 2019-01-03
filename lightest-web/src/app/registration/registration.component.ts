@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../shared/services/auth.service';
 import {AuthErrorMsgService} from '../shared/services/authErrorMsg.service';
+import {Message} from '../shared/models/Message';
+import {MatSnackBar} from '@angular/material';
+import {MessageComponent} from '../message/message.component';
 
 @Component({
   selector: 'app-registration',
@@ -11,6 +14,7 @@ import {AuthErrorMsgService} from '../shared/services/authErrorMsg.service';
 })
 export class RegistrationComponent implements OnInit {
 
+  messageInfo: Message = {message: '', isError: false};
   registrationUserForm: FormGroup;
   formErrors = {
     'firstName': '',
@@ -54,7 +58,8 @@ export class RegistrationComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private authErrorMsgService: AuthErrorMsgService
+    private authErrorMsgService: AuthErrorMsgService,
+    public snackBar: MatSnackBar,
   ) { }
 
   ngOnInit() {
@@ -102,7 +107,10 @@ export class RegistrationComponent implements OnInit {
                               this.registrationUserForm.value.password,
                               this.registrationUserForm.value.email)
     .subscribe(data => {
-      //  this.authService.getToken();
+      this.messageInfo.message = 'Ви зареєстровані. Тепер увійдіть в систему';
+      this.messageInfo.isError = false;
+      this.openSnackBar(false);
+      this.router.navigate(['login']);
     }, (err) => {
         this.authErrorMsgService.handleRegistrationError(err);
     });
@@ -128,5 +136,10 @@ export class RegistrationComponent implements OnInit {
     }
   }
 
+  openSnackBar(isError) {
+    if(!isError) {
+      this.snackBar.openFromComponent(MessageComponent, { data: this.messageInfo, panelClass: ['snackbar-success-message'] } )
+    }
+  }
 
 }
