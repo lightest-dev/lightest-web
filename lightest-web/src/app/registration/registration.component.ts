@@ -10,6 +10,8 @@ import { AuthService } from '../shared/services/auth.service';
 })
 export class RegistrationComponent implements OnInit {
 
+  hide1: boolean;
+  hide2 : boolean;
   registrationUserForm: FormGroup;
   formErrors = {
     'firstName': '',

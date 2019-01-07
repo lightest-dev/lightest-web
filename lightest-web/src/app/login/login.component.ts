@@ -13,6 +13,7 @@ import {Message} from '../shared/models/Message';
 })
 export class LoginComponent implements OnInit {
 
+  hide: boolean;
   loginUserForm: FormGroup;
   messageInfo: Message = {message: '', isError: false};
 
