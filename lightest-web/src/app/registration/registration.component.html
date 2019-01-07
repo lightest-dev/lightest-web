@@ -63,7 +63,8 @@
                 name="passwordRepeat"
                 formControlName="passwordRepeat"
                 placeholder="Повторіть пароль"
-                [type]="hide2 ? 'text' : 'password'">
+                [type]="hide2 ? 'text' : 'password'"
+                compare="password">
               <mat-error *ngIf="registrationUserForm.value.password!==registrationUserForm.value.passwordRepeat">Паролі не збігаються</mat-error>
 
               <mat-icon matSuffix

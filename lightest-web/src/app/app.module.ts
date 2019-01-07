@@ -21,6 +21,7 @@ import { MessageComponent } from './message/message.component';
 import {MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material';
 import {OverlayModule} from '@angular/cdk/overlay';
 import {AuthErrorMsgService} from './shared/services/authErrorMsg.service';
+import {CompareValidatorDirective} from './shared/directives/compare-validator.directive';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import {AuthErrorMsgService} from './shared/services/authErrorMsg.service';
     ErrorComponent,
     AuthComponent,
     EditorComponent,
-    MessageComponent
+    MessageComponent,
+    CompareValidatorDirective
   ],
   imports: [
     AppRoutingModule,
