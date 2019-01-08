@@ -50,7 +50,8 @@ export class RegistrationComponent implements OnInit {
       'pattern': `Пароль повинен містити: великі, малі літери, цифри та символи`
     },
     'passwordRepeat': {
-      'required': `Обов'язкове поле`
+      'required': `Обов'язкове поле`,
+      'compare': `Паролі не збігаються`
     }
   };
 
@@ -94,12 +95,18 @@ export class RegistrationComponent implements OnInit {
         passwordRepeat: ['', [
           Validators.required
         ]]
-    });
+    }, {validators: this.checkPasswords });
 
     this.registrationUserForm.valueChanges
       .subscribe(data => this.onValueChanged(data));
 
     this.onValueChanged();
+  }
+
+  checkPasswords(group: FormGroup) {
+    let password = group.controls.password.value;
+    let passwordRepeat = group.controls.passwordRepeat.value;
+    return password === passwordRepeat ? null : { notSame: true }
   }
 
   register() {
