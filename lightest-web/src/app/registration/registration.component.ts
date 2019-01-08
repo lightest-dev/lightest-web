@@ -51,7 +51,7 @@ export class RegistrationComponent implements OnInit {
     },
     'passwordRepeat': {
       'required': `Обов'язкове поле`,
-      'notSame': `Паролі різні`
+      'compare': `Паролі не збігаються`
     }
   };
 

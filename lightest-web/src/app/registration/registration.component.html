@@ -65,7 +65,7 @@
                 placeholder="Повторіть пароль"
                 [type]="hide2 ? 'text' : 'password'"
                 compare="password">
-              <mat-error *ngIf="registrationUserForm.value.password!==registrationUserForm.value.passwordRepeat">Паролі не збігаються</mat-error>
+              <mat-error *ngIf="formErrors.passwordRepeat">{{formErrors.passwordRepeat}}</mat-error>
 
               <mat-icon matSuffix
                  color="primary"
