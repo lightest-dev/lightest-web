@@ -39,7 +39,17 @@ export class AuthService {
   }
 
   login(data): Observable<Object> {
-    return this.http.post(`${LOGIN_URL}/Account/Login`, data);
+    const options = {
+      withCredentials: true
+    };
+    return this.http.post(`${LOGIN_URL}/Account/Login`, data, options);
+                      // .pipe(
+                      //   catchError((err: HttpErrorResponse) => {
+                      //     if (err.status === 400) {
+                      //       return throwError('Bad Request');
+                      //     }
+                      //   })
+                      // );
   }
 
   confirmLogin(): void {
@@ -58,7 +68,10 @@ export class AuthService {
   }
 
   register(userName: string, password: string, email: string): Observable<Object> {
-    return this.http.post(`${LOGIN_URL}/account/register`, this.loadRegisterObject(userName, password, email))
+    const options = {
+      withCredentials: true
+    };
+    return this.http.post(`${LOGIN_URL}/account/register`, this.loadRegisterObject(userName, password, email), options)
                     .pipe(
                       catchError((err: HttpErrorResponse) => {
                         if (err.status === 400) {

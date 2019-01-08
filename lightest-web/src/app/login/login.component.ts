@@ -14,6 +14,7 @@ import {AuthErrorMsgService} from '../shared/services/authErrorMsg.service';
 })
 export class LoginComponent implements OnInit {
 
+  hide: boolean;
   loginUserForm: FormGroup;
   messageInfo: Message = {message: '', isError: false};
 
