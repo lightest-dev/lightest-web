@@ -8,6 +8,7 @@ import { StudentComponent } from './student.component';
 import { SharedModule } from '../shared/shared.module';
 import {StudentInfoComponent} from './student-info/student-info.component';
 import { TaskComponent } from './task/task.component';
+import {AccountService} from '../shared/services/account.service';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,9 @@ import { TaskComponent } from './task/task.component';
    CommonModule,
    SharedModule,
    AccountStudentRoutingModule
+  ],
+  providers: [
+    AccountService
   ]
 })
 

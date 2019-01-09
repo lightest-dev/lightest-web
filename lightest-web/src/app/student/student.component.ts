@@ -2,13 +2,16 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { AuthService } from '../shared/services/auth.service';
 import {Router} from '@angular/router';
+import {AccountService} from '../shared/services/account.service';
 
 @Component({
   selector: 'app-student',
   templateUrl: './student.component.html',
   styleUrls: ['./student.component.scss']
 })
+
 export class StudentComponent implements OnInit {
+
   mobileQuery: MediaQueryList;
 
   fillerNav = [
@@ -40,7 +43,8 @@ export class StudentComponent implements OnInit {
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
     private authService: AuthService,
-    private routerLink: Router
+    private routerLink: Router,
+    private accountService: AccountService
   ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -52,8 +56,8 @@ export class StudentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const userInfo = this.authService.getUserInfo();
-    // get data about student from service accountService
+    const USER_INFO = this.authService.getUserInfo();
+    this.accountService.getUser(USER_INFO.id);
   }
 
   logout() {

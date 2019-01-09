@@ -5,8 +5,8 @@ import { StudentComponent } from './student.component';
 
 const routes: Routes = [
     {
-      // to do: go to url student if student ...
-      path: 'account/student/:id', component: StudentComponent,
+      // todo: go to url student if student ...
+      path: 'account/student', component: StudentComponent,
       canActivate: [AuthGuardService]
     },
     { path: '**', redirectTo: 'main' }
