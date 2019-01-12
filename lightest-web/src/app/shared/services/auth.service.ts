@@ -3,7 +3,7 @@ import {HttpClient, HttpHandler, HttpHeaders, HttpErrorResponse, HttpParams} fro
 import {Observable, throwError, of} from 'rxjs';
 import {retry, tap, map, filter, catchError, pluck} from 'rxjs/operators';
 import { OAuthService, AuthConfig, JwksValidationHandler } from 'angular-oauth2-oidc';
-import { UserInfo } from '../models/userInfo';
+import { UserRoleInfo } from '../models/UserRoleInfo';
 import { LOGIN_TIMEOUT_MS, LOGIN_URL } from 'src/config/apiConfig';
 import * as jwt_decode from 'jwt-decode';
 
@@ -57,10 +57,10 @@ export class AuthService {
     sessionStorage.setItem('logged_in', this.loggedInTime.toString());
   }
 
-  getUserInfo(): UserInfo {
+  getUserInfo(): UserRoleInfo {
     const token = this.oauthService.getAccessToken();
     const claims = jwt_decode(token);
-    const result = new UserInfo();
+    const result = new UserRoleInfo();
     result.id = claims['sub'];
     result.isAdmin = claims['Admin'] && claims['Admin'].toLowerCase() === 'true';
     result.isTeacher = claims['Teacher'] && claims['Teacher'].toLowerCase() === 'true';

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {API_URL} from '../../../config/apiConfig';
-import {Category} from '../models/category';
-import {CategoryUser} from '../models/categoryUser';
+import {Category} from '../models/Category';
+import {CategoryUser} from '../models/CategoryUser';
 import {Observable} from 'rxjs';
 
 @Injectable({
