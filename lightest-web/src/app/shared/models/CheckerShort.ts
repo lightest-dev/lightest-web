@@ -1,6 +1,6 @@
 export class CheckerShort {
   compiled?: boolean;
-  id: string;
+  id?: string;
   name: string;
   code?: string;
 }
