@@ -117,11 +117,26 @@ export class RegistrationComponent implements OnInit {
       this.messageInfo.message = 'Ви зареєстровані. Тепер увійдіть в систему';
       this.messageInfo.isError = false;
       this.openSnackBar(false);
-      this.router.navigate(['login']);
+      // this.router.navigate(['login']);
+        this.login();
     }, (err) => {
         this.authErrorMsgService.handleRegistrationError(err);
     });
   }
+
+    login() {
+        this.authService.login({login: this.registrationUserForm.value.login, password: this.registrationUserForm.value.password})
+            .subscribe(data => {
+                console.log(data);
+                this.authService.confirmLogin();
+                this.messageInfo.message = 'Успішно';
+                this.messageInfo.isError = false;
+                this.openSnackBar(false);
+                this.router.navigate(['']);
+            }, (error) => {
+                this.authErrorMsgService.handleLoginError(error);
+            });
+    }
 
   onValueChanged(data?: any) {
     if (!this.registrationUserForm) { return; }
