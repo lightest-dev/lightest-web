@@ -9,31 +9,23 @@
           <p>Реєстрація</p>
         </div>
 
-        <div class="double-inputs">
-            <mat-form-field >
-                <input matInput
-                 name="firstName"
-                 formControlName="firstName"
-                 placeholder="Ім'я">
-              <mat-error *ngIf="formErrors.firstName">{{formErrors.firstName}}</mat-error>
-            </mat-form-field>
+        <!--<div class="double-inputs">-->
+            <!--<mat-form-field >-->
+                <!--<input matInput-->
+                 <!--name="firstName"-->
+                 <!--formControlName="firstName"-->
+                 <!--placeholder="Ім'я">-->
+              <!--<mat-error *ngIf="formErrors.firstName">{{formErrors.firstName}}</mat-error>-->
+            <!--</mat-form-field>-->
 
-            <mat-form-field >
-                <input matInput
-                name="secondName"
-                formControlName="secondName"
-                placeholder="Прізвище">
-              <mat-error *ngIf="formErrors.secondName">{{formErrors.secondName}}</mat-error>
-            </mat-form-field>
-        </div>
-
-        <mat-form-field >
-            <input matInput
-            name="email"
-            formControlName="email"
-            placeholder="E-mail">
-          <mat-error *ngIf="formErrors.email">{{formErrors.email}}</mat-error>
-        </mat-form-field>
+            <!--<mat-form-field >-->
+                <!--<input matInput-->
+                <!--name="secondName"-->
+                <!--formControlName="secondName"-->
+                <!--placeholder="Прізвище">-->
+              <!--<mat-error *ngIf="formErrors.secondName">{{formErrors.secondName}}</mat-error>-->
+            <!--</mat-form-field>-->
+        <!--</div>-->
 
         <mat-form-field >
           <input matInput
@@ -41,6 +33,14 @@
             formControlName="login"
             placeholder="Логін">
           <mat-error *ngIf="formErrors.login">{{formErrors.login}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field >
+          <input matInput
+                 name="email"
+                 formControlName="email"
+                 placeholder="E-mail">
+          <mat-error *ngIf="formErrors.email">{{formErrors.email}}</mat-error>
         </mat-form-field>
 
         <div class="double-inputs">
@@ -51,7 +51,9 @@
                 placeholder="Пароль"
                 [type]="hide1 ? 'text' : 'password'">
               <mat-error *ngIf="formErrors.password">{{formErrors.password}}</mat-error>
+
                 <mat-icon matSuffix
+                class="password-eye"
                 color="primary"
                 (click)="hide1 = !hide1">
                 {{hide1 ? 'visibility' : 'visibility_off'}}
@@ -68,6 +70,7 @@
               <mat-error *ngIf="formErrors.passwordRepeat">{{formErrors.passwordRepeat}}</mat-error>
 
               <mat-icon matSuffix
+                 class="password-eye"
                  color="primary"
                  (click)="hide2 = !hide2">
                  {{hide2 ? 'visibility' : 'visibility_off'}}

@@ -6,6 +6,9 @@ import {AuthErrorMsgService} from '../shared/services/authErrorMsg.service';
 import {Message} from '../shared/models/Message';
 import {MatSnackBar} from '@angular/material';
 import {MessageComponent} from '../message/message.component';
+import {Observable} from 'rxjs';
+import {AccountService} from '../shared/services/account.service';
+import {tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-registration',
@@ -17,8 +20,8 @@ export class RegistrationComponent implements OnInit {
   messageInfo: Message = {message: '', isError: false};
   registrationUserForm: FormGroup;
   formErrors = {
-    'firstName': '',
-    'secondName': '',
+    // 'firstName': '',
+    // 'secondName': '',
     'email': '',
     'login': '',
     'password': '',
@@ -26,16 +29,16 @@ export class RegistrationComponent implements OnInit {
   };
 
   validationMessages = {
-    'firstName': {
-      'required': `Обов'язкове поле`,
-      'minlength': `Мінімальна кількість символів 3`,
-      'maxlength': `Максимальна кількість символів 25`
-    },
-    'secondName': {
-      'required': `Обов'язкове поле`,
-      'minlength': `Мінімальна кількість символів 3`,
-      'maxlength': `Максимальна кількість символів 25`
-    },
+    // 'firstName': {
+    //   'required': `Обов'язкове поле`,
+    //   'minlength': `Мінімальна кількість символів 3`,
+    //   'maxlength': `Максимальна кількість символів 25`
+    // },
+    // 'secondName': {
+    //   'required': `Обов'язкове поле`,
+    //   'minlength': `Мінімальна кількість символів 3`,
+    //   'maxlength': `Максимальна кількість символів 25`
+    // },
     'email': {
       'required': `Обов'язкове поле`,
       'pattern': `Некоректна форма email`
@@ -61,6 +64,7 @@ export class RegistrationComponent implements OnInit {
     private authService: AuthService,
     private authErrorMsgService: AuthErrorMsgService,
     public snackBar: MatSnackBar,
+    public accountService: AccountService
   ) { }
 
   ngOnInit() {
@@ -69,16 +73,16 @@ export class RegistrationComponent implements OnInit {
 
   initFormValidators() {
     this.registrationUserForm = this.formBuilder.group({
-      firstName: ['', [
-        Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(25)
-      ]],
-      secondName: ['', [
-        Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(25)
-      ]],
+      // firstName: ['', [
+      //   Validators.required,
+      //   Validators.minLength(3),
+      //   Validators.maxLength(25)
+      // ]],
+      // secondName: ['', [
+      //   Validators.required,
+      //   Validators.minLength(3),
+      //   Validators.maxLength(25)
+      // ]],
       email: ['', [
         Validators.required,
         Validators.pattern(/^[0-9a-z-\.]+\@[0-9a-z-]{2,}\.[a-z]{2,}$/)
@@ -113,29 +117,22 @@ export class RegistrationComponent implements OnInit {
     this.authService.register(this.registrationUserForm.value.login,
                               this.registrationUserForm.value.password,
                               this.registrationUserForm.value.email)
-    .subscribe(data => {
-      this.messageInfo.message = 'Ви зареєстровані. Тепер увійдіть в систему';
-      this.messageInfo.isError = false;
-      this.openSnackBar(false);
-      // this.router.navigate(['login']);
+    .subscribe(() => {
         this.login();
     }, (err) => {
         this.authErrorMsgService.handleRegistrationError(err);
     });
   }
 
-    login() {
-        this.authService.login({login: this.registrationUserForm.value.login, password: this.registrationUserForm.value.password})
-            .subscribe(data => {
-                console.log(data);
-                this.authService.confirmLogin();
-                this.messageInfo.message = 'Успішно';
-                this.messageInfo.isError = false;
-                this.openSnackBar(false);
-                this.router.navigate(['']);
-            }, (error) => {
-                this.authErrorMsgService.handleLoginError(error);
-            });
+  login() {
+      this.authService.login({login: this.registrationUserForm.value.login, password: this.registrationUserForm.value.password})
+        .subscribe(data => {
+          this.authService.confirmLogin();
+          this.messageInfo.message = 'Успішно';
+          this.messageInfo.isError = false;
+          this.openSnackBar(this.messageInfo.isError);
+          this.router.navigate(['']);
+        });
     }
 
   onValueChanged(data?: any) {
