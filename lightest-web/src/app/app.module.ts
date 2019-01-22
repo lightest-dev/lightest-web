@@ -22,6 +22,8 @@ import {MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material';
 import {OverlayModule} from '@angular/cdk/overlay';
 import {AuthErrorMsgService} from './shared/services/authErrorMsg.service';
 import {CompareValidatorDirective} from './shared/directives/compare-validator.directive';
+import {MatDialogModule} from '@angular/material/dialog';
+import { UserChangeInfoDialogComponent } from './user-change-info-dialog/user-change-info-dialog.component';
 
 
 @NgModule({
@@ -34,7 +36,8 @@ import {CompareValidatorDirective} from './shared/directives/compare-validator.d
     AuthComponent,
     EditorComponent,
     MessageComponent,
-    CompareValidatorDirective
+    CompareValidatorDirective,
+    UserChangeInfoDialogComponent
   ],
   imports: [
     AppRoutingModule,
@@ -49,7 +52,8 @@ import {CompareValidatorDirective} from './shared/directives/compare-validator.d
       }
     }),
     MonacoEditorModule.forRoot(),
-    OverlayModule
+    OverlayModule,
+    MatDialogModule
   ],
   providers: [
     AuthService,
