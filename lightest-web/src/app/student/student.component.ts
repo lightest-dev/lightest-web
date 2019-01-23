@@ -3,6 +3,9 @@ import { MediaMatcher } from '@angular/cdk/layout';
 import { AuthService } from '../shared/services/auth.service';
 import {Router} from '@angular/router';
 import {AccountService} from '../shared/services/account.service';
+import {UserChangeInfoDialogComponent} from '../user-change-info-dialog/user-change-info-dialog.component';
+import {MatDialog} from '@angular/material';
+import {User} from '../shared/models/User';
 
 @Component({
   selector: 'app-student',
@@ -12,6 +15,7 @@ import {AccountService} from '../shared/services/account.service';
 
 export class StudentComponent implements OnInit {
 
+  user: User;
   mobileQuery: MediaQueryList;
 
   fillerNav = [
@@ -44,7 +48,8 @@ export class StudentComponent implements OnInit {
     media: MediaMatcher,
     private authService: AuthService,
     private routerLink: Router,
-    private accountService: AccountService
+    private accountService: AccountService,
+    public dialog: MatDialog
   ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -56,10 +61,40 @@ export class StudentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const USER_INFO = this.authService.getUserInfo();
-    this.accountService.getUser(USER_INFO.id);
-    console.log(USER_INFO.id);
+    this.initUser();
+    this.getUser(this.user.id);
   }
+
+  initUser() {
+      const temp = this.authService.getUserInfo();
+      this.user.id = temp.id;
+      this.user.isAdmin = temp.isAdmin;
+      this.user.isTeacher = temp.isTeacher;
+      console.log(this.user.id);
+  }
+
+  getUser(id) {
+    this.accountService.getUser(id).subscribe(data => {
+      if (data.name === null || data.surname === null) {
+        this.openDialog();
+      } else {
+        this.user = data;
+      }
+    });
+  }
+
+    openDialog(): void {
+        const dialogRef = this.dialog.open(UserChangeInfoDialogComponent, {
+            width: '375px',
+            data: {name: 'test', animal: 'fff'}
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            console.log('The dialog was closed');
+            console.log(result.value);
+            this.accountService.putUser(this.authService.getUserInfo().id, {name: result.value.firstName, surname: result.value.secondName, userId: this.authService.getUserInfo().id}).subscribe();
+        });
+    }
 
   logout() {
     console.log('logout');

@@ -108,9 +108,9 @@ export class RegistrationComponent implements OnInit {
   }
 
   checkPasswords(group: FormGroup) {
-    let password = group.controls.password.value;
-    let passwordRepeat = group.controls.passwordRepeat.value;
-    return password === passwordRepeat ? null : { notSame: true }
+    const password = group.controls.password.value;
+    const passwordRepeat = group.controls.passwordRepeat.value;
+    return password === passwordRepeat ? null : { notSame: true };
   }
 
   register() {
@@ -156,7 +156,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   openSnackBar(isError) {
-    if(!isError) {
+    if (!isError) {
       this.snackBar.openFromComponent(MessageComponent, { data: this.messageInfo, panelClass: ['snackbar-success-message'] } )
     }
   }

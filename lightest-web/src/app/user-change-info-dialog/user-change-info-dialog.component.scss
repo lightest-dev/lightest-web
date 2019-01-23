@@ -1,0 +1,13 @@
+.dialog-window {
+    overflow: initial;
+    margin: 0;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+
+    .actions {display: flex; justify-content: flex-end;}
+  }
+}

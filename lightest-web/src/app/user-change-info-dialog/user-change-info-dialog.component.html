@@ -1,11 +1,27 @@
-<h1 mat-dialog-title>Hi {{data.name}}</h1>
-<div mat-dialog-content>
-  <p>What's your favorite animal?</p>
-  <mat-form-field>
-    <input matInput [(ngModel)]="data.animal">
-  </mat-form-field>
+
+<div mat-dialog-content class="dialog-window">
+  <p>Будь ласка, заповніть інформацію про себе:</p>
+
+  <form [formGroup]="userForm" (ngSubmit)="sumbit()">
+    <mat-form-field >
+    <input matInput
+    name="firstName"
+    formControlName="firstName"
+    placeholder="Ім'я">
+    <mat-error *ngIf="formErrors.firstName">{{formErrors.firstName}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field >
+    <input matInput
+    name="secondName"
+    formControlName="secondName"
+    placeholder="Прізвище">
+    <mat-error *ngIf="formErrors.secondName">{{formErrors.secondName}}</mat-error>
+    </mat-form-field>
+
+    <div class="actions" mat-dialog-actions>
+      <button mat-button type="submit" [disabled]="userForm.invalid" [mat-dialog-close]="userForm" cdkFocusInitial>Ок</button>
+    </div>
+  </form>
 </div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
-</div>
+

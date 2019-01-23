@@ -14,7 +14,7 @@ export class AccountService {
     return this.http.get<User>(`${API_URL}/profile/${id}`);
   }
 
-  getUsers() :Observable<UserShort[]>{
+  getUsers() :Observable<UserShort[]> {
     return this.http.get<UserShort[]>(`${API_URL}/profile`);
   }
 
@@ -22,7 +22,7 @@ export class AccountService {
     return this.http.put(`${API_URL}/profile/${id}`, user);
   }
 
-  getUsersIDByRole(roleName: string) :Observable<any>{
+  getUsersIDByRole(roleName: string) :Observable<any> {
     return this.http.get(`${API_URL}/profile/role/${roleName}`);
   }
 }

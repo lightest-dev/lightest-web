@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit, Output} from '@angular/core';
+import {User} from '../../shared/models/User';
 
 @Component({
   selector: 'app-student-info',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./student-info.component.scss']
 })
 export class StudentInfoComponent implements OnInit {
+  @Input('studentInfo') user;
+
   tabsForTasks = [
     {
       icon: 'list',

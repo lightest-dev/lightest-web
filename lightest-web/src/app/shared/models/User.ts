@@ -1,4 +1,7 @@
 export class User {
+  id?: string;
+  isAdmin?: boolean;
+  isTeacher?: boolean;
   name: string;
   surname: string;
   login: string;

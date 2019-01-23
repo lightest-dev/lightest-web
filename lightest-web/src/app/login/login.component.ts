@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../shared/services/auth.service';
-import {MatSnackBar} from '@angular/material';
+import {MatDialog, MatSnackBar} from '@angular/material';
 import {MessageComponent} from '../message/message.component';
 import {Message} from '../shared/models/Message';
 import {AuthErrorMsgService} from '../shared/services/authErrorMsg.service';
@@ -57,8 +57,8 @@ export class LoginComponent implements OnInit {
   }
 
   openSnackBar(isError) {
-    if(!isError) {
-      this.snackBar.openFromComponent(MessageComponent, { data: this.messageInfo, panelClass: ['snackbar-success-message'] } )
+    if (!isError) {
+      this.snackBar.openFromComponent(MessageComponent, { data: this.messageInfo, panelClass: ['snackbar-success-message'] } );
     }
   }
 

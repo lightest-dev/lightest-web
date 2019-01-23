@@ -63,8 +63,9 @@ import { UserChangeInfoDialogComponent } from './user-change-info-dialog/user-ch
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}}
     ],
   bootstrap: [AppComponent],
-  entryComponents:[
-    MessageComponent
+  entryComponents: [
+    MessageComponent,
+    UserChangeInfoDialogComponent
   ],
 })
 
