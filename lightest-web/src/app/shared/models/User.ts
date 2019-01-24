@@ -1,5 +1,5 @@
 export class User {
-  id?: string;
+  id?;
   isAdmin?: boolean;
   isTeacher?: boolean;
   name: string;

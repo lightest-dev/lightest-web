@@ -15,7 +15,7 @@ import {User} from '../shared/models/User';
 
 export class StudentComponent implements OnInit {
 
-  user: User;
+  user = new User();
   mobileQuery: MediaQueryList;
 
   fillerNav = [
