@@ -82,10 +82,13 @@ export class AuthService {
   }
 
   logout(): Observable<Object> {
+      const options = {
+          withCredentials: true
+      };
     sessionStorage.removeItem('logged_in');
     this.loggedInTime = 0;
     this.oauthService.logOut(true);
-    return this.http.post(`${LOGIN_URL}/Account/Logout`, {});
+    return this.http.post(`${LOGIN_URL}/Account/Logout`, 'clientName');
   }
 
   loadRegisterObject(userName: string, password: string, email: string) {

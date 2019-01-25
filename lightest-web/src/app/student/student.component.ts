@@ -62,7 +62,6 @@ export class StudentComponent implements OnInit {
 
   ngOnInit(): void {
     this.initUser();
-    this.getUser(this.user.id);
   }
 
   initUser() {
@@ -71,22 +70,28 @@ export class StudentComponent implements OnInit {
       this.user.isAdmin = temp.isAdmin;
       this.user.isTeacher = temp.isTeacher;
       console.log(this.user.id);
+      this.getUser(this.user.id);
   }
 
   getUser(id) {
     this.accountService.getUser(id).subscribe(data => {
-      if (data.name === null || data.surname === null) {
-        this.openDialog();
-      } else {
         this.user = data;
-      }
-    });
+      // if (data.name === null || data.surname === null) {
+      //   this.openDialog();
+      // } else {
+      //   this.user = data;
+      // }
+    }, (err) => {},
+        () => {
+            if (this.user.name === null && this.user.surname === null) {
+                this.openDialog();
+            }
+        });
   }
 
     openDialog(): void {
         const dialogRef = this.dialog.open(UserChangeInfoDialogComponent, {
-            width: '375px',
-            data: {name: 'test', animal: 'fff'}
+            width: '375px'
         });
 
         dialogRef.afterClosed().subscribe(result => {
@@ -99,11 +104,9 @@ export class StudentComponent implements OnInit {
   logout() {
     console.log('logout');
     this.authService.logout().subscribe(data => {
-        console.log(data);
+        this.routerLink.navigate(['/login']);
       }, (err) => {
       console.log(err.status);
-    }, () => {
-    //  this.routerLink.routerL(\main);/
     });
   }
 }
