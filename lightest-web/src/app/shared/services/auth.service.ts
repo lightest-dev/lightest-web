@@ -38,7 +38,7 @@ export class AuthService {
     return difference < LOGIN_TIMEOUT_MS;
   }
 
-  login(data): Observable<Object> {
+  login(data: { login: any; password: any; }): Observable<Object> {
     const options = {
       withCredentials: true
     };
@@ -82,13 +82,16 @@ export class AuthService {
   }
 
   logout(): Observable<Object> {
-      const options = {
-          withCredentials: true
-      };
+    const options = {
+        withCredentials: true
+    };
+    const data = {
+      clientName: 'client'
+    };
     sessionStorage.removeItem('logged_in');
     this.loggedInTime = 0;
     this.oauthService.logOut(true);
-    return this.http.post(`${LOGIN_URL}/Account/Logout`, 'clientName');
+    return this.http.post(`${LOGIN_URL}/Account/Logout`, data, options);
   }
 
   loadRegisterObject(userName: string, password: string, email: string) {
