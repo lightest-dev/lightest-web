@@ -17,6 +17,7 @@ export class StudentComponent implements OnInit {
 
   user = new User();
   mobileQuery: MediaQueryList;
+  flagUserInit: boolean = false;
 
   fillerNav = [
     {
@@ -61,26 +62,31 @@ export class StudentComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    //this.initUser();
+  }
+
+  ngAfterViewInit() {
     this.initUser();
   }
 
   initUser() {
+    if(!this.flagUserInit) {
       const temp = this.authService.getUserInfo();
       this.user.id = temp.id;
       this.user.isAdmin = temp.isAdmin;
       this.user.isTeacher = temp.isTeacher;
       console.log(this.user.id);
-      this.getUser(this.user.id);
+      if((this.user.name === null || this.user.name === undefined) &&
+        (this.user.surname === null || this.user.surname === undefined)) {
+        this.getUser(this.user.id);
+      }
+      this.flagUserInit = true;
+    }
   }
 
-  getUser(id) {
-    this.accountService.getUser(id).subscribe(data => {
+   getUser(id)  {
+    let temp = this.accountService.getUser(id).subscribe(data => {
         this.user = data;
-      // if (data.name === null || data.surname === null) {
-      //   this.openDialog();
-      // } else {
-      //   this.user = data;
-      // }
     }, (err) => {},
         () => {
             if (this.user.name === null && this.user.surname === null) {
@@ -97,7 +103,13 @@ export class StudentComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => {
             console.log('The dialog was closed');
             console.log(result.value);
-            this.accountService.putUser(this.authService.getUserInfo().id, {name: result.value.firstName, surname: result.value.secondName, userId: this.authService.getUserInfo().id}).subscribe();
+            this.accountService.putUser(this.authService.getUserInfo().id, {name: result.value.firstName, surname: result.value.secondName, userId: this.authService.getUserInfo().id})
+              .subscribe( () => {},
+                          error1 => {},
+                          () => {
+                            this.getUser(this.authService.getUserInfo().id);
+                          }
+                );
         });
     }
 

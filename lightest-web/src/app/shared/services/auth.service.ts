@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHandler, HttpHeaders, HttpErrorResponse, HttpParams} from '@angular/common/http';
-import {Observable, throwError, of} from 'rxjs';
+import {Observable, throwError, of, pipe} from 'rxjs';
 import {retry, tap, map, filter, catchError, pluck} from 'rxjs/operators';
 import { OAuthService, AuthConfig, JwksValidationHandler } from 'angular-oauth2-oidc';
 import { UserRoleInfo } from '../models/UserRoleInfo';
@@ -42,14 +42,14 @@ export class AuthService {
     const options = {
       withCredentials: true
     };
-    return this.http.post(`${LOGIN_URL}/Account/Login`, data, options);
-                      // .pipe(
-                      //   catchError((err: HttpErrorResponse) => {
-                      //     if (err.status === 400) {
-                      //       return throwError('Bad Request');
-                      //     }
-                      //   })
-                      // );
+    return this.http.post(`${LOGIN_URL}/Account/Login`, data, options)
+                      .pipe(
+                        catchError((err: HttpErrorResponse) => {
+                          if (err.status === 400) {
+                            return throwError('Bad Request');
+                          }
+                        })
+                      );
   }
 
   confirmLogin(): void {

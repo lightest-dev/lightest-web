@@ -15,6 +15,7 @@ export class AuthComponent implements OnInit {
     private authService: AuthService) {}
 
   ngOnInit() {
+    console.log('auth');
     if (!this.authService.loginPossible()) {
         this.router.navigate(['/main']);
     } else {
