@@ -62,10 +62,7 @@ export class StudentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //this.initUser();
-  }
-
-  ngAfterViewInit() {
+    console.log('student account');
     this.initUser();
   }
 
