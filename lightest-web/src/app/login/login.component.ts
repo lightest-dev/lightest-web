@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     public snackBar: MatSnackBar,
-    public authErrorMsgService: AuthErrorMsgService
+    public authErrorMsgService: AuthErrorMsgService,
   ) { }
 
   ngOnInit() {

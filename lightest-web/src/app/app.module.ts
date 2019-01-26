@@ -24,6 +24,7 @@ import {AuthErrorMsgService} from './shared/services/authErrorMsg.service';
 import {CompareValidatorDirective} from './shared/directives/compare-validator.directive';
 import {MatDialogModule} from '@angular/material/dialog';
 import { UserChangeInfoDialogComponent } from './user-change-info-dialog/user-change-info-dialog.component';
+import { AddTaskPageComponent } from './add-task-page/add-task-page.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { UserChangeInfoDialogComponent } from './user-change-info-dialog/user-ch
     EditorComponent,
     MessageComponent,
     CompareValidatorDirective,
-    UserChangeInfoDialogComponent
+    UserChangeInfoDialogComponent,
+    AddTaskPageComponent
   ],
   imports: [
     AppRoutingModule,
