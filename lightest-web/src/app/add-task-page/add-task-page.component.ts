@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-add-task-page',
@@ -22,12 +22,24 @@ export class AddTaskPageComponent implements OnInit {
 
   initForm() {
     this.taskForm = this.formBuilder.group({
-      taskName: [],
-      taskPoints: [],
-      taskDescription: [],
-      examples: [],
+      taskName: ['', [
+        Validators.required
+      ]],
+      taskPoints: ['', [
+        Validators.required
+      ]],
+      taskDescription: ['', [
+        Validators.required
+      ]],
+      examples: ['', [
+        Validators.required
+      ]],
 
     });
+  }
+
+  submit() {
+
   }
 
 }

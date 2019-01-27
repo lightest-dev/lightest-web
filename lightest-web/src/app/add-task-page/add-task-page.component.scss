@@ -3,6 +3,12 @@
   display: flex;
   justify-content: center;
 
+  .form-header {
+   font-size: 18px;
+    text-align: center;
+  }
+
+
   form {
     display: flex;
     flex-direction: column;
