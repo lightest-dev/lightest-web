@@ -12,7 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { AuthComponent } from './auth/auth.component';
 import { AuthService } from './shared/services/auth.service';
 import { AuthGuardService } from './shared/guards/auth-guard.service';
-import { AccountStudentModule } from './student/accountStudent.module';
+import { UserAccountModule } from './student/userAccount.module';
 import { EditorComponent } from './editor/editor.component';
 import { MonacoEditorModule } from 'ngx-monaco-editor';
 import { EditorService } from './shared/services/editor.service';
@@ -46,7 +46,7 @@ import { AddTaskPageComponent } from './add-task-page/add-task-page.component';
     SharedModule,
     MatFormFieldModule,
     HttpClientModule,
-    AccountStudentModule,
+    UserAccountModule,
     OAuthModule.forRoot({
       resourceServer: {
         allowedUrls: [API_URL],

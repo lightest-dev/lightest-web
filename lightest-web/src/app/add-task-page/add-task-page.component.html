@@ -1,3 +1,74 @@
-<p>
-  add-task-page works!
-</p>
+<div class="wrapper">
+  <form [formGroup]="taskForm" (ngSubmit)="submit()">
+    <div class="form-header">
+      <p>Створення нового завдання</p>
+    </div>
+
+     <div class="double-inputs">
+         <mat-form-field>
+          <input matInput
+                 placeholder="Назва завдання"
+                 name="taskName"
+                 formControlName="taskName">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput
+                 placeholder="Максимальна кількість балів"
+                 name="taskPoints"
+                 formControlName="taskPoints"
+                 type="number" >
+        </mat-form-field>
+     </div>
+
+    <mat-checkbox  name="publicTask">Публічне завдання</mat-checkbox>
+
+    <div class="double-inputs">
+      <mat-form-field>
+        <mat-label>Категорія</mat-label>
+        <mat-select name="category" #fontSize1 value="16px">
+          <mat-option value="10px">10px</mat-option>
+          <mat-option value="12px">12px</mat-option>
+          <mat-option value="14px">14px</mat-option>
+          <mat-option value="16px">16px</mat-option>
+          <mat-option value="18px">18px</mat-option>
+          <mat-option value="20px">20px</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
+      <mat-form-field>
+        <mat-label>Програма перевірки</mat-label>
+        <mat-select name="checker" #fontSize value="16px">
+          <mat-option value="10px">10px</mat-option>
+          <mat-option value="12px">12px</mat-option>
+          <mat-option value="14px">14px</mat-option>
+          <mat-option value="16px">16px</mat-option>
+          <mat-option value="18px">18px</mat-option>
+          <mat-option value="20px">20px</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field class="example-full-width">
+      <textarea matInput
+                placeholder="Опис завдання"
+                name="taskDescription"
+                formControlName="taskDescription"
+                type="text">
+      </textarea>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <textarea matInput
+                placeholder="Приклади"
+                name="examples"
+                formControlName="examples"
+                type="text">
+      </textarea>
+    </mat-form-field>
+
+    <button mat-button type="submit" class="c-button">Додати</button>
+
+  </form>
+</div>

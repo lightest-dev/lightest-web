@@ -1,0 +1,28 @@
+.wrapper {
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 65%;
+
+    mat-form-field {
+      margin: 10px 0;
+      width: 100%;
+    }
+
+    .double-inputs {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      mat-form-field {
+        width: 45%;
+      }
+    }
+  }
+}
+
+

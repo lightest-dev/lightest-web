@@ -9,11 +9,11 @@ import {User} from '../shared/models/User';
 
 @Component({
   selector: 'app-student',
-  templateUrl: './student.component.html',
-  styleUrls: ['./student.component.scss']
+  templateUrl: './userAccount.component.html',
+  styleUrls: ['./userAccount.component.scss']
 })
 
-export class StudentComponent implements OnInit {
+export class UserAccountComponent implements OnInit {
 
   user = new User();
   mobileQuery: MediaQueryList;
