@@ -10,6 +10,7 @@
                  placeholder="Назва завдання"
                  name="taskName"
                  formControlName="taskName">
+             <mat-error *ngIf="formErrors.taskName">{{formErrors.taskName}}</mat-error>
         </mat-form-field>
 
         <mat-form-field>
@@ -18,15 +19,16 @@
                  name="taskPoints"
                  formControlName="taskPoints"
                  type="number" >
+            <mat-error *ngIf="formErrors.taskPoints">{{formErrors.taskPoints}}</mat-error>
         </mat-form-field>
      </div>
 
-    <mat-checkbox  name="publicTask">Публічне завдання</mat-checkbox>
+    <mat-checkbox name="publicTask" formControlName="publicTask">Публічне завдання</mat-checkbox>
 
     <div class="double-inputs">
       <mat-form-field>
         <mat-label>Категорія</mat-label>
-        <mat-select name="category" #fontSize1 value="16px">
+        <mat-select name="category" formControlName="category" value="16px">
           <mat-option value="10px">10px</mat-option>
           <mat-option value="12px">12px</mat-option>
           <mat-option value="14px">14px</mat-option>
@@ -34,12 +36,13 @@
           <mat-option value="18px">18px</mat-option>
           <mat-option value="20px">20px</mat-option>
         </mat-select>
+        <mat-error *ngIf="formErrors.category">{{formErrors.category}}</mat-error>
       </mat-form-field>
 
 
       <mat-form-field>
         <mat-label>Програма перевірки</mat-label>
-        <mat-select name="checker" #fontSize value="16px">
+        <mat-select name="checker" formControlName="checker" value="16px">
           <mat-option value="10px">10px</mat-option>
           <mat-option value="12px">12px</mat-option>
           <mat-option value="14px">14px</mat-option>
@@ -47,6 +50,7 @@
           <mat-option value="18px">18px</mat-option>
           <mat-option value="20px">20px</mat-option>
         </mat-select>
+        <mat-error *ngIf="formErrors.checker">{{formErrors.checker}}</mat-error>
       </mat-form-field>
     </div>
 
@@ -57,6 +61,7 @@
                 formControlName="taskDescription"
                 type="text">
       </textarea>
+      <mat-error *ngIf="formErrors.taskDescription">{{formErrors.taskDescription}}</mat-error>
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
@@ -66,9 +71,10 @@
                 formControlName="examples"
                 type="text">
       </textarea>
+      <mat-error *ngIf="formErrors.examples">{{formErrors.examples}}</mat-error>
     </mat-form-field>
 
-    <button mat-button type="submit" class="c-button">Додати</button>
+    <button mat-button type="submit" class="c-button" [disabled]="taskForm.invalid" >Додати</button>
 
   </form>
 </div>
