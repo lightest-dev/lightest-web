@@ -26,6 +26,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { UserChangeInfoDialogComponent } from './user-change-info-dialog/user-change-info-dialog.component';
 import { AddTaskPageComponent } from './add-task-page/add-task-page.component';
 import { AddCategoryPageComponent } from './add-category-page/add-category-page.component';
+import {AddCheckerPageComponent} from './add-checker-page/add-checker-page.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { AddCategoryPageComponent } from './add-category-page/add-category-page.
     CompareValidatorDirective,
     UserChangeInfoDialogComponent,
     AddTaskPageComponent,
-    AddCategoryPageComponent
+    AddCategoryPageComponent,
+    AddCheckerPageComponent
   ],
   imports: [
     AppRoutingModule,
