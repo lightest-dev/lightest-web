@@ -25,6 +25,7 @@ import {CompareValidatorDirective} from './shared/directives/compare-validator.d
 import {MatDialogModule} from '@angular/material/dialog';
 import { UserChangeInfoDialogComponent } from './user-change-info-dialog/user-change-info-dialog.component';
 import { AddTaskPageComponent } from './add-task-page/add-task-page.component';
+import { AddCategoryPageComponent } from './add-category-page/add-category-page.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { AddTaskPageComponent } from './add-task-page/add-task-page.component';
     MessageComponent,
     CompareValidatorDirective,
     UserChangeInfoDialogComponent,
-    AddTaskPageComponent
+    AddTaskPageComponent,
+    AddCategoryPageComponent
   ],
   imports: [
     AppRoutingModule,
