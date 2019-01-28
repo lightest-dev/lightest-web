@@ -12,15 +12,18 @@ export class CategoriesService {
 
   constructor(private http: HttpClient) { }
 
-  getCategories() :Observable<Category[]>{
+  getCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(`${API_URL}/categories`);
   }
 
-  postCategory(category: Category) {
-    return this.http.post(`${API_URL}/categories`, category);
+  addCategory(category: Category) {
+    const options = {
+        withCredentials: true
+    };
+    return this.http.post(`${API_URL}/categories`, category, options);
   }
 
-  getCategory(id) :Observable<Category>{
+  getCategory(id): Observable<Category> {
     return this.http.get<Category>(`${API_URL}/categories/${id}`);
   }
 

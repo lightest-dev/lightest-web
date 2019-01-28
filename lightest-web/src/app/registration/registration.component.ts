@@ -73,16 +73,6 @@ export class RegistrationComponent implements OnInit {
 
   initFormValidators() {
     this.registrationUserForm = this.formBuilder.group({
-      // firstName: ['', [
-      //   Validators.required,
-      //   Validators.minLength(3),
-      //   Validators.maxLength(25)
-      // ]],
-      // secondName: ['', [
-      //   Validators.required,
-      //   Validators.minLength(3),
-      //   Validators.maxLength(25)
-      // ]],
       email: ['', [
         Validators.required,
         Validators.pattern(/^[0-9a-z-\.]+\@[0-9a-z-]{2,}\.[a-z]{2,}$/)
@@ -130,7 +120,7 @@ export class RegistrationComponent implements OnInit {
           this.authService.confirmLogin();
           this.messageInfo.message = 'Успішно';
           this.messageInfo.isError = false;
-          this.openSnackBar(this.messageInfo.isError);
+          this.openSnackBar(this.messageInfo);
           this.router.navigate(['']);
         });
     }
@@ -155,10 +145,9 @@ export class RegistrationComponent implements OnInit {
     }
   }
 
-  openSnackBar(isError) {
-    if (!isError) {
-      this.snackBar.openFromComponent(MessageComponent, { data: this.messageInfo, panelClass: ['snackbar-success-message'] } )
-    }
+  openSnackBar(message: Message) {
+      this.snackBar.openFromComponent(MessageComponent, { data: message,
+          panelClass: message.isError ? ['snackbar-error-message'] : ['snackbar-success-message'] } );
   }
 
 }

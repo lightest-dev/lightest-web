@@ -49,17 +49,16 @@ export class LoginComponent implements OnInit {
         this.authService.confirmLogin();
         this.messageInfo.message = 'Успішно';
         this.messageInfo.isError = false;
-        this.openSnackBar(false);
+        this.openSnackBar(this.messageInfo);
         this.router.navigate(['']);
       }, (error) => {
         this.authErrorMsgService.handleLoginError(error);
     });
   }
 
-  openSnackBar(isError) {
-    if (!isError) {
-      this.snackBar.openFromComponent(MessageComponent, { data: this.messageInfo, panelClass: ['snackbar-success-message'] } );
-    }
+  openSnackBar(message: Message) {
+      this.snackBar.openFromComponent(MessageComponent, { data: message,
+          panelClass: message.isError ? ['snackbar-error-message'] : ['snackbar-success-message'] } );
   }
 
 }

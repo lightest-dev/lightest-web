@@ -1,6 +1,6 @@
 export class Category {
-  id?: number;
+  id?: string;
   name: string;
-  parentId?: number;
-  public: true;
+  parentId: string; // 0
+  public: boolean;
 }

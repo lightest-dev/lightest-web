@@ -67,7 +67,7 @@ export class UserAccountComponent implements OnInit {
   }
 
   initUser() {
-    if(!this.flagUserInit) {
+    if (!this.flagUserInit) {
       const temp = this.authService.getUserInfo();
       this.user.id = temp.id;
       this.user.isAdmin = temp.isAdmin;
