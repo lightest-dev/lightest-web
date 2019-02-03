@@ -1,3 +1,28 @@
-<p>
-  add-checker-page works!
-</p>
+<div class="wrapper">
+  <form [formGroup]="checkerForm" (ngSubmit)="submit()">
+    <div class="form-header">
+      <p>Форма створення нової програми перевірки</p>
+    </div>
+
+    <mat-form-field>
+      <input matInput
+             placeholder="Назва"
+             name="checkerName"
+             formControlName="checkerName">
+      <mat-error *ngIf="formErrors.checkerName">{{formErrors.checkerName}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <textarea matInput
+                placeholder="Код мовою C++"
+                name="checkerCode"
+                formControlName="checkerCode"
+                type="text">
+      </textarea>
+      <mat-error *ngIf="formErrors.checkerCode">{{formErrors.checkerCode}}</mat-error>
+    </mat-form-field>
+
+    <button mat-button type="submit" class="c-button" [disabled]="checkerForm.invalid" >Додати</button>
+
+  </form>
+</div>

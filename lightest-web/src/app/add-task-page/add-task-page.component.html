@@ -29,12 +29,8 @@
       <mat-form-field>
         <mat-label>Категорія</mat-label>
         <mat-select name="category" formControlName="category" value="16px">
-          <mat-option value="10px">10px</mat-option>
-          <mat-option value="12px">12px</mat-option>
-          <mat-option value="14px">14px</mat-option>
-          <mat-option value="16px">16px</mat-option>
-          <mat-option value="18px">18px</mat-option>
-          <mat-option value="20px">20px</mat-option>
+          <mat-option>Виберіть категорію</mat-option>
+          <mat-option *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</mat-option>
         </mat-select>
         <mat-error *ngIf="formErrors.category">{{formErrors.category}}</mat-error>
       </mat-form-field>
@@ -43,12 +39,8 @@
       <mat-form-field>
         <mat-label>Програма перевірки</mat-label>
         <mat-select name="checker" formControlName="checker" value="16px">
-          <mat-option value="10px">10px</mat-option>
-          <mat-option value="12px">12px</mat-option>
-          <mat-option value="14px">14px</mat-option>
-          <mat-option value="16px">16px</mat-option>
-          <mat-option value="18px">18px</mat-option>
-          <mat-option value="20px">20px</mat-option>
+          <mat-option>Виберіть програму перевірки</mat-option>
+          <mat-option *ngFor="let checker of checkers" value="{{checker.id}}">{{checker.name}}</mat-option>
         </mat-select>
         <mat-error *ngIf="formErrors.checker">{{formErrors.checker}}</mat-error>
       </mat-form-field>
