@@ -27,6 +27,7 @@ import { UserChangeInfoDialogComponent } from './user-change-info-dialog/user-ch
 import { AddTaskPageComponent } from './add-task-page/add-task-page.component';
 import { AddCategoryPageComponent } from './add-category-page/add-category-page.component';
 import {AddCheckerPageComponent} from './add-checker-page/add-checker-page.component';
+import { AddGroupPageComponent } from './add-group-page/add-group-page.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import {AddCheckerPageComponent} from './add-checker-page/add-checker-page.compo
     UserChangeInfoDialogComponent,
     AddTaskPageComponent,
     AddCategoryPageComponent,
-    AddCheckerPageComponent
+    AddCheckerPageComponent,
+    AddGroupPageComponent
   ],
   imports: [
     AppRoutingModule,
