@@ -1,6 +1,6 @@
 export class GroupShort {
-  id: string;
+  id?: string;
   name: string;
   public: boolean;
-  parentId: string;
+  parentId: string;  // ''
 }
