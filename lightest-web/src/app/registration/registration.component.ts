@@ -17,6 +17,8 @@ import {tap} from 'rxjs/operators';
 })
 export class RegistrationComponent implements OnInit {
 
+  hide1: boolean;
+  hide2: boolean;
   messageInfo: Message = {message: '', isError: false};
   registrationUserForm: FormGroup;
   formErrors = {
