@@ -1,4 +1,5 @@
-$DATE = date -u +%FT%T
+DATE="$(date -u +%FT%T)"
+echo $DATE
 set -v
 npm install
 ng build --prod
