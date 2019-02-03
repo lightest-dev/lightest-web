@@ -9,6 +9,8 @@ import {AddTaskPageComponent} from './add-task-page/add-task-page.component';
 import {AddCategoryPageComponent} from './add-category-page/add-category-page.component';
 import {AddCheckerPageComponent} from './add-checker-page/add-checker-page.component';
 import {AddGroupPageComponent} from './add-group-page/add-group-page.component';
+import {AddLanguagePageComponent} from './add-language-page/add-language-page.component';
+import {AddTestPageComponent} from './add-test-page/add-test-page.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: AuthComponent, },
@@ -19,7 +21,9 @@ const routes: Routes = [
   { path: 'add-task', component: AddTaskPageComponent },
   { path: 'add-category', component: AddCategoryPageComponent },
   { path: 'add-checker', component: AddCheckerPageComponent },
-  { path: 'add-group', component: AddGroupPageComponent }
+  { path: 'add-group', component: AddGroupPageComponent },
+  { path: 'add-language', component: AddLanguagePageComponent },
+  { path: 'add-test', component: AddTestPageComponent }
 ];
 
 @NgModule({
