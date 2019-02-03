@@ -16,8 +16,8 @@ export class LanguageService {
   }
 
   // temporary not available
-  addLanguages(languages: Language[]){
-    return this.http.post(`${API_URL}/languages`, languages);
+  addLanguage(language: Language){
+    return this.http.post(`${API_URL}/languages`, language);
   }
 
   // temporary not available

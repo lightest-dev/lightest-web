@@ -23,7 +23,7 @@ export class TestService {
     return this.http.delete(`${API_URL}/tests/${id}`);
   }
 
-  addTest(id, test: Test){
-    return this.http.post(`${API_URL}/tests/${id}`, test);
+  addTest(test: Test){
+    return this.http.post(`${API_URL}/tests`, test);
   }
 }

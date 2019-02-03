@@ -2,7 +2,7 @@ import {Category} from './Category';
 import {Checker} from './Checker';
 
 export class Test {
-      id: string;
+      id?: string;
       input: string;
       output: string;
       taskId: string;

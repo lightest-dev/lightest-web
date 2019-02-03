@@ -1,3 +1,26 @@
-<p>
-  add-language-page works!
-</p>
+<div class="wrapper">
+  <form [formGroup]="languageForm" (ngSubmit)="submit()">
+    <div class="form-header">
+      <p>Форма створення нової мови</p>
+    </div>
+
+    <mat-form-field>
+      <input matInput
+             placeholder="Назва мови"
+             name="languageName"
+             formControlName="languageName">
+      <mat-error *ngIf="formErrors.languageName">{{formErrors.languageName}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput
+             placeholder="Розширення"
+             name="extension"
+             formControlName="extension">
+      <mat-error *ngIf="formErrors.extension">{{formErrors.extension}}</mat-error>
+    </mat-form-field>
+
+    <button mat-button type="submit" class="c-button" [disabled]="languageForm.invalid" >Додати</button>
+
+  </form>
+</div>

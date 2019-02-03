@@ -1,3 +1,35 @@
-<p>
-  add-test-page works!
-</p>
+<div class="wrapper">
+  <form [formGroup]="testForm" (ngSubmit)="submit()">
+    <div class="form-header">
+      <p>Форма створення нового тесту</p>
+    </div>
+
+    <mat-form-field>
+      <input matInput
+             placeholder="Input"
+             name="inputTest"
+             formControlName="inputTest">
+      <mat-error *ngIf="formErrors.inputTest">{{formErrors.inputTest}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput
+             placeholder="Output"
+             name="outputTest"
+             formControlName="outputTest">
+      <mat-error *ngIf="formErrors.outputTest">{{formErrors.outputTest}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Назва завдання, до якого відноситься тест</mat-label>
+      <mat-select name="task" formControlName="task" value="16px">
+        <mat-option>Виберіть завдання</mat-option>
+        <mat-option *ngFor="let task of tasks" value="{{task.id}}">{{task.name}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="formErrors.task">{{formErrors.task}}</mat-error>
+    </mat-form-field>
+
+    <button mat-button type="submit" class="c-button" [disabled]="testForm.invalid" >Додати</button>
+
+  </form>
+</div>
