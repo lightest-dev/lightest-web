@@ -17,4 +17,4 @@ LABEL org.label-schema.maintainer="lllen" \
 COPY nginx.conf /etc/nginx/nginx.conf
 
 WORKDIR /usr/share/nginx/html
-COPY dist/ .
+COPY dist/lightest-web/ .

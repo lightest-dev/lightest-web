@@ -12,28 +12,28 @@ import { OAuthService } from 'angular-oauth2-oidc';
 export class AuthComponent implements OnInit {
 
   constructor(private oauthService: OAuthService, private router: Router,
-    private authService: AuthService) {}
+    private authService: AuthService) { }
 
   ngOnInit() {
     console.log('auth');
     if (!this.authService.loginPossible()) {
-        this.router.navigate(['/main']);
+      this.router.navigate(['/main']);
     } else {
-        this.oauthService.loadDiscoveryDocumentAndTryLogin().then(_ => {
-            if (!this.oauthService.hasValidIdToken() || !this.oauthService.hasValidAccessToken()) {
-                this.oauthService.initImplicitFlow('some-state');
-            } else {
-                // todo: should be changed to actual main page after login
-              let userInfo = this.authService.getUserInfo();
-              if(userInfo.isTeacher) {
+      this.oauthService.loadDiscoveryDocumentAndTryLogin().then(_ => {
+        if (!this.oauthService.hasValidIdToken() || !this.oauthService.hasValidAccessToken()) {
+          this.oauthService.initImplicitFlow('some-state');
+        } else {
+          // todo: should be changed to actual main page after login
+          let userInfo = this.authService.getUserInfo();
+          if (userInfo.isTeacher) {
 
-              } else if(userInfo.isAdmin) {
+          } else if (userInfo.isAdmin) {
 
-              } else {
-                this.router.navigate([`/account/student`]);
-              }
-            }
-        });
+          } else {
+            this.router.navigate([`/account/student`]);
+          }
+        }
+      });
     }
   }
 
