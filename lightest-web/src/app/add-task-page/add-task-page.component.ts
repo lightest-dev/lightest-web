@@ -10,6 +10,10 @@ import {Category} from '../shared/models/Category';
 import {Message} from '../shared/models/Message';
 import {MessageComponent} from '../message/message.component';
 import {MatSnackBar} from '@angular/material';
+import {Test} from '../shared/models/Test';
+import {LanguageForTask} from '../shared/models/LanguageForTask';
+import {LanguageService} from '../shared/services/language.service';
+import {Language} from '../shared/models/Language';
 
 @Component({
   selector: 'app-add-task-page',
@@ -18,9 +22,11 @@ import {MatSnackBar} from '@angular/material';
 })
 export class AddTaskPageComponent implements OnInit {
 
+    taskId;
     message: Message = {message: '', isError: false};
     checkers: CheckerShort[];
     categories: Category[];
+    languages: Language[];
     taskForm: FormGroup;
     formErrors = {
         'taskName': '',
@@ -28,7 +34,13 @@ export class AddTaskPageComponent implements OnInit {
         'taskDescription': '',
         'examples': '',
         'category': '',
-        'checker': ''
+        'checker': '',
+        'language': '',
+        'timeLimit': '',
+        'memoryLimit': '',
+        'inputTest': '',
+        'outputTest': '',
+        'task': ''
     };
     validationMessages = {
         'taskName': {
@@ -48,6 +60,24 @@ export class AddTaskPageComponent implements OnInit {
         },
         'checker': {
             'required': `Обов'язкове поле`
+        },
+        'language': {
+          'required': `Обов'язкове поле`
+        },
+        'timeLimit': {
+          'required': `Обов'язкове поле`
+        },
+        'memoryLimit': {
+          'required': `Обов'язкове поле`
+        },
+        'inputTest': {
+          'required': `Обов'язкове поле`
+        },
+        'outputTest': {
+          'required': `Обов'язкове поле`
+        },
+        'task': {
+          'required': `Обов'язкове поле`
         }
     };
 
@@ -57,12 +87,14 @@ export class AddTaskPageComponent implements OnInit {
     private taskService: TaskService,
     private checkerService: CheckerService,
     private categoryService: CategoriesService,
+    private languageService: LanguageService,
     public snackBar: MatSnackBar,
   ) { }
 
   ngOnInit() {
     this.getCheckers();
     this.getCategories();
+    this.getLanguages();
     this.initForm();
   }
 
@@ -80,6 +112,13 @@ export class AddTaskPageComponent implements OnInit {
       })
   }
 
+  getLanguages() {
+    this.languageService.getLanguages()
+      .subscribe(data => {
+        console.log(data);
+        this.languages = data;
+      });
+  }
 
   initForm() {
     this.taskForm = this.formBuilder.group({
@@ -102,6 +141,24 @@ export class AddTaskPageComponent implements OnInit {
       checker: ['', [
           Validators.required
       ]],
+      language: ['', [
+        Validators.required
+      ]],
+      timeLimit: ['', [
+        Validators.required
+      ]],
+      memoryLimit: ['', [
+        Validators.required
+      ]],
+      inputTest: ['', [
+        Validators.required
+      ]],
+      outputTest: ['', [
+        Validators.required
+      ]],
+      task: ['', [
+        Validators.required
+      ]]
     });
 
       this.taskForm.valueChanges
@@ -114,52 +171,92 @@ export class AddTaskPageComponent implements OnInit {
     this.taskService.addNewTask(this.loadTaskObject(this.taskForm.value))
       .subscribe(data => {
         if(data) {
-          this.taskForm.reset();
-          this.message.isError = false;
-          this.message.message = 'Успішно';
-          this.openSnackBar(this.message);
+          this.taskId = data['id'];
+          // this.taskForm.reset();
+          // this.message.isError = false;
+          // this.message.message = 'Успішно';
+          // this.openSnackBar(this.message);
         }
       }, err => {
         console.log(err);
         this.message.isError = true;
         this.message.message = 'Помилка';
         this.openSnackBar(this.message);
+      }, () => {
+        this.submitTests();
+        this.submitLanguages();
       });
   }
 
-  loadTaskObject(currentTask): TaskShort {
-   const task: TaskShort = {
-       name: currentTask.taskName,
-       points: currentTask.taskPoints,
-       public: currentTask.publicTask,
-       checkerId: currentTask.checker,
-       categoryId: currentTask.category,
-       description: currentTask.taskDescription,
-       examples: currentTask.examples
-   };
+  submitTests() {
+    this.taskService.addTestsForTask(this.taskId, this.loadTestsObject(this.taskForm.value))
+      .subscribe(data => {
+        console.log(data);
+      })
+  }
 
+  submitLanguages() {
+    this.taskService.addLanguagesForTask(this.taskId, this.loadLanguageObject(this.taskForm.value))
+      .subscribe(data => {
+        console.log(data);
+      })
+  }
+
+  loadTaskObject(currentTask): TaskShort {
+    const task: TaskShort = {
+      name: currentTask.taskName,
+      points: currentTask.taskPoints,
+      public: currentTask.publicTask,
+      checkerId: currentTask.checker,
+      categoryId: currentTask.category,
+      description: currentTask.taskDescription,
+      examples: currentTask.examples
+    };
     return task;
   }
 
-    onValueChanged(data?: any) {
-        if (!this.taskForm) { return; }
-        const form = this.taskForm;
-        for (const field in this.formErrors) {
-            if (this.formErrors.hasOwnProperty(field)) {
-                // clear previous error message (if any)
-                this.formErrors[field] = '';
-                const control = form.get(field);
-                if (control && control.dirty && !control.valid) {
-                    const messages = this.validationMessages[field];
-                    for (const key in control.errors) {
-                        if (control.errors.hasOwnProperty(key)) {
-                            this.formErrors[field] += messages[key] + ' ';
-                        }
-                    }
-                }
-            }
-        }
-    }
+  loadTestsObject(obj): Test[]{
+    const tests: Test[] = [
+      {
+        taskId: this.taskId,
+        input: obj.input,
+        output: obj.output,
+      }
+    ];
+    return tests;
+  }
+
+  loadLanguageObject(obj): LanguageForTask[] {
+    const languages: LanguageForTask[] = [
+      {
+        languageId: obj.language,
+        taskId: this.taskId,
+        timeLimit: obj.timeLimit,
+        memoryLimit: obj.memoryLimit
+      }
+    ];
+    return languages;
+  }
+
+  onValueChanged(data?: any) {
+      if (!this.taskForm) { return; }
+      const form = this.taskForm;
+      for (const field in this.formErrors) {
+          if (this.formErrors.hasOwnProperty(field)) {
+              // clear previous error message (if any)
+              this.formErrors[field] = '';
+              const control = form.get(field);
+              if (control && control.dirty && !control.valid) {
+                  const messages = this.validationMessages[field];
+                  for (const key in control.errors) {
+                      if (control.errors.hasOwnProperty(key)) {
+                          this.formErrors[field] += messages[key] + ' ';
+                      }
+                  }
+              }
+          }
+      }
+  }
 
   openSnackBar(message: Message) {
     this.snackBar.openFromComponent(MessageComponent, { data: message,

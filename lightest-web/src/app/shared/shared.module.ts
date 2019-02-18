@@ -24,6 +24,7 @@ import { MatCardModule } from '@angular/material/card';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import {AddTestPageComponent} from '../add-test-page/add-test-page.component';
 
 @NgModule({
   imports: [
@@ -47,9 +48,12 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     MatExpansionModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+
   ],
-  declarations: [],
+  declarations: [
+    AddTestPageComponent
+  ],
   exports: [
     BrowserModule,
     CommonModule,
@@ -72,7 +76,9 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     MatExpansionModule,
     MatNativeDateModule,
     MatCheckboxModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    AddTestPageComponent
   ]
+
 })
 export class SharedModule { }

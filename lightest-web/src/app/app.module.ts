@@ -29,8 +29,6 @@ import { AddCategoryPageComponent } from './add-category-page/add-category-page.
 import {AddCheckerPageComponent} from './add-checker-page/add-checker-page.component';
 import { AddGroupPageComponent } from './add-group-page/add-group-page.component';
 import { AddLanguagePageComponent } from './add-language-page/add-language-page.component';
-import { AddTestPageComponent } from './add-test-page/add-test-page.component';
-
 
 @NgModule({
   declarations: [
@@ -48,8 +46,7 @@ import { AddTestPageComponent } from './add-test-page/add-test-page.component';
     AddCategoryPageComponent,
     AddCheckerPageComponent,
     AddGroupPageComponent,
-    AddLanguagePageComponent,
-    AddTestPageComponent
+    AddLanguagePageComponent
   ],
   imports: [
     AppRoutingModule,

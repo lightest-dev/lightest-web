@@ -1,14 +1,18 @@
 .wrapper {
-  padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+
+  .group-wrapper {
+    text-align: center;
+    padding: 25px 0;
+  }
 
   .form-header {
     font-size: 22px;
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
+    margin-top: 20px;
   }
 
 

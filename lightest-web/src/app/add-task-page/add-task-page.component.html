@@ -28,7 +28,7 @@
     <div class="double-inputs">
       <mat-form-field>
         <mat-label>Категорія</mat-label>
-        <mat-select name="category" formControlName="category" value="16px">
+        <mat-select name="category" formControlName="category" >
           <mat-option>Виберіть категорію</mat-option>
           <mat-option *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</mat-option>
         </mat-select>
@@ -38,7 +38,7 @@
 
       <mat-form-field>
         <mat-label>Програма перевірки</mat-label>
-        <mat-select name="checker" formControlName="checker" value="16px">
+        <mat-select name="checker" formControlName="checker" >
           <mat-option>Виберіть програму перевірки</mat-option>
           <mat-option *ngFor="let checker of checkers" value="{{checker.id}}">{{checker.name}}</mat-option>
         </mat-select>
@@ -65,6 +65,62 @@
       </textarea>
       <mat-error *ngIf="formErrors.examples">{{formErrors.examples}}</mat-error>
     </mat-form-field>
+
+<!--  LANGUAGE -->
+    <div class="form-header">
+      <p>Мови програмування</p>
+    </div>
+
+    <mat-form-field>
+      <mat-label>Категорія</mat-label>
+      <mat-select name="language" formControlName="language">
+        <mat-option>Виберіть назву мови</mat-option>
+        <mat-option *ngFor="let language of languages" value="{{language.id}}">{{language.name}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="formErrors.language">{{formErrors.language}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput
+             placeholder="Часове обмеження"
+             name="timeLimit"
+             formControlName="timeLimit">
+      <mat-error *ngIf="formErrors.timeLimit">{{formErrors.timeLimit}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput
+             placeholder="Обмеження в пам'яті"
+             name="memoryLimit"
+             formControlName="memoryLimit">
+      <mat-error *ngIf="formErrors.memoryLimit">{{formErrors.memoryLimit}}</mat-error>
+    </mat-form-field>
+<!-- END LANGUAGE -->
+
+<!-- TEST -->
+
+    <div class="form-header">
+      <p>Тестові дані</p>
+    </div>
+
+    <mat-form-field>
+      <input matInput
+             placeholder="Input"
+             name="inputTest"
+             formControlName="inputTest">
+      <mat-error *ngIf="formErrors.inputTest">{{formErrors.inputTest}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput
+             placeholder="Output"
+             name="outputTest"
+             formControlName="outputTest">
+      <mat-error *ngIf="formErrors.outputTest">{{formErrors.outputTest}}</mat-error>
+    </mat-form-field>
+
+<!-- END TEST -->
+
 
     <button mat-button type="submit" class="c-button" [disabled]="taskForm.invalid" >Додати</button>
 
