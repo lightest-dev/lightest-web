@@ -14,6 +14,7 @@ import {Test} from '../shared/models/Test';
 import {LanguageForTask} from '../shared/models/LanguageForTask';
 import {LanguageService} from '../shared/services/language.service';
 import {Language} from '../shared/models/Language';
+import { mergeMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-task-page',
@@ -39,8 +40,7 @@ export class AddTaskPageComponent implements OnInit {
         'timeLimit': '',
         'memoryLimit': '',
         'inputTest': '',
-        'outputTest': '',
-        'task': ''
+        'outputTest': ''
     };
     validationMessages = {
         'taskName': {
@@ -74,9 +74,6 @@ export class AddTaskPageComponent implements OnInit {
           'required': `Обов'язкове поле`
         },
         'outputTest': {
-          'required': `Обов'язкове поле`
-        },
-        'task': {
           'required': `Обов'язкове поле`
         }
     };
@@ -155,44 +152,49 @@ export class AddTaskPageComponent implements OnInit {
       ]],
       outputTest: ['', [
         Validators.required
-      ]],
-      task: ['', [
-        Validators.required
       ]]
     });
 
-      this.taskForm.valueChanges
-          .subscribe(data => this.onValueChanged(data));
-
-      this.onValueChanged();
+      this.taskForm.valueChanges.subscribe(data => this.onValueChanged(data));
   }
 
   submit() {
     this.taskService.addNewTask(this.loadTaskObject(this.taskForm.value))
-      .subscribe(data => {
-        if(data) {
-          this.taskId = data['id'];
-          // this.taskForm.reset();
-          // this.message.isError = false;
-          // this.message.message = 'Успішно';
-          // this.openSnackBar(this.message);
-        }
-      }, err => {
-        console.log(err);
-        this.message.isError = true;
-        this.message.message = 'Помилка';
-        this.openSnackBar(this.message);
-      }, () => {
-        this.submitTests();
-        this.submitLanguages();
-      });
+      .pipe(
+        mergeMap(data =>
+          this.taskService.addTestsForTask(data.id, this.loadTestsObject(this.taskForm.value))
+        )
+      ).subscribe(res => console.log(res));
+
+  //
+  // .subscribe(data => {
+  //       if(data) {
+  //         this.taskId = data['id'];
+  //       }
+  //     }, err => {
+  //       console.log(err);
+  //       this.message.isError = true;
+  //       this.message.message = 'Помилка';
+  //       this.openSnackBar(this.message);
+  //     }, () => {
+  //       if(this.taskId) {
+  //         this.submitLanguages();
+  //         this.submitTests();
+  //       }
+  //     });
   }
 
   submitTests() {
     this.taskService.addTestsForTask(this.taskId, this.loadTestsObject(this.taskForm.value))
       .subscribe(data => {
         console.log(data);
-      })
+      }, err => {},
+        () => {
+          this.taskForm.reset();
+          this.message.isError = false;
+          this.message.message = 'Успішно';
+          this.openSnackBar(this.message);
+        });
   }
 
   submitLanguages() {
@@ -219,8 +221,8 @@ export class AddTaskPageComponent implements OnInit {
     const tests: Test[] = [
       {
         taskId: this.taskId,
-        input: obj.input,
-        output: obj.output,
+        input: obj.inputTest,
+        output: obj.outputTest,
       }
     ];
     return tests;
