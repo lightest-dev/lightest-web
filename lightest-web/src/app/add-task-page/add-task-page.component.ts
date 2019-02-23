@@ -15,6 +15,7 @@ import {LanguageForTask} from '../shared/models/LanguageForTask';
 import {LanguageService} from '../shared/services/language.service';
 import {Language} from '../shared/models/Language';
 import { mergeMap } from 'rxjs/operators';
+import {concat, merge} from 'rxjs';
 
 @Component({
   selector: 'app-add-task-page',
@@ -23,60 +24,75 @@ import { mergeMap } from 'rxjs/operators';
 })
 export class AddTaskPageComponent implements OnInit {
 
-    taskId;
-    message: Message = {message: '', isError: false};
-    checkers: CheckerShort[];
-    categories: Category[];
-    languages: Language[];
-    taskForm: FormGroup;
-    formErrors = {
-        'taskName': '',
-        'taskPoints': '',
-        'taskDescription': '',
-        'examples': '',
-        'category': '',
-        'checker': '',
-        'language': '',
-        'timeLimit': '',
-        'memoryLimit': '',
-        'inputTest': '',
-        'outputTest': ''
-    };
-    validationMessages = {
-        'taskName': {
-            'required': `Обов'язкове поле`
-        },
-        'taskPoints': {
-            'required': `Обов'язкове поле`
-        },
-        'taskDescription': {
-            'required': `Обов'язкове поле`
-        },
-        'examples': {
-            'required': `Обов'язкове поле`
-        },
-        'category': {
-            'required': `Обов'язкове поле`
-        },
-        'checker': {
-            'required': `Обов'язкове поле`
-        },
-        'language': {
+  taskId;
+  message: Message = {message: '', isError: false};
+  checkers: CheckerShort[];
+  categories: Category[];
+  languages: Language[];
+  taskForm: FormGroup;
+  languageForm: FormGroup;
+  testForm: FormGroup;
+  formErrorstaskForm = {
+      'taskName': '',
+      'taskPoints': '',
+      'taskDescription': '',
+      'examples': '',
+      'category': '',
+      'checker': ''
+  };
+
+  formErrorsLanguageForm = {
+    'language': '',
+    'timeLimit': '',
+    'memoryLimit': ''
+  };
+
+  formErrorsTestForm = {
+    'inputTest': '',
+    'outputTest': ''
+  };
+
+  validationMessagestaskForm = {
+      'taskName': {
           'required': `Обов'язкове поле`
-        },
-        'timeLimit': {
+      },
+      'taskPoints': {
           'required': `Обов'язкове поле`
-        },
-        'memoryLimit': {
+      },
+      'taskDescription': {
           'required': `Обов'язкове поле`
-        },
-        'inputTest': {
+      },
+      'examples': {
           'required': `Обов'язкове поле`
-        },
-        'outputTest': {
+      },
+      'category': {
           'required': `Обов'язкове поле`
-        }
-    };
+      },
+      'checker': {
+          'required': `Обов'язкове поле`
+      }
+  };
+
+  validationMessagesLanguageForm = {
+    'language': {
+      'required': `Обов'язкове поле`
+    },
+    'timeLimit': {
+      'required': `Обов'язкове поле`
+    },
+    'memoryLimit': {
+      'required': `Обов'язкове поле`
+    }
+  };
+
+  validationMessagesTestForm = {
+    'inputTest': {
+      'required': `Обов'язкове поле`
+    },
+    'outputTest': {
+      'required': `Обов'язкове поле`
+    }
+  };
 
   constructor(
     private router: Router,
@@ -92,7 +108,7 @@ export class AddTaskPageComponent implements OnInit {
     this.getCheckers();
     this.getCategories();
     this.getLanguages();
-    this.initForm();
+    this.initForms();
   }
 
   getCheckers() {
@@ -117,7 +133,13 @@ export class AddTaskPageComponent implements OnInit {
       });
   }
 
-  initForm() {
+  initForms() {
+    this.initTaskForm();
+    this.initLanguageForm();
+    this.initTestForm();
+  }
+
+  initTaskForm() {
     this.taskForm = this.formBuilder.group({
       taskName: ['', [
         Validators.required
@@ -137,7 +159,17 @@ export class AddTaskPageComponent implements OnInit {
       ]],
       checker: ['', [
           Validators.required
-      ]],
+      ]]
+    });
+
+      this.taskForm.valueChanges
+        .subscribe(() =>
+          this.onValueChanged(this.taskForm, this.formErrorstaskForm, this.validationMessagestaskForm)
+        );
+  }
+
+  initLanguageForm() {
+    this.languageForm = this.formBuilder.group({
       language: ['', [
         Validators.required
       ]],
@@ -146,7 +178,17 @@ export class AddTaskPageComponent implements OnInit {
       ]],
       memoryLimit: ['', [
         Validators.required
-      ]],
+      ]]
+    });
+
+    this.taskForm.valueChanges
+      .subscribe(() =>
+        this.onValueChanged(this.languageForm, this.formErrorsLanguageForm, this.validationMessagesLanguageForm)
+      );
+  }
+
+  initTestForm() {
+    this.testForm = this.formBuilder.group({
       inputTest: ['', [
         Validators.required
       ]],
@@ -155,53 +197,30 @@ export class AddTaskPageComponent implements OnInit {
       ]]
     });
 
-      this.taskForm.valueChanges.subscribe(data => this.onValueChanged(data));
+    this.taskForm.valueChanges
+      .subscribe(() =>
+        this.onValueChanged(this.testForm, this.formErrorsTestForm, this.validationMessagesTestForm)
+      );
   }
 
   submit() {
     this.taskService.addNewTask(this.loadTaskObject(this.taskForm.value))
       .pipe(
         mergeMap(data =>
-          this.taskService.addTestsForTask(data.id, this.loadTestsObject(this.taskForm.value))
+          merge(
+            this.taskService.addTestsForTask(data['id'], this.loadTestsObject(this.testForm.value)),
+            this.taskService.addLanguagesForTask(data['id'], this.loadLanguageObject(this.languageForm.value))
+          )
         )
-      ).subscribe(res => console.log(res));
-
-  //
-  // .subscribe(data => {
-  //       if(data) {
-  //         this.taskId = data['id'];
-  //       }
-  //     }, err => {
-  //       console.log(err);
-  //       this.message.isError = true;
-  //       this.message.message = 'Помилка';
-  //       this.openSnackBar(this.message);
-  //     }, () => {
-  //       if(this.taskId) {
-  //         this.submitLanguages();
-  //         this.submitTests();
-  //       }
-  //     });
-  }
-
-  submitTests() {
-    this.taskService.addTestsForTask(this.taskId, this.loadTestsObject(this.taskForm.value))
-      .subscribe(data => {
-        console.log(data);
-      }, err => {},
-        () => {
+      ).subscribe(res => {
+          this.openSnackBar({message: 'Успішно', isError: false});
           this.taskForm.reset();
-          this.message.isError = false;
-          this.message.message = 'Успішно';
-          this.openSnackBar(this.message);
+        },
+        error1 => {
+          if (error1) {
+            this.openSnackBar({message: 'Помилка', isError: true});
+          }
         });
-  }
-
-  submitLanguages() {
-    this.taskService.addLanguagesForTask(this.taskId, this.loadLanguageObject(this.taskForm.value))
-      .subscribe(data => {
-        console.log(data);
-      })
   }
 
   loadTaskObject(currentTask): TaskShort {
@@ -240,19 +259,19 @@ export class AddTaskPageComponent implements OnInit {
     return languages;
   }
 
-  onValueChanged(data?: any) {
-      if (!this.taskForm) { return; }
-      const form = this.taskForm;
-      for (const field in this.formErrors) {
-          if (this.formErrors.hasOwnProperty(field)) {
+  onValueChanged(_form, errorForm, validationMessages) {
+      if (!_form) { return; }
+      const form = _form;
+      for (const field in errorForm) {
+          if (errorForm.hasOwnProperty(field)) {
               // clear previous error message (if any)
-              this.formErrors[field] = '';
+              errorForm[field] = '';
               const control = form.get(field);
               if (control && control.dirty && !control.valid) {
-                  const messages = this.validationMessages[field];
+                  const messages = validationMessages[field];
                   for (const key in control.errors) {
                       if (control.errors.hasOwnProperty(key)) {
-                          this.formErrors[field] += messages[key] + ' ';
+                        errorForm[field] += messages[key] + ' ';
                       }
                   }
               }
@@ -263,5 +282,9 @@ export class AddTaskPageComponent implements OnInit {
   openSnackBar(message: Message) {
     this.snackBar.openFromComponent(MessageComponent, { data: message,
       panelClass: message.isError ? ['snackbar-error-message'] : ['snackbar-success-message'] } );
+  }
+
+  addLanguageForm() {
+    console.log('add-language-form');
   }
 }

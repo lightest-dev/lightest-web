@@ -1,5 +1,6 @@
 <div class="wrapper">
-  <form [formGroup]="taskForm" (ngSubmit)="submit()">
+  <app-language-form></app-language-form>
+  <form [formGroup]="taskForm">
     <div class="form-header">
       <p>Форма створення нового завдання</p>
     </div>
@@ -10,7 +11,7 @@
                  placeholder="Назва завдання"
                  name="taskName"
                  formControlName="taskName">
-             <mat-error *ngIf="formErrors.taskName">{{formErrors.taskName}}</mat-error>
+             <mat-error *ngIf="formErrorstaskForm.taskName">{{formErrorstaskForm.taskName}}</mat-error>
         </mat-form-field>
 
         <mat-form-field>
@@ -19,7 +20,7 @@
                  name="taskPoints"
                  formControlName="taskPoints"
                  type="number" >
-            <mat-error *ngIf="formErrors.taskPoints">{{formErrors.taskPoints}}</mat-error>
+            <mat-error *ngIf="formErrorstaskForm.taskPoints">{{formErrorstaskForm.taskPoints}}</mat-error>
         </mat-form-field>
      </div>
 
@@ -32,7 +33,7 @@
           <mat-option>Виберіть категорію</mat-option>
           <mat-option *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</mat-option>
         </mat-select>
-        <mat-error *ngIf="formErrors.category">{{formErrors.category}}</mat-error>
+        <mat-error *ngIf="formErrorstaskForm.category">{{formErrorstaskForm.category}}</mat-error>
       </mat-form-field>
 
 
@@ -42,7 +43,7 @@
           <mat-option>Виберіть програму перевірки</mat-option>
           <mat-option *ngFor="let checker of checkers" value="{{checker.id}}">{{checker.name}}</mat-option>
         </mat-select>
-        <mat-error *ngIf="formErrors.checker">{{formErrors.checker}}</mat-error>
+        <mat-error *ngIf="formErrorstaskForm.checker">{{formErrorstaskForm.checker}}</mat-error>
       </mat-form-field>
     </div>
 
@@ -53,7 +54,7 @@
                 formControlName="taskDescription"
                 type="text">
       </textarea>
-      <mat-error *ngIf="formErrors.taskDescription">{{formErrors.taskDescription}}</mat-error>
+      <mat-error *ngIf="formErrorstaskForm.taskDescription">{{formErrorstaskForm.taskDescription}}</mat-error>
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
@@ -63,10 +64,13 @@
                 formControlName="examples"
                 type="text">
       </textarea>
-      <mat-error *ngIf="formErrors.examples">{{formErrors.examples}}</mat-error>
+      <mat-error *ngIf="formErrorstaskForm.examples">{{formErrorstaskForm.examples}}</mat-error>
     </mat-form-field>
+  </form>
 
 <!--  LANGUAGE -->
+
+  <form [formGroup]="languageForm" id="language-form">
     <div class="form-header">
       <p>Мови програмування</p>
     </div>
@@ -77,7 +81,7 @@
         <mat-option>Виберіть назву мови</mat-option>
         <mat-option *ngFor="let language of languages" value="{{language.id}}">{{language.name}}</mat-option>
       </mat-select>
-      <mat-error *ngIf="formErrors.language">{{formErrors.language}}</mat-error>
+      <mat-error *ngIf="formErrorsLanguageForm.language">{{formErrorsLanguageForm.language}}</mat-error>
     </mat-form-field>
 
     <mat-form-field>
@@ -85,7 +89,7 @@
              placeholder="Часове обмеження"
              name="timeLimit"
              formControlName="timeLimit">
-      <mat-error *ngIf="formErrors.timeLimit">{{formErrors.timeLimit}}</mat-error>
+      <mat-error *ngIf="formErrorsLanguageForm.timeLimit">{{formErrorsLanguageForm.timeLimit}}</mat-error>
     </mat-form-field>
 
     <mat-form-field>
@@ -93,12 +97,16 @@
              placeholder="Обмеження в пам'яті"
              name="memoryLimit"
              formControlName="memoryLimit">
-      <mat-error *ngIf="formErrors.memoryLimit">{{formErrors.memoryLimit}}</mat-error>
+      <mat-error *ngIf="formErrorsLanguageForm.memoryLimit">{{formErrorsLanguageForm.memoryLimit}}</mat-error>
     </mat-form-field>
+
+    <button mat-button class="c-button" type="button" (click)="addLanguageForm()"><i class="material-icons">add_box</i></button>
+  </form>
 <!-- END LANGUAGE -->
 
 <!-- TEST -->
 
+  <form [formGroup]="testForm" id="test-form">
     <div class="form-header">
       <p>Тестові дані</p>
     </div>
@@ -108,7 +116,7 @@
              placeholder="Input"
              name="inputTest"
              formControlName="inputTest">
-      <mat-error *ngIf="formErrors.inputTest">{{formErrors.inputTest}}</mat-error>
+      <mat-error *ngIf="formErrorsTestForm.inputTest">{{formErrorsTestForm.inputTest}}</mat-error>
     </mat-form-field>
 
     <mat-form-field>
@@ -116,13 +124,13 @@
              placeholder="Output"
              name="outputTest"
              formControlName="outputTest">
-      <mat-error *ngIf="formErrors.outputTest">{{formErrors.outputTest}}</mat-error>
+      <mat-error *ngIf="formErrorsTestForm.outputTest">{{formErrorsTestForm.outputTest}}</mat-error>
     </mat-form-field>
 
+    <button mat-button class="c-button" type="button" (click)="addTestForm()"><i class="material-icons">add_box</i></button>
+  </form>
 <!-- END TEST -->
 
+    <button mat-button type="submit" class="c-button" [disabled]="taskForm.invalid" (click)="submit()">Додати</button>
 
-    <button mat-button type="submit" class="c-button" [disabled]="taskForm.invalid" >Додати</button>
-
-  </form>
 </div>
