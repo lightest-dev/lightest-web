@@ -16,6 +16,8 @@ import {LanguageService} from '../shared/services/language.service';
 import {Language} from '../shared/models/Language';
 import { mergeMap } from 'rxjs/operators';
 import {concat, merge} from 'rxjs';
+import {LanguageFormComponent} from '../language-form/language-form.component';
+import {DomService} from '../shared/services/dom.service';
 
 @Component({
   selector: 'app-add-task-page',
@@ -102,6 +104,7 @@ export class AddTaskPageComponent implements OnInit {
     private categoryService: CategoriesService,
     private languageService: LanguageService,
     public snackBar: MatSnackBar,
+    public domService: DomService
   ) { }
 
   ngOnInit() {
@@ -286,5 +289,6 @@ export class AddTaskPageComponent implements OnInit {
 
   addLanguageForm() {
     console.log('add-language-form');
+    this.domService.appendComponent(LanguageFormComponent, '.test');
   }
 }

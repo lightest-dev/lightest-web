@@ -54,8 +54,6 @@ import {LanguageFormComponent} from '../language-form/language-form.component';
   ],
   declarations: [
     AddTestPageComponent,
-    LanguageFormComponent,
-    TestFormComponent
   ],
   exports: [
     BrowserModule,
@@ -81,8 +79,6 @@ import {LanguageFormComponent} from '../language-form/language-form.component';
     MatCheckboxModule,
     MatSnackBarModule,
     AddTestPageComponent,
-    LanguageFormComponent,
-    TestFormComponent
   ]
 
 })

@@ -29,6 +29,9 @@ import { AddCategoryPageComponent } from './add-category-page/add-category-page.
 import {AddCheckerPageComponent} from './add-checker-page/add-checker-page.component';
 import { AddGroupPageComponent } from './add-group-page/add-group-page.component';
 import { AddLanguagePageComponent } from './add-language-page/add-language-page.component';
+import {DomService} from './shared/services/dom.service';
+import {LanguageFormComponent} from './language-form/language-form.component';
+import {TestFormComponent} from './test-form/test-form.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +49,9 @@ import { AddLanguagePageComponent } from './add-language-page/add-language-page.
     AddCategoryPageComponent,
     AddCheckerPageComponent,
     AddGroupPageComponent,
-    AddLanguagePageComponent
+    AddLanguagePageComponent,
+    LanguageFormComponent,
+    TestFormComponent
   ],
   imports: [
     AppRoutingModule,
@@ -69,12 +74,15 @@ import { AddLanguagePageComponent } from './add-language-page/add-language-page.
     AuthGuardService,
     EditorService,
     AuthErrorMsgService,
+    DomService,
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}}
     ],
   bootstrap: [AppComponent],
   entryComponents: [
     MessageComponent,
-    UserChangeInfoDialogComponent
+    UserChangeInfoDialogComponent,
+    LanguageFormComponent,
+    TestFormComponent
   ],
 })
 
