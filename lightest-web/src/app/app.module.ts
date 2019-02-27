@@ -32,6 +32,8 @@ import { AddLanguagePageComponent } from './add-language-page/add-language-page.
 import {DomService} from './shared/services/dom.service';
 import {LanguageFormComponent} from './language-form/language-form.component';
 import {TestFormComponent} from './test-form/test-form.component';
+import {AdDirective} from './shared/directives/ad.directive';
+import {DynamicAdComponent} from './dynamic-ad/dynamic-ad.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,9 @@ import {TestFormComponent} from './test-form/test-form.component';
     AddGroupPageComponent,
     AddLanguagePageComponent,
     LanguageFormComponent,
-    TestFormComponent
+    TestFormComponent,
+    AdDirective,
+    DynamicAdComponent
   ],
   imports: [
     AppRoutingModule,

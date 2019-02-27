@@ -68,10 +68,6 @@
   </form>
 
 <!--  LANGUAGE -->
-  <div class="test">
-    <app-language-form></app-language-form>
-  </div>
-
   <form [formGroup]="languageForm" id="language-form">
     <div class="form-header">
       <p>Мови програмування</p>
@@ -101,9 +97,11 @@
              formControlName="memoryLimit">
       <mat-error *ngIf="formErrorsLanguageForm.memoryLimit">{{formErrorsLanguageForm.memoryLimit}}</mat-error>
     </mat-form-field>
-
-    <button mat-button class="c-button" type="button" (click)="addLanguageForm()"><i class="material-icons">add_box</i></button>
   </form>
+
+    <div class="dynamic-language-forms"></div>
+    <button mat-button class="c-button" type="button" (click)="addLanguageForm()"><i class="material-icons">add_box</i></button>
+
 <!-- END LANGUAGE -->
 
 <!-- TEST -->

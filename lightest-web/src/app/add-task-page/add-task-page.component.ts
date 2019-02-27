@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {ApplicationRef, Component, ComponentFactoryResolver, EmbeddedViewRef, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TaskService} from '../shared/services/task.service';
@@ -15,10 +15,12 @@ import {LanguageForTask} from '../shared/models/LanguageForTask';
 import {LanguageService} from '../shared/services/language.service';
 import {Language} from '../shared/models/Language';
 import { mergeMap } from 'rxjs/operators';
-import {concat, merge} from 'rxjs';
-import {LanguageFormComponent} from '../language-form/language-form.component';
 import {DomService} from '../shared/services/dom.service';
-
+import {merge} from 'rxjs';
+import {AdItem} from '../shared/directives/ad.item';
+import {LanguageFormComponent} from '../language-form/language-form.component';
+import {AdComponent} from '../shared/directives/ad.component';
+import {AdDirective} from '../shared/directives/ad.directive';
 @Component({
   selector: 'app-add-task-page',
   templateUrl: './add-task-page.component.html',
@@ -26,6 +28,7 @@ import {DomService} from '../shared/services/dom.service';
 })
 export class AddTaskPageComponent implements OnInit {
 
+  ads;
   taskId;
   message: Message = {message: '', isError: false};
   checkers: CheckerShort[];
@@ -34,6 +37,10 @@ export class AddTaskPageComponent implements OnInit {
   taskForm: FormGroup;
   languageForm: FormGroup;
   testForm: FormGroup;
+
+  languageForms = [];
+  languageFormsCount = 0;
+
   formErrorstaskForm = {
       'taskName': '',
       'taskPoints': '',
@@ -104,7 +111,9 @@ export class AddTaskPageComponent implements OnInit {
     private categoryService: CategoriesService,
     private languageService: LanguageService,
     public snackBar: MatSnackBar,
-    public domService: DomService
+    public domService: DomService,
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private appRef: ApplicationRef,
   ) { }
 
   ngOnInit() {
@@ -288,7 +297,16 @@ export class AddTaskPageComponent implements OnInit {
   }
 
   addLanguageForm() {
-    console.log('add-language-form');
-    this.domService.appendComponent(LanguageFormComponent, '.test');
+    this.languageFormsCount ++;
+
+    this.domService.appendComponent(LanguageFormComponent, '.dynamic-language-forms', {languages: this.languages, id: this.languageFormsCount})
+      .subscribe(result => {
+        this.languageForms.push(result);
+        console.log(this.languageForms);
+      });
+  }
+
+  addTestForm() {
+
   }
 }

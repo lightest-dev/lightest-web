@@ -1,3 +1,30 @@
-<p>
-  language-form works!
-</p>
+<form [formGroup]="languageForm" id="language-form" class="language-form-{{data.id}}">
+  <div class="form-header">
+    <p>Мови програмування</p>
+  </div>
+
+  <mat-form-field>
+    <mat-label>Мова програмування</mat-label>
+    <mat-select name="language" formControlName="language">
+      <mat-option>Виберіть назву мови</mat-option>
+      <mat-option *ngFor="let language of data.languages" value="{{language.id}}">{{language.name}}</mat-option>
+    </mat-select>
+    <mat-error *ngIf="formErrorsLanguageForm.language">{{formErrorsLanguageForm.language}}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput
+           placeholder="Часове обмеження"
+           name="timeLimit"
+           formControlName="timeLimit">
+    <mat-error *ngIf="formErrorsLanguageForm.timeLimit">{{formErrorsLanguageForm.timeLimit}}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput
+           placeholder="Обмеження в пам'яті"
+           name="memoryLimit"
+           formControlName="memoryLimit">
+    <mat-error *ngIf="formErrorsLanguageForm.memoryLimit">{{formErrorsLanguageForm.memoryLimit}}</mat-error>
+  </mat-form-field>
+</form>
