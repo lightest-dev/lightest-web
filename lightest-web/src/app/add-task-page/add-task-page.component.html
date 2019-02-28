@@ -126,11 +126,12 @@
              formControlName="outputTest">
       <mat-error *ngIf="formErrorsTestForm.outputTest">{{formErrorsTestForm.outputTest}}</mat-error>
     </mat-form-field>
-
-    <button mat-button class="c-button" type="button" (click)="addTestForm()"><i class="material-icons">add_box</i></button>
   </form>
+  <div class="dynamic-test-forms"></div>
+    <button mat-button class="c-button" type="button" (click)="addTestForm()"><i class="material-icons">add_box</i></button>
+
 <!-- END TEST -->
 
-    <button mat-button type="submit" class="c-button" [disabled]="taskForm.invalid" (click)="submit()">Додати</button>
+    <button mat-button type="submit" class="c-button" (click)="submit()">Додати</button>
 
 </div>

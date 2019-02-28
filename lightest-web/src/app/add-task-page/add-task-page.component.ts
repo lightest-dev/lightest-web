@@ -21,6 +21,7 @@ import {AdItem} from '../shared/directives/ad.item';
 import {LanguageFormComponent} from '../language-form/language-form.component';
 import {AdComponent} from '../shared/directives/ad.component';
 import {AdDirective} from '../shared/directives/ad.directive';
+import {TestFormComponent} from '../test-form/test-form.component';
 @Component({
   selector: 'app-add-task-page',
   templateUrl: './add-task-page.component.html',
@@ -40,6 +41,9 @@ export class AddTaskPageComponent implements OnInit {
 
   languageForms = [];
   languageFormsCount = 0;
+
+  testForms = [];
+  testFormsCount = 0;
 
   formErrorstaskForm = {
       'taskName': '',
@@ -216,15 +220,16 @@ export class AddTaskPageComponent implements OnInit {
   }
 
   submit() {
-    this.taskService.addNewTask(this.loadTaskObject(this.taskForm.value))
-      .pipe(
-        mergeMap(data =>
-          merge(
-            this.taskService.addTestsForTask(data['id'], this.loadTestsObject(this.testForm.value)),
-            this.taskService.addLanguagesForTask(data['id'], this.loadLanguageObject(this.languageForm.value))
+    if(this.isValidForms()) {
+      this.taskService.addNewTask(this.loadTaskObject(this.taskForm.value))
+        .pipe(
+          mergeMap(data =>
+            merge(
+              this.taskService.addTestsForTask(data['id'], this.loadTestsObject(this.testForm.value)),
+              this.taskService.addLanguagesForTask(data['id'], this.loadLanguageObject(this.languageForm.value))
+            )
           )
-        )
-      ).subscribe(res => {
+        ).subscribe(res => {
           this.openSnackBar({message: 'Успішно', isError: false});
           this.taskForm.reset();
         },
@@ -233,6 +238,9 @@ export class AddTaskPageComponent implements OnInit {
             this.openSnackBar({message: 'Помилка', isError: true});
           }
         });
+    } else {
+      this.openSnackBar({message: 'Заповніть необхідні поля форми', isError: true});
+    }
   }
 
   loadTaskObject(currentTask): TaskShort {
@@ -298,15 +306,68 @@ export class AddTaskPageComponent implements OnInit {
 
   addLanguageForm() {
     this.languageFormsCount ++;
+    this.languageForms.push({data: {}, id: this.languageFormsCount, valid: false});
 
     this.domService.appendComponent(LanguageFormComponent, '.dynamic-language-forms', {languages: this.languages, id: this.languageFormsCount})
       .subscribe(result => {
-        this.languageForms.push(result);
-        console.log(this.languageForms);
+        this.handleLanguageForms(result);
       });
   }
 
-  addTestForm() {
+  handleLanguageForms(formObj) {
+    let flag = false;
+    for (let i=0; i<this.languageForms.length; i++) {
+      if(this.languageForms[i].id == formObj.id) {
+        this.languageForms[i] = Object.assign({}, formObj);
+        flag = true;
+      }
+    }
 
+    if(!flag) {
+      this.languageForms.push(formObj);
+    }
+  }
+
+  isValidLanguageForms() {
+    let isValid = this.languageForms.find(form => {
+      return form.valid == false;
+    });
+    return isValid == undefined ? false : true;
+  }
+
+  handleTestForms(formObj) {
+    let flag = false;
+    for (let i=0; i<this.testForms.length; i++) {
+      if(this.testForms[i].id == formObj.id) {
+        this.testForms[i] = Object.assign({}, formObj);
+        flag = true;
+      }
+    }
+
+    if(!flag) {
+      this.testForms.push(formObj);
+    }
+  }
+
+  isValidTestForms() {
+    let isValid = this.testForms.find(form => {
+      return form.valid == false;
+    });
+    return isValid == undefined ? false : true;
+  }
+
+
+  addTestForm() {
+    this.testFormsCount ++;
+    this.testForms.push({data: {}, id: this.testFormsCount, valid: false});
+
+    this.domService.appendComponent(TestFormComponent, '.dynamic-test-forms', {id: this.testFormsCount})
+      .subscribe(result => {
+        this.handleTestForms(result);
+      });
+  }
+
+  isValidForms () {
+    return this.taskForm.invalid && this.isValidLanguageForms() && this.isValidTestForms();
   }
 }

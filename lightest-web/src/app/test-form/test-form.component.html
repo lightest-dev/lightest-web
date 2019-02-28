@@ -1,3 +1,18 @@
-<p>
-  test-form works!
-</p>
+<form [formGroup]="testForm" id="test-form">
+
+  <mat-form-field>
+    <input matInput
+           placeholder="Input"
+           name="inputTest"
+           formControlName="inputTest">
+    <mat-error *ngIf="formErrorsTestForm.inputTest">{{formErrorsTestForm.inputTest}}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput
+           placeholder="Output"
+           name="outputTest"
+           formControlName="outputTest">
+    <mat-error *ngIf="formErrorsTestForm.outputTest">{{formErrorsTestForm.outputTest}}</mat-error>
+  </mat-form-field>
+</form>
