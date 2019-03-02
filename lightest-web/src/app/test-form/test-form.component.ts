@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormService} from '../shared/services/form.service';
 
 @Component({
   selector: 'app-test-form',
@@ -25,7 +26,8 @@ export class TestFormComponent implements OnInit {
   @Input() data;
   @Output() form = new EventEmitter();
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder,
+              private formService: FormService) { }
 
   ngOnInit() {
     this.initTestForm();
@@ -52,23 +54,7 @@ export class TestFormComponent implements OnInit {
     this.form.emit({data: this.testForm.value, valid: this.testForm.valid, id: this.data.id});
   }
 
-  onValueChanged(_form, errorForm, validationMessages) {
-    if (!_form) { return; }
-    const form = _form;
-    for (const field in errorForm) {
-      if (errorForm.hasOwnProperty(field)) {
-        // clear previous error message (if any)
-        errorForm[field] = '';
-        const control = form.get(field);
-        if (control && control.dirty && !control.valid) {
-          const messages = validationMessages[field];
-          for (const key in control.errors) {
-            if (control.errors.hasOwnProperty(key)) {
-              errorForm[field] += messages[key] + ' ';
-            }
-          }
-        }
-      }
-    }
+  onValueChanged(form, errorForm, validationMessages) {
+    this.formService.onValueChanged(form, errorForm, validationMessages);
   }
 }

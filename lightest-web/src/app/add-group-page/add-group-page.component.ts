@@ -9,6 +9,7 @@ import {Category} from '../shared/models/Category';
 import {MessageComponent} from '../message/message.component';
 import {GroupShort} from '../shared/models/GroupShort';
 import {SnackbarService} from '../shared/services/snackbar.service';
+import {FormService} from '../shared/services/form.service';
 
 @Component({
   selector: 'app-add-group-page',
@@ -33,6 +34,7 @@ export class AddGroupPageComponent implements OnInit {
     private formBuilder: FormBuilder,
     private groupService: GroupService,
     public snackBar: SnackbarService,
+    private formService: FormService,
   ) { }
 
   ngOnInit() {
@@ -48,7 +50,7 @@ export class AddGroupPageComponent implements OnInit {
     });
 
     this.groupForm.valueChanges
-      .subscribe(data => this.onValueChanged(data));
+      .subscribe(() => this.onValueChanged(this.groupForm, this.formErrors, this.validationMessages));
 
   }
 
@@ -69,24 +71,8 @@ export class AddGroupPageComponent implements OnInit {
       })
   }
 
-  onValueChanged(data?: any) {
-    if (!this.groupForm) { return; }
-    const form = this.groupForm;
-    for (const field in this.formErrors) {
-      if (this.formErrors.hasOwnProperty(field)) {
-        // clear previous error message (if any)
-        this.formErrors[field] = '';
-        const control = form.get(field);
-        if (control && control.dirty && !control.valid) {
-          const messages = this.validationMessages[field];
-          for (const key in control.errors) {
-            if (control.errors.hasOwnProperty(key)) {
-              this.formErrors[field] += messages[key] + ' ';
-            }
-          }
-        }
-      }
-    }
+  onValueChanged(form, errorForm, validationMessages) {
+    this.formService.onValueChanged(form, errorForm, validationMessages);
   }
 
   loadObject(currentGroup) {

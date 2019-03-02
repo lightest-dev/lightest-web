@@ -25,6 +25,7 @@ import {TestFormComponent} from '../test-form/test-form.component';
 import {until} from 'selenium-webdriver';
 import elementTextContains = until.elementTextContains;
 import {SnackbarService} from '../shared/services/snackbar.service';
+import {FormService} from '../shared/services/form.service';
 @Component({
   selector: 'app-add-task-page',
   templateUrl: './add-task-page.component.html',
@@ -119,6 +120,7 @@ export class AddTaskPageComponent implements OnInit {
     private languageService: LanguageService,
     public snackBar: SnackbarService,
     public domService: DomService,
+    private formService: FormService,
     private componentFactoryResolver: ComponentFactoryResolver,
     private appRef: ApplicationRef,
   ) { }
@@ -300,23 +302,7 @@ export class AddTaskPageComponent implements OnInit {
   }
 
   onValueChanged(_form, errorForm, validationMessages) {
-      if (!_form) { return; }
-      const form = _form;
-      for (const field in errorForm) {
-          if (errorForm.hasOwnProperty(field)) {
-              // clear previous error message (if any)
-              errorForm[field] = '';
-              const control = form.get(field);
-              if (control && control.dirty && !control.valid) {
-                  const messages = validationMessages[field];
-                  for (const key in control.errors) {
-                      if (control.errors.hasOwnProperty(key)) {
-                        errorForm[field] += messages[key] + ' ';
-                      }
-                  }
-              }
-          }
-      }
+      this.formService.onValueChanged(_form, errorForm, validationMessages);
   }
 
   openSnackBar(message: Message) {

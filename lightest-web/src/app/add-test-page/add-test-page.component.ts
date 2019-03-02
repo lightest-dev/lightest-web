@@ -13,6 +13,7 @@ import {TaskShort} from '../shared/models/TaskShort';
 import {TestService} from '../shared/services/test.service';
 import {Test} from '../shared/models/Test';
 import {SnackbarService} from '../shared/services/snackbar.service';
+import {FormService} from '../shared/services/form.service';
 
 @Component({
   selector: 'app-add-test-page',
@@ -47,7 +48,8 @@ export class AddTestPageComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     public snackBar: SnackbarService,
-    private testService: TestService
+    private testService: TestService,
+    private formService: FormService
   ) { }
 
   ngOnInit() {
@@ -69,7 +71,7 @@ export class AddTestPageComponent implements OnInit {
     });
 
     this.testForm.valueChanges
-      .subscribe(data => this.onValueChanged(data));
+      .subscribe(() => this.onValueChanged(this.testForm, this.formErrors, this.validationMessages));
   }
 
   getTasks() {
@@ -108,24 +110,8 @@ export class AddTestPageComponent implements OnInit {
     return test;
   }
 
-  onValueChanged(data?: any) {
-    if (!this.testForm) { return; }
-    const form = this.testForm;
-    for (const field in this.formErrors) {
-      if (this.formErrors.hasOwnProperty(field)) {
-        // clear previous error message (if any)
-        this.formErrors[field] = '';
-        const control = form.get(field);
-        if (control && control.dirty && !control.valid) {
-          const messages = this.validationMessages[field];
-          for (const key in control.errors) {
-            if (control.errors.hasOwnProperty(key)) {
-              this.formErrors[field] += messages[key] + ' ';
-            }
-          }
-        }
-      }
-    }
+  onValueChanged(form, errorForm, validationMessages) {
+    this.formService.onValueChanged(form, errorForm, validationMessages);
   }
 
   openSnackBar(message: Message) {

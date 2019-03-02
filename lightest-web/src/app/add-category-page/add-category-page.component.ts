@@ -8,6 +8,7 @@ import {MessageComponent} from '../message/message.component';
 import {MatSnackBar} from '@angular/material';
 import {Message} from '../shared/models/Message';
 import {SnackbarService} from '../shared/services/snackbar.service';
+import {FormService} from '../shared/services/form.service';
 
 @Component({
   selector: 'app-add-category-page',
@@ -33,6 +34,7 @@ export class AddCategoryPageComponent implements OnInit {
       private formBuilder: FormBuilder,
       private categoryService: CategoriesService,
       public snackBar: SnackbarService,
+      private formService: FormService,
   ) { }
 
   ngOnInit() {
@@ -64,29 +66,13 @@ export class AddCategoryPageComponent implements OnInit {
           publicCategory: [true]
       });
 
-      this.$valueChange = this.categoryForm.valueChanges
-          .subscribe(data => this.onValueChanged(data));
+      this.categoryForm.valueChanges
+          .subscribe(() => this.onValueChanged(this.categoryForm, this.formErrors, this.validationMessages));
 
   }
 
-  onValueChanged(data?: any) {
-      if (!this.categoryForm) { return; }
-      const form = this.categoryForm;
-      for (const field in this.formErrors) {
-          if (this.formErrors.hasOwnProperty(field)) {
-              // clear previous error message (if any)
-              this.formErrors[field] = '';
-              const control = form.get(field);
-              if (control && control.dirty && !control.valid) {
-                  const messages = this.validationMessages[field];
-                  for (const key in control.errors) {
-                      if (control.errors.hasOwnProperty(key)) {
-                          this.formErrors[field] += messages[key] + ' ';
-                      }
-                  }
-              }
-          }
-      }
+  onValueChanged(form, errorForm, validationMessages) {
+     this.formService.onValueChanged(form, errorForm, validationMessages);
   }
 
   loadObject(currentCategory) {

@@ -10,6 +10,7 @@ import {Checker} from '../shared/models/Checker';
 import {CheckerShort} from '../shared/models/CheckerShort';
 import {CheckerService} from '../shared/services/checker.service';
 import {SnackbarService} from '../shared/services/snackbar.service';
+import {FormService} from '../shared/services/form.service';
 
 @Component({
   selector: 'app-add-checker-page',
@@ -38,6 +39,7 @@ export class AddCheckerPageComponent implements OnInit {
     private formBuilder: FormBuilder,
     private checkerService: CheckerService,
     public snackBar: SnackbarService,
+    private formService: FormService
   ) { }
 
   ngOnInit() {
@@ -55,7 +57,7 @@ export class AddCheckerPageComponent implements OnInit {
     });
 
     this.checkerForm.valueChanges
-      .subscribe(data => this.onValueChanged(data));
+      .subscribe(() => this.onValueChanged(this.checkerForm, this.formErrors, this.validationMessages));
 
   }
 
@@ -85,24 +87,8 @@ export class AddCheckerPageComponent implements OnInit {
   }
 
 
-  onValueChanged(data?: any) {
-    if (!this.checkerForm) { return; }
-    const form = this.checkerForm;
-    for (const field in this.formErrors) {
-      if (this.formErrors.hasOwnProperty(field)) {
-        // clear previous error message (if any)
-        this.formErrors[field] = '';
-        const control = form.get(field);
-        if (control && control.dirty && !control.valid) {
-          const messages = this.validationMessages[field];
-          for (const key in control.errors) {
-            if (control.errors.hasOwnProperty(key)) {
-              this.formErrors[field] += messages[key] + ' ';
-            }
-          }
-        }
-      }
-    }
+  onValueChanged(form, errorForm, validationMessages) {
+    this.formService.onValueChanged(form, errorForm, validationMessages);
   }
 
   openSnackBar(message: Message) {

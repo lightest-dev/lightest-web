@@ -10,6 +10,7 @@ import {Observable} from 'rxjs';
 import {AccountService} from '../shared/services/account.service';
 import {tap} from 'rxjs/operators';
 import {SnackbarService} from '../shared/services/snackbar.service';
+import {FormService} from '../shared/services/form.service';
 
 @Component({
   selector: 'app-registration',
@@ -55,7 +56,8 @@ export class RegistrationComponent implements OnInit {
     private authService: AuthService,
     private authErrorMsgService: AuthErrorMsgService,
     public snackBar: SnackbarService,
-    public accountService: AccountService
+    public accountService: AccountService,
+    private formService: FormService
   ) { }
 
   ngOnInit() {
@@ -83,9 +85,7 @@ export class RegistrationComponent implements OnInit {
     }, {validators: this.checkPasswords });
 
     this.registrationUserForm.valueChanges
-      .subscribe(data => this.onValueChanged(data));
-
-    this.onValueChanged();
+      .subscribe(() => this.onValueChanged(this.registrationUserForm, this.formErrors, this.validationMessages));
   }
 
   checkPasswords(group: FormGroup) {
@@ -116,24 +116,8 @@ export class RegistrationComponent implements OnInit {
         });
     }
 
-  onValueChanged(data?: any) {
-    if (!this.registrationUserForm) { return; }
-    const form = this.registrationUserForm;
-    for (const field in this.formErrors) {
-      if (this.formErrors.hasOwnProperty(field)) {
-        // clear previous error message (if any)
-        this.formErrors[field] = '';
-        const control = form.get(field);
-        if (control && control.dirty && !control.valid) {
-          const messages = this.validationMessages[field];
-          for (const key in control.errors) {
-            if (control.errors.hasOwnProperty(key)) {
-              this.formErrors[field] += messages[key] + ' ';
-            }
-          }
-        }
-      }
-    }
+  onValueChanged(form, errorForm, validationMessages) {
+    this.formService.onValueChanged(form, errorForm, validationMessages);
   }
 
   openSnackBar(message: Message) {

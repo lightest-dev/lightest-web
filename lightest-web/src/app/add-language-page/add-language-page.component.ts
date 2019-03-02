@@ -11,6 +11,7 @@ import {Test} from '../shared/models/Test';
 import {MessageComponent} from '../message/message.component';
 import {Language} from '../shared/models/Language';
 import {SnackbarService} from '../shared/services/snackbar.service';
+import {FormService} from '../shared/services/form.service';
 
 @Component({
   selector: 'app-add-language-page',
@@ -39,7 +40,8 @@ export class AddLanguagePageComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     public snackBar: SnackbarService,
-    private languageService: LanguageService
+    private languageService: LanguageService,
+    private formServie: FormService
   ) { }
 
   ngOnInit() {
@@ -57,7 +59,8 @@ export class AddLanguagePageComponent implements OnInit {
     });
 
     this.languageForm.valueChanges
-      .subscribe(data => this.onValueChanged(data));
+      .subscribe( () =>
+        this.onValueChanged(this.languageForm, this.formErrors, this.validationMessages));
   }
 
 
@@ -87,24 +90,8 @@ export class AddLanguagePageComponent implements OnInit {
     return language;
   }
 
-  onValueChanged(data?: any) {
-    if (!this.languageForm) { return; }
-    const form = this.languageForm;
-    for (const field in this.formErrors) {
-      if (this.formErrors.hasOwnProperty(field)) {
-        // clear previous error message (if any)
-        this.formErrors[field] = '';
-        const control = form.get(field);
-        if (control && control.dirty && !control.valid) {
-          const messages = this.validationMessages[field];
-          for (const key in control.errors) {
-            if (control.errors.hasOwnProperty(key)) {
-              this.formErrors[field] += messages[key] + ' ';
-            }
-          }
-        }
-      }
-    }
+  onValueChanged(form, errorForm, validationMessages) {
+    this.formServie.onValueChanged(form, errorForm, validationMessages);
   }
 
   openSnackBar(message: Message) {
