@@ -43,3 +43,59 @@ a {
 ul li {
   list-style: none;
 }
+
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  .group-wrapper {
+    text-align: center;
+    padding: 25px 0;
+  }
+
+  .form-header {
+    font-size: 22px;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+
+
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 65%;
+
+    mat-checkbox {margin-bottom: 20px;}
+
+    mat-form-field {
+      margin: 15px 0;
+      width: 100%;
+    }
+
+    .double-inputs {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      mat-form-field {
+        width: 45%;
+      }
+    }
+  }
+}
+
+.dynamic-component-wrapper {
+  width: 100%;
+}
+
+app-test-form,
+app-language-form {
+  display: flex;
+  justify-content: center;
+}
+
+

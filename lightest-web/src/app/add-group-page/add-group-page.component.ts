@@ -8,6 +8,7 @@ import {GroupService} from '../shared/services/group.service';
 import {Category} from '../shared/models/Category';
 import {MessageComponent} from '../message/message.component';
 import {GroupShort} from '../shared/models/GroupShort';
+import {SnackbarService} from '../shared/services/snackbar.service';
 
 @Component({
   selector: 'app-add-group-page',
@@ -31,7 +32,7 @@ export class AddGroupPageComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private groupService: GroupService,
-    public snackBar: MatSnackBar,
+    public snackBar: SnackbarService,
   ) { }
 
   ngOnInit() {
@@ -98,7 +99,6 @@ export class AddGroupPageComponent implements OnInit {
   }
 
   openSnackBar(message: Message) {
-    this.snackBar.openFromComponent(MessageComponent, { data: message,
-      panelClass: message.isError ? ['snackbar-error-message'] : ['snackbar-success-message'] } );
+    this.snackBar.showSnackBar(message);
   }
 }

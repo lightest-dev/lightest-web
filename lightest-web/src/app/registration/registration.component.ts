@@ -9,6 +9,7 @@ import {MessageComponent} from '../message/message.component';
 import {Observable} from 'rxjs';
 import {AccountService} from '../shared/services/account.service';
 import {tap} from 'rxjs/operators';
+import {SnackbarService} from '../shared/services/snackbar.service';
 
 @Component({
   selector: 'app-registration',
@@ -22,8 +23,6 @@ export class RegistrationComponent implements OnInit {
   messageInfo: Message = {message: '', isError: false};
   registrationUserForm: FormGroup;
   formErrors = {
-    // 'firstName': '',
-    // 'secondName': '',
     'email': '',
     'login': '',
     'password': '',
@@ -31,16 +30,6 @@ export class RegistrationComponent implements OnInit {
   };
 
   validationMessages = {
-    // 'firstName': {
-    //   'required': `Обов'язкове поле`,
-    //   'minlength': `Мінімальна кількість символів 3`,
-    //   'maxlength': `Максимальна кількість символів 25`
-    // },
-    // 'secondName': {
-    //   'required': `Обов'язкове поле`,
-    //   'minlength': `Мінімальна кількість символів 3`,
-    //   'maxlength': `Максимальна кількість символів 25`
-    // },
     'email': {
       'required': `Обов'язкове поле`,
       'pattern': `Некоректна форма email`
@@ -65,7 +54,7 @@ export class RegistrationComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private authErrorMsgService: AuthErrorMsgService,
-    public snackBar: MatSnackBar,
+    public snackBar: SnackbarService,
     public accountService: AccountService
   ) { }
 
@@ -148,8 +137,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   openSnackBar(message: Message) {
-      this.snackBar.openFromComponent(MessageComponent, { data: message,
-          panelClass: message.isError ? ['snackbar-error-message'] : ['snackbar-success-message'] } );
+      this.snackBar.showSnackBar(message);
   }
 
 }

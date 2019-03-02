@@ -13,7 +13,6 @@ export class DomService {
 
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
-
     private appRef: ApplicationRef,
     private injector: Injector
   ) { }
@@ -25,10 +24,6 @@ export class DomService {
       .create(this.injector);
 
     (<AdComponent>componentRef.instance).data = data;
-
-    // componentRef.instance['form'].subscribe(result => { console.log(result); }); // here observeVariable is an Observable in dynamic component(ie. this.componentRef)
-
-     // componentRef.instance['name'] = `i'm dynamic component`;
 
     // Attach component to the appRef so that it's inside the ng component tree
     this.appRef.attachView(componentRef.hostView);

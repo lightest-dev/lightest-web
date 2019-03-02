@@ -12,6 +12,7 @@ import {MatSnackBar} from '@angular/material';
 import {TaskShort} from '../shared/models/TaskShort';
 import {TestService} from '../shared/services/test.service';
 import {Test} from '../shared/models/Test';
+import {SnackbarService} from '../shared/services/snackbar.service';
 
 @Component({
   selector: 'app-add-test-page',
@@ -45,7 +46,7 @@ export class AddTestPageComponent implements OnInit {
     private taskService: TaskService,
     private router: Router,
     private formBuilder: FormBuilder,
-    public snackBar: MatSnackBar,
+    public snackBar: SnackbarService,
     private testService: TestService
   ) { }
 
@@ -128,7 +129,6 @@ export class AddTestPageComponent implements OnInit {
   }
 
   openSnackBar(message: Message) {
-    this.snackBar.openFromComponent(MessageComponent, { data: message,
-      panelClass: message.isError ? ['snackbar-error-message'] : ['snackbar-success-message'] } );
+    this.snackBar.showSnackBar(message);
   }
 }

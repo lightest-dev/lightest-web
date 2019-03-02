@@ -7,6 +7,7 @@ import {Category} from '../shared/models/Category';
 import {MessageComponent} from '../message/message.component';
 import {MatSnackBar} from '@angular/material';
 import {Message} from '../shared/models/Message';
+import {SnackbarService} from '../shared/services/snackbar.service';
 
 @Component({
   selector: 'app-add-category-page',
@@ -31,7 +32,7 @@ export class AddCategoryPageComponent implements OnInit {
       private router: Router,
       private formBuilder: FormBuilder,
       private categoryService: CategoriesService,
-      public snackBar: MatSnackBar,
+      public snackBar: SnackbarService,
   ) { }
 
   ngOnInit() {
@@ -98,7 +99,6 @@ export class AddCategoryPageComponent implements OnInit {
   }
 
     openSnackBar(message: Message) {
-            this.snackBar.openFromComponent(MessageComponent, { data: message,
-                panelClass: message.isError ? ['snackbar-error-message'] : ['snackbar-success-message'] } );
+      this.snackBar.showSnackBar(message);
     }
 }

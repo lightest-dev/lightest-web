@@ -10,6 +10,7 @@ import {LanguageService} from '../shared/services/language.service';
 import {Test} from '../shared/models/Test';
 import {MessageComponent} from '../message/message.component';
 import {Language} from '../shared/models/Language';
+import {SnackbarService} from '../shared/services/snackbar.service';
 
 @Component({
   selector: 'app-add-language-page',
@@ -37,7 +38,7 @@ export class AddLanguagePageComponent implements OnInit {
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
-    public snackBar: MatSnackBar,
+    public snackBar: SnackbarService,
     private languageService: LanguageService
   ) { }
 
@@ -107,8 +108,7 @@ export class AddLanguagePageComponent implements OnInit {
   }
 
   openSnackBar(message: Message) {
-    this.snackBar.openFromComponent(MessageComponent, { data: message,
-      panelClass: message.isError ? ['snackbar-error-message'] : ['snackbar-success-message'] } );
+    this.snackBar.showSnackBar(message);
   }
 
 }

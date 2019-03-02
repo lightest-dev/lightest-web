@@ -22,6 +22,9 @@ import {LanguageFormComponent} from '../language-form/language-form.component';
 import {AdComponent} from '../shared/directives/ad.component';
 import {AdDirective} from '../shared/directives/ad.directive';
 import {TestFormComponent} from '../test-form/test-form.component';
+import {until} from 'selenium-webdriver';
+import elementTextContains = until.elementTextContains;
+import {SnackbarService} from '../shared/services/snackbar.service';
 @Component({
   selector: 'app-add-task-page',
   templateUrl: './add-task-page.component.html',
@@ -114,7 +117,7 @@ export class AddTaskPageComponent implements OnInit {
     private checkerService: CheckerService,
     private categoryService: CategoriesService,
     private languageService: LanguageService,
-    public snackBar: MatSnackBar,
+    public snackBar: SnackbarService,
     public domService: DomService,
     private componentFactoryResolver: ComponentFactoryResolver,
     private appRef: ApplicationRef,
@@ -225,8 +228,9 @@ export class AddTaskPageComponent implements OnInit {
         .pipe(
           mergeMap(data =>
             merge(
-              this.taskService.addTestsForTask(data['id'], this.loadTestsObject(this.testForm.value)),
-              this.taskService.addLanguagesForTask(data['id'], this.loadLanguageObject(this.languageForm.value))
+              this.taskId = data['id'],
+              this.taskService.addTestsForTask(data['id'], this.getTestObj()),
+              this.taskService.addLanguagesForTask(data['id'], this.getLanguagesObj())
             )
           )
         ).subscribe(res => {
@@ -256,26 +260,42 @@ export class AddTaskPageComponent implements OnInit {
     return task;
   }
 
-  loadTestsObject(obj): Test[]{
-    const tests: Test[] = [
+  getLanguagesObj() {
+    let allLanguages = [];
+    allLanguages =  this.languageForms.map(languageForm => {
+      return this.loadLanguageObject(languageForm.data)
+    });
+    allLanguages.push(this.loadLanguageObject(this.languageForm.value));
+    return allLanguages;
+  }
+
+  getTestObj() {
+    let allTests = [];
+    allTests =  this.testForms.map(testForm => {
+      return this.loadTestsObject(testForm.data)
+    });
+    allTests.push(this.loadTestsObject(this.testForm.value));
+    return allTests;
+  }
+
+  loadTestsObject(obj): Test{
+    const tests =
       {
         taskId: this.taskId,
         input: obj.inputTest,
         output: obj.outputTest,
-      }
-    ];
+      };
     return tests;
   }
 
-  loadLanguageObject(obj): LanguageForTask[] {
-    const languages: LanguageForTask[] = [
+  loadLanguageObject(obj): LanguageForTask {
+    const languages: LanguageForTask =
       {
         languageId: obj.language,
         taskId: this.taskId,
         timeLimit: obj.timeLimit,
         memoryLimit: obj.memoryLimit
-      }
-    ];
+      };
     return languages;
   }
 
@@ -300,8 +320,7 @@ export class AddTaskPageComponent implements OnInit {
   }
 
   openSnackBar(message: Message) {
-    this.snackBar.openFromComponent(MessageComponent, { data: message,
-      panelClass: message.isError ? ['snackbar-error-message'] : ['snackbar-success-message'] } );
+    this.snackBar.showSnackBar(message);
   }
 
   addLanguageForm() {
@@ -332,7 +351,7 @@ export class AddTaskPageComponent implements OnInit {
     let isValid = this.languageForms.find(form => {
       return form.valid == false;
     });
-    return isValid == undefined ? false : true;
+    return isValid == undefined ? true : false;
   }
 
   handleTestForms(formObj) {
@@ -353,7 +372,7 @@ export class AddTaskPageComponent implements OnInit {
     let isValid = this.testForms.find(form => {
       return form.valid == false;
     });
-    return isValid == undefined ? false : true;
+    return isValid == undefined ? true : false;
   }
 
 
@@ -368,6 +387,6 @@ export class AddTaskPageComponent implements OnInit {
   }
 
   isValidForms () {
-    return this.taskForm.invalid && this.isValidLanguageForms() && this.isValidTestForms();
+    return !this.taskForm.invalid && this.isValidLanguageForms() && this.isValidTestForms();
   }
 }

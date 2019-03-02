@@ -6,6 +6,7 @@ import {MatDialog, MatSnackBar} from '@angular/material';
 import {MessageComponent} from '../message/message.component';
 import {Message} from '../shared/models/Message';
 import {AuthErrorMsgService} from '../shared/services/authErrorMsg.service';
+import {SnackbarService} from '../shared/services/snackbar.service';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    public snackBar: MatSnackBar,
+    public snackBar: SnackbarService,
     public authErrorMsgService: AuthErrorMsgService,
   ) { }
 
@@ -57,8 +58,7 @@ export class LoginComponent implements OnInit {
   }
 
   openSnackBar(message: Message) {
-      this.snackBar.openFromComponent(MessageComponent, { data: message,
-          panelClass: message.isError ? ['snackbar-error-message'] : ['snackbar-success-message'] } );
+      this.snackBar.showSnackBar(message);
   }
 
 }

@@ -34,6 +34,7 @@ import {LanguageFormComponent} from './language-form/language-form.component';
 import {TestFormComponent} from './test-form/test-form.component';
 import {AdDirective} from './shared/directives/ad.directive';
 import {DynamicAdComponent} from './dynamic-ad/dynamic-ad.component';
+import {SnackbarService} from './shared/services/snackbar.service';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import {DynamicAdComponent} from './dynamic-ad/dynamic-ad.component';
     EditorService,
     AuthErrorMsgService,
     DomService,
+    SnackbarService,
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}}
     ],
   bootstrap: [AppComponent],

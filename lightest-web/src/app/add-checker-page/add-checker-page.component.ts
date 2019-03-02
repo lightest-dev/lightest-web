@@ -9,6 +9,7 @@ import {Category} from '../shared/models/Category';
 import {Checker} from '../shared/models/Checker';
 import {CheckerShort} from '../shared/models/CheckerShort';
 import {CheckerService} from '../shared/services/checker.service';
+import {SnackbarService} from '../shared/services/snackbar.service';
 
 @Component({
   selector: 'app-add-checker-page',
@@ -36,7 +37,7 @@ export class AddCheckerPageComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private checkerService: CheckerService,
-    public snackBar: MatSnackBar,
+    public snackBar: SnackbarService,
   ) { }
 
   ngOnInit() {
@@ -105,8 +106,7 @@ export class AddCheckerPageComponent implements OnInit {
   }
 
   openSnackBar(message: Message) {
-    this.snackBar.openFromComponent(MessageComponent, { data: message,
-      panelClass: message.isError ? ['snackbar-error-message'] : ['snackbar-success-message'] } );
+    this.snackBar.showSnackBar(message);
   }
 
 }
