@@ -73,6 +73,8 @@
       <p>Мови програмування</p>
     </div>
     <mat-form-field>
+      <span class="counter">1.</span>
+
       <mat-label>Мова програмування</mat-label>
       <mat-select name="language" formControlName="language">
         <mat-option>Виберіть назву мови</mat-option>
@@ -99,7 +101,16 @@
   </form>
 
    <div class="dynamic-component-wrapper dynamic-language-forms"></div>
-   <button mat-button class="c-button" type="button" (click)="addLanguageForm()"><i class="material-icons">add_box</i></button>
+   <button
+     mat-button
+     matTooltip="Додати ще мову"
+     matTooltipPosition="right"
+     matTooltipClass="c-primary-tooltip"
+     class="c-button"
+     type="button"
+     (click)="addLanguageForm()">
+        <i class="material-icons">add_box</i>
+   </button>
 
 <!-- END LANGUAGE -->
 
@@ -111,6 +122,9 @@
     </div>
 
     <mat-form-field>
+
+      <span class="counter">1.</span>
+
       <input matInput
              placeholder="Input"
              name="inputTest"
@@ -127,10 +141,19 @@
     </mat-form-field>
   </form>
   <div class="dynamic-component-wrapper dynamic-test-forms"></div>
-    <button mat-button class="c-button" type="button" (click)="addTestForm()"><i class="material-icons">add_box</i></button>
+    <button
+      mat-button
+      matTooltip="Додати ще тест"
+      matTooltipPosition="right"
+      matTooltipClass="c-primary-tooltip"
+      class="c-button"
+      type="button"
+      (click)="addTestForm()">
+        <i class="material-icons">add_box</i>
+    </button>
 
 <!-- END TEST -->
 
-    <button mat-button type="submit" class="c-button" (click)="submit()">Додати</button>
+    <button mat-button type="submit" class="c-button" (click)="submit()">Зберегти</button>
 
 </div>

@@ -8,8 +8,6 @@ import {CategoriesService} from '../shared/services/categories.service';
 import {CheckerShort} from '../shared/models/CheckerShort';
 import {Category} from '../shared/models/Category';
 import {Message} from '../shared/models/Message';
-import {MessageComponent} from '../message/message.component';
-import {MatSnackBar} from '@angular/material';
 import {Test} from '../shared/models/Test';
 import {LanguageForTask} from '../shared/models/LanguageForTask';
 import {LanguageService} from '../shared/services/language.service';
@@ -17,15 +15,11 @@ import {Language} from '../shared/models/Language';
 import { mergeMap } from 'rxjs/operators';
 import {DomService} from '../shared/services/dom.service';
 import {merge} from 'rxjs';
-import {AdItem} from '../shared/directives/ad.item';
 import {LanguageFormComponent} from '../language-form/language-form.component';
-import {AdComponent} from '../shared/directives/ad.component';
-import {AdDirective} from '../shared/directives/ad.directive';
 import {TestFormComponent} from '../test-form/test-form.component';
-import {until} from 'selenium-webdriver';
-import elementTextContains = until.elementTextContains;
 import {SnackbarService} from '../shared/services/snackbar.service';
 import {FormService} from '../shared/services/form.service';
+
 @Component({
   selector: 'app-add-task-page',
   templateUrl: './add-task-page.component.html',
@@ -33,7 +27,6 @@ import {FormService} from '../shared/services/form.service';
 })
 export class AddTaskPageComponent implements OnInit {
 
-  ads;
   taskId;
   message: Message = {message: '', isError: false};
   checkers: CheckerShort[];
@@ -121,8 +114,6 @@ export class AddTaskPageComponent implements OnInit {
     public snackBar: SnackbarService,
     public domService: DomService,
     private formService: FormService,
-    private componentFactoryResolver: ComponentFactoryResolver,
-    private appRef: ApplicationRef,
   ) { }
 
   ngOnInit() {
@@ -143,7 +134,7 @@ export class AddTaskPageComponent implements OnInit {
     this.categoryService.getCategories()
       .subscribe(data => {
         this.categories = data;
-      })
+      });
   }
 
   getLanguages() {
@@ -291,8 +282,7 @@ export class AddTaskPageComponent implements OnInit {
   }
 
   loadLanguageObject(obj): LanguageForTask {
-    const languages: LanguageForTask =
-      {
+    const languages: LanguageForTask = {
         languageId: obj.language,
         taskId: this.taskId,
         timeLimit: obj.timeLimit,
@@ -321,29 +311,29 @@ export class AddTaskPageComponent implements OnInit {
 
   handleLanguageForms(formObj) {
     let flag = false;
-    for (let i=0; i<this.languageForms.length; i++) {
-      if(this.languageForms[i].id == formObj.id) {
+    for (let i = 0; i<this.languageForms.length; i++) {
+      if (this.languageForms[i].id === formObj.id) {
         this.languageForms[i] = Object.assign({}, formObj);
         flag = true;
       }
     }
 
-    if(!flag) {
+    if (!flag) {
       this.languageForms.push(formObj);
     }
   }
 
   isValidLanguageForms() {
-    let isValid = this.languageForms.find(form => {
-      return form.valid == false;
+    const isValid = this.languageForms.find(form => {
+      return form.valid === false;
     });
-    return isValid == undefined ? true : false;
+    return isValid === undefined ? true : false;
   }
 
   handleTestForms(formObj) {
     let flag = false;
-    for (let i=0; i<this.testForms.length; i++) {
-      if(this.testForms[i].id == formObj.id) {
+    for (let i = 0; i < this.testForms.length; i++) {
+      if (this.testForms[i].id === formObj.id) {
         this.testForms[i] = Object.assign({}, formObj);
         flag = true;
       }
@@ -355,10 +345,10 @@ export class AddTaskPageComponent implements OnInit {
   }
 
   isValidTestForms() {
-    let isValid = this.testForms.find(form => {
-      return form.valid == false;
+    const isValid = this.testForms.find(form => {
+      return form.valid === false;
     });
-    return isValid == undefined ? true : false;
+    return isValid === undefined ? true : false;
   }
 
 

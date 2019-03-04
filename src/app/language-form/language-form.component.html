@@ -1,9 +1,11 @@
 <form [formGroup]="languageForm" id="language-form" class="language-form-{{data.id}}">
   <div class="form-header">
-    <p>Мови програмування</p>
   </div>
 
   <mat-form-field>
+
+    <span class="counter">{{data.id + 1}}.</span>
+
     <mat-label>Мова програмування</mat-label>
     <mat-select name="language" formControlName="language">
       <mat-option>Виберіть назву мови</mat-option>
@@ -28,5 +30,3 @@
     <mat-error *ngIf="formErrorsLanguageForm.memoryLimit">{{formErrorsLanguageForm.memoryLimit}}</mat-error>
   </mat-form-field>
 </form>
-
-<button mat-button (click)="destroy()">test</button>

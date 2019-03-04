@@ -18,7 +18,7 @@ import {
   MatToolbar,
   MatToolbarModule,
   MatListModule,
-  MatTabsModule, MatNativeDateModule, MatCheckboxModule
+  MatTabsModule, MatNativeDateModule, MatCheckboxModule, MatTooltipModule
 } from '@angular/material';
 import { MatCardModule } from '@angular/material/card';
 import {MatSidenavModule} from '@angular/material/sidenav';
@@ -45,6 +45,7 @@ import {LanguageFormComponent} from '../language-form/language-form.component';
     MatOptionModule,
     MatSelectModule,
     MatToolbarModule,
+    MatTooltipModule,
     MatListModule,
     MatTabsModule,
     MatExpansionModule,
@@ -71,6 +72,7 @@ import {LanguageFormComponent} from '../language-form/language-form.component';
     MatOptionModule,
     MatSelectModule,
     MatToolbarModule,
+    MatTooltipModule,
     MatListModule,
     MatTabsModule,
     MatDatepickerModule,

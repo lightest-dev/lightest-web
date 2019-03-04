@@ -13,5 +13,19 @@ $custom-warn-secondary: mat-palette($mat-deep-orange, A700);
 
 @include angular-material-theme($custom-theme);
 
-.snackbar-success-message {background-color: mat-color($custom-primary); color: black;}
-.snackbar-error-message {background-color: mat-color($custom-warn-secondary); color: white;}
+.snackbar-success-message {
+  background-color: mat-color($custom-primary);
+  color: black;
+}
+
+.snackbar-error-message {
+  background-color: mat-color($custom-warn-secondary);
+  color: white;
+}
+
+.c-primary-tooltip {
+  background-color: #00594f;
+  color: white;
+  font-size: 13px;
+  padding: 5px;
+}

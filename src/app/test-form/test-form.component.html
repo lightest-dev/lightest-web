@@ -1,6 +1,11 @@
 <form [formGroup]="testForm" id="test-form">
+  <div class="form-header">
+  </div>
 
   <mat-form-field>
+
+    <span class="counter">{{data.id + 1}}.</span>
+
     <input matInput
            placeholder="Input"
            name="inputTest"
