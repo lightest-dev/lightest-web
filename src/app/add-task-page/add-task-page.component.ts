@@ -129,7 +129,7 @@ export class AddTaskPageComponent implements OnInit {
     this.checkerService.getCheckers()
       .subscribe(data => {
         this.checkers = data;
-      })
+      });
   }
 
   getCategories() {

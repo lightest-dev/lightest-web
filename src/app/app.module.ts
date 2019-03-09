@@ -36,6 +36,9 @@ import {AdDirective} from './shared/directives/ad.directive';
 import {DynamicAdComponent} from './dynamic-ad/dynamic-ad.component';
 import {SnackbarService} from './shared/services/snackbar.service';
 import {FormService} from './shared/services/form.service';
+import { TaskForUsersFormComponent } from './task-for-users-form/task-for-users-form.component';
+import { UsersToGroupFormComponent } from './users-to-group-form/users-to-group-form.component';
+import { UsersToCategoryFormComponent } from './users-to-category-form/users-to-category-form.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +60,10 @@ import {FormService} from './shared/services/form.service';
     LanguageFormComponent,
     TestFormComponent,
     AdDirective,
-    DynamicAdComponent
+    DynamicAdComponent,
+    TaskForUsersFormComponent,
+    UsersToGroupFormComponent,
+    UsersToCategoryFormComponent
   ],
   imports: [
     AppRoutingModule,
