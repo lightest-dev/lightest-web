@@ -36,9 +36,9 @@ import {AdDirective} from './shared/directives/ad.directive';
 import {DynamicAdComponent} from './dynamic-ad/dynamic-ad.component';
 import {SnackbarService} from './shared/services/snackbar.service';
 import {FormService} from './shared/services/form.service';
-import { TaskForUsersFormComponent } from './task-for-users-form/task-for-users-form.component';
-import { UsersToGroupFormComponent } from './users-to-group-form/users-to-group-form.component';
-import { UsersToCategoryFormComponent } from './users-to-category-form/users-to-category-form.component';
+import { AddTaskToUsersPageComponent } from './add-task-to-users-page/add-task-to-users-page.component';
+import { AddUsersToGroupPageComponent } from './add-users-to-group-page/add-users-to-group-page.component';
+import { AddUsersToCategoryPageComponent } from './add-users-to-category-page/add-users-to-category-page.component';
 
 @NgModule({
   declarations: [
@@ -61,9 +61,9 @@ import { UsersToCategoryFormComponent } from './users-to-category-form/users-to-
     TestFormComponent,
     AdDirective,
     DynamicAdComponent,
-    TaskForUsersFormComponent,
-    UsersToGroupFormComponent,
-    UsersToCategoryFormComponent
+    AddTaskToUsersPageComponent,
+    AddUsersToGroupPageComponent,
+    AddUsersToCategoryPageComponent
   ],
   imports: [
     AppRoutingModule,

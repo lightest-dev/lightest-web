@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TaskForUsersFormComponent } from './task-for-users-form.component';
+import { AddTaskToUsersPageComponent } from './add-task-to-users-page.component';
 
-describe('TaskForUsersFormComponent', () => {
-  let component: TaskForUsersFormComponent;
-  let fixture: ComponentFixture<TaskForUsersFormComponent>;
+describe('AddTaskToUsersPageComponent', () => {
+  let component: AddTaskToUsersPageComponent;
+  let fixture: ComponentFixture<AddTaskToUsersPageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TaskForUsersFormComponent ]
+      declarations: [ AddTaskToUsersPageComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TaskForUsersFormComponent);
+    fixture = TestBed.createComponent(AddTaskToUsersPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
