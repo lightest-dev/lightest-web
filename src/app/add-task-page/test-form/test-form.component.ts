@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {FormService} from '../shared/services/form.service';
+import {FormService} from '../../shared/services/form.service';
 
 @Component({
   selector: 'app-test-form',

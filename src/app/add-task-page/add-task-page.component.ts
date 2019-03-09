@@ -15,8 +15,8 @@ import {Language} from '../shared/models/Language';
 import { mergeMap } from 'rxjs/operators';
 import {DomService} from '../shared/services/dom.service';
 import {merge} from 'rxjs';
-import {LanguageFormComponent} from '../language-form/language-form.component';
-import {TestFormComponent} from '../test-form/test-form.component';
+import {LanguageFormComponent} from './language-form/language-form.component';
+import {TestFormComponent} from './test-form/test-form.component';
 import {SnackbarService} from '../shared/services/snackbar.service';
 import {FormService} from '../shared/services/form.service';
 
