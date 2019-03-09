@@ -27,6 +27,8 @@ import {FormService} from '../shared/services/form.service';
 })
 export class AddTaskPageComponent implements OnInit {
 
+  compRefLang = [];
+  compRefTest = [];
   taskId;
   message: Message = {message: '', isError: false};
   checkers: CheckerShort[];
@@ -216,7 +218,7 @@ export class AddTaskPageComponent implements OnInit {
   }
 
   submit() {
-    if(this.isValidForms()) {
+    if (this.isValidForms()) {
       this.taskService.addNewTask(this.loadTaskObject(this.taskForm.value))
         .pipe(
           mergeMap(data =>
@@ -229,6 +231,9 @@ export class AddTaskPageComponent implements OnInit {
         ).subscribe(res => {
           this.openSnackBar({message: 'Успішно', isError: false});
           this.taskForm.reset();
+          this.languageForm.reset();
+          this.testForm.reset();
+          this.deleteDynamicForms();
         },
         error1 => {
           if (error1) {
@@ -271,9 +276,8 @@ export class AddTaskPageComponent implements OnInit {
     return allTests;
   }
 
-  loadTestsObject(obj): Test{
-    const tests =
-      {
+  loadTestsObject(obj): Test {
+    const tests = {
         taskId: this.taskId,
         input: obj.inputTest,
         output: obj.outputTest,
@@ -302,16 +306,31 @@ export class AddTaskPageComponent implements OnInit {
   addLanguageForm() {
     this.languageFormsCount ++;
     this.languageForms.push({data: {}, id: this.languageFormsCount, valid: false});
+    console.log(this.languageForms);
 
-    this.domService.appendComponent(LanguageFormComponent, '.dynamic-language-forms', {languages: this.languages, id: this.languageFormsCount})
-      .subscribe(result => {
-        this.handleLanguageForms(result);
+    const compRef = this.domService.appendComponent(LanguageFormComponent, '.dynamic-language-forms', {languages: this.languages, id: this.languageFormsCount});
+    compRef.instance['form'].subscribe(result => {
+      this.compRefLang.push({ref: compRef, id: result.id});
+
+        result.delete ?
+          this.deleteLanguage(result.id, compRef) :
+          this.handleLanguageForms(result);
       });
+  }
+
+  deleteLanguage (id, compRef) {
+    for (let i = 0; i < this.languageForms.length; i++) {
+      if (this.languageForms[i].id === id) {
+        this.languageForms.splice(i, 1);
+      }
+    }
+    this.domService.destroy(compRef);
+    this.languageFormsCount--;
   }
 
   handleLanguageForms(formObj) {
     let flag = false;
-    for (let i = 0; i<this.languageForms.length; i++) {
+    for (let i = 0; i < this.languageForms.length; i++) {
       if (this.languageForms[i].id === formObj.id) {
         this.languageForms[i] = Object.assign({}, formObj);
         flag = true;
@@ -339,7 +358,7 @@ export class AddTaskPageComponent implements OnInit {
       }
     }
 
-    if(!flag) {
+    if (!flag) {
       this.testForms.push(formObj);
     }
   }
@@ -356,13 +375,37 @@ export class AddTaskPageComponent implements OnInit {
     this.testFormsCount ++;
     this.testForms.push({data: {}, id: this.testFormsCount, valid: false});
 
-    this.domService.appendComponent(TestFormComponent, '.dynamic-test-forms', {id: this.testFormsCount})
-      .subscribe(result => {
-        this.handleTestForms(result);
+    const compRef = this.domService.appendComponent(TestFormComponent, '.dynamic-test-forms', {id: this.testFormsCount});
+      compRef.instance['form'].subscribe(result => {
+        this.compRefTest.push({ref: compRef, id: result.id});
+
+        result.delete ?
+          this.deleteTest(result.id, compRef) :
+          this.handleTestForms(result);
       });
+  }
+
+  deleteTest(id, compRef) {
+    for (let i = 0; i < this.testForms.length; i++) {
+      if (this.testForms[i].id === id) {
+        this.testForms.splice(i, 1);
+      }
+    }
+    this.domService.destroy(compRef);
+    this.testFormsCount--;
   }
 
   isValidForms () {
     return !this.taskForm.invalid && this.isValidLanguageForms() && this.isValidTestForms();
+  }
+
+  deleteDynamicForms() {
+    this.compRefLang.forEach(el => {
+      this.domService.destroy(el.ref);
+    });
+
+    this.compRefTest.forEach(el => {
+      this.domService.destroy(el.ref);
+    });
   }
 }

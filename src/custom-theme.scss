@@ -29,3 +29,11 @@ $custom-warn-secondary: mat-palette($mat-deep-orange, A700);
   font-size: 13px;
   padding: 5px;
 }
+
+.c-warning-tooltip {
+  background-color: mat-color($custom-warn);
+  color: white;
+  font-size: 13px;
+  padding: 5px;
+}
+

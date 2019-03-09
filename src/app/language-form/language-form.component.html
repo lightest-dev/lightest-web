@@ -16,6 +16,7 @@
 
   <mat-form-field>
     <input matInput
+           type="number"
            placeholder="Часове обмеження"
            name="timeLimit"
            formControlName="timeLimit">
@@ -24,9 +25,15 @@
 
   <mat-form-field>
     <input matInput
+           type="number"
            placeholder="Обмеження в пам'яті"
            name="memoryLimit"
            formControlName="memoryLimit">
     <mat-error *ngIf="formErrorsLanguageForm.memoryLimit">{{formErrorsLanguageForm.memoryLimit}}</mat-error>
   </mat-form-field>
+  <i class="material-icons delete-comp"
+     matTooltip="Видалити"
+     matTooltipPosition="right"
+     matTooltipClass="c-warning-tooltip"
+     (click)="delete()">delete_forever</i>
 </form>

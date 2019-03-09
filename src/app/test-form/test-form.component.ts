@@ -22,6 +22,7 @@ export class TestFormComponent implements OnInit {
     }
   };
 
+  deleteFlag = false;
   testForm: FormGroup;
   @Input() data;
   @Output() form = new EventEmitter();
@@ -51,10 +52,19 @@ export class TestFormComponent implements OnInit {
   }
 
   emitData() {
-    this.form.emit({data: this.testForm.value, valid: this.testForm.valid, id: this.data.id});
+    if (this.deleteFlag) {
+      this.form.emit({delete: true, id: this.data.id});
+    } else {
+      this.form.emit({data: this.testForm.value, valid: this.testForm.valid, id: this.data.id});
+    }
   }
 
   onValueChanged(form, errorForm, validationMessages) {
     this.formService.onValueChanged(form, errorForm, validationMessages);
+  }
+
+  delete() {
+    this.deleteFlag = true;
+    this.emitData();
   }
 }

@@ -27,6 +27,7 @@ export class LanguageFormComponent implements OnInit {
     }
   };
 
+  deleteFlag = false ;
   languageForm: FormGroup;
   @Input() data: any;
   @Output() form = new EventEmitter();
@@ -59,10 +60,19 @@ export class LanguageFormComponent implements OnInit {
   }
 
   emitData() {
-    this.form.emit({data: this.languageForm.value, valid: this.languageForm.valid, id: this.data.id});
+    if (this.deleteFlag) {
+      this.form.emit({delete: true, id: this.data.id});
+    } else {
+      this.form.emit({data: this.languageForm.value, valid: this.languageForm.valid, id: this.data.id});
+    }
   }
 
   onValueChanged(form, errorForm, validationMessages) {
     this.formService.onValueChanged(form, errorForm, validationMessages);
+  }
+
+  delete() {
+    this.deleteFlag = true;
+    this.emitData();
   }
 }

@@ -41,7 +41,12 @@ export class DomService {
     //   componentRef.destroy();
     // }, 3000);
 
-  return componentRef.instance['form'];
+      return componentRef;
+  }
+
+  destroy(componentRef) {
+    this.appRef.detachView(componentRef.hostView);
+    componentRef.destroy();
   }
 
 }

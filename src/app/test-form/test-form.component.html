@@ -20,4 +20,9 @@
            formControlName="outputTest">
     <mat-error *ngIf="formErrorsTestForm.outputTest">{{formErrorsTestForm.outputTest}}</mat-error>
   </mat-form-field>
+  <i (click)="delete()"
+     matTooltip="Видалити"
+     matTooltipPosition="right"
+     matTooltipClass="c-warning-tooltip"
+     class="delete-comp material-icons">delete_forever</i>
 </form>
