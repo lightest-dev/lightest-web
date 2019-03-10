@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {TaskService} from '../shared/services/task.service';
+import {AccountService} from '../shared/services/account.service';
+import {TaskShort} from '../shared/models/TaskShort';
 
 @Component({
   selector: 'app-add-task-to-users-page',
@@ -7,9 +10,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddTaskToUsersPageComponent implements OnInit {
 
-  constructor() { }
+  tasks: TaskShort[];
+  users;
+
+  constructor(private taskService: TaskService,
+              private accountService: AccountService) { }
 
   ngOnInit() {
+    this.getTasks();
+    this.getUsers();
+  }
+
+
+  getTasks() {
+    this.taskService.getTasks()
+      .subscribe(data => {
+        this.tasks = data;
+      });
+  }
+
+  getUsers() {
+    this.accountService.getUsers()
+      .subscribe(data => {
+        console.log(data);
+        this.users = data;
+      });
   }
 
 }

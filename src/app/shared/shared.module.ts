@@ -25,8 +25,6 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {AddTestPageComponent} from '../add-test-page/add-test-page.component';
-import {TestFormComponent} from '../add-task-page/test-form/test-form.component';
-import {LanguageFormComponent} from '../add-task-page/language-form/language-form.component';
 
 @NgModule({
   imports: [
