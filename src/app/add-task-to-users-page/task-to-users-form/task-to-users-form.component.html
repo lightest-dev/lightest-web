@@ -1,13 +1,10 @@
-<form [formGroup]="usersTaskForm" id="users-task-form">
-  <div class="form-header">
-  </div>
-
+<form *ngIf="formObj" [formGroup]="usersTaskForm" id="users-task-form">
 
   <mat-form-field>
     <mat-label>Назва завдання</mat-label>
     <mat-select name="task" formControlName="task">
       <mat-option>Виберіть назву завадння</mat-option>
-      <mat-option *ngFor="let task of tasks" value="{{task.id}}">{{task.name}}</mat-option>
+      <mat-option *ngFor="let task of formObj.tasks" value="{{task.id}}">{{task.name}}</mat-option>
     </mat-select>
     <mat-error *ngIf="formErrorsUsersTaskForm.task">{{formErrorsUsersTaskForm.task}}</mat-error>
   </mat-form-field>
@@ -28,7 +25,7 @@
     <mat-label>Користувачі</mat-label>
     <mat-select name="users" formControlName="users" multiple>
       <mat-option disabled>Виберіть виконавців</mat-option>
-      <mat-option *ngFor="let user of users" value="{{user.id}}">{{user.name}} {{user.surname}}</mat-option>
+      <mat-option *ngFor="let user of formObj.users" value="{{user.id}}">{{user.name}} {{user.surname}}</mat-option>
     </mat-select>
     <mat-error *ngIf="formErrorsUsersTaskForm.task">{{formErrorsUsersTaskForm.task}}</mat-error>
   </mat-form-field>

@@ -12,6 +12,10 @@ export class AddTaskToUsersPageComponent implements OnInit {
 
   tasks: TaskShort[];
   users;
+  formFirst;
+  allForms = [];
+  formObj;
+  formCounts = 0;
 
   constructor(private taskService: TaskService,
               private accountService: AccountService) { }
@@ -32,9 +36,20 @@ export class AddTaskToUsersPageComponent implements OnInit {
   getUsers() {
     this.accountService.getUsers()
       .subscribe(data => {
-        console.log(data);
         this.users = data;
-      });
+      }, error1 => {},
+        () => {
+          this.initFormObj();
+        });
+  }
+
+  initFormObj() {
+    this.formObj = {id: this.formCounts, tasks: this.tasks, users: this.users, valid: false};
+  }
+
+  formOnChange(form) {
+    console.log(form);
+    this.allForms.push(form);
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {FormService} from '../../shared/services/form.service';
 import {TaskService} from '../../shared/services/task.service';
@@ -31,34 +31,21 @@ export class TaskToUsersFormComponent implements OnInit {
   };
 
   usersTaskForm: FormGroup;
-  tasks: TaskShort[];
-  users;
+  @Output() form = new EventEmitter();
+  @Input() formObj;
 
   constructor(private formBuilder: FormBuilder,
-              private formService: FormService,
-              private taskService: TaskService,
-              private accountService: AccountService) { }
+              private formService: FormService) { }
 
   ngOnInit() {
-    this.getUsers();
-    this.getTasks();
-    this.initTaskForm();
   }
 
-  getTasks() {
-    this.taskService.getTasks()
-      .subscribe(data => {
-        this.tasks = data;
-      });
+  ngOnChanges () {
+    if (this.formObj) {
+      this.initTaskForm();
+    }
   }
 
-  getUsers() {
-    this.accountService.getUsers()
-      .subscribe(data => {
-        console.log(data);
-        this.users = data;
-      });
-  }
 
   initTaskForm() {
     this.usersTaskForm = this.formBuilder.group({
@@ -78,9 +65,10 @@ export class TaskToUsersFormComponent implements OnInit {
     });
 
     this.usersTaskForm.valueChanges
-      .subscribe(() =>
-        this.onValueChanged(this.usersTaskForm, this.formErrorsUsersTaskForm, this.validationMessagesUsersTaskForm)
-      );
+      .subscribe(() => {
+          this.onValueChanged(this.usersTaskForm, this.formErrorsUsersTaskForm, this.validationMessagesUsersTaskForm);
+          this.form.emit({data: this.usersTaskForm.value, valid: this.usersTaskForm.valid, id: this.formObj.id});
+      });
   }
 
   onValueChanged(form, errorForm, validationMessages) {

@@ -2,5 +2,6 @@
   <div class="form-header">
     Форма додавання завдань для студентів
   </div>
-  <app-task-to-users-form></app-task-to-users-form>
+  <app-task-to-users-form (form)="formOnChange($event)" [formObj]="formObj"></app-task-to-users-form>
+  <p>{{formFirst}}</p>
 </div>

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, ComponentFactoryResolver, OnDestroy } from '@angular/core';
+import {Component, Input, OnInit, ViewChild, ComponentFactoryResolver, OnDestroy, Output, EventEmitter} from '@angular/core';
 
 import { AdDirective } from '../shared/directives/ad.directive';
 import { AdItem }      from '../shared/directives/ad.item';
@@ -12,6 +12,7 @@ export class DynamicAdComponent implements OnInit, OnDestroy {
   @Input() ads: AdItem;
   @ViewChild(AdDirective) adHost: AdDirective;
   interval: any;
+  @Output()form = new EventEmitter();
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
 
@@ -31,5 +32,10 @@ export class DynamicAdComponent implements OnInit, OnDestroy {
 
     let componentRef = viewContainerRef.createComponent(componentFactory);
     (<AdComponent>componentRef.instance).data = this.ads.data;
+
+    componentRef.instance['form'].subscribe(data => {
+      console.log(data);
+      this.form.emit(data);
+    });
   }
 }
