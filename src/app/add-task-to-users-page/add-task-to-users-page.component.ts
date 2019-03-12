@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {TaskService} from '../shared/services/task.service';
 import {AccountService} from '../shared/services/account.service';
 import {TaskShort} from '../shared/models/TaskShort';
+import {LanguageFormComponent} from '../add-task-page/language-form/language-form.component';
+import {DomService} from '../shared/services/dom.service';
+import {TaskToUsersFormComponent} from './task-to-users-form/task-to-users-form.component';
 
 @Component({
   selector: 'app-add-task-to-users-page',
@@ -14,11 +17,12 @@ export class AddTaskToUsersPageComponent implements OnInit {
   users;
   formFirst;
   allForms = [];
-  formObj;
-  formCounts = 0;
+  data;
+  formCounts = 1;
 
   constructor(private taskService: TaskService,
-              private accountService: AccountService) { }
+              private accountService: AccountService,
+              private domService: DomService) { }
 
   ngOnInit() {
     this.getTasks();
@@ -44,12 +48,37 @@ export class AddTaskToUsersPageComponent implements OnInit {
   }
 
   initFormObj() {
-    this.formObj = {id: this.formCounts, tasks: this.tasks, users: this.users, valid: false};
+    this.data = {id: this.formCounts, tasks: this.tasks, users: this.users, valid: false};
   }
 
   formOnChange(form) {
-    console.log(form);
-    this.allForms.push(form);
+    if (form.valid) {
+      this.allForms.push(form);
+    }
+  }
+
+  addForm () {
+    this.formCounts++;
+    this.allForms.push({id: this.formCounts, data: {}, valid: false});
+
+    const compRef = this.domService.appendComponent(TaskToUsersFormComponent, '.dynamic-forms', {users: this.users, tasks: this.tasks, id: this.formCounts});
+    compRef.instance['form'].subscribe(result => {
+      // this.compRefLang.push({ref: compRef, id: result.id});
+
+        this.handleForms(result);
+    });
+  }
+
+  handleForms (formObj) {
+    for (let i = 0; i < this.allForms.length; i++) {
+      if (this.allForms[i].id === formObj.id) {
+        this.allForms[i] = Object.assign({}, formObj);
+      }
+    }
+  }
+
+  submit () {
+
   }
 
 }

@@ -261,7 +261,7 @@ export class AddTaskPageComponent implements OnInit {
   getLanguagesObj() {
     let allLanguages = [];
     allLanguages =  this.languageForms.map(languageForm => {
-      return this.loadLanguageObject(languageForm.data)
+      return this.loadLanguageObject(languageForm.data);
     });
     allLanguages.push(this.loadLanguageObject(this.languageForm.value));
     return allLanguages;
@@ -270,7 +270,7 @@ export class AddTaskPageComponent implements OnInit {
   getTestObj() {
     let allTests = [];
     allTests =  this.testForms.map(testForm => {
-      return this.loadTestsObject(testForm.data)
+      return this.loadTestsObject(testForm.data);
     });
     allTests.push(this.loadTestsObject(this.testForm.value));
     return allTests;

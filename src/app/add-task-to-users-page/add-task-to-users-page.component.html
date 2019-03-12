@@ -2,6 +2,21 @@
   <div class="form-header">
     Форма додавання завдань для студентів
   </div>
-  <app-task-to-users-form (form)="formOnChange($event)" [formObj]="formObj"></app-task-to-users-form>
+  <app-task-to-users-form (form)="formOnChange($event)" [data]="data"></app-task-to-users-form>
   <p>{{formFirst}}</p>
+
+  <div class="dynamic-forms"></div>
+
+  <button
+    mat-button
+    matTooltip="Додати ще форму"
+    matTooltipPosition="right"
+    matTooltipClass="c-primary-tooltip"
+    class="c-button"
+    type="button"
+    (click)="addForm()">
+    <i class="material-icons">add_box</i>
+  </button>
+
+  <button mat-button type="submit" class="c-button" (click)="submit()">Зберегти</button>
 </div>

@@ -95,6 +95,7 @@ import { TaskToUsersFormComponent } from './add-task-to-users-page/task-to-users
     ],
   bootstrap: [AppComponent],
   entryComponents: [
+    TaskToUsersFormComponent,
     MessageComponent,
     UserChangeInfoDialogComponent,
     LanguageFormComponent,

@@ -32,7 +32,7 @@ export class TaskToUsersFormComponent implements OnInit {
 
   usersTaskForm: FormGroup;
   @Output() form = new EventEmitter();
-  @Input() formObj;
+  @Input() data;
 
   constructor(private formBuilder: FormBuilder,
               private formService: FormService) { }
@@ -41,7 +41,7 @@ export class TaskToUsersFormComponent implements OnInit {
   }
 
   ngOnChanges () {
-    if (this.formObj) {
+    if (this.data) {
       this.initTaskForm();
     }
   }
@@ -67,7 +67,7 @@ export class TaskToUsersFormComponent implements OnInit {
     this.usersTaskForm.valueChanges
       .subscribe(() => {
           this.onValueChanged(this.usersTaskForm, this.formErrorsUsersTaskForm, this.validationMessagesUsersTaskForm);
-          this.form.emit({data: this.usersTaskForm.value, valid: this.usersTaskForm.valid, id: this.formObj.id});
+          this.form.emit({data: this.usersTaskForm.value, valid: this.usersTaskForm.valid, id: this.data.id});
       });
   }
 
