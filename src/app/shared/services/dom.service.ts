@@ -35,13 +35,7 @@ export class DomService {
     // Append DOM element to the body
     document.querySelector(selector).appendChild(domElem);
 
-    // Wait some time and remove it from the component tree and from the DOM
-    // setTimeout(() => {
-    //   this.appRef.detachView(componentRef.hostView);
-    //   componentRef.destroy();
-    // }, 3000);
-
-      return componentRef;
+    return componentRef;
   }
 
   destroy(componentRef) {

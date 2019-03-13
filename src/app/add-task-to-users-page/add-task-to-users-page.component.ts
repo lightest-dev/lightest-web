@@ -78,7 +78,44 @@ export class AddTaskToUsersPageComponent implements OnInit {
   }
 
   submit () {
+    if (this.isValidForms()) {
+      console.log('good');
 
+    } else {
+      console.log('bad');
+    }
+    this.loadFormObjectsArray(); // return obj for request
   }
 
+
+
+  isValidForms() {
+    const isValid = this.allForms.find(form => {
+      return form.valid === false;
+    });
+    return isValid === undefined ? true : false;
+  }
+
+  loadFormObjectsArray () {
+    let forms = [];
+    return this.allForms.map(form => {
+        forms = forms.concat(this.loadFormObject(form.data));
+      });
+  }
+
+  loadFormObject (form) {
+    return form.users.map(user => {
+      return {
+        canRead: form.canRead,
+        canWrite: form.canWrite,
+        canChangeAccess: form.canChangeAccess,
+        isOwner: form.isOwner,
+        deadline: form.date,
+        taskId: form.task,
+        userId: user
+      };
+    });
+  }
 }
+
+

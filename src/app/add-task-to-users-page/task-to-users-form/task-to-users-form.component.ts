@@ -38,6 +38,9 @@ export class TaskToUsersFormComponent implements OnInit {
               private formService: FormService) { }
 
   ngOnInit() {
+    if(this.data) {
+      this.initTaskForm();
+    }
   }
 
   ngOnChanges () {
@@ -59,9 +62,9 @@ export class TaskToUsersFormComponent implements OnInit {
         Validators.required
       ]],
       canRead: ['true'],
-      canWrite: [''],
-      canChangeAccess: [''],
-      isOwner:  ['']
+      canWrite: ['false'],
+      canChangeAccess: ['false'],
+      isOwner:  ['false']
     });
 
     this.usersTaskForm.valueChanges
