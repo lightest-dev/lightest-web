@@ -61,7 +61,7 @@ export class AddTaskToUsersPageComponent implements OnInit {
     this.formCounts++;
     this.allForms.push({id: this.formCounts, data: {}, valid: false});
 
-    const compRef = this.domService.appendComponent(TaskToUsersFormComponent, '.dynamic-forms', {users: this.users, tasks: this.tasks, id: this.formCounts});
+    const compRef = this.domService.appendComponent(TaskToUsersFormComponent, '.dynamic-component-wrapper', {users: this.users, tasks: this.tasks, id: this.formCounts});
     compRef.instance['form'].subscribe(result => {
       // this.compRefLang.push({ref: compRef, id: result.id});
 
