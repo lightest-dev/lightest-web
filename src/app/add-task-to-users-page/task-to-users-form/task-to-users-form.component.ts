@@ -30,6 +30,7 @@ export class TaskToUsersFormComponent implements OnInit {
     'users': ''
   };
 
+  deleteFlag = false;
   usersTaskForm: FormGroup;
   @Output() form = new EventEmitter();
   @Input() data;
@@ -38,7 +39,7 @@ export class TaskToUsersFormComponent implements OnInit {
               private formService: FormService) { }
 
   ngOnInit() {
-    if(this.data) {
+    if (this.data) {
       this.initTaskForm();
     }
   }
@@ -70,12 +71,25 @@ export class TaskToUsersFormComponent implements OnInit {
     this.usersTaskForm.valueChanges
       .subscribe(() => {
           this.onValueChanged(this.usersTaskForm, this.formErrorsUsersTaskForm, this.validationMessagesUsersTaskForm);
-          this.form.emit({data: this.usersTaskForm.value, valid: this.usersTaskForm.valid, id: this.data.id});
+          this.emitData();
       });
   }
 
   onValueChanged(form, errorForm, validationMessages) {
     this.formService.onValueChanged(form, errorForm, validationMessages);
+  }
+
+  emitData() {
+    if (this.deleteFlag) {
+      this.form.emit({delete: true, id: this.data.id});
+    } else {
+      this.form.emit({data: this.usersTaskForm.value, valid: this.usersTaskForm.valid, id: this.data.id});
+    }
+  }
+
+  delete () {
+    this.deleteFlag = true;
+    this.emitData();
   }
 
 }

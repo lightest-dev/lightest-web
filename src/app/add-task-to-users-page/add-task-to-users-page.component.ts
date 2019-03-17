@@ -53,9 +53,7 @@ export class AddTaskToUsersPageComponent implements OnInit {
 
   formOnChange(form) {
     console.log(this.allForms);
-    if (form.valid) {
-      this.handleForms(form);
-    }
+    this.handleForms(form);
   }
 
   addForm () {
@@ -64,10 +62,20 @@ export class AddTaskToUsersPageComponent implements OnInit {
 
     const compRef = this.domService.appendComponent(TaskToUsersFormComponent, '.dynamic-component-wrapper', {users: this.users, tasks: this.tasks, id: this.formCounts});
     compRef.instance['form'].subscribe(result => {
-      // this.compRefLang.push({ref: compRef, id: result.id});
-
+      result.delete ?
+        this.deleteForm(result.id, compRef) :
         this.handleForms(result);
     });
+  }
+
+  deleteForm (id, compRef) {
+    for (let i = 0; i < this.allForms.length; i++) {
+      if (this.allForms[i].id === id) {
+        this.allForms.splice(i, 1);
+      }
+    }
+    this.domService.destroy(compRef);
+    this.formCounts--;
   }
 
   handleForms (formObj) {
@@ -92,8 +100,6 @@ export class AddTaskToUsersPageComponent implements OnInit {
     }
     console.log(this.loadFormObjectsArray()); // return obj for request
   }
-
-
 
   isValidForms() {
     const isValid = this.allForms.find(form => {

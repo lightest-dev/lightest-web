@@ -1,6 +1,10 @@
 <form *ngIf="data" [formGroup]="usersTaskForm" id="users-task-form">
 
+
   <mat-form-field>
+
+    <span class="counter">{{data.id}}.</span>
+
     <mat-label>Назва завдання</mat-label>
     <mat-select name="task" formControlName="task">
       <mat-option>Виберіть назву завадння</mat-option>
@@ -29,4 +33,10 @@
     </mat-select>
     <mat-error *ngIf="formErrorsUsersTaskForm.task">{{formErrorsUsersTaskForm.task}}</mat-error>
   </mat-form-field>
+  <i *ngIf="data.id > 1"
+     (click)="delete()"
+     matTooltip="Видалити"
+     matTooltipPosition="right"
+     matTooltipClass="c-warning-tooltip"
+     class="delete-comp material-icons">delete_forever</i>
 </form>
