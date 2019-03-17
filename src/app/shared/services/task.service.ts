@@ -39,8 +39,8 @@ export class TaskService {
     return this.http.get<UserForTask[]>(`${API_URL}/tasks/${taskId}/users`);
   }
 
-  assignTaskToUsers(taskId, users: UserForTask[]) :void{
-     this.http.post(`${API_URL}/tasks/${taskId}/users`, users);
+  assignTaskToUsers(taskId, users: UserForTask[]) {
+     return this.http.post(`${API_URL}/tasks/${taskId}/users`, users);
   }
 
   addLanguagesForTask(taskId, languages: LanguageForTask[]): Observable<LanguageForTask[]>{

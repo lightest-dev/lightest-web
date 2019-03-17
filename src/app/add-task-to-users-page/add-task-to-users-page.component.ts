@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {TaskService} from '../shared/services/task.service';
 import {AccountService} from '../shared/services/account.service';
 import {TaskShort} from '../shared/models/TaskShort';
-import {LanguageFormComponent} from '../add-task-page/language-form/language-form.component';
 import {DomService} from '../shared/services/dom.service';
 import {TaskToUsersFormComponent} from './task-to-users-form/task-to-users-form.component';
 
@@ -49,11 +48,13 @@ export class AddTaskToUsersPageComponent implements OnInit {
 
   initFormObj() {
     this.data = {id: this.formCounts, tasks: this.tasks, users: this.users, valid: false};
+    this.allForms = [{id: this.formCounts, valid: false, data: {}}];
   }
 
   formOnChange(form) {
+    console.log(this.allForms);
     if (form.valid) {
-      this.allForms.push(form);
+      this.handleForms(form);
     }
   }
 
@@ -80,11 +81,16 @@ export class AddTaskToUsersPageComponent implements OnInit {
   submit () {
     if (this.isValidForms()) {
       console.log('good');
+      let tasksForUesers = this.loadFormObjectsArray();
+      tasksForUesers.forEach(obj => {
+        this.taskService.assignTaskToUsers(obj[0].taskId, obj).subscribe(data => {
 
+        }, error1 => { console.log(error1); });
+      });
     } else {
       console.log('bad');
     }
-    this.loadFormObjectsArray(); // return obj for request
+    console.log(this.loadFormObjectsArray()); // return obj for request
   }
 
 
@@ -97,14 +103,16 @@ export class AddTaskToUsersPageComponent implements OnInit {
   }
 
   loadFormObjectsArray () {
-    let forms = [];
-    return this.allForms.map(form => {
-        forms = forms.concat(this.loadFormObject(form.data));
-      });
+     let forms = [];
+    this.allForms.map(form => {
+       forms.push(this.loadFormObject(form.data));
+       console.log(forms);
+    });
+    return forms;
   }
 
   loadFormObject (form) {
-    return form.users.map(user => {
+    const temp = form.users.map(user => {
       return {
         canRead: form.canRead,
         canWrite: form.canWrite,
@@ -115,6 +123,7 @@ export class AddTaskToUsersPageComponent implements OnInit {
         userId: user
       };
     });
+    return temp;
   }
 }
 
