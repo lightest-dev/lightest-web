@@ -5,8 +5,9 @@
         {{task.name}}
       </mat-panel-title>
       <mat-panel-description>
-        {{task.courseName}}
-        <mat-icon>{{task.icon}}</mat-icon>
+        {{task.categoryName}}
+        <span class="points">0 / {{task.points}}</span>
+        <mat-icon matTooltip="Завдання не виконано"><i class="material-icons">notifications</i></mat-icon>
       </mat-panel-description>
     </mat-expansion-panel-header>
 

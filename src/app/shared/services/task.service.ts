@@ -15,7 +15,7 @@ export class TaskService {
 
   constructor(private http: HttpClient) { }
 
-  getTasks() :Observable<TaskShort[]>{
+  getTasks(): Observable<TaskShort[]> {
     return this.http.get<TaskShort[]>(`${API_URL}/tasks`);
   }
 
@@ -23,11 +23,11 @@ export class TaskService {
     return this.http.post(`${API_URL}/tasks`, task);
   }
 
-  getTask(id) :Observable<Task>{
+  getTask(id): Observable<Task>{
     return this.http.get<Task>(`${API_URL}/tasks/${id}`);
   }
 
-  changeTask(id, task: TaskShort) :void{
+  changeTask(id, task: TaskShort): void{
      this.http.put(`${API_URL}/tasks/${id}`, task);
   }
 

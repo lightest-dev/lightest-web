@@ -52,7 +52,6 @@ export class AddTaskToUsersPageComponent implements OnInit {
   }
 
   formOnChange(form) {
-    console.log(this.allForms);
     this.handleForms(form);
   }
 
@@ -88,7 +87,6 @@ export class AddTaskToUsersPageComponent implements OnInit {
 
   submit () {
     if (this.isValidForms()) {
-      console.log('good');
       let tasksForUesers = this.loadFormObjectsArray();
       tasksForUesers.forEach(obj => {
         this.taskService.assignTaskToUsers(obj[0].taskId, obj).subscribe(data => {
@@ -98,7 +96,6 @@ export class AddTaskToUsersPageComponent implements OnInit {
     } else {
       console.log('bad');
     }
-    console.log(this.loadFormObjectsArray()); // return obj for request
   }
 
   isValidForms() {
@@ -111,8 +108,7 @@ export class AddTaskToUsersPageComponent implements OnInit {
   loadFormObjectsArray () {
      let forms = [];
     this.allForms.map(form => {
-       forms.push(this.loadFormObject(form.data));
-       console.log(forms);
+       forms.push(this.loadFormObject(form.data))
     });
     return forms;
   }

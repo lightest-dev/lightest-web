@@ -12,7 +12,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { AuthComponent } from './auth/auth.component';
 import { AuthService } from './shared/services/auth.service';
 import { AuthGuardService } from './shared/guards/auth-guard.service';
-import { UserAccountModule } from './student/userAccount.module';
 import { EditorComponent } from './editor/editor.component';
 import { MonacoEditorModule } from 'ngx-monaco-editor';
 import { EditorService } from './shared/services/editor.service';
@@ -36,10 +35,15 @@ import {AdDirective} from './shared/directives/ad.directive';
 import {DynamicAdComponent} from './dynamic-ad/dynamic-ad.component';
 import {SnackbarService} from './shared/services/snackbar.service';
 import {FormService} from './shared/services/form.service';
-import { AddTaskToUsersPageComponent } from './add-task-to-users-page/add-task-to-users-page.component';
 import { AddUsersToGroupPageComponent } from './add-users-to-group-page/add-users-to-group-page.component';
 import { AddUsersToCategoryPageComponent } from './add-users-to-category-page/add-users-to-category-page.component';
-import { TaskToUsersFormComponent } from './add-task-to-users-page/task-to-users-form/task-to-users-form.component';
+import {ProfilePageComponent} from './user/profilePage.component';
+import {UserInfoComponent} from './user/user-info/user-info.component';
+import {AddTaskToUsersPageComponent} from './add-task-to-users-page/add-task-to-users-page.component';
+import {TaskToUsersFormComponent} from './add-task-to-users-page/task-to-users-form/task-to-users-form.component';
+import {AddTestPageComponent} from './add-test-page/add-test-page.component';
+import {TaskComponent} from './user/task/task.component';
+import {AccountService} from './shared/services/account.service';
 
 @NgModule({
   declarations: [
@@ -62,17 +66,20 @@ import { TaskToUsersFormComponent } from './add-task-to-users-page/task-to-users
     TestFormComponent,
     AdDirective,
     DynamicAdComponent,
-    AddTaskToUsersPageComponent,
     AddUsersToGroupPageComponent,
     AddUsersToCategoryPageComponent,
-    TaskToUsersFormComponent
+    ProfilePageComponent,
+    UserInfoComponent,
+    AddTaskToUsersPageComponent,
+    TaskToUsersFormComponent,
+    AddTestPageComponent,
+    TaskComponent
   ],
   imports: [
     AppRoutingModule,
     SharedModule,
     MatFormFieldModule,
     HttpClientModule,
-    UserAccountModule,
     OAuthModule.forRoot({
       resourceServer: {
         allowedUrls: [API_URL],
@@ -91,6 +98,7 @@ import { TaskToUsersFormComponent } from './add-task-to-users-page/task-to-users
     DomService,
     SnackbarService,
     FormService,
+    AccountService,
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}}
     ],
   bootstrap: [AppComponent],

@@ -11,21 +11,58 @@ import {AddCheckerPageComponent} from './add-checker-page/add-checker-page.compo
 import {AddGroupPageComponent} from './add-group-page/add-group-page.component';
 import {AddLanguagePageComponent} from './add-language-page/add-language-page.component';
 import {AddTestPageComponent} from './add-test-page/add-test-page.component';
+import {ProfilePageComponent} from './user/profilePage.component';
+import {AuthGuardService} from './shared/guards/auth-guard.service';
+import {UserInfoComponent} from './user/user-info/user-info.component';
 import {AddTaskToUsersPageComponent} from './add-task-to-users-page/add-task-to-users-page.component';
+// import {AddTaskToUsersPageComponent} from './add-task-to-users-page/add-task-to-users-page.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: AuthComponent, },
   { path: 'main', component: MainComponent},
   { path: 'login', component: LoginComponent},
   { path: 'registration', component: RegistrationComponent},
-  { path: 'editor', component: EditorComponent },
-  { path: 'add-task', component: AddTaskPageComponent },
-  { path: 'add-category', component: AddCategoryPageComponent },
-  { path: 'add-checker', component: AddCheckerPageComponent },
-  { path: 'add-group', component: AddGroupPageComponent },
-  { path: 'add-language', component: AddLanguagePageComponent },
-  { path: 'add-test', component: AddTestPageComponent },
-  { path: 'add-task-for-users', component: AddTaskToUsersPageComponent}
+
+  { path: 'editor',
+    canActivate: [AuthGuardService],
+    component: EditorComponent
+  },
+  { path: 'add-task',
+    canActivate: [AuthGuardService],
+    component: AddTaskPageComponent
+  },
+  { path: 'add-category',
+    canActivate: [AuthGuardService],
+    component: AddCategoryPageComponent
+  },
+  { path: 'add-checker',
+    canActivate: [AuthGuardService],
+    component: AddCheckerPageComponent
+  },
+  { path: 'add-group',
+    canActivate: [AuthGuardService],
+    component: AddGroupPageComponent
+  },
+  { path: 'add-language',
+    canActivate: [AuthGuardService],
+    component: AddLanguagePageComponent
+  },
+  { path: 'add-test',
+    canActivate: [AuthGuardService],
+    component: AddTestPageComponent
+  },
+  { path: 'add-task-for-users',
+    canActivate: [AuthGuardService],
+    component: AddTaskToUsersPageComponent
+  },
+  {
+    path: 'account', component: ProfilePageComponent,
+    canActivate: [AuthGuardService],
+    children: [
+      { path: '', component: UserInfoComponent },
+    ]
+  },
+
 ];
 
 @NgModule({

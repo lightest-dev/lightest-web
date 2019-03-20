@@ -9,11 +9,11 @@ import {User} from '../shared/models/User';
 
 @Component({
   selector: 'app-student',
-  templateUrl: './userAccount.component.html',
-  styleUrls: ['./userAccount.component.scss']
+  templateUrl: './profilePage.component.html',
+  styleUrls: ['./profilePage.component.scss']
 })
 
-export class UserAccountComponent implements OnInit {
+export class ProfilePageComponent implements OnInit {
 
   user = new User();
   mobileQuery: MediaQueryList;
@@ -23,7 +23,7 @@ export class UserAccountComponent implements OnInit {
     {
       name: 'Моя сторінка',
       icon: 'account_circle',
-      link: 'account/student'
+      link: 'account/user'
     },
     {
       name: 'Список курсів',
@@ -62,7 +62,7 @@ export class UserAccountComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('student account');
+    console.log('user account');
     this.initUser();
   }
 
@@ -73,7 +73,7 @@ export class UserAccountComponent implements OnInit {
       this.user.isAdmin = temp.isAdmin;
       this.user.isTeacher = temp.isTeacher;
       console.log(this.user.id);
-      if((this.user.name === null || this.user.name === undefined) &&
+      if ((this.user.name === null || this.user.name === undefined) &&
         (this.user.surname === null || this.user.surname === undefined)) {
         this.getUser(this.user.id);
       }
