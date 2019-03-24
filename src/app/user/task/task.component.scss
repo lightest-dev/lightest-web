@@ -7,3 +7,25 @@
   justify-content: space-between;
   align-items: center;
 }
+
+.mat-panel-description {
+  position: relative;
+}
+
+.points {
+  position: absolute;
+  right: 75px;
+}
+
+.no-tasks {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+  color: #848c8a;
+
+  i {
+    font-size: 35px;
+  }
+}

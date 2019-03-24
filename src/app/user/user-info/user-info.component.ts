@@ -17,20 +17,23 @@ import {pluck, tap} from 'rxjs/operators';
   styleUrls: ['./user-info.component.scss']
 })
 export class UserInfoComponent implements OnInit {
-  tabsForTasks = [
-    {
+  taskTabs = {
+    'all': {
       icon: 'list',
-      tabName: 'Завдання'
+      tabName: 'Завдання',
+      tasks: []
     },
-    {
+    'done': {
       icon: 'done_all',
-      tabName: 'Виконані'
+      tabName: 'Виконані',
+      tasks: []
     },
-    {
+    'notDone': {
       icon: 'notifications',
-      tabName: 'Потрібно виконати'
+      tabName: 'Потрібно виконати',
+      tasks: []
     }
-  ]; // get content from accountService (from studentComponent)
+  };
 
   tasks;
 
@@ -68,7 +71,6 @@ export class UserInfoComponent implements OnInit {
       this.user.id = temp.id;
       this.user.isAdmin = temp.isAdmin;
       this.user.isTeacher = temp.isTeacher;
-      console.log(this.user.id);
       if ((this.user.name === null || this.user.name === undefined) &&
         (this.user.surname === null || this.user.surname === undefined)) {
         this.getUser(this.user.id);
@@ -78,7 +80,7 @@ export class UserInfoComponent implements OnInit {
   }
 
   getUser(id)  {
-    const temp = this.accountService.getUser(id).subscribe(data => {
+   this.accountService.getUser(id).subscribe(data => {
         this.user = data;
       }, (err) => {},
       () => {
@@ -89,16 +91,6 @@ export class UserInfoComponent implements OnInit {
       });
   }
 
-  // getTasks() {
-  //   this.taskService.getTasks().subscribe(data => {
-  //     this.tasks = data;
-  //   }, error1 => {},
-  //     () => {
-  //       this.getCategoriesFromTasks();
-  //     });
-  // }
-
-  // todo: finish
   getTasks() {
     this.user.tasks.map(task => {
       this.taskService.getTask(task.id)
@@ -108,6 +100,10 @@ export class UserInfoComponent implements OnInit {
           task['points'] = data['points'];
       });
     });
+
+    this.taskTabs.done.tasks = this.taskService.findDoneTasks(this.user.tasks);
+    this.taskTabs.notDone.tasks = this.taskService.findNotDoneTasks(this.user.tasks);
+    this.taskTabs.all.tasks = this.taskTabs.done.tasks.concat(this.taskTabs.notDone.tasks);
   }
 
   openDialog(): void {

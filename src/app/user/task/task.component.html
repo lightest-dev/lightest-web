@@ -5,8 +5,8 @@
         {{task.name}}
       </mat-panel-title>
       <mat-panel-description>
-        {{task.categoryName}}
-        <span class="points">0 / {{task.points}}</span>
+        {{task.category}}
+        <span class="points">{{task.highScore}} / {{task.points}}</span>
         <mat-icon matTooltip="Завдання не виконано"><i class="material-icons">notifications</i></mat-icon>
       </mat-panel-description>
     </mat-expansion-panel-header>
@@ -17,4 +17,9 @@
       <button mat-button color="primary" (click)="nextStep()">Next</button>
     </mat-action-row>
   </mat-expansion-panel>
+
+  <div class="no-tasks" *ngIf="!tasks.length">
+    <i class="material-icons">sentiment_dissatisfied</i>
+    <span>У вас ще немає виконаних завдань</span>
+  </div>
 </mat-accordion>

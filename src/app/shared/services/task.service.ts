@@ -50,4 +50,16 @@ export class TaskService {
   addTestsForTask(taskId, tests: Test[]) {
     return this.http.post(`${API_URL}/tasks/${taskId}/tests`, tests);
   }
+
+  findDoneTasks(tasks) {
+    return tasks.filter(task => {
+      return task.completed === true;
+    });
+  }
+
+  findNotDoneTasks(tasks) {
+    return tasks.filter(task => {
+      return task.completed === false;
+    });
+  }
 }

@@ -8,6 +8,11 @@
   justify-content: space-evenly;
 }
 
+.personal-info {
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+
 .work-info { width: 100% }
 
 i { padding: 0 7px; }
