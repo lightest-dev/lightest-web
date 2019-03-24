@@ -98,6 +98,7 @@ export class UserInfoComponent implements OnInit {
           task['category'] = data['category']['name'];
           task['description'] = data['description'];
           task['points'] = data['points'];
+          task['languages'] = data['languages'];
       });
     });
 

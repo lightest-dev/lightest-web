@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {EditorService} from '../shared/services/editor.service';
+import {UploadService} from '../shared/services/upload.service';
+import {TaskSolution} from '../shared/models/TaskSolution';
 
 @Component({
   selector: 'app-editor',
@@ -12,7 +14,8 @@ export class EditorComponent implements OnInit {
   languages;
   theme;
   code = `/* write your code here*/ `;
-  constructor(public editorService: EditorService) { }
+  constructor(public editorService: EditorService,
+              private uploadService: UploadService) { }
 
   ngOnInit() {
     this.initTheme();
@@ -37,6 +40,16 @@ export class EditorComponent implements OnInit {
       // language: language.toLocaleLowerCase()
       language: 'javascript'
     };
+  }
+
+  upload() {
+    console.log('love sucks nahui suka tak');
+    // this.uploadService.uploadTaskSolution(this.loadObjectForUpload());
+    this.loadObjectForUpload();
+  }
+
+  loadObjectForUpload() {
+    console.log(this.editorService.getState());
   }
 
 }

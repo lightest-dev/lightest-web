@@ -12,19 +12,19 @@ export class UploadService {
 
   constructor(private http: HttpClient) { }
 
-  getTaskUploads(taskId) :Observable<TaskResult[]>{
+  getTaskUploads(taskId): Observable<TaskResult[]> {
     return this.http.get<TaskResult[]>(`${API_URL}/uploads/${taskId}`);
   }
 
-  getTaskResult(taskId) :Observable<TaskResult>{
+  getTaskResult(taskId): Observable<TaskResult> {
     return this.http.get<TaskResult>(`${API_URL}/uploads/code/${taskId}/result`);
   }
 
-  getTaskUploadsAllUsers(taskId) :Observable<TaskResult[]>{
+  getTaskUploadsAllUsers(taskId): Observable<TaskResult[]> {
     return this.http.get<TaskResult[]>(`${API_URL}/uploads/code/${taskId}/result`);
   }
 
-  uploadTaskSolution(taskSolution :TaskSolution) {
+  uploadTaskSolution(taskSolution: TaskSolution) {
     return this.http.post(`${API_URL}/uploads/code`, taskSolution);
   }
 

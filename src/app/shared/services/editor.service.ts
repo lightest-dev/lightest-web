@@ -6,6 +6,12 @@ import { API_URL } from 'src/config/apiConfig';
 
 @Injectable()
 export class EditorService {
+
+  editorState = {
+    taskId: '',
+    languages: []
+  };
+
   constructor(private http: HttpClient) {}
 
   getLanguages () {
@@ -14,6 +20,15 @@ export class EditorService {
 
   getThemes() {
     return THEMES;
+  }
+
+  saveState(options) {
+    this.editorState.taskId = options.taskId;
+    this.editorState.languages = options.languages;
+  }
+
+  getState() {
+    return this.editorState;
   }
 
 }

@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+import {EditorService} from '../../shared/services/editor.service';
 
 @Component({
   selector: 'app-task',
@@ -9,7 +10,8 @@ import {Router} from '@angular/router';
 export class TaskComponent implements OnInit {
   step = -1;
   @Input() tasks;
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+              private editorService: EditorService) { }
 
   ngOnInit() {
   }
@@ -26,7 +28,11 @@ export class TaskComponent implements OnInit {
     this.step--;
   }
 
-  doExcercise() {
+  doExcercise(taskId, languages) {
+    this.editorService.saveState({
+      taskId: taskId,
+      languages: languages
+    });
     this.router.navigate(['account/editor']);
   }
 }
