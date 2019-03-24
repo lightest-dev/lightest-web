@@ -23,10 +23,6 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'registration', component: RegistrationComponent},
 
-  { path: 'editor',
-    canActivate: [AuthGuardService],
-    component: EditorComponent
-  },
   { path: 'add-task',
     canActivate: [AuthGuardService],
     component: AddTaskPageComponent
@@ -60,6 +56,10 @@ const routes: Routes = [
     canActivate: [AuthGuardService],
     children: [
       { path: '', component: UserInfoComponent },
+      { path: 'editor',
+        canActivate: [AuthGuardService],
+        component: EditorComponent
+      },
     ]
   },
 

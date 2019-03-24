@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-task',
@@ -8,7 +9,7 @@ import {Component, Input, OnInit} from '@angular/core';
 export class TaskComponent implements OnInit {
   step = -1;
   @Input() tasks;
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
@@ -23,5 +24,9 @@ export class TaskComponent implements OnInit {
 
   prevStep() {
     this.step--;
+  }
+
+  doExcercise() {
+    this.router.navigate(['account/editor']);
   }
 }

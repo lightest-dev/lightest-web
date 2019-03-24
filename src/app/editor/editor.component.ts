@@ -34,7 +34,8 @@ export class EditorComponent implements OnInit {
   loadEditorOptions(theme: string, language: string) {
     this.options = {
       theme: theme.toLocaleLowerCase(),
-      language: language.toLocaleLowerCase()
+      // language: language.toLocaleLowerCase()
+      language: 'javascript'
     };
   }
 
