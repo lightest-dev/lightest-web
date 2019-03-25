@@ -43,13 +43,19 @@ export class EditorComponent implements OnInit {
   }
 
   upload() {
-    console.log('love sucks nahui suka tak');
-    // this.uploadService.uploadTaskSolution(this.loadObjectForUpload());
-    this.loadObjectForUpload();
+    this.uploadService.uploadTaskSolution(this.loadObjectForUpload())
+      .subscribe(data => {
+        console.log(data);
+      });
   }
 
   loadObjectForUpload() {
-    console.log(this.editorService.getState());
+    const temp = this.editorService.getState();
+    return {
+      code: this.code,
+      taskId: temp.taskId,
+      languageId: temp.languages[0].id
+    };
   }
 
 }

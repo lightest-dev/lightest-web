@@ -7,7 +7,8 @@
       <mat-panel-description>
         {{task.category}}
         <span class="points">{{task.highScore}} / {{task.points}}</span>
-        <mat-icon matTooltip="Завдання не виконано"><i class="material-icons">notifications</i></mat-icon>
+        <mat-icon *ngIf="!task.completed" matTooltip="Завдання не виконано"><i class="material-icons">notifications</i></mat-icon>
+        <mat-icon *ngIf="task.completed" matTooltip="Виконано"><i class="material-icons">done_all</i></mat-icon>
       </mat-panel-description>
     </mat-expansion-panel-header>
 
