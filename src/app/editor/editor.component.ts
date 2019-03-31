@@ -2,6 +2,12 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import {EditorService} from '../shared/services/editor.service';
 import {UploadService} from '../shared/services/upload.service';
 import {TaskSolution} from '../shared/models/TaskSolution';
+import {LanguageService} from '../shared/services/language.service';
+import {TaskService} from '../shared/services/task.service';
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
+import {MatDialog} from '@angular/material';
+import {UserChangeInfoDialogComponent} from '../user-change-info-dialog/user-change-info-dialog.component';
+import {InfoDialogComponent} from '../info-dialog/info-dialog.component';
 
 @Component({
   selector: 'app-editor',
@@ -11,51 +17,94 @@ import {TaskSolution} from '../shared/models/TaskSolution';
 
 export class EditorComponent implements OnInit {
   options;
+  task;
   languages;
-  theme;
+  themes;
   code = `/* write your code here*/ `;
-  constructor(public editorService: EditorService,
-              private uploadService: UploadService) { }
+  activeLanguage = {name: 'cpp', id: ''};
+  activeTheme = 'vs-dark';
+  results;
+  constructor(public  route: Router,
+              public dialog: MatDialog,
+              private activatedRoute: ActivatedRoute,
+              public  editorService: EditorService,
+              private uploadService: UploadService,
+              private languageService: LanguageService,
+              private taskService: TaskService) { }
 
   ngOnInit() {
     this.initTheme();
-    this.initLanguages();
+
+    this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
+      this.taskService.getTask(params.get('id')).subscribe(data => {
+        this.task = data;
+      }, error1 => {},
+        () => {
+          this.initLanguages();
+          this.loadEditorOptions();
+        });
+    });
   }
 
   initLanguages () {
-    this.editorService.getLanguages().subscribe(data => {
-      this.languages = data;
-    }, error => console.log(error),
-      () =>  this.loadEditorOptions(this.theme[0], this.languages[0].name));
+    this.languages = this.task.languages;
   }
-
 
   initTheme() {
-    this.theme = this.editorService.getThemes();
+    this.themes = this.editorService.getThemes();
   }
 
-  loadEditorOptions(theme: string, language: string) {
+  loadEditorOptions() {
     this.options = {
-      theme: theme.toLocaleLowerCase(),
-      // language: language.toLocaleLowerCase()
-      language: 'javascript'
+      theme: this.activeTheme,
+      language: this.activeLanguage.name
     };
   }
 
   upload() {
+    let uploadId;
     this.uploadService.uploadTaskSolution(this.loadObjectForUpload())
       .subscribe(data => {
-        console.log(data);
-      });
+        uploadId = data;
+      }, error1 => {},
+        () => {
+          this.uploadService.getTaskUploads(this.task.id)
+            .subscribe(data => {
+              this.results = data;
+              const lastResult = this.results.filter(result => {
+                 if (result.id === uploadId) {
+                   return result;
+                 }
+              });
+
+              this.openInfoDialog(lastResult);
+            });
+        });
   }
 
   loadObjectForUpload() {
-    const temp = this.editorService.getState();
     return {
       code: this.code,
-      taskId: temp.taskId,
-      languageId: temp.languages[0].id
+      taskId: this.task.id,
+      languageId: this.activeLanguage.id
     };
   }
 
+  themeOnChange(theme) {
+    this.activeTheme = theme;
+    this.loadEditorOptions();
+  }
+
+  languageOnChange(language) {
+    console.log(language);
+    this.activeLanguage = language;
+    this.loadEditorOptions();
+  }
+
+  openInfoDialog(results) {
+    const dialogRef = this.dialog.open(InfoDialogComponent, {
+      width: '375px',
+      data: results,
+    });
+  }
 }

@@ -28,11 +28,7 @@ export class TaskComponent implements OnInit {
     this.step--;
   }
 
-  doExcercise(taskId, languages) {
-    this.editorService.saveState({
-      taskId: taskId,
-      languages: languages
-    });
-    this.router.navigate(['account/editor']);
+  doExcercise(taskId) {
+    this.router.navigate([`account/editor/${taskId}`]);
   }
 }

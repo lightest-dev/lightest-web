@@ -1,4 +1,15 @@
 <div class="editor-wrapper">
-  <ngx-monaco-editor [options]="options" [(ngModel)]="code"></ngx-monaco-editor>
   <button mat-button (click)="upload()">Upload</button>
+
+  <mat-select (selectionChange)="languageOnChange($event.value)" #languageSelected>
+    <mat-option>Виберіть мову програмування</mat-option>
+    <mat-option *ngFor="let language of languages" [value]="language">{{language.name}}</mat-option>
+  </mat-select>
+
+  <mat-select (selectionChange)="themeOnChange($event.value)">
+    <mat-option>Виберіть тему редактора</mat-option>
+    <mat-option *ngFor="let theme of themes" [value]="theme">{{theme}}</mat-option>
+  </mat-select>
+
+  <ngx-monaco-editor [options]="options" [(ngModel)]="code"></ngx-monaco-editor>
 </div>

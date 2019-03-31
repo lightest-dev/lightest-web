@@ -44,6 +44,7 @@ import {TaskToUsersFormComponent} from './add-task-to-users-page/task-to-users-f
 import {AddTestPageComponent} from './add-test-page/add-test-page.component';
 import {TaskComponent} from './user/task/task.component';
 import {AccountService} from './shared/services/account.service';
+import { InfoDialogComponent } from './info-dialog/info-dialog.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,8 @@ import {AccountService} from './shared/services/account.service';
     AddTaskToUsersPageComponent,
     TaskToUsersFormComponent,
     AddTestPageComponent,
-    TaskComponent
+    TaskComponent,
+    InfoDialogComponent
   ],
   imports: [
     AppRoutingModule,
@@ -106,6 +108,7 @@ import {AccountService} from './shared/services/account.service';
     TaskToUsersFormComponent,
     MessageComponent,
     UserChangeInfoDialogComponent,
+    InfoDialogComponent,
     LanguageFormComponent,
     TestFormComponent
   ],

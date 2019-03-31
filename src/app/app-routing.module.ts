@@ -56,7 +56,7 @@ const routes: Routes = [
     canActivate: [AuthGuardService],
     children: [
       { path: '', component: UserInfoComponent },
-      { path: 'editor',
+      { path: 'editor/:id',
         canActivate: [AuthGuardService],
         component: EditorComponent
       },
