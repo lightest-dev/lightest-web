@@ -14,4 +14,8 @@ export class InfoDialogComponent implements OnInit {
     console.log(this.data);
   }
 
+  close(): void {
+
+  }
+
 }

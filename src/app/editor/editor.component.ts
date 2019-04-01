@@ -8,6 +8,7 @@ import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {MatDialog} from '@angular/material';
 import {UserChangeInfoDialogComponent} from '../user-change-info-dialog/user-change-info-dialog.component';
 import {InfoDialogComponent} from '../info-dialog/info-dialog.component';
+import {delay, first, map, pluck, repeat, timeout} from 'rxjs/operators';
 
 @Component({
   selector: 'app-editor',
@@ -68,18 +69,21 @@ export class EditorComponent implements OnInit {
         uploadId = data;
       }, error1 => {},
         () => {
-          this.uploadService.getTaskUploads(this.task.id)
-            .subscribe(data => {
-              this.results = data;
-              const lastResult = this.results.filter(result => {
-                 if (result.id === uploadId) {
-                   return result;
-                 }
-              });
-
-              this.openInfoDialog(lastResult);
-            });
+          this.getResult();
         });
+  }
+
+  getResult() {
+    this.uploadService.getTaskUploads(this.task.id)
+      .subscribe(data => {
+        if (data[0]['status'] === 'TESTING' || data[0]['status'] === 'NEW' || data[0]['status'] === 'QUEUE') {
+          console.log('loading');
+         this.getResult();
+        } else  {
+          console.log('bad');
+          this.openInfoDialog(data[0], 'Помилка', 'Завдання шото там....', false);
+        }
+      });
   }
 
   loadObjectForUpload() {
@@ -96,15 +100,21 @@ export class EditorComponent implements OnInit {
   }
 
   languageOnChange(language) {
-    console.log(language);
     this.activeLanguage = language;
     this.loadEditorOptions();
   }
 
-  openInfoDialog(results) {
-    const dialogRef = this.dialog.open(InfoDialogComponent, {
-      width: '375px',
-      data: results,
+  openInfoDialog(results, message, status, success) {
+   this.dialog.open(InfoDialogComponent, {
+      width: '450px',
+      data: {
+        points: results.points,
+        messageFromServer: results.message,
+        statusFromServer: results.status,
+        message: message,
+        status: status,
+        success: success
+      }
     });
   }
 }

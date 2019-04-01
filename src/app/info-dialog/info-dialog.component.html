@@ -1,4 +1,24 @@
-<p>
-  {{data.points}}
-  {{data.message}}
-</p>
+
+<div class="dialog-wrapper" #dialogResults>
+  <h1 mat-dialog-title>{{data.message}}</h1>
+  <div mat-dialog-content>
+
+    <p>
+      Points: {{data.points}}
+    </p>
+    <p>
+      {{data.message}}
+      {{data.status}}
+    </p>
+    <p>
+      Message: {{data.messageFromServer}}
+    </p>
+    <p>
+      Status: {{data.statusFromServer}}
+    </p>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="dialogResults" cdkFocusInitial>Ok</button>
+  </div>
+</div>
+
