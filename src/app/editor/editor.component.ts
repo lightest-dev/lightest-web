@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {EditorService} from '../shared/services/editor.service';
 import {UploadService} from '../shared/services/upload.service';
 import {TaskSolution} from '../shared/models/TaskSolution';
@@ -20,11 +20,15 @@ export class EditorComponent implements OnInit {
   options;
   task;
   languages;
+
   themes;
   code = `/* write your code here*/ `;
   activeLanguage = {name: 'cpp', id: ''};
   activeTheme = 'vs-dark';
   results;
+
+  @ViewChild('sidenav') sidenav: ElementRef;
+
   constructor(public  route: Router,
               public dialog: MatDialog,
               private activatedRoute: ActivatedRoute,
@@ -107,6 +111,7 @@ export class EditorComponent implements OnInit {
   openInfoDialog(results, message, status, success) {
    this.dialog.open(InfoDialogComponent, {
       width: '450px',
+      panelClass: success ? ['success-upload'] : ['failed-upload'],
       data: {
         points: results.points,
         messageFromServer: results.message,
@@ -116,5 +121,10 @@ export class EditorComponent implements OnInit {
         success: success
       }
     });
+  }
+
+  openTaskDescription(func) {
+    func.toggle();
+
   }
 }

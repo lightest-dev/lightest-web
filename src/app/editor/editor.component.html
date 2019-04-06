@@ -1,15 +1,42 @@
-<div class="editor-wrapper">
-  <button mat-button (click)="upload()">Upload</button>
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #sidenav mode="side" position="end">
+    <div class="description" *ngIf="task.description">
+      {{task.description}}
+    </div>
+  </mat-sidenav>
 
-  <mat-select (selectionChange)="languageOnChange($event.value)" #languageSelected>
-    <mat-option>Виберіть мову програмування</mat-option>
-    <mat-option *ngFor="let language of languages" [value]="language">{{language.name}}</mat-option>
-  </mat-select>
+  <mat-sidenav-content>
+    <div class="editor-wrapper">
+      <nav>
+        <mat-form-field>
+          <mat-label>Мова програмування</mat-label>
+          <mat-select name="languages" (selectionChange)="languageOnChange($event.value)" #languageSelected>
+            <mat-option *ngFor="let language of languages" [value]="language">{{language.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
 
-  <mat-select (selectionChange)="themeOnChange($event.value)">
-    <mat-option>Виберіть тему редактора</mat-option>
-    <mat-option *ngFor="let theme of themes" [value]="theme">{{theme}}</mat-option>
-  </mat-select>
+        <mat-form-field>
+          <mat-label>Тема редактора</mat-label>
+          <mat-select name="theme" (selectionChange)="themeOnChange($event.value)">
+            <mat-option *ngFor="let theme of themes" [value]="theme">{{theme}}</mat-option>
+          </mat-select>
+        </mat-form-field>
 
-  <ngx-monaco-editor [options]="options" [(ngModel)]="code"></ngx-monaco-editor>
-</div>
+        <button matTooltip="Відправити завдання на перевірку"
+                matTooltipClass="c-primary-tooltip"
+                mat-button (click)="upload()">
+                Завантажити результат
+                <i class="material-icons">cloud_upload</i>
+        </button>
+
+        <button class="description-toggle"
+                mat-button
+                (click)="openTaskDescription(sidenav)"
+                matTooltipClass="c-primary-tooltip"
+        >Умова завдання</button>
+      </nav>
+
+      <ngx-monaco-editor [options]="options" [(ngModel)]="code"></ngx-monaco-editor>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
