@@ -9,6 +9,10 @@ import {MatDialog} from '@angular/material';
 import {UserChangeInfoDialogComponent} from '../user-change-info-dialog/user-change-info-dialog.component';
 import {InfoDialogComponent} from '../info-dialog/info-dialog.component';
 import {delay, first, map, pluck, repeat, timeout} from 'rxjs/operators';
+import {SnackbarService} from '../shared/services/snackbar.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {GroupService} from '../shared/services/group.service';
+import {FormService} from '../shared/services/form.service';
 
 @Component({
   selector: 'app-editor',
@@ -25,9 +29,19 @@ export class EditorComponent implements OnInit {
   code = `/* write your code here*/ `;
   activeLanguage = {name: 'cpp', id: ''};
   activeTheme = 'vs-dark';
-  results;
+
+  editorOptionsForm: FormGroup;
+  formErrors = {
+    'languages': ''
+  };
+  validationMessages = {
+    'languages': {
+      'required': `Обов'язкове поле`
+    }
+  };
 
   @ViewChild('sidenav') sidenav: ElementRef;
+  @ViewChild('languageSelected') selectedLanguage: ElementRef;
 
   constructor(public  route: Router,
               public dialog: MatDialog,
@@ -35,10 +49,14 @@ export class EditorComponent implements OnInit {
               public  editorService: EditorService,
               private uploadService: UploadService,
               private languageService: LanguageService,
-              private taskService: TaskService) { }
+              private taskService: TaskService,
+              private messageService: SnackbarService,
+              private formBuilder: FormBuilder,
+              private formService: FormService) { }
 
   ngOnInit() {
     this.initTheme();
+    this.initForm();
 
     this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
       this.taskService.getTask(params.get('id')).subscribe(data => {
@@ -49,6 +67,18 @@ export class EditorComponent implements OnInit {
           this.loadEditorOptions();
         });
     });
+  }
+
+  initForm() {
+    this.editorOptionsForm = this.formBuilder.group({
+      languages: ['', [
+        Validators.required
+      ]],
+      theme: ['vs-dark', []]
+    });
+
+    this.editorOptionsForm.valueChanges
+      .subscribe(() => this.formService.onValueChanged(this.editorOptionsForm, this.formErrors, this.validationMessages));
   }
 
   initLanguages () {
@@ -67,14 +97,16 @@ export class EditorComponent implements OnInit {
   }
 
   upload() {
-    let uploadId;
-    this.uploadService.uploadTaskSolution(this.loadObjectForUpload())
-      .subscribe(data => {
-        uploadId = data;
-      }, error1 => {},
-        () => {
-          this.getResult();
-        });
+    if (this.editorOptionsForm.valid) {
+      let uploadId;
+      this.uploadService.uploadTaskSolution(this.loadObjectForUpload())
+        .subscribe(data => {
+            uploadId = data;
+          }, error1 => {},
+          () => {
+            this.getResult();
+          });
+    }
   }
 
   getResult() {
@@ -83,9 +115,10 @@ export class EditorComponent implements OnInit {
         if (data[0]['status'] === 'TESTING' || data[0]['status'] === 'NEW' || data[0]['status'] === 'QUEUE') {
           console.log('loading');
          this.getResult();
-        } else  {
-          console.log('bad');
-          this.openInfoDialog(data[0], 'Помилка', 'Завдання шото там....', false);
+        }  else if (data[0]['OK']) {
+          this.openInfoDialog(data[0], 'Завдання пройшло перевірку', true);
+        } else {
+          this.openInfoDialog(data[0], 'Помилка', false);
         }
       });
   }
@@ -108,16 +141,14 @@ export class EditorComponent implements OnInit {
     this.loadEditorOptions();
   }
 
-  openInfoDialog(results, message, status, success) {
+  openInfoDialog(results, message, success) {
    this.dialog.open(InfoDialogComponent, {
       width: '450px',
-      panelClass: success ? ['success-upload'] : ['failed-upload'],
       data: {
         points: results.points,
         messageFromServer: results.message,
         statusFromServer: results.status,
         message: message,
-        status: status,
         success: success
       }
     });

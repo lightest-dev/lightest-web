@@ -8,32 +8,42 @@
   <mat-sidenav-content>
     <div class="editor-wrapper">
       <nav>
-        <mat-form-field>
-          <mat-label>Мова програмування</mat-label>
-          <mat-select name="languages" (selectionChange)="languageOnChange($event.value)" #languageSelected>
-            <mat-option *ngFor="let language of languages" [value]="language">{{language.name}}</mat-option>
-          </mat-select>
-        </mat-form-field>
+        <form [formGroup]="editorOptionsForm">
+          <mat-form-field>
+            <mat-label>Мова програмування</mat-label>
+            <mat-select
+              formControlName="languages"
+              name="languages"
+              (selectionChange)="languageOnChange($event.value)"
+              #languageSelected>
+              <mat-option *ngFor="let language of languages" [value]="language">{{language.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
 
-        <mat-form-field>
-          <mat-label>Тема редактора</mat-label>
-          <mat-select name="theme" (selectionChange)="themeOnChange($event.value)">
-            <mat-option *ngFor="let theme of themes" [value]="theme">{{theme}}</mat-option>
-          </mat-select>
-        </mat-form-field>
+          <mat-form-field>
+            <mat-label>Тема редактора</mat-label>
+            <mat-select
+              name="theme"
+              formControlName="theme"
+              (selectionChange)="themeOnChange($event.value)">
+              <mat-option *ngFor="let theme of themes" [value]="theme">{{theme}}</mat-option>
+            </mat-select>
+          </mat-form-field>
 
-        <button matTooltip="Відправити завдання на перевірку"
-                matTooltipClass="c-primary-tooltip"
-                mat-button (click)="upload()">
-                Завантажити результат
-                <i class="material-icons">cloud_upload</i>
-        </button>
+          <button matTooltip="Відправити завдання на перевірку"
+                  matTooltipClass="c-primary-tooltip"
+                  mat-button (click)="upload()">
+            Завантажити результат
+            <i class="material-icons">cloud_upload</i>
+          </button>
 
-        <button class="description-toggle"
-                mat-button
-                (click)="openTaskDescription(sidenav)"
-                matTooltipClass="c-primary-tooltip"
-        >Умова завдання</button>
+          <button class="description-toggle"
+                  mat-button
+                  (click)="openTaskDescription(sidenav)"
+                  matTooltipClass="c-primary-tooltip"
+          >Умова завдання</button>
+        </form>
+
       </nav>
 
       <ngx-monaco-editor [options]="options" [(ngModel)]="code"></ngx-monaco-editor>

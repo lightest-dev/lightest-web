@@ -9,8 +9,5 @@ import {OverlayContainer} from '@angular/cdk/overlay';
 })
 
 export class MessageComponent {
-  constructor(@Inject(MAT_SNACK_BAR_DATA) public data: any,
-              overlayContainer: OverlayContainer) {
-    overlayContainer.getContainerElement().classList.add('success');
-  }
+  constructor(@Inject(MAT_SNACK_BAR_DATA) public data: any) {}
 }
