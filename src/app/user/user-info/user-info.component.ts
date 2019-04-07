@@ -82,6 +82,7 @@ export class UserInfoComponent implements OnInit {
   getUser(id)  {
    this.accountService.getUser(id).subscribe(data => {
         this.user = data;
+        console.log(data);
       }, (err) => {},
       () => {
         this.getTasks();

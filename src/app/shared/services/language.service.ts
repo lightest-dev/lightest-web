@@ -15,12 +15,10 @@ export class LanguageService {
     return this.http.get<Language[]>(`${API_URL}/languages`);
   }
 
-  // temporary not available
   addLanguage(language: Language){
     return this.http.post(`${API_URL}/languages`, language);
   }
 
-  // temporary not available
   deleteLanguage(id){
     return this.http.delete(`${API_URL}/languages/${id}`);
   }

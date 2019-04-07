@@ -17,7 +17,7 @@ export class ProfilePageComponent implements OnInit {
 
   user = new User();
   mobileQuery: MediaQueryList;
-  flagUserInit: boolean = false;
+  flagUserInit = false;
 
   fillerNav = [
     {
@@ -62,53 +62,9 @@ export class ProfilePageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('user account');
-    this.initUser();
   }
 
-  initUser() {
-    if (!this.flagUserInit) {
-      const temp = this.authService.getUserInfo();
-      this.user.id = temp.id;
-      this.user.isAdmin = temp.isAdmin;
-      this.user.isTeacher = temp.isTeacher;
-      console.log(this.user.id);
-      if ((this.user.name === null || this.user.name === undefined) &&
-        (this.user.surname === null || this.user.surname === undefined)) {
-        this.getUser(this.user.id);
-      }
-      this.flagUserInit = true;
-    }
-  }
 
-   getUser(id)  {
-    let temp = this.accountService.getUser(id).subscribe(data => {
-        this.user = data;
-    }, (err) => {},
-        () => {
-            if (this.user.name === null && this.user.surname === null) {
-                this.openDialog();
-            }
-        });
-  }
-
-    openDialog(): void {
-        const dialogRef = this.dialog.open(UserChangeInfoDialogComponent, {
-            width: '375px'
-        });
-
-        dialogRef.afterClosed().subscribe(result => {
-            console.log('The dialog was closed');
-            console.log(result.value);
-            this.accountService.putUser(this.authService.getUserInfo().id, {name: result.value.firstName, surname: result.value.secondName, userId: this.authService.getUserInfo().id})
-              .subscribe( () => {},
-                          error1 => {},
-                          () => {
-                            this.getUser(this.authService.getUserInfo().id);
-                          }
-                );
-        });
-    }
 
   logout() {
     console.log('logout');

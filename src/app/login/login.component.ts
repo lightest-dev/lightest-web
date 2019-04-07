@@ -46,7 +46,6 @@ export class LoginComponent implements OnInit {
   login() {
    this.authService.login(this.loginUserForm.value)
     .subscribe(data => {
-        console.log(data);
         this.authService.confirmLogin();
         this.messageInfo.message = 'Успішно';
         this.messageInfo.isError = false;

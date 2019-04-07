@@ -1,15 +1,16 @@
 <div class="container">
   <div class="wrapper personal-info">
-    <div class="photo-wrapper">
-      <img width="230" height="230"
-           src="https://avatars1.githubusercontent.com/u/23261377?s=400&u=8df1d796999633af6b2665a3c173b7c3c6743115&v=4"
-           alt="">
+    <div class="photo-wrapper" >
+      <i class="material-icons">account_circle</i>
     </div>
-    <div class="title-name">
-      <h3>{{user.name}} {{user.surname}}</h3>
+    <div class="uinitials-wrapper">
+      <button mat-button>Змінити</button>
+      <div class="title-name" *ngIf="user.name && user.surname">
+        <h3>{{user.name}} {{user.surname}}</h3>
+      </div>
     </div>
   </div>
-  <div class=" work-info">
+  <div class="work-info">
     <mat-tab-group>
       <mat-tab>
         <ng-template mat-tab-label>
@@ -18,7 +19,6 @@
         </ng-template>
         Content 1
       </mat-tab>
-
       <mat-tab >
         <ng-template mat-tab-label>
           <i class="material-icons">list</i>
@@ -28,7 +28,6 @@
           <app-task [tasks]="taskTabs.all.tasks"></app-task>
         </ng-container>
       </mat-tab>
-
       <mat-tab>
         <ng-template mat-tab-label>
           <i class="material-icons">done_all</i>
@@ -38,7 +37,6 @@
           <app-task [tasks]="taskTabs.done.tasks"></app-task>
         </ng-container>
       </mat-tab>
-
       <mat-tab>
         <ng-template mat-tab-label>
           <i class="material-icons">notifications</i>
@@ -48,7 +46,6 @@
           <app-task [tasks]="taskTabs.notDone.tasks"></app-task>
         </ng-container>
       </mat-tab>
-
     </mat-tab-group>
   </div>
 </div>

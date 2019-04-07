@@ -1,6 +1,13 @@
 
 
-.photo-wrapper img{ border-radius: 5px; }
+.photo-wrapper {
+  margin: 0;
+
+  i {
+    font-size: 230px;
+    color: #848c8a;
+  }
+}
 
 .tabs {
   display: flex;

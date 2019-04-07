@@ -10,14 +10,14 @@ export class AuthErrorMsgService {
 
   public handleLoginError(error) {
     if(400) { // check error status
-      this.messageInfo.message = 'error';
+      this.messageInfo.message = 'Помилка';
       this.snackBar.openFromComponent(MessageComponent, { data: this.messageInfo, panelClass: ['snackbar-error-message']});
     }
   }
 
   public handleRegistrationError(error) {
     if(400) { // check error status
-      this.messageInfo.message = 'error';
+      this.messageInfo.message = 'Помилка';
       this.snackBar.openFromComponent(MessageComponent, { data: this.messageInfo, panelClass: ['snackbar-error-message']});
     }
   }
