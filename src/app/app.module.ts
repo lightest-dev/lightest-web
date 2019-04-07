@@ -45,6 +45,8 @@ import {AddTestPageComponent} from './add-test-page/add-test-page.component';
 import {TaskComponent} from './user/task/task.component';
 import {AccountService} from './shared/services/account.service';
 import { InfoDialogComponent } from './info-dialog/info-dialog.component';
+import { TableBaseComponent } from './table-base/table-base.component';
+import { UsersTableComponent } from './users-table/users-table.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +77,9 @@ import { InfoDialogComponent } from './info-dialog/info-dialog.component';
     TaskToUsersFormComponent,
     AddTestPageComponent,
     TaskComponent,
-    InfoDialogComponent
+    InfoDialogComponent,
+    TableBaseComponent,
+    UsersTableComponent
   ],
   imports: [
     AppRoutingModule,
