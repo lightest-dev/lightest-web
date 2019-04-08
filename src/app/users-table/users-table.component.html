@@ -1,3 +1,4 @@
-<p>
-  users-table works!
-</p>
+<ng-container *ngIf="userTableObj">
+  <app-table-base [tableData]="userTableObj"></app-table-base>
+</ng-container>
+

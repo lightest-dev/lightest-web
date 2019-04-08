@@ -16,6 +16,7 @@ import {AuthGuardService} from './shared/guards/auth-guard.service';
 import {UserInfoComponent} from './user/user-info/user-info.component';
 import {AddTaskToUsersPageComponent} from './add-task-to-users-page/add-task-to-users-page.component';
 import {TableBaseComponent} from './table-base/table-base.component';
+import {UsersTableComponent} from './users-table/users-table.component';
 // import {AddTaskToUsersPageComponent} from './add-task-to-users-page/add-task-to-users-page.component';
 
 const routes: Routes = [
@@ -63,7 +64,7 @@ const routes: Routes = [
       },
       { path: 'table/users',
         canActivate: [AuthGuardService],
-        component: TableBaseComponent
+        component: UsersTableComponent
       },
     ]
   },

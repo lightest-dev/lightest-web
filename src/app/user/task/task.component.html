@@ -1,11 +1,7 @@
-<mat-form-field>
-  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-</mat-form-field>
-
 <mat-accordion class="example-headers-align">
   <mat-expansion-panel *ngFor="let task of tasks; let i = index" [expanded]="step === i" (opened)="setStep(i)" hideToggle>
     <mat-expansion-panel-header>
-      <mat-panel-title>
+      <mat-panel-title >
         {{task.name}}
       </mat-panel-title>
       <mat-panel-description>

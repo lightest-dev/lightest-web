@@ -10,6 +10,7 @@ import {SnackbarService} from '../shared/services/snackbar.service';
 export class UsersTableComponent implements OnInit {
 
   users;
+  userTableObj;
 
   constructor(private accountService: AccountService,
               private messageService: SnackbarService) { }
@@ -23,7 +24,24 @@ export class UsersTableComponent implements OnInit {
           message: 'Не вдалось отримати користувачів',
           isError: true
         });
+      }, () => {
+        this.loadObjForUsersTable();
       });
+  }
+
+  loadObjForUsersTable() {
+    this.userTableObj = {
+      labels: ['number', 'name', 'surname', 'email', 'details', 'delete'],
+      labelsName: {
+        number: '№',
+        name: 'Ім\'я',
+        surname: 'Прізвище',
+        email: 'E-mail',
+        details: 'Детальніше'
+        delete: 'Видалити',
+      },
+      data: this.users
+    };
   }
 
 }

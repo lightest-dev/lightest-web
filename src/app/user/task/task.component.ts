@@ -1,6 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {EditorService} from '../../shared/services/editor.service';
+import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import {UserData} from '../../table-base/table-base.component';
 
 @Component({
   selector: 'app-task',
@@ -9,14 +11,11 @@ import {EditorService} from '../../shared/services/editor.service';
 })
 export class TaskComponent implements OnInit {
   step = -1;
-  @Input() tasks;
-  constructor(private router: Router,
-              private editorService: EditorService) { }
 
-  ngOnInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
+  @Input() tasks;
+  constructor(private router: Router) {}
+
+  ngOnInit() {}
 
   setStep(index: number) {
     this.step = index;
@@ -34,11 +33,4 @@ export class TaskComponent implements OnInit {
     this.router.navigate([`account/editor/${taskId}`]);
   }
 
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
 }
