@@ -18,7 +18,7 @@ import {
   MatToolbar,
   MatToolbarModule,
   MatListModule,
-  MatTabsModule, MatNativeDateModule, MatCheckboxModule, MatTooltipModule
+  MatTabsModule, MatNativeDateModule, MatCheckboxModule, MatTooltipModule, MatTableModule, MatGridListModule, MatPaginatorModule
 } from '@angular/material';
 import { MatCardModule } from '@angular/material/card';
 import {MatSidenavModule} from '@angular/material/sidenav';
@@ -58,6 +58,9 @@ import {TestFormComponent} from '../add-task-page/test-form/test-form.component'
     MatNativeDateModule,
     MatSnackBarModule,
     MatCheckboxModule,
+    MatTableModule,
+    MatGridListModule,
+    MatPaginatorModule
   ],
   declarations: [
   ],
@@ -87,6 +90,9 @@ import {TestFormComponent} from '../add-task-page/test-form/test-form.component'
     MatNativeDateModule,
     MatCheckboxModule,
     MatSnackBarModule,
+    MatTableModule,
+    MatGridListModule,
+    MatPaginatorModule
   ]
 
 })

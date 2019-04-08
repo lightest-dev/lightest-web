@@ -15,6 +15,7 @@ import {ProfilePageComponent} from './user/profilePage.component';
 import {AuthGuardService} from './shared/guards/auth-guard.service';
 import {UserInfoComponent} from './user/user-info/user-info.component';
 import {AddTaskToUsersPageComponent} from './add-task-to-users-page/add-task-to-users-page.component';
+import {TableBaseComponent} from './table-base/table-base.component';
 // import {AddTaskToUsersPageComponent} from './add-task-to-users-page/add-task-to-users-page.component';
 
 const routes: Routes = [
@@ -59,6 +60,10 @@ const routes: Routes = [
       { path: 'editor/:id',
         canActivate: [AuthGuardService],
         component: EditorComponent
+      },
+      { path: 'table/users',
+        canActivate: [AuthGuardService],
+        component: TableBaseComponent
       },
     ]
   },
