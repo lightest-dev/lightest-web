@@ -1,8 +1,6 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {EditorService} from '../../shared/services/editor.service';
-import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
-import {UserData} from '../../table-base/table-base.component';
+
 
 @Component({
   selector: 'app-task',

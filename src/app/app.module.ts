@@ -47,6 +47,8 @@ import {AccountService} from './shared/services/account.service';
 import { InfoDialogComponent } from './info-dialog/info-dialog.component';
 import { TableBaseComponent } from './table-base/table-base.component';
 import { UsersTableComponent } from './users-table/users-table.component';
+import { CategoriesTableComponent } from './categories-table/categories-table.component';
+import { TasksTableComponent } from './tasks-table/tasks-table.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +81,9 @@ import { UsersTableComponent } from './users-table/users-table.component';
     TaskComponent,
     InfoDialogComponent,
     TableBaseComponent,
-    UsersTableComponent
+    UsersTableComponent,
+    CategoriesTableComponent,
+    TasksTableComponent
   ],
   imports: [
     AppRoutingModule,

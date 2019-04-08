@@ -25,23 +25,32 @@ export class UsersTableComponent implements OnInit {
           isError: true
         });
       }, () => {
+        this.modarateData();
         this.loadObjForUsersTable();
       });
   }
 
   loadObjForUsersTable() {
     this.userTableObj = {
-      labels: ['number', 'name', 'surname', 'email', 'details', 'delete'],
+      labels: ['number', 'name', 'surname', 'email', 'delete', 'details'],
       labelsName: {
         number: '№',
         name: 'Ім\'я',
         surname: 'Прізвище',
         email: 'E-mail',
-        details: 'Детальніше'
         delete: 'Видалити',
+        details: 'Деталі'
       },
       data: this.users
     };
+  }
+
+  modarateData() {
+    this.users.map((user, index) => {
+      user.number = index + 1;
+      user.delete = 'Видалити';
+      user.details = 'Деталі';
+    });
   }
 
 }
