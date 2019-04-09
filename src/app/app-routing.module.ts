@@ -18,6 +18,7 @@ import {AddTaskToUsersPageComponent} from './add-task-to-users-page/add-task-to-
 import {TableBaseComponent} from './table-base/table-base.component';
 import {UsersTableComponent} from './users-table/users-table.component';
 import {TasksTableComponent} from './tasks-table/tasks-table.component';
+import {CategoriesTableComponent} from './categories-table/categories-table.component';
 // import {AddTaskToUsersPageComponent} from './add-task-to-users-page/add-task-to-users-page.component';
 
 const routes: Routes = [
@@ -70,6 +71,10 @@ const routes: Routes = [
       { path: 'table/tasks',
         canActivate: [AuthGuardService],
         component: TasksTableComponent
+      },
+      { path: 'table/categories',
+        canActivate: [AuthGuardService],
+        component: CategoriesTableComponent
       },
     ]
   },
