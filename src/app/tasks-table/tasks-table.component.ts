@@ -54,7 +54,7 @@ export class TasksTableComponent implements OnInit {
     this.tasks.map((task, index) => {
       task.number = index + 1;
       task.details = 'Деталі';
-      task.delete = true;
+      task.delete = 'Видалити';
     });
   }
 

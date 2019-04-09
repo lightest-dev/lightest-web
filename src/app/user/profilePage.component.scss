@@ -59,4 +59,14 @@ i {
   padding: 0 7px;
 }
 
+.stepBack {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  i {
+    font-size: 18px;
+  }
+}
+
 

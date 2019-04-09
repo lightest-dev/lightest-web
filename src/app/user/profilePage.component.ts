@@ -6,6 +6,7 @@ import {AccountService} from '../shared/services/account.service';
 import {UserChangeInfoDialogComponent} from '../user-change-info-dialog/user-change-info-dialog.component';
 import {MatDialog} from '@angular/material';
 import {User} from '../shared/models/User';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-student',
@@ -50,7 +51,8 @@ export class ProfilePageComponent implements OnInit {
     private authService: AuthService,
     private routerLink: Router,
     private accountService: AccountService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private location: Location
   ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -64,8 +66,6 @@ export class ProfilePageComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
-
   logout() {
     console.log('logout');
     this.authService.logout().subscribe(data => {
@@ -73,5 +73,9 @@ export class ProfilePageComponent implements OnInit {
       }, (err) => {
       console.log(err.status);
     });
+  }
+
+  stepBack() {
+    this.location.back();
   }
 }
