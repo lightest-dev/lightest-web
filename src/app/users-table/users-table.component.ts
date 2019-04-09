@@ -32,13 +32,12 @@ export class UsersTableComponent implements OnInit {
 
   loadObjForUsersTable() {
     this.userTableObj = {
-      labels: ['number', 'name', 'surname', 'email', 'delete', 'details'],
+      labels: ['number', 'name', 'surname', 'email', 'details'],
       labelsName: {
         number: '№',
         name: 'Ім\'я',
         surname: 'Прізвище',
         email: 'E-mail',
-        delete: 'Видалити',
         details: 'Деталі'
       },
       data: this.users
@@ -48,9 +47,12 @@ export class UsersTableComponent implements OnInit {
   modarateData() {
     this.users.map((user, index) => {
       user.number = index + 1;
-      user.delete = 'Видалити';
       user.details = 'Деталі';
     });
+  }
+
+  deleteUser(user) {
+    console.log(user);
   }
 
 }

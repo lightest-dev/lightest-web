@@ -1,4 +1,4 @@
 <ng-container *ngIf="userTableObj">
-  <app-table-base [tableData]="userTableObj"></app-table-base>
+  <app-table-base [tableData]="userTableObj" (itemDelete)="deleteUser($event)"></app-table-base>
 </ng-container>
 

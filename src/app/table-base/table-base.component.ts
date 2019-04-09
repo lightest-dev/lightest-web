@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {AccountService} from '../shared/services/account.service';
 
@@ -16,6 +16,7 @@ export class TableBaseComponent implements OnInit {
   displayedColumns;
 
   @Input() tableData;
+  @Output() itemDelete = new EventEmitter();
 
   constructor() {}
 
@@ -33,6 +34,11 @@ export class TableBaseComponent implements OnInit {
 
   onSchoolClick(row) {
     console.log(row);
+  }
+
+  handleDelete(event) {
+    console.log(event);
+    this.itemDelete.emit(event);
   }
 
 }
