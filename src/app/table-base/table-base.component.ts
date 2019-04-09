@@ -21,6 +21,14 @@ export class TableBaseComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
+    this.initData();
+  }
+
+  ngOnChanges() {
+    this.initData();
+  }
+
+  initData() {
     this.data = this.tableData.data;
     this.labels = this.tableData.labels;
     this.labelsName = this.tableData.labelsName;
@@ -32,12 +40,7 @@ export class TableBaseComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  onSchoolClick(row) {
-    console.log(row);
-  }
-
   handleDelete(event) {
-    console.log(event);
     this.itemDelete.emit(event);
   }
 
