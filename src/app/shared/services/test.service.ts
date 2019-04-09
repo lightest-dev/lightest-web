@@ -11,8 +11,8 @@ export class TestService {
 
   constructor(private http: HttpClient) { }
 
-  getTest(id) :Observable<Test[]>{
-    return this.http.get<Test[]>(`${API_URL}/tests/${id}`);
+  getTest(taskId) :Observable<Test[]>{
+    return this.http.get<Test[]>(`${API_URL}/tests/${taskId}`);
   }
 
   changeTest(id, tests: Test[]){

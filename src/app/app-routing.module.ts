@@ -19,6 +19,10 @@ import {TableBaseComponent} from './table-base/table-base.component';
 import {UsersTableComponent} from './users-table/users-table.component';
 import {TasksTableComponent} from './tasks-table/tasks-table.component';
 import {CategoriesTableComponent} from './categories-table/categories-table.component';
+import {CheckersTableComponent} from './checkers-table/checkers-table.component';
+import {TestsTableComponent} from './tests-table/tests-table.component';
+import {UploadsTableComponent} from './uploads-table/uploads-table.component';
+import {GroupsTableComponent} from './groups-table/groups-table.component';
 // import {AddTaskToUsersPageComponent} from './add-task-to-users-page/add-task-to-users-page.component';
 
 const routes: Routes = [
@@ -75,6 +79,22 @@ const routes: Routes = [
       { path: 'table/categories',
         canActivate: [AuthGuardService],
         component: CategoriesTableComponent
+      },
+      { path: 'table/checkers',
+        canActivate: [AuthGuardService],
+        component: CheckersTableComponent
+      },
+      { path: 'table/groups',
+        canActivate: [AuthGuardService],
+        component: GroupsTableComponent
+      },
+      { path: 'table/tests',
+        canActivate: [AuthGuardService],
+        component: TestsTableComponent
+      },
+      { path: 'table/uploads',
+        canActivate: [AuthGuardService],
+        component: UploadsTableComponent
       },
     ]
   },
