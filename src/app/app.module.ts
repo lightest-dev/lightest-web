@@ -49,6 +49,10 @@ import { TableBaseComponent } from './table-base/table-base.component';
 import { UsersTableComponent } from './users-table/users-table.component';
 import { CategoriesTableComponent } from './categories-table/categories-table.component';
 import { TasksTableComponent } from './tasks-table/tasks-table.component';
+import { CheckersTableComponent } from './checkers-table/checkers-table.component';
+import { GroupsTableComponent } from './groups-table/groups-table.component';
+import { TestsTableComponent } from './tests-table/tests-table.component';
+import { UploadsTableComponent } from './uploads-table/uploads-table.component';
 
 @NgModule({
   declarations: [
@@ -83,7 +87,11 @@ import { TasksTableComponent } from './tasks-table/tasks-table.component';
     TableBaseComponent,
     UsersTableComponent,
     CategoriesTableComponent,
-    TasksTableComponent
+    TasksTableComponent,
+    CheckersTableComponent,
+    GroupsTableComponent,
+    TestsTableComponent,
+    UploadsTableComponent
   ],
   imports: [
     AppRoutingModule,
