@@ -54,9 +54,6 @@ export class CategoriesTableComponent implements OnInit {
   moderateData() {
     this.categories.map((el, index) => {
       el.number = index + 1;
-      el.details = 'Деталі';
-      el.delete = true;
-      el.edit = true;
     });
   }
 

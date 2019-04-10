@@ -4,6 +4,7 @@ import {AccountService} from '../shared/services/account.service';
 import {TaskShort} from '../shared/models/TaskShort';
 import {DomService} from '../shared/services/dom.service';
 import {TaskToUsersFormComponent} from './task-to-users-form/task-to-users-form.component';
+import {SnackbarService} from '../shared/services/snackbar.service';
 
 @Component({
   selector: 'app-add-task-to-users-page',
@@ -20,6 +21,7 @@ export class AddTaskToUsersPageComponent implements OnInit {
   formCounts = 1;
 
   constructor(private taskService: TaskService,
+              private messageService: SnackbarService,
               private accountService: AccountService,
               private domService: DomService) { }
 
@@ -90,11 +92,24 @@ export class AddTaskToUsersPageComponent implements OnInit {
       let tasksForUesers = this.loadFormObjectsArray();
       tasksForUesers.forEach(obj => {
         this.taskService.assignTaskToUsers(obj[0].taskId, obj).subscribe(data => {
-
-        }, error1 => { console.log(error1); });
+          this.messageService.showSnackBar({
+            message: 'Успішно',
+            isError: false
+          });
+          this.initFormObj();
+        }, error1 => {
+          console.log(error1);
+          this.messageService.showSnackBar({
+            message: 'Помилка: ' + error1.status,
+            isError: true
+          });
+        });
       });
     } else {
-      console.log('bad');
+      this.messageService.showSnackBar({
+        message: 'Заповніть форму',
+        isError: true
+      });
     }
   }
 

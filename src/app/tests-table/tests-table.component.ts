@@ -109,6 +109,7 @@ export class TestsTableComponent implements OnInit {
             message: 'Успішно',
             isError: false
           });
+          this.tests = [];
           this.getData();
         }
       }, error1 => {

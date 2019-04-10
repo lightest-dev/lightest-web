@@ -1,0 +1,18 @@
+.cards-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+mat-card {
+  cursor: pointer;
+  width: 220px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  i {
+    font-size: 55px;
+  }
+}

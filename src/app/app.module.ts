@@ -53,6 +53,7 @@ import { CheckersTableComponent } from './checkers-table/checkers-table.componen
 import { GroupsTableComponent } from './groups-table/groups-table.component';
 import { TestsTableComponent } from './tests-table/tests-table.component';
 import { UploadsTableComponent } from './uploads-table/uploads-table.component';
+import { ServiceNavigationComponent } from './service-navigation/service-navigation.component';
 
 @NgModule({
   declarations: [
@@ -91,7 +92,8 @@ import { UploadsTableComponent } from './uploads-table/uploads-table.component';
     CheckersTableComponent,
     GroupsTableComponent,
     TestsTableComponent,
-    UploadsTableComponent
+    UploadsTableComponent,
+    ServiceNavigationComponent
   ],
   imports: [
     AppRoutingModule,

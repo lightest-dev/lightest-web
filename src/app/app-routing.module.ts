@@ -15,15 +15,13 @@ import {ProfilePageComponent} from './user/profilePage.component';
 import {AuthGuardService} from './shared/guards/auth-guard.service';
 import {UserInfoComponent} from './user/user-info/user-info.component';
 import {AddTaskToUsersPageComponent} from './add-task-to-users-page/add-task-to-users-page.component';
-import {TableBaseComponent} from './table-base/table-base.component';
 import {UsersTableComponent} from './users-table/users-table.component';
 import {TasksTableComponent} from './tasks-table/tasks-table.component';
 import {CategoriesTableComponent} from './categories-table/categories-table.component';
 import {CheckersTableComponent} from './checkers-table/checkers-table.component';
 import {TestsTableComponent} from './tests-table/tests-table.component';
-import {UploadsTableComponent} from './uploads-table/uploads-table.component';
 import {GroupsTableComponent} from './groups-table/groups-table.component';
-// import {AddTaskToUsersPageComponent} from './add-task-to-users-page/add-task-to-users-page.component';
+import {ServiceNavigationComponent} from './service-navigation/service-navigation.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: AuthComponent, },
@@ -31,34 +29,6 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'registration', component: RegistrationComponent},
 
-  { path: 'add-task',
-    canActivate: [AuthGuardService],
-    component: AddTaskPageComponent
-  },
-  { path: 'add-category',
-    canActivate: [AuthGuardService],
-    component: AddCategoryPageComponent
-  },
-  { path: 'add-checker',
-    canActivate: [AuthGuardService],
-    component: AddCheckerPageComponent
-  },
-  { path: 'add-group',
-    canActivate: [AuthGuardService],
-    component: AddGroupPageComponent
-  },
-  { path: 'add-language',
-    canActivate: [AuthGuardService],
-    component: AddLanguagePageComponent
-  },
-  { path: 'add-test',
-    canActivate: [AuthGuardService],
-    component: AddTestPageComponent
-  },
-  { path: 'add-task-for-users',
-    canActivate: [AuthGuardService],
-    component: AddTaskToUsersPageComponent
-  },
   {
     path: 'account', component: ProfilePageComponent,
     canActivate: [AuthGuardService],
@@ -92,7 +62,38 @@ const routes: Routes = [
         canActivate: [AuthGuardService],
         component: TestsTableComponent
       },
-
+      { path: 'add-task',
+        canActivate: [AuthGuardService],
+        component: AddTaskPageComponent
+      },
+      { path: 'add-category',
+        canActivate: [AuthGuardService],
+        component: AddCategoryPageComponent
+      },
+      { path: 'add-checker',
+        canActivate: [AuthGuardService],
+        component: AddCheckerPageComponent
+      },
+      { path: 'add-group',
+        canActivate: [AuthGuardService],
+        component: AddGroupPageComponent
+      },
+      { path: 'add-language',
+        canActivate: [AuthGuardService],
+        component: AddLanguagePageComponent
+      },
+      { path: 'add-test',
+        canActivate: [AuthGuardService],
+        component: AddTestPageComponent
+      },
+      { path: 'add-task-for-users',
+        canActivate: [AuthGuardService],
+        component: AddTaskToUsersPageComponent
+      },
+      { path: 'service-navigation',
+        canActivate: [AuthGuardService],
+        component: ServiceNavigationComponent
+      },
     ]
   },
 
