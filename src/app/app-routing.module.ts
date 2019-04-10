@@ -92,10 +92,7 @@ const routes: Routes = [
         canActivate: [AuthGuardService],
         component: TestsTableComponent
       },
-      { path: 'table/uploads',
-        canActivate: [AuthGuardService],
-        component: UploadsTableComponent
-      },
+
     ]
   },
 

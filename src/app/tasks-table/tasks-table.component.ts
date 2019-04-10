@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {TaskService} from '../shared/services/task.service';
 import {SnackbarService} from '../shared/services/snackbar.service';
+import {combineLatest} from 'rxjs';
+import {map} from 'rxjs/operators';
+import {CheckerService} from '../shared/services/checker.service';
+import {CategoriesService} from '../shared/services/categories.service';
 
 @Component({
   selector: 'app-tasks-table',
@@ -11,9 +15,13 @@ export class TasksTableComponent implements OnInit {
 
   userTableObj;
   tasks;
+  checkers;
+  categories;
 
   constructor(private taskService: TaskService,
-              private messageService: SnackbarService) { }
+              private messageService: SnackbarService,
+              private checkerService: CheckerService,
+              private categoryService: CategoriesService) { }
 
   ngOnInit() {
    this.getTasks();
@@ -30,11 +38,49 @@ export class TasksTableComponent implements OnInit {
         });
       }, () => {
         this.moderateData();
-        this.loadObjForUsersTable();
+        this.loadObjForTable();
+        this.getCheckers();
       });
   }
 
-  loadObjForUsersTable() {
+  getCheckers() {
+    const checkerIds = Object.assign([], this.tasks.map(task => task.checkerId));
+    const $checkerOservers = [];
+    checkerIds.forEach(id => {
+      $checkerOservers.push(this.checkerService.getChecker(id));
+    });
+    const combined = combineLatest($checkerOservers);
+    combined.subscribe(data => {
+      this.checkers = data;
+    }, error1 => {},
+      () => {
+        for (let i = 0; i < this.tasks.length; i++) {
+          this.tasks[i].checkerId = this.checkers[i].name;
+        }
+        this.getCategories();
+      });
+  }
+
+  getCategories() {
+    const categoriesIds = Object.assign([], this.tasks.map(task => task.categoryId));
+    const $categoriesOservers = [];
+    categoriesIds.forEach(id => {
+      $categoriesOservers.push(this.categoryService.getCategory(id));
+    });
+    const combined = combineLatest($categoriesOservers);
+    combined.subscribe(data => {
+        this.categories = data;
+      }, error1 => {},
+      () => {
+        for (let i = 0; i < this.tasks.length; i++) {
+          this.tasks[i].categoryId = this.categories[i].name;
+        }
+        this.moderateData();
+        this.loadObjForTable();
+      });
+  }
+
+  loadObjForTable() {
     this.userTableObj = {
       labels: ['number', 'name', 'categoryId', 'checkerId', 'public', 'details', 'delete'],
       labelsName: {

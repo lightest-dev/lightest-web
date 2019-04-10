@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {TestService} from '../shared/services/test.service';
 import {SnackbarService} from '../shared/services/snackbar.service';
 import {TaskService} from '../shared/services/task.service';
-import {concatAll, map, mergeAll, mergeMap, subscribeOn} from 'rxjs/operators';
 import {combineLatest} from 'rxjs';
+import {map, mapTo, mergeMap, subscribeOn} from 'rxjs/operators';
 
 
 @Component({
@@ -27,15 +27,6 @@ export class TestsTableComponent implements OnInit {
 
   getData() {
     this.taskService.getTasks()
-      // .pipe(
-      //   mergeMap(data => {
-      //      Object.assign([], data.map(task => task.id)).map( id => {
-      //       return this.taskService.getTask(id);
-      //     });
-      //   })
-      // ).subscribe(data => {
-      //   console.log(data);
-      // });
       .subscribe(data => {
         this.tasks = data;
       }, error1 => {
@@ -50,34 +41,53 @@ export class TestsTableComponent implements OnInit {
 
   getTests() {
     const taskIds = Object.assign([], this.tasks.map(task => task.id));
-    console.log(taskIds);
-    let $tasksOservers = [];
+    const $tasksOservers = [];
     taskIds.forEach(taskId => {
-      if($tasksOservers.length !== 2) {
         $tasksOservers.push(this.taskService.getTask(taskId));
-      }
     });
-
     const combined = combineLatest($tasksOservers);
-
-    combined.subscribe(([timerValOne, timerValTwo]) => {
-      console.log(timerValOne['tests']);
-      console.log(timerValTwo['tests']);
-    });
-
-
+    combined.pipe(
+      map(data => {
+        return data.map(el => el['tests'])
+      }),
+    ).subscribe(data => {
+      data.forEach((array) => {
+        array.forEach(el => {
+          this.tests.push(el);
+        });
+      });
+    }, error1 => {},
+      () => {
+        this.setTasksName();
+        this.moderateData();
+        this.loadObjForTable();
+      });
   }
 
+  setTasksName() {
+    this.tests.forEach(test => {
+      test.taskId = this.getTaskNameById(test.taskId);
+    });
+  }
+
+  getTaskNameById(id) {
+    for(let task of this.tasks) {
+      if(task.id == id) {
+        return task.name;
+      }
+    }
+  }
+  
   loadObjForTable() {
     this.tableObj = {
-      labels: ['number', 'name', 'public', 'details', 'delete', 'edit'],
+      labels: ['number', 'input', 'output', 'taskId', 'delete', 'edit'],
       labelsName: {
         number: '№',
-        name: 'Назва',
-        public: 'Публічне',
-        details: 'Деталі',
+        input: 'Вхідні дані',
+        output: 'Вихідні дані',
         delete: 'Видалити',
-        edit: 'Редагувати'
+        edit: 'Редагувати',
+        taskId: 'Завдання'
       },
       data: this.tests
     };
@@ -86,7 +96,6 @@ export class TestsTableComponent implements OnInit {
   moderateData() {
     this.tests.map((el, index) => {
       el.number = index + 1;
-      el.details = 'Деталі';
       el.delete = true;
       el.edit = true;
     });
