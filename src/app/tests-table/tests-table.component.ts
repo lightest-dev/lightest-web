@@ -3,6 +3,8 @@ import {TestService} from '../shared/services/test.service';
 import {SnackbarService} from '../shared/services/snackbar.service';
 import {TaskService} from '../shared/services/task.service';
 import {concatAll, map, mergeAll, mergeMap, subscribeOn} from 'rxjs/operators';
+import {combineLatest} from 'rxjs';
+
 
 @Component({
   selector: 'app-tests-table',
@@ -25,39 +27,46 @@ export class TestsTableComponent implements OnInit {
 
   getData() {
     this.taskService.getTasks()
-      .pipe(
-        mergeMap(data => {
-          return Object.assign([], data.map(task => task.id)).map( id => {
-            return this.taskService.getTask(id);
-          });
-        })
-      ).subscribe(data => {
-        console.log(data);
-      });
-      // .subscribe(data => {
-      //   this.tasks = data;
-      // }, error1 => {
-      //   this.messageService.showSnackBar({
-      //       message: 'Не вдалось отримати дані',
-      //       isError: true,
+      // .pipe(
+      //   mergeMap(data => {
+      //      Object.assign([], data.map(task => task.id)).map( id => {
+      //       return this.taskService.getTask(id);
       //     });
-      // }, () => {
-      //
+      //   })
+      // ).subscribe(data => {
+      //   console.log(data);
       // });
+      .subscribe(data => {
+        this.tasks = data;
+      }, error1 => {
+        this.messageService.showSnackBar({
+            message: 'Не вдалось отримати дані',
+            isError: true,
+          });
+      }, () => {
+          this.getTests();
+      });
   }
 
-  // getTests() {
-  //   const taskIds = Object.assign([], this.tasks.map(task => task.id));
-  //   taskIds.forEach(taskId => {
-  //     this.taskService.getTask(taskId)
-  //       .pipe(
-  //         mergeMap((data) => {
-  //           this.tests = this.tests.concat(data.tests);
-  //       }).subscribe(data => {
-  //         console.log(data);
-  //     })
-  //   });
-  // }
+  getTests() {
+    const taskIds = Object.assign([], this.tasks.map(task => task.id));
+    console.log(taskIds);
+    let $tasksOservers = [];
+    taskIds.forEach(taskId => {
+      if($tasksOservers.length !== 2) {
+        $tasksOservers.push(this.taskService.getTask(taskId));
+      }
+    });
+
+    const combined = combineLatest($tasksOservers);
+
+    combined.subscribe(([timerValOne, timerValTwo]) => {
+      console.log(timerValOne['tests']);
+      console.log(timerValTwo['tests']);
+    });
+
+
+  }
 
   loadObjForTable() {
     this.tableObj = {
