@@ -90,6 +90,14 @@ const routes: Routes = [
         canActivate: [AuthGuardService],
         component: AddTaskToUsersPageComponent
       },
+      { path: 'add-users-to-group',
+        canActivate: [AuthGuardService],
+        component: AddTaskToUsersPageComponent
+      },
+      { path: 'add-users-to-categories',
+        canActivate: [AuthGuardService],
+        component: AddTaskToUsersPageComponent
+      },
       { path: 'service-navigation',
         canActivate: [AuthGuardService],
         component: ServiceNavigationComponent

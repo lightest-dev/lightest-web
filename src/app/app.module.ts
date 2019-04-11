@@ -54,6 +54,8 @@ import { GroupsTableComponent } from './groups-table/groups-table.component';
 import { TestsTableComponent } from './tests-table/tests-table.component';
 import { UploadsTableComponent } from './uploads-table/uploads-table.component';
 import { ServiceNavigationComponent } from './service-navigation/service-navigation.component';
+import { AddUsersToGroupComponent } from './add-users-to-group/add-users-to-group.component';
+import { AddUsersToCategoriesComponent } from './add-users-to-categories/add-users-to-categories.component';
 
 @NgModule({
   declarations: [
@@ -93,7 +95,9 @@ import { ServiceNavigationComponent } from './service-navigation/service-navigat
     GroupsTableComponent,
     TestsTableComponent,
     UploadsTableComponent,
-    ServiceNavigationComponent
+    ServiceNavigationComponent,
+    AddUsersToGroupComponent,
+    AddUsersToCategoriesComponent
   ],
   imports: [
     AppRoutingModule,
