@@ -56,6 +56,8 @@ import { UploadsTableComponent } from './uploads-table/uploads-table.component';
 import { ServiceNavigationComponent } from './service-navigation/service-navigation.component';
 import { AddUsersToGroupComponent } from './add-users-to-group/add-users-to-group.component';
 import { AddUsersToCategoriesComponent } from './add-users-to-categories/add-users-to-categories.component';
+import {AuthGuardAdminService} from './shared/guards/auth-guard-admin.service';
+import {AuthGuardTeacherService} from './shared/guards/auth-guard-teacher.service';
 
 @NgModule({
   declarations: [
@@ -117,6 +119,8 @@ import { AddUsersToCategoriesComponent } from './add-users-to-categories/add-use
   providers: [
     AuthService,
     AuthGuardService,
+    AuthGuardAdminService,
+    AuthGuardTeacherService,
     EditorService,
     AuthErrorMsgService,
     DomService,

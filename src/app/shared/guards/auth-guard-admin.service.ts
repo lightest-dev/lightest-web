@@ -1,19 +1,21 @@
-import {CanActivate, Router} from '@angular/router';
 import {Injectable} from '@angular/core';
-import { AuthService } from '../services/auth.service';
+import {CanActivate, Router} from '@angular/router';
+import {AuthService} from '../services/auth.service';
 import { Location } from '@angular/common';
 
 @Injectable()
-export class AuthGuardService implements CanActivate {
+export class AuthGuardAdminService implements CanActivate {
 
   constructor(
     private authService: AuthService,
+    private router: Router,
     private location: Location) {
   }
 
   canActivate() {
     const isLoggedIn = this.authService.isLoggedIn();
-    if (isLoggedIn) {
+    const isAdminTeacher = this.authService.getUserInfo().isAdmin || this.authService.getUserInfo().isTeacher;
+    if (isLoggedIn && isAdminTeacher) {
       return true;
     } else {
       this.location.back();

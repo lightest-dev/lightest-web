@@ -26,21 +26,6 @@ export class ProfilePageComponent implements OnInit {
       icon: 'account_circle',
       link: 'account/user'
     },
-    {
-      name: 'Список курсів',
-      icon: 'import_contacts',
-      link: ''
-    },
-    {
-      name: 'Список завдань',
-      icon: 'list',
-      link: ''
-    }
-    // {
-    //   name: 'Вихід',
-    //   icon: 'rowing',
-    //   link: ''
-    // }
   ];
 
   private _mobileQueryListener: () => void;

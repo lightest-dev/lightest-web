@@ -1,14 +1,13 @@
-import {CanActivate, Router} from '@angular/router';
 import {Injectable} from '@angular/core';
-import { AuthService } from '../services/auth.service';
-import { Location } from '@angular/common';
+import {CanActivate, Router} from '@angular/router';
+import {AuthService} from '../services/auth.service';
 
 @Injectable()
-export class AuthGuardService implements CanActivate {
+export class AuthGuardTeacherService implements CanActivate {
 
   constructor(
     private authService: AuthService,
-    private location: Location) {
+    private router: Router) {
   }
 
   canActivate() {
@@ -16,7 +15,7 @@ export class AuthGuardService implements CanActivate {
     if (isLoggedIn) {
       return true;
     } else {
-      this.location.back();
+      this.router.navigate(['/login']);
       return false;
     }
   }
