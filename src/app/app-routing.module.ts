@@ -24,6 +24,8 @@ import {GroupsTableComponent} from './groups-table/groups-table.component';
 import {ServiceNavigationComponent} from './service-navigation/service-navigation.component';
 import {AuthGuardAdminService} from './shared/guards/auth-guard-admin.service';
 import {AddUsersToGroupComponent} from './add-users-to-group/add-users-to-group.component';
+import {AddUsersToCategoriesComponent} from './add-users-to-categories/add-users-to-categories.component';
+import {UploadsListComponent} from './uploads-list/uploads-list.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: AuthComponent, },
@@ -98,11 +100,19 @@ const routes: Routes = [
       },
       { path: 'add-users-to-categories',
         canActivate: [AuthGuardAdminService],
+        component: AddUsersToCategoriesComponent
+      },
+      { path: 'add-users-to-categories',
+        canActivate: [AuthGuardAdminService],
         component: AddTaskToUsersPageComponent
       },
       { path: 'service-navigation',
         canActivate: [AuthGuardAdminService],
         component: ServiceNavigationComponent
+      },
+      { path: 'uploads/:id',
+        canActivate: [AuthGuardService],
+        component: UploadsListComponent
       },
     ]
   },

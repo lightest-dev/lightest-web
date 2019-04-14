@@ -16,6 +16,10 @@ export class UploadService {
     return this.http.get<TaskResult[]>(`${API_URL}/uploads/${taskId}`);
   }
 
+  getTaskUploadsAll(taskId): Observable<TaskResult[]> {
+    return this.http.get<TaskResult[]>(`${API_URL}/uploads/${taskId}/all`);
+  }
+
   getTaskResult(taskId): Observable<TaskResult> {
     return this.http.get<TaskResult>(`${API_URL}/uploads/code/${taskId}/result`);
   }

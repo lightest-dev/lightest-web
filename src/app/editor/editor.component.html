@@ -1,7 +1,11 @@
 <mat-sidenav-container class="example-container">
   <mat-sidenav #sidenav mode="side" position="end">
     <div class="description" *ngIf="task.description">
+      <h4>Опис</h4>
       {{task.description}}
+      <br>
+      <h4>Приклади</h4>
+      {{task.examples}}
     </div>
   </mat-sidenav>
 

@@ -35,8 +35,6 @@ import {AdDirective} from './shared/directives/ad.directive';
 import {DynamicAdComponent} from './dynamic-ad/dynamic-ad.component';
 import {SnackbarService} from './shared/services/snackbar.service';
 import {FormService} from './shared/services/form.service';
-import { AddUsersToGroupPageComponent } from './add-users-to-group-page/add-users-to-group-page.component';
-import { AddUsersToCategoryPageComponent } from './add-users-to-category-page/add-users-to-category-page.component';
 import {ProfilePageComponent} from './user/profilePage.component';
 import {UserInfoComponent} from './user/user-info/user-info.component';
 import {AddTaskToUsersPageComponent} from './add-task-to-users-page/add-task-to-users-page.component';
@@ -58,6 +56,7 @@ import { AddUsersToGroupComponent } from './add-users-to-group/add-users-to-grou
 import { AddUsersToCategoriesComponent } from './add-users-to-categories/add-users-to-categories.component';
 import {AuthGuardAdminService} from './shared/guards/auth-guard-admin.service';
 import {AuthGuardTeacherService} from './shared/guards/auth-guard-teacher.service';
+import { UploadsListComponent } from './uploads-list/uploads-list.component';
 
 @NgModule({
   declarations: [
@@ -80,8 +79,6 @@ import {AuthGuardTeacherService} from './shared/guards/auth-guard-teacher.servic
     TestFormComponent,
     AdDirective,
     DynamicAdComponent,
-    AddUsersToGroupPageComponent,
-    AddUsersToCategoryPageComponent,
     ProfilePageComponent,
     UserInfoComponent,
     AddTaskToUsersPageComponent,
@@ -99,7 +96,8 @@ import {AuthGuardTeacherService} from './shared/guards/auth-guard-teacher.servic
     UploadsTableComponent,
     ServiceNavigationComponent,
     AddUsersToGroupComponent,
-    AddUsersToCategoriesComponent
+    AddUsersToCategoriesComponent,
+    UploadsListComponent
   ],
   imports: [
     AppRoutingModule,

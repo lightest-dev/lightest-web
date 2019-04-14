@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {GroupService} from '../shared/services/group.service';
-import {TaskService} from '../shared/services/task.service';
 import {SnackbarService} from '../shared/services/snackbar.service';
 import {AccountService} from '../shared/services/account.service';
 import {DomService} from '../shared/services/dom.service';
@@ -35,7 +34,6 @@ export class AddUsersToGroupComponent implements OnInit {
   constructor(private groupService: GroupService,
               private messageService: SnackbarService,
               private accountService: AccountService,
-              private domService: DomService,
               private formBuilder: FormBuilder,
               private formService: FormService) {
   }
@@ -70,9 +68,9 @@ export class AddUsersToGroupComponent implements OnInit {
       users: ['', [
         Validators.required
       ]],
-      canRead: ['false'],
-      canWrite: ['false'],
-      canChangeAccess: ['false']
+      canRead: ['true'],
+      canWrite: ['true'],
+      canChangeAccess: ['true']
     });
 
     this.usersGroupForm.valueChanges
@@ -85,8 +83,22 @@ export class AddUsersToGroupComponent implements OnInit {
     if (this.usersGroupForm.valid) {
       this.groupService.addUsersToGroup(this.usersGroupForm.value.groups, this.loadObj())
         .subscribe(data => {
-          console.log(data);
+          this.messageService.showSnackBar({
+            message: 'Успішно',
+            isError: false
+          });
+          this.initForm();
+        }, error1 => {
+          this.messageService.showSnackBar({
+            message: 'Помилка',
+            isError: true
+          });
         });
+    } else {
+      this.messageService.showSnackBar({
+        message: 'Заповніть форму',
+        isError: true
+      });
     }
   }
 

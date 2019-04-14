@@ -1,0 +1,31 @@
+<mat-accordion *ngIf="task" class="example-headers-align">
+  <mat-expansion-panel *ngFor="let upload of uploads; let i = index" [expanded]="step === i" (opened)="setStep(i)" hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title >
+        {{task.name}}
+      </mat-panel-title>
+      <mat-panel-description>
+        {{task.category.name}}
+        <span class="points">{{upload.points}} / {{task.points}}</span>
+        <mat-icon *ngIf="!task.completed" matTooltip="Завдання не виконано"><i class="material-icons">notifications</i></mat-icon>
+        <mat-icon *ngIf="task.completed" matTooltip="Виконано"><i class="material-icons">done_all</i></mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <h3>Код програми</h3>
+    {{upload.code}}
+    <br>
+    <br>
+    <ng-container *ngIf="upload.message">
+      <h3>Повідомлення компіляції</h3>
+      {{upload.message}}
+    </ng-container>
+
+    <mat-action-row>
+      <button mat-button color="primary" (click)="doExcercise(task.id, task.languages)">Перейти до виконання завдання</button>
+      <button mat-button color="primary" (click)="prevStep()">Попереднє</button>
+      <button mat-button color="primary" (click)="nextStep()">Наступне</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+
+</mat-accordion>

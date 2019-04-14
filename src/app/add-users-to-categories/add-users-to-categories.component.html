@@ -1,3 +1,32 @@
-<p>
-  add-users-to-categories works!
-</p>
+
+<div class="wrapper">
+  <div class="form-header">
+    Форма додавання студентів до категорії
+  </div>
+
+  <form [formGroup]="usersCategoryForm" id="users-group-form">
+    <mat-form-field>
+      <mat-label>Назва категорії</mat-label>
+      <mat-select name="categories" formControlName="categories">
+        <mat-option>Виберіть назву групи</mat-option>
+        <mat-option *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="formErrorsUsersCategoryForm.categories">{{formErrorsUsersCategoryForm.categories}}</mat-error>
+    </mat-form-field>
+
+    <mat-checkbox name="canRead" formControlName="canRead">Дозвіл на читання</mat-checkbox>
+    <mat-checkbox name="canWrite" formControlName="canWrite">Дозвіл на зміну</mat-checkbox>
+    <mat-checkbox name="canChangeAccess" formControlName="canChangeAccess">Дозвіл на зміну доступу</mat-checkbox>
+
+    <mat-form-field>
+      <mat-label>Користувачі</mat-label>
+      <mat-select name="users" formControlName="users" multiple>
+        <mat-option disabled>Виберіть виконавців</mat-option>
+        <mat-option *ngFor="let user of users" value="{{user.id}}">{{user.name}} {{user.surname}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="formErrorsUsersCategoryForm.users">{{formErrorsUsersCategoryForm.users}}</mat-error>
+    </mat-form-field>
+
+    <button mat-button type="submit" class="c-button" (click)="submit()">Зберегти</button>
+  </form>
+</div>
