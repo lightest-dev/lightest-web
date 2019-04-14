@@ -19,6 +19,7 @@ export class ProfilePageComponent implements OnInit {
   user = new User();
   mobileQuery: MediaQueryList;
   flagUserInit = false;
+  userRole;
 
   fillerNav = [
     {
@@ -49,10 +50,10 @@ export class ProfilePageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.checkAccess();
   }
 
   logout() {
-    console.log('logout');
     this.authService.logout().subscribe(data => {
         this.routerLink.navigate(['/login']);
       }, (err) => {
@@ -62,5 +63,17 @@ export class ProfilePageComponent implements OnInit {
 
   stepBack() {
     this.location.back();
+  }
+
+  checkAccess() {
+    if (this.authService.getUserInfo().isAdmin || this.authService.getUserInfo().isTeacher) {
+     this.userRole = true;
+    } else {
+      this.userRole = false;
+    }
+  }
+
+  goToService() {
+    this.routerLink.navigate(['account/service-navigation']);
   }
 }

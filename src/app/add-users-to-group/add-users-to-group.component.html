@@ -1,9 +1,44 @@
 <!--<form *ngIf="data" [formGroup]="usersTaskForm" id="users-task-form">-->
 
 
-  <!--<mat-checkbox name="canRead" formControlName="canRead">Дозвіл на читання</mat-checkbox>-->
-  <!--<mat-checkbox name="canWrite" formControlName="canWrite">Дозвіл на зміну</mat-checkbox>-->
-  <!--<mat-checkbox name="canChangeAccess" formControlName="canChangeAccess">Дозвіл на зміну доступу</mat-checkbox>-->
-  <!--<mat-checkbox name="isOwner" formControlName="isOwner">Власник</mat-checkbox>-->
+  <!--&lt;!&ndash;<mat-checkbox name="canRead" formControlName="canRead">Дозвіл на читання</mat-checkbox>&ndash;&gt;-->
+  <!--&lt;!&ndash;<mat-checkbox name="canWrite" formControlName="canWrite">Дозвіл на зміну</mat-checkbox>&ndash;&gt;-->
+  <!--&lt;!&ndash;<mat-checkbox name="canChangeAccess" formControlName="canChangeAccess">Дозвіл на зміну доступу</mat-checkbox>&ndash;&gt;-->
+  <!--&lt;!&ndash;<mat-checkbox name="isOwner" formControlName="isOwner">Власник</mat-checkbox>&ndash;&gt;-->
 
 <!--</form>-->
+
+<div class="wrapper">
+  <div class="form-header">
+    Форма додавання студентів до групи
+  </div>
+
+  <form [formGroup]="usersGroupForm" id="users-group-form">
+    <mat-form-field>
+      <mat-label>Назва групи</mat-label>
+      <mat-select name="groups" formControlName="groups">
+        <mat-option>Виберіть назву групи</mat-option>
+        <mat-option *ngFor="let group of groups" value="{{group.id}}">{{group.name}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="formErrorsUsersGroupForm.groups">{{formErrorsUsersGroupForm.groups}}</mat-error>
+    </mat-form-field>
+
+    <mat-checkbox name="canRead" formControlName="canRead">Дозвіл на читання</mat-checkbox>
+    <mat-checkbox name="canWrite" formControlName="canWrite">Дозвіл на зміну</mat-checkbox>
+    <mat-checkbox name="canChangeAccess" formControlName="canChangeAccess">Дозвіл на зміну доступу</mat-checkbox>
+
+    <mat-form-field>
+      <mat-label>Користувачі</mat-label>
+      <mat-select name="users" formControlName="users" multiple>
+        <mat-option disabled>Виберіть виконавців</mat-option>
+        <mat-option *ngFor="let user of users" value="{{user.id}}">{{user.name}} {{user.surname}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="formErrorsUsersGroupForm.users">{{formErrorsUsersGroupForm.users}}</mat-error>
+    </mat-form-field>
+
+    <button mat-button type="submit" class="c-button" (click)="submit()">Зберегти</button>
+  </form>
+</div>
+
+
+

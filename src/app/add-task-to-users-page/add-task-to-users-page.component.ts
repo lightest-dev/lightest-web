@@ -5,6 +5,7 @@ import {TaskShort} from '../shared/models/TaskShort';
 import {DomService} from '../shared/services/dom.service';
 import {TaskToUsersFormComponent} from './task-to-users-form/task-to-users-form.component';
 import {SnackbarService} from '../shared/services/snackbar.service';
+import {GroupService} from '../shared/services/group.service';
 
 @Component({
   selector: 'app-add-task-to-users-page',
@@ -13,6 +14,7 @@ import {SnackbarService} from '../shared/services/snackbar.service';
 })
 export class AddTaskToUsersPageComponent implements OnInit {
 
+  groups;
   tasks: TaskShort[];
   users;
   formFirst;
@@ -20,7 +22,8 @@ export class AddTaskToUsersPageComponent implements OnInit {
   data;
   formCounts = 1;
 
-  constructor(private taskService: TaskService,
+  constructor(private groupService: GroupService,
+              private taskService: TaskService,
               private messageService: SnackbarService,
               private accountService: AccountService,
               private domService: DomService) { }

@@ -23,6 +23,7 @@ import {TestsTableComponent} from './tests-table/tests-table.component';
 import {GroupsTableComponent} from './groups-table/groups-table.component';
 import {ServiceNavigationComponent} from './service-navigation/service-navigation.component';
 import {AuthGuardAdminService} from './shared/guards/auth-guard-admin.service';
+import {AddUsersToGroupComponent} from './add-users-to-group/add-users-to-group.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: AuthComponent, },
@@ -93,7 +94,7 @@ const routes: Routes = [
       },
       { path: 'add-users-to-group',
         canActivate: [AuthGuardAdminService],
-        component: AddTaskToUsersPageComponent
+        component: AddUsersToGroupComponent
       },
       { path: 'add-users-to-categories',
         canActivate: [AuthGuardAdminService],
