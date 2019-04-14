@@ -2,7 +2,8 @@
   <mat-card
     *ngFor="let card of cards"
     (click)="linkTo(card.link)"
-    matTooltip="{{card.tooltip}}">
+    matTooltip="{{card.tooltip}}"
+    matTooltipClass="c-primary-tooltip">
     <mat-card-header>
       <mat-card-title>{{card.name}}</mat-card-title>
       <mat-card-subtitle>{{card.description}}</mat-card-subtitle>

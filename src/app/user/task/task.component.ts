@@ -31,4 +31,8 @@ export class TaskComponent implements OnInit {
     this.router.navigate([`account/editor/${taskId}`]);
   }
 
+  openUploads(taskId) {
+    this.router.navigate([`account/uploads/${taskId}`]);
+  }
+
 }

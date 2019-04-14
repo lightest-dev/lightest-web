@@ -102,10 +102,6 @@ const routes: Routes = [
         canActivate: [AuthGuardAdminService],
         component: AddUsersToCategoriesComponent
       },
-      { path: 'add-users-to-categories',
-        canActivate: [AuthGuardAdminService],
-        component: AddTaskToUsersPageComponent
-      },
       { path: 'service-navigation',
         canActivate: [AuthGuardAdminService],
         component: ServiceNavigationComponent

@@ -15,6 +15,7 @@
     {{task.description}}
 
     <mat-action-row>
+      <button mat-button color="primary" (click)="openUploads(task.id)">Мої розв'язки</button>
       <button mat-button color="primary" (click)="doExcercise(task.id, task.languages)">Перейти до виконання завдання</button>
       <button mat-button color="primary" (click)="prevStep()">Попереднє</button>
       <button mat-button color="primary" (click)="nextStep()">Наступне</button>
@@ -23,6 +24,5 @@
 
   <div class="no-tasks" *ngIf="!tasks.length">
     <i class="material-icons">sentiment_dissatisfied</i>
-    <span>У вас ще немає завдань</span>
   </div>
 </mat-accordion>
