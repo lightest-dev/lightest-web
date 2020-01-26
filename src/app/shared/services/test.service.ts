@@ -5,7 +5,6 @@ import {combineLatest, Observable, of} from 'rxjs';
 import {Test} from '../models/Test';
 import {map} from 'rxjs/operators';
 import {TaskService} from './task.service';
-import {forEach} from '@angular/router/src/utils/collection';
 
 @Injectable({
   providedIn: 'root'

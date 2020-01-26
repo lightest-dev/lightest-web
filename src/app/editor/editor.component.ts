@@ -40,8 +40,8 @@ export class EditorComponent implements OnInit {
     }
   };
 
-  @ViewChild('sidenav') sidenav: ElementRef;
-  @ViewChild('languageSelected') selectedLanguage: ElementRef;
+  @ViewChild('sidenav', {static: false}) sidenav: ElementRef;
+  @ViewChild('languageSelected', {static: false}) selectedLanguage: ElementRef;
 
   constructor(public  route: Router,
               public dialog: MatDialog,

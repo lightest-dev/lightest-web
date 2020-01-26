@@ -1,3 +1,4 @@
+set -e
 DATE="$(date -u +%FT%T)"
 echo $DATE
 set -v
