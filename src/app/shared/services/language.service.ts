@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
-import {Language} from '../../api/models/language';
 import {API_URL} from '../../../config/apiConfig';
 import {HttpClient} from '@angular/common/http';
+import { Language } from '../models/Language';
 
 @Injectable({
   providedIn: 'root'

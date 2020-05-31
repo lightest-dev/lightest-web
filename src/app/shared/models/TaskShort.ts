@@ -1,5 +1,5 @@
 export class TaskShort {
-  id?: number;
+  id?: string;
   name: string;
   description: string;
   categoryId: number;

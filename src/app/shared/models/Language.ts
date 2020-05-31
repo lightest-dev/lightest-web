@@ -1,5 +1,5 @@
 export class Language {
-  id?: number;
+  id?: string;
   extension: string;
   name: string;
 }

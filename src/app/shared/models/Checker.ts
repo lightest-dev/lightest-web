@@ -1,5 +1,5 @@
 export class Checker {
-  id: number;
+  id: string;
   name: string;
   code: string;
   compiled: boolean;
