@@ -7,6 +7,7 @@ import {Task} from '../models/Task';
 import {UserForTask} from '../models/UserForTask';
 import {LanguageForTask} from '../models/LanguageForTask';
 import {Test} from '../models/Test';
+import { Assignment } from '../models/Assignment';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class TaskService {
 
   constructor(private http: HttpClient) { }
 
+  // TODO: review current usage and replace with getAssignedTasks for non-admin users
   getTasks(): Observable<TaskShort[]> {
     return this.http.get<TaskShort[]>(`${API_URL}/tasks`);
   }
@@ -35,12 +37,17 @@ export class TaskService {
     return this.http.delete(`${API_URL}/tasks/${id}`);
   }
 
-  getAssignedUsersToTask(taskId) :Observable<UserForTask[]>{
-    return this.http.get<UserForTask[]>(`${API_URL}/tasks/${taskId}/users`);
+  // TODO: move to a separate service
+  getAssignedTasks(): Observable<Assignment[]>{
+    return this.http.get<Assignment[]>(`${API_URL}/assignments/my`);
   }
 
-  assignTaskToUsers(taskId, users: UserForTask[]) {
-     return this.http.post(`${API_URL}/tasks/${taskId}/users`, users);
+  getAssignedUsersToTask(taskId: string) :Observable<UserForTask[]>{
+    return this.http.get<UserForTask[]>(`${API_URL}/assignments/${taskId}`);
+  }
+
+  assignTaskToUsers(taskId: string, users: UserForTask[]) {
+     return this.http.post(`${API_URL}/assignments/${taskId}`, users);
   }
 
   addLanguagesForTask(taskId, languages: LanguageForTask[]): Observable<LanguageForTask[]>{
