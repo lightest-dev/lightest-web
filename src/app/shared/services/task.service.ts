@@ -7,7 +7,8 @@ import {Task} from '../models/Task';
 import {UserForTask} from '../models/UserForTask';
 import {LanguageForTask} from '../models/LanguageForTask';
 import {Test} from '../models/Test';
-import { Assignment } from '../models/Assignment';
+import { Assignment } from '../models/assignments/Assignment';
+import { AssignmentModification } from '../models/assignments/AssignmentModification';
 
 @Injectable({
   providedIn: 'root'
@@ -46,8 +47,8 @@ export class TaskService {
     return this.http.get<UserForTask[]>(`${API_URL}/assignments/${taskId}`);
   }
 
-  assignTaskToUsers(taskId: string, users: UserForTask[]) {
-     return this.http.post(`${API_URL}/assignments/${taskId}`, users);
+  assignTaskToUsers(request: AssignmentModification) {
+     return this.http.post(`${API_URL}/assignments/${request.taskId}`, request);
   }
 
   addLanguagesForTask(taskId, languages: LanguageForTask[]): Observable<LanguageForTask[]>{
