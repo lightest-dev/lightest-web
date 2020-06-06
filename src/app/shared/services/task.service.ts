@@ -4,11 +4,8 @@ import {API_URL} from '../../../config/apiConfig';
 import {Observable} from 'rxjs';
 import {TaskShort} from '../models/TaskShort';
 import {Task} from '../models/Task';
-import {UserForTask} from '../models/UserForTask';
 import {LanguageForTask} from '../models/LanguageForTask';
 import {Test} from '../models/Test';
-import { Assignment } from '../models/assignments/Assignment';
-import { AssignmentModification } from '../models/assignments/AssignmentModification';
 
 @Injectable({
   providedIn: 'root'
@@ -38,21 +35,8 @@ export class TaskService {
     return this.http.delete(`${API_URL}/tasks/${id}`);
   }
 
-  // TODO: move to a separate service
-  getAssignedTasks(): Observable<Assignment[]>{
-    return this.http.get<Assignment[]>(`${API_URL}/assignments/my`);
-  }
-
-  getAssignedUsersToTask(taskId: string) :Observable<UserForTask[]>{
-    return this.http.get<UserForTask[]>(`${API_URL}/assignments/${taskId}`);
-  }
-
-  assignTaskToUsers(request: AssignmentModification) {
-     return this.http.post(`${API_URL}/assignments/${request.taskId}`, request);
-  }
-
   addLanguagesForTask(taskId, languages: LanguageForTask[]): Observable<LanguageForTask[]>{
-     return this.http.post<LanguageForTask[]>(`${API_URL}/tasks/${taskId}/languages`, languages);
+    return this.http.post<LanguageForTask[]>(`${API_URL}/tasks/${taskId}/languages`, languages);
   }
 
   addTestsForTask(taskId, tests: Test[]) {

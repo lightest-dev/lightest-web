@@ -7,6 +7,7 @@ import {TaskToUsersFormComponent} from './task-to-users-form/task-to-users-form.
 import {SnackbarService} from '../shared/services/snackbar.service';
 import {GroupService} from '../shared/services/group.service';
 import { AssignmentModification } from '../shared/models/assignments/AssignmentModification';
+import { AssignmentService } from '../shared/services/assignment.service';
 
 @Component({
   selector: 'app-add-task-to-users-page',
@@ -25,6 +26,7 @@ export class AddTaskToUsersPageComponent implements OnInit {
 
   constructor(private groupService: GroupService,
               private taskService: TaskService,
+              private assignmentService: AssignmentService,
               private messageService: SnackbarService,
               private accountService: AccountService,
               private domService: DomService) { }
@@ -99,7 +101,7 @@ export class AddTaskToUsersPageComponent implements OnInit {
           taskId: obj[0].taskId,
           assignments: obj
         });
-        this.taskService.assignTaskToUsers(request).subscribe(data => {
+        this.assignmentService.assignTaskToUsers(request).subscribe(data => {
           this.messageService.showSnackBar({
             message: 'Успішно',
             isError: false
