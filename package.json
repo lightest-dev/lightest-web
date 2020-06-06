@@ -25,6 +25,7 @@
     "@moebius/ng-validators": "^2.0.2",
     "@webcomponents/custom-elements": "^1.4.1",
     "angular-oauth2-oidc": "^9.2.2",
+    "angular-oauth2-oidc-jwks": "^9.0.0",
     "bootstrap": "^4.5.0",
     "core-js": "^3.6.5",
     "jwt-decode": "^2.2.0",
