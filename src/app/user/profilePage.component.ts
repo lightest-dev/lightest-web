@@ -4,7 +4,7 @@ import { AuthService } from '../shared/services/auth.service';
 import {Router} from '@angular/router';
 import {AccountService} from '../shared/services/account.service';
 import {UserChangeInfoDialogComponent} from '../user-change-info-dialog/user-change-info-dialog.component';
-import {MatDialog} from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import {User} from '../shared/models/User';
 import { Location } from '@angular/common';
 

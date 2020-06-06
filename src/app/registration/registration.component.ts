@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../shared/services/auth.service';
 import {AuthErrorMsgService} from '../shared/services/authErrorMsg.service';
 import {Message} from '../shared/models/Message';
-import {MatSnackBar} from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {MessageComponent} from '../message/message.component';
 import {Observable} from 'rxjs';
 import {AccountService} from '../shared/services/account.service';

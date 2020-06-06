@@ -3,7 +3,7 @@ import {Message} from '../shared/models/Message';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {CategoriesService} from '../shared/services/categories.service';
-import {MatSnackBar} from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {MessageComponent} from '../message/message.component';
 import {Category} from '../shared/models/Category';
 import {Checker} from '../shared/models/Checker';

@@ -5,7 +5,7 @@ import {TaskService} from '../shared/services/task.service';
 import {CategoriesService} from '../shared/services/categories.service';
 import {Category} from '../shared/models/Category';
 import {MessageComponent} from '../message/message.component';
-import {MatSnackBar} from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {Message} from '../shared/models/Message';
 import {SnackbarService} from '../shared/services/snackbar.service';
 import {FormService} from '../shared/services/form.service';

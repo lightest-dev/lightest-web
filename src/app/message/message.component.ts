@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_SNACK_BAR_DATA, MatSnackBar} from '@angular/material';
+import { MAT_SNACK_BAR_DATA, MatSnackBar } from '@angular/material/snack-bar';
 import {OverlayContainer} from '@angular/cdk/overlay';
 
 @Component({

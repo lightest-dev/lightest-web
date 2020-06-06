@@ -5,7 +5,7 @@ import {MediaMatcher} from '@angular/cdk/layout';
 import {AuthService} from '../../shared/services/auth.service';
 import {Router} from '@angular/router';
 import {AccountService} from '../../shared/services/account.service';
-import {MatDialog} from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import {TaskService} from '../../shared/services/task.service';
 import {TaskShort} from '../../shared/models/TaskShort';
 import {CategoriesService} from '../../shared/services/categories.service';

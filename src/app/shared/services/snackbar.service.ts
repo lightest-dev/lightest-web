@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Message} from '../models/Message';
 import {MessageComponent} from '../../message/message.component';
-import {MatSnackBar} from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable()
 export class SnackbarService {

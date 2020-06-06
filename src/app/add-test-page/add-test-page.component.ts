@@ -8,7 +8,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {CheckerService} from '../shared/services/checker.service';
 import {CategoriesService} from '../shared/services/categories.service';
-import {MatSnackBar} from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {TaskShort} from '../shared/models/TaskShort';
 import {TestService} from '../shared/services/test.service';
 import {Test} from '../shared/models/Test';

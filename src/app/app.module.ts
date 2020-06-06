@@ -17,7 +17,7 @@ import { MonacoEditorModule } from 'ngx-monaco-editor';
 import { EditorService } from './shared/services/editor.service';
 import { API_URL } from 'src/config/apiConfig';
 import { MessageComponent } from './message/message.component';
-import {MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material';
+import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 import {OverlayModule} from '@angular/cdk/overlay';
 import {AuthErrorMsgService} from './shared/services/authErrorMsg.service';
 import {CompareValidatorDirective} from './shared/directives/compare-validator.directive';

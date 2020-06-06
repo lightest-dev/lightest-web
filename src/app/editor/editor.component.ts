@@ -5,7 +5,7 @@ import {TaskSolution} from '../shared/models/TaskSolution';
 import {LanguageService} from '../shared/services/language.service';
 import {TaskService} from '../shared/services/task.service';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
-import {MatDialog} from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import {UserChangeInfoDialogComponent} from '../user-change-info-dialog/user-change-info-dialog.component';
 import {InfoDialogComponent} from '../info-dialog/info-dialog.component';
 import {delay, first, map, pluck, repeat, timeout} from 'rxjs/operators';
@@ -40,8 +40,8 @@ export class EditorComponent implements OnInit {
     }
   };
 
-  @ViewChild('sidenav', {static: false}) sidenav: ElementRef;
-  @ViewChild('languageSelected', {static: false}) selectedLanguage: ElementRef;
+  @ViewChild('sidenav') sidenav: ElementRef;
+  @ViewChild('languageSelected') selectedLanguage: ElementRef;
 
   constructor(public  route: Router,
               public dialog: MatDialog,

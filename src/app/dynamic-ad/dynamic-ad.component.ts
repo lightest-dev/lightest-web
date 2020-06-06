@@ -10,7 +10,7 @@ import { AdComponent } from '../shared/directives/ad.component';
 })
 export class DynamicAdComponent implements OnInit, OnDestroy {
   @Input() ads: AdItem;
-  @ViewChild(AdDirective, {static: false}) adHost: AdDirective;
+  @ViewChild(AdDirective) adHost: AdDirective;
   interval: any;
   @Output()form = new EventEmitter();
 

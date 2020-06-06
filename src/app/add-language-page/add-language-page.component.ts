@@ -4,7 +4,7 @@ import {Message} from '../shared/models/Message';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TaskService} from '../shared/services/task.service';
 import {Router} from '@angular/router';
-import {MatSnackBar} from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {TestService} from '../shared/services/test.service';
 import {LanguageService} from '../shared/services/language.service';
 import {Test} from '../shared/models/Test';
