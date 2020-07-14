@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, Input, OnInit, Output} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {User} from '../../shared/models/User';
 import {UserChangeInfoDialogComponent} from '../../user-change-info-dialog/user-change-info-dialog.component';
 import {MediaMatcher} from '@angular/cdk/layout';
@@ -7,9 +7,7 @@ import {Router} from '@angular/router';
 import {AccountService} from '../../shared/services/account.service';
 import { MatDialog } from '@angular/material/dialog';
 import {TaskService} from '../../shared/services/task.service';
-import {TaskShort} from '../../shared/models/TaskShort';
 import {CategoriesService} from '../../shared/services/categories.service';
-import {pluck, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-student-info',
@@ -46,12 +44,9 @@ export class UserInfoComponent implements OnInit {
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
     private authService: AuthService,
-    private routerLink: Router,
     private accountService: AccountService,
     public dialog: MatDialog,
-    private taskService: TaskService,
-    private categoriesService: CategoriesService
-  ) {
+    private taskService: TaskService  ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
@@ -83,7 +78,7 @@ export class UserInfoComponent implements OnInit {
    this.accountService.getUser(id).subscribe(data => {
         this.user = data;
         console.log(data);
-      }, (err) => {},
+      }, () => {},
       () => {
         this.getTasks();
         if (this.user.name === null && this.user.surname === null) {
@@ -116,7 +111,7 @@ export class UserInfoComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.accountService.putUser(this.authService.getUserInfo().id, {name: result.value.firstName, surname: result.value.secondName, userId: this.authService.getUserInfo().id})
         .subscribe( () => {},
-          error1 => {},
+          () => {},
           () => {
             this.getUser(this.authService.getUserInfo().id);
           }

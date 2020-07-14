@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {TaskService} from '../shared/services/task.service';
 import {AccountService} from '../shared/services/account.service';
-import {TaskShort} from '../shared/models/TaskShort';
+import {TaskShort} from '../shared/models/tasks/TaskShort';
 import {DomService} from '../shared/services/dom.service';
 import {TaskToUsersFormComponent} from './task-to-users-form/task-to-users-form.component';
 import {SnackbarService} from '../shared/services/snackbar.service';
 import {GroupService} from '../shared/services/group.service';
 import { AssignmentModification } from '../shared/models/assignments/AssignmentModification';
 import { AssignmentService } from '../shared/services/assignment.service';
+import { Assignment } from '../shared/models/assignments/Assignment';
 
 @Component({
   selector: 'app-add-task-to-users-page',
@@ -17,7 +18,7 @@ import { AssignmentService } from '../shared/services/assignment.service';
 export class AddTaskToUsersPageComponent implements OnInit {
 
   groups;
-  tasks: TaskShort[];
+  tasks: Assignment[];
   users;
   formFirst;
   allForms = [];
@@ -38,7 +39,7 @@ export class AddTaskToUsersPageComponent implements OnInit {
 
 
   getTasks() {
-    this.taskService.getTasks()
+    this.assignmentService.getAssignedTasks()
       .subscribe(data => {
         this.tasks = data;
       });

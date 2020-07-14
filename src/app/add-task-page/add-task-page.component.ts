@@ -2,7 +2,7 @@ import {ApplicationRef, Component, ComponentFactoryResolver, EmbeddedViewRef, On
 import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TaskService} from '../shared/services/task.service';
-import {TaskShort} from '../shared/models/TaskShort';
+import {TaskShort} from '../shared/models/tasks/TaskShort';
 import {CheckerService} from '../shared/services/checker.service';
 import {CategoriesService} from '../shared/services/categories.service';
 import {CheckerShort} from '../shared/models/CheckerShort';

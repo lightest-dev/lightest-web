@@ -1,9 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {FormService} from '../../shared/services/form.service';
-import {TaskService} from '../../shared/services/task.service';
-import {TaskShort} from '../../shared/models/TaskShort';
-import {AccountService} from '../../shared/services/account.service';
 
 @Component({
   selector: 'app-task-to-users-form',

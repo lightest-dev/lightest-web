@@ -1,6 +1,6 @@
-export class TaskShort {
-  id?: string;
-  name: string;
+import { BaseTask } from "./BaseTask";
+
+export class TaskShort extends BaseTask {
   description: string;
   categoryId: number;
   checkerId: number;

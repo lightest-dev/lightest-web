@@ -1,19 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {TaskService} from '../shared/services/task.service';
 import {Message} from '../shared/models/Message';
-import {MessageComponent} from '../message/message.component';
-import {CheckerShort} from '../shared/models/CheckerShort';
-import {Category} from '../shared/models/Category';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
-import {CheckerService} from '../shared/services/checker.service';
-import {CategoriesService} from '../shared/services/categories.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import {TaskShort} from '../shared/models/TaskShort';
+import {TaskShort} from '../shared/models/tasks/TaskShort';
 import {TestService} from '../shared/services/test.service';
 import {Test} from '../shared/models/Test';
 import {SnackbarService} from '../shared/services/snackbar.service';
 import {FormService} from '../shared/services/form.service';
+import { BaseTask } from '../shared/models/tasks/BaseTask';
 
 @Component({
   selector: 'app-add-test-page',
@@ -22,7 +16,7 @@ import {FormService} from '../shared/services/form.service';
 })
 export class AddTestPageComponent implements OnInit {
 
-  tasks: TaskShort[];
+  tasks: BaseTask[];
   message: Message = {message: '', isError: false};
   testForm: FormGroup;
   formErrors = {
@@ -45,7 +39,6 @@ export class AddTestPageComponent implements OnInit {
 
   constructor(
     private taskService: TaskService,
-    private router: Router,
     private formBuilder: FormBuilder,
     public snackBar: SnackbarService,
     private testService: TestService,

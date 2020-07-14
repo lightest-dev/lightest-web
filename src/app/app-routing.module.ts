@@ -46,6 +46,7 @@ const routes: Routes = [
         canActivate: [AuthGuardAdminService],
         component: UsersTableComponent
       },
+      // TODO: should be accessible only by teachers/admins
       { path: 'table/tasks',
         canActivate: [AuthGuardService],
         component: TasksTableComponent

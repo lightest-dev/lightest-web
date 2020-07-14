@@ -1,10 +1,9 @@
-import {Category} from './Category';
-import {Checker} from './Checker';
-import {Test} from './Test';
+import {Category} from '../Category';
+import {Checker} from '../Checker';
+import {Test} from '../Test';
+import { BaseTask } from './BaseTask';
 
-export class Task {
-  id: string;
-  name: string;
+export class Task extends BaseTask {
   category: Category;
   checker: Checker;
   description: string;
