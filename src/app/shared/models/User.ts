@@ -1,3 +1,5 @@
+import { Assignment } from "./assignments/Assignment";
+
 export class User {
   id?: string;
   isAdmin?: boolean;
@@ -6,14 +8,7 @@ export class User {
   surname: string;
   login: string;
   email: string;
-  tasks: [
-    {
-      id: number;
-      name: string;
-      completed: boolean;
-      highScore: number;
-    }
-  ];
+  tasks: Assignment[];
   groups: [
     {
       id: number;

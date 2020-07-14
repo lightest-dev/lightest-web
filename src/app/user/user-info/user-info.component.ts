@@ -8,6 +8,7 @@ import {AccountService} from '../../shared/services/account.service';
 import { MatDialog } from '@angular/material/dialog';
 import {TaskService} from '../../shared/services/task.service';
 import {CategoriesService} from '../../shared/services/categories.service';
+import { AssignmentService } from 'src/app/shared/services/assignment.service';
 
 @Component({
   selector: 'app-student-info',
@@ -33,8 +34,6 @@ export class UserInfoComponent implements OnInit {
     }
   };
 
-  tasks;
-
   user = new User();
   mobileQuery: MediaQueryList;
   flagUserInit = false;
@@ -46,7 +45,8 @@ export class UserInfoComponent implements OnInit {
     private authService: AuthService,
     private accountService: AccountService,
     public dialog: MatDialog,
-    private taskService: TaskService  ) {
+    private taskService: TaskService,
+    private assignmentService: AssignmentService) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
@@ -88,19 +88,22 @@ export class UserInfoComponent implements OnInit {
   }
 
   getTasks() {
-    this.user.tasks.map(task => {
-      this.taskService.getTask(task.id)
-        .subscribe(data => {
-          task['category'] = data['category']['name'];
-          task['description'] = data['description'];
-          task['points'] = data['points'];
-          task['languages'] = data['languages'];
+    this.assignmentService.getAssignedTasks().subscribe(data => {
+      this.user.tasks = data;
+      this.user.tasks.map(task => {
+        this.taskService.getTask(task.id)
+          .subscribe(data => {
+            task['category'] = data['category']['name'];
+            task['description'] = data['description'];
+            task['points'] = data['points'];
+            task['languages'] = data['languages'];
+        });
       });
+  
+      this.taskTabs.done.tasks = this.taskService.findDoneTasks(this.user.tasks);
+      this.taskTabs.notDone.tasks = this.taskService.findNotDoneTasks(this.user.tasks);
+      this.taskTabs.all.tasks = this.taskTabs.done.tasks.concat(this.taskTabs.notDone.tasks);
     });
-
-    this.taskTabs.done.tasks = this.taskService.findDoneTasks(this.user.tasks);
-    this.taskTabs.notDone.tasks = this.taskService.findNotDoneTasks(this.user.tasks);
-    this.taskTabs.all.tasks = this.taskTabs.done.tasks.concat(this.taskTabs.notDone.tasks);
   }
 
   openDialog(): void {

@@ -18,7 +18,7 @@ import { Assignment } from '../shared/models/assignments/Assignment';
 export class AddTaskToUsersPageComponent implements OnInit {
 
   groups;
-  tasks: Assignment[];
+  tasks: TaskShort[];
   users;
   formFirst;
   allForms = [];
@@ -39,7 +39,7 @@ export class AddTaskToUsersPageComponent implements OnInit {
 
 
   getTasks() {
-    this.assignmentService.getAssignedTasks()
+    this.taskService.getTasks()
       .subscribe(data => {
         this.tasks = data;
       });

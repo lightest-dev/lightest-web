@@ -15,7 +15,7 @@ export class AccountService {
   }
 
   getUsers(): Observable<UserShort[]> {
-    return this.http.get<UserShort[]>(`${API_URL}/profile`);
+    return this.http.get<UserShort[]>(`${API_URL}/profile/all`);
   }
 
   putUser(id, user: UserPUT) {
