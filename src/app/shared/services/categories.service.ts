@@ -17,10 +17,10 @@ export class CategoriesService {
   }
 
   addCategory(category: Category) {
-    const options = {
-        withCredentials: true
-    };
-    return this.http.post(`${API_URL}/categories`, category, options);
+    if (!category.parentId) {
+      delete category.parentId;
+    }
+    return this.http.post(`${API_URL}/categories`, category);
   }
 
   getCategory(id): Observable<Category> {

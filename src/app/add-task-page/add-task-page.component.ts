@@ -167,7 +167,7 @@ export class AddTaskPageComponent implements OnInit {
       examples: ['', [
         Validators.required
       ]],
-      publicTask: ['true'],
+      publicTask: [true],
       category:  ['', [
           Validators.required
       ]],

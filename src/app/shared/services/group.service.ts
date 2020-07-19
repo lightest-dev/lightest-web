@@ -18,6 +18,9 @@ export class GroupService {
   }
 
   addGroup(group :GroupShort) :Observable<GroupShort>{
+    if (!group.parentId) {
+      delete group.parentId;
+    }
     return this.http.post<GroupShort>(`${API_URL}/groups`, group);
   }
 

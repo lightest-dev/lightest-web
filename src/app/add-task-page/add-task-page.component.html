@@ -86,7 +86,7 @@
     <mat-form-field>
       <input matInput
              type="number"
-             placeholder="Часове обмеження"
+             placeholder="Часове обмеження (мс)"
              name="timeLimit"
              formControlName="timeLimit">
       <mat-error *ngIf="formErrorsLanguageForm.timeLimit">{{formErrorsLanguageForm.timeLimit}}</mat-error>
@@ -95,7 +95,7 @@
     <mat-form-field>
       <input matInput
              type="number"
-             placeholder="Обмеження в пам'яті"
+             placeholder="Обмеження в пам'яті (МБ)"
              name="memoryLimit"
              formControlName="memoryLimit">
       <mat-error *ngIf="formErrorsLanguageForm.memoryLimit">{{formErrorsLanguageForm.memoryLimit}}</mat-error>

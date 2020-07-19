@@ -59,10 +59,10 @@ export class TaskToUsersFormComponent implements OnInit {
       users: ['', [
         Validators.required
       ]],
-      canRead: ['true'],
-      canWrite: ['false'],
-      canChangeAccess: ['false'],
-      isOwner:  ['false']
+      canRead: [true],
+      canWrite: [false],
+      canChangeAccess: [false],
+      isOwner:  [false]
     });
 
     this.usersTaskForm.valueChanges

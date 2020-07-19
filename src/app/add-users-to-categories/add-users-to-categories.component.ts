@@ -56,9 +56,9 @@ export class AddUsersToCategoriesComponent implements OnInit {
       users: ['', [
         Validators.required
       ]],
-      canRead: ['true'],
-      canWrite: ['true'],
-      canChangeAccess: ['true']
+      canRead: [true],
+      canWrite: [false],
+      canChangeAccess: [false]
     });
 
     this.usersCategoryForm.valueChanges
