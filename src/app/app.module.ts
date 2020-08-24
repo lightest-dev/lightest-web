@@ -27,7 +27,7 @@ import { AddTaskPageComponent } from './add-task-page/add-task-page.component';
 import { AddCategoryPageComponent } from './add-category-page/add-category-page.component';
 import {CheckerPageComponent} from './checker-page/checker-page.component';
 import { AddGroupPageComponent } from './add-group-page/add-group-page.component';
-import { AddLanguagePageComponent } from './add-language-page/add-language-page.component';
+import { LanguagePageComponent } from './language-page/language-page.component';
 import {DomService} from './shared/services/dom.service';
 import {LanguageFormComponent} from './add-task-page/language-form/language-form.component';
 import {TestFormComponent} from './add-task-page/test-form/test-form.component';
@@ -74,7 +74,7 @@ import { UploadsListComponent } from './uploads-list/uploads-list.component';
     AddCategoryPageComponent,
     CheckerPageComponent,
     AddGroupPageComponent,
-    AddLanguagePageComponent,
+    LanguagePageComponent,
     LanguageFormComponent,
     TestFormComponent,
     AdDirective,

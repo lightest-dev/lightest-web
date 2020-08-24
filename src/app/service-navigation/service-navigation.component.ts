@@ -91,7 +91,7 @@ export class ServiceNavigationComponent implements OnInit {
       tooltip: 'Створити',
       description: '',
       icon: 'language',
-      link: 'account/add-language'
+      link: 'languages/add'
     },
     {
       name: 'Додати завдання студентам',

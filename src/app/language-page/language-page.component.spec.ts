@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddLanguagePageComponent } from './add-language-page.component';
+import { LanguagePageComponent } from './language-page.component';
 
-describe('AddLanguagePageComponent', () => {
-  let component: AddLanguagePageComponent;
-  let fixture: ComponentFixture<AddLanguagePageComponent>;
+describe('LanguagePageComponent', () => {
+  let component: LanguagePageComponent;
+  let fixture: ComponentFixture<LanguagePageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddLanguagePageComponent ]
+      declarations: [ LanguagePageComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddLanguagePageComponent);
+    fixture = TestBed.createComponent(LanguagePageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

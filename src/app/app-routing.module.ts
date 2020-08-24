@@ -9,7 +9,7 @@ import {AddTaskPageComponent} from './add-task-page/add-task-page.component';
 import {AddCategoryPageComponent} from './add-category-page/add-category-page.component';
 import {CheckerPageComponent} from './checker-page/checker-page.component';
 import {AddGroupPageComponent} from './add-group-page/add-group-page.component';
-import {AddLanguagePageComponent} from './add-language-page/add-language-page.component';
+import {LanguagePageComponent} from './language-page/language-page.component';
 import {TestPageComponent} from './test-page/test-page.component';
 import {ProfilePageComponent} from './user/profilePage.component';
 import {AuthGuardService} from './shared/guards/auth-guard.service';
@@ -36,10 +36,17 @@ const routes: Routes = [
     path: 'tests',
     canActivate: [AuthGuardService],
     children: [
-      { path: 'add',
+      {
+        path: 'table',
+        canActivate: [AuthGuardAdminService],
+        component: TestsTableComponent
+      },
+      {
+        path: 'add',
         component: TestPageComponent
       },
-      { path: 'edit/:id',
+      {
+        path: 'edit/:id',
         component: TestPageComponent
       },
     ]
@@ -61,6 +68,17 @@ const routes: Routes = [
       {
         path: 'edit/:id',
         component: CheckerPageComponent
+      },
+    ]
+  },
+  {
+    path: 'languages',
+    canActivate: [AuthGuardService],
+    children: [
+      {
+        path: 'add',
+        canActivate: [AuthGuardAdminService],
+        component: LanguagePageComponent
       },
     ]
   },
@@ -90,10 +108,6 @@ const routes: Routes = [
         canActivate: [AuthGuardAdminService],
         component: GroupsTableComponent
       },
-      { path: 'table/tests',
-        canActivate: [AuthGuardAdminService],
-        component: TestsTableComponent
-      },
       { path: 'add-task',
         canActivate: [AuthGuardAdminService],
         component: AddTaskPageComponent
@@ -105,10 +119,6 @@ const routes: Routes = [
       { path: 'add-group',
         canActivate: [AuthGuardAdminService],
         component: AddGroupPageComponent
-      },
-      { path: 'add-language',
-        canActivate: [AuthGuardAdminService],
-        component: AddLanguagePageComponent
       },
       { path: 'add-task-for-users',
         canActivate: [AuthGuardAdminService],
