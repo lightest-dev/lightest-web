@@ -10,7 +10,7 @@ import {AddCategoryPageComponent} from './add-category-page/add-category-page.co
 import {AddCheckerPageComponent} from './add-checker-page/add-checker-page.component';
 import {AddGroupPageComponent} from './add-group-page/add-group-page.component';
 import {AddLanguagePageComponent} from './add-language-page/add-language-page.component';
-import {AddTestPageComponent} from './add-test-page/add-test-page.component';
+import {TestPageComponent} from './test-page/test-page.component';
 import {ProfilePageComponent} from './user/profilePage.component';
 import {AuthGuardService} from './shared/guards/auth-guard.service';
 import {UserInfoComponent} from './user/user-info/user-info.component';
@@ -32,7 +32,18 @@ const routes: Routes = [
   { path: 'main', component: MainComponent},
   { path: 'login', component: LoginComponent},
   { path: 'registration', component: RegistrationComponent},
-
+  { 
+    path: 'tests',
+    canActivate: [AuthGuardService],
+    children: [
+      { path: 'add',
+        component: TestPageComponent
+      },
+      { path: 'edit/:id',
+        component: TestPageComponent
+      },
+    ]
+  },
   {
     path: 'account', component: ProfilePageComponent,
     canActivate: [AuthGuardService],
@@ -86,10 +97,6 @@ const routes: Routes = [
       { path: 'add-language',
         canActivate: [AuthGuardAdminService],
         component: AddLanguagePageComponent
-      },
-      { path: 'add-test',
-        canActivate: [AuthGuardAdminService],
-        component: AddTestPageComponent
       },
       { path: 'add-task-for-users',
         canActivate: [AuthGuardAdminService],

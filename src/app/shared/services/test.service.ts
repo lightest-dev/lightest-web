@@ -14,20 +14,20 @@ export class TestService {
   constructor(private http: HttpClient,
               private taskService: TaskService) { }
 
-  getTest(taskId) :Observable<Test[]>{
-    return this.http.get<Test[]>(`${API_URL}/tests/${taskId}`);
+  getTest(id: string) :Observable<Test>{
+    return this.http.get<Test>(`${API_URL}/tests/${id}`);
   }
 
-  changeTest(id, tests: Test[]){
-    return this.http.put(`${API_URL}/tests/${id}`, tests);
+  changeTest(id: string, test: Test){
+    return this.http.put(`${API_URL}/tests/${id}`, test);
   }
 
-  deleteTest(id){
+  deleteTest(id: string){
     return this.http.delete(`${API_URL}/tests/${id}`);
   }
 
   addTest(test: Test){
-    return this.http.post(`${API_URL}/tests`, test);
+    return this.http.post<Test>(`${API_URL}/tests`, test);
   }
 
 

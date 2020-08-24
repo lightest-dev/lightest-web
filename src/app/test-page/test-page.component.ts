@@ -2,20 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import {TaskService} from '../shared/services/task.service';
 import {Message} from '../shared/models/Message';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {TaskShort} from '../shared/models/tasks/TaskShort';
 import {TestService} from '../shared/services/test.service';
 import {Test} from '../shared/models/Test';
 import {SnackbarService} from '../shared/services/snackbar.service';
 import {FormService} from '../shared/services/form.service';
 import { BaseTask } from '../shared/models/tasks/BaseTask';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-add-test-page',
-  templateUrl: './add-test-page.component.html',
-  styleUrls: ['./add-test-page.component.scss']
+  selector: 'app-test-page',
+  templateUrl: './test-page.component.html',
+  styleUrls: ['./test-page.component.scss']
 })
-export class AddTestPageComponent implements OnInit {
-
+export class TestPageComponent implements OnInit {
+  isEdit: Boolean;
+  id?: string;
   tasks: BaseTask[];
   message: Message = {message: '', isError: false};
   testForm: FormGroup;
@@ -42,10 +43,27 @@ export class AddTestPageComponent implements OnInit {
     private formBuilder: FormBuilder,
     public snackBar: SnackbarService,
     private testService: TestService,
-    private formService: FormService
+    private formService: FormService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
+    this.id = this.activatedRoute.snapshot.params.id;
+    this.isEdit = !!this.id;
+
+    if (this.isEdit) {
+      this.testService.getTest(this.id).subscribe((test) => {
+        this.testForm.patchValue({
+          'inputTest':  test.input,
+          'outputTest': test.output,
+          'task': test.taskId
+        });
+        const taskSelect = this.testForm.get('task');
+        taskSelect.disable();
+      });
+    }
+
     this.getTasks();
     this.initForm();
   }
@@ -77,24 +95,35 @@ export class AddTestPageComponent implements OnInit {
   }
 
   submit() {
-    this.testService.addTest(this.loadObject(this.testForm.value))
-      .subscribe(data => {
-        if(data){
-          this.testForm.reset();
-          this.message.isError = false;
-          this.message.message = 'Успішно';
-          this.openSnackBar(this.message);
-        }
-      }, err => {
-        console.log(err);
-        this.message.isError = true;
-        this.message.message = 'Помилка';
-        this.openSnackBar(this.message);
-      });
+    const test = this.loadObject(this.testForm.value);
+
+    const errorHandler = err => {
+      console.error(err);
+      this.message.isError = true;
+      this.message.message = 'Помилка';
+      this.openSnackBar(this.message);
+    };
+
+    const showMessage = () => {
+      this.message.isError = false;
+      this.message.message = 'Успішно';
+      this.openSnackBar(this.message);
+    };
+
+    if (this.isEdit) {
+      this.testService.changeTest(test.id, test)
+        .subscribe(showMessage, errorHandler);
+    } else {
+      this.testService.addTest(test).subscribe(data => {
+        showMessage();
+        this.router.navigate([`tests/edit/${data.id}`]);
+    }, errorHandler);
+    }
   }
 
   loadObject(currentTest): Test {
     const test: Test = {
+      id: this.id,
       input: currentTest.inputTest,
       output: currentTest.outputTest,
       taskId: currentTest.task

@@ -26,7 +26,7 @@ import { MatCardModule } from '@angular/material/card';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import {AddTestPageComponent} from '../add-test-page/add-test-page.component';
+import {TestPageComponent} from '../test-page/test-page.component';
 import {EditorComponent} from '../editor/editor.component';
 import {AddTaskToUsersPageComponent} from '../add-task-to-users-page/add-task-to-users-page.component';
 import {TaskToUsersFormComponent} from '../add-task-to-users-page/task-to-users-form/task-to-users-form.component';

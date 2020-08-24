@@ -77,7 +77,7 @@ export class ServiceNavigationComponent implements OnInit {
       tooltip: 'Створити',
       description: '',
       icon: 'check_box',
-      link: 'account/add-test'
+      link: 'tests/add'
     },
     {
       name: 'Додати програму перевірки',

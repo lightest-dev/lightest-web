@@ -39,7 +39,7 @@ import {ProfilePageComponent} from './user/profilePage.component';
 import {UserInfoComponent} from './user/user-info/user-info.component';
 import {AddTaskToUsersPageComponent} from './add-task-to-users-page/add-task-to-users-page.component';
 import {TaskToUsersFormComponent} from './add-task-to-users-page/task-to-users-form/task-to-users-form.component';
-import {AddTestPageComponent} from './add-test-page/add-test-page.component';
+import {TestPageComponent} from './test-page/test-page.component';
 import {TaskComponent} from './user/task/task.component';
 import {AccountService} from './shared/services/account.service';
 import { InfoDialogComponent } from './info-dialog/info-dialog.component';
@@ -83,7 +83,7 @@ import { UploadsListComponent } from './uploads-list/uploads-list.component';
     UserInfoComponent,
     AddTaskToUsersPageComponent,
     TaskToUsersFormComponent,
-    AddTestPageComponent,
+    TestPageComponent,
     TaskComponent,
     InfoDialogComponent,
     TableBaseComponent,
