@@ -7,7 +7,7 @@ import { AuthComponent } from './auth/auth.component';
 import { EditorComponent } from './editor/editor.component';
 import {AddTaskPageComponent} from './add-task-page/add-task-page.component';
 import {AddCategoryPageComponent} from './add-category-page/add-category-page.component';
-import {AddCheckerPageComponent} from './add-checker-page/add-checker-page.component';
+import {CheckerPageComponent} from './checker-page/checker-page.component';
 import {AddGroupPageComponent} from './add-group-page/add-group-page.component';
 import {AddLanguagePageComponent} from './add-language-page/add-language-page.component';
 import {TestPageComponent} from './test-page/test-page.component';
@@ -45,6 +45,26 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'checkers',
+    canActivate: [AuthGuardService],
+    children: [
+      {
+        path: 'table',
+        canActivate: [AuthGuardAdminService],
+        component: CheckersTableComponent
+      },
+      {
+        path: 'add',
+        canActivate: [AuthGuardAdminService],
+        component: CheckerPageComponent
+      },
+      {
+        path: 'edit/:id',
+        component: CheckerPageComponent
+      },
+    ]
+  },
+  {
     path: 'account', component: ProfilePageComponent,
     canActivate: [AuthGuardService],
     children: [
@@ -66,10 +86,6 @@ const routes: Routes = [
         canActivate: [AuthGuardAdminService],
         component: CategoriesTableComponent
       },
-      { path: 'table/checkers',
-        canActivate: [AuthGuardAdminService],
-        component: CheckersTableComponent
-      },
       { path: 'table/groups',
         canActivate: [AuthGuardAdminService],
         component: GroupsTableComponent
@@ -85,10 +101,6 @@ const routes: Routes = [
       { path: 'add-category',
         canActivate: [AuthGuardAdminService],
         component: AddCategoryPageComponent
-      },
-      { path: 'add-checker',
-        canActivate: [AuthGuardService],
-        component: AddCheckerPageComponent
       },
       { path: 'add-group',
         canActivate: [AuthGuardAdminService],

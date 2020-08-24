@@ -28,7 +28,7 @@ export class ServiceNavigationComponent implements OnInit {
       tooltip: 'Переглянути список',
       description: '',
       icon: 'how_to_vote',
-      link: 'account/table/checkers'
+      link: 'checkers/table'
     },
     {
       name: 'Тести',
@@ -84,7 +84,7 @@ export class ServiceNavigationComponent implements OnInit {
       tooltip: 'Створити',
       description: '',
       icon: 'how_to_vote',
-      link: 'account/add-checker'
+      link: 'checkers/add'
     },
     {
       name: 'Додати мову',

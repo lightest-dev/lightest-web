@@ -25,7 +25,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { UserChangeInfoDialogComponent } from './user-change-info-dialog/user-change-info-dialog.component';
 import { AddTaskPageComponent } from './add-task-page/add-task-page.component';
 import { AddCategoryPageComponent } from './add-category-page/add-category-page.component';
-import {AddCheckerPageComponent} from './add-checker-page/add-checker-page.component';
+import {CheckerPageComponent} from './checker-page/checker-page.component';
 import { AddGroupPageComponent } from './add-group-page/add-group-page.component';
 import { AddLanguagePageComponent } from './add-language-page/add-language-page.component';
 import {DomService} from './shared/services/dom.service';
@@ -72,7 +72,7 @@ import { UploadsListComponent } from './uploads-list/uploads-list.component';
     UserChangeInfoDialogComponent,
     AddTaskPageComponent,
     AddCategoryPageComponent,
-    AddCheckerPageComponent,
+    CheckerPageComponent,
     AddGroupPageComponent,
     AddLanguagePageComponent,
     LanguageFormComponent,
