@@ -5,7 +5,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { MainComponent } from './main/main.component';
 import { AuthComponent } from './auth/auth.component';
 import { EditorComponent } from './editor/editor.component';
-import {AddTaskPageComponent} from './add-task-page/add-task-page.component';
+import {TaskPageComponent} from './task-page/task-page.component';
 import {CategoryPageComponent} from './category-page/category-page.component';
 import {CheckerPageComponent} from './checker-page/checker-page.component';
 import {GroupPageComponent} from './group-page/group-page.component';
@@ -125,6 +125,28 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'tasks',
+    canActivate: [AuthGuardService],
+    children: [
+      // TODO: should be accessible only by teachers/admins
+      {
+        path: 'table',
+        canActivate: [AuthGuardService],
+        component: TasksTableComponent
+      },
+      {
+        path: 'add',
+        canActivate: [AuthGuardAdminService],
+        component: TaskPageComponent
+      },
+      {
+        path: 'edit/:id',
+        canActivate: [AuthGuardAdminService],
+        component: TaskPageComponent
+      },
+    ]
+  },
+  {
     path: 'account', component: ProfilePageComponent,
     canActivate: [AuthGuardService],
     children: [
@@ -136,15 +158,6 @@ const routes: Routes = [
       { path: 'table/users',
         canActivate: [AuthGuardAdminService],
         component: UsersTableComponent
-      },
-      // TODO: should be accessible only by teachers/admins
-      { path: 'table/tasks',
-        canActivate: [AuthGuardService],
-        component: TasksTableComponent
-      },
-      { path: 'add-task',
-        canActivate: [AuthGuardAdminService],
-        component: AddTaskPageComponent
       },
       { path: 'add-task-for-users',
         canActivate: [AuthGuardAdminService],

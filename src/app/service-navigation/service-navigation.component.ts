@@ -21,7 +21,7 @@ export class ServiceNavigationComponent implements OnInit {
       tooltip: 'Переглянути список',
       description: '',
       icon: 'format_list_numbered',
-      link: 'account/table/tasks'
+      link: 'tasks/table'
     },
     {
       name: 'Програми перевірки',
@@ -29,13 +29,6 @@ export class ServiceNavigationComponent implements OnInit {
       description: '',
       icon: 'how_to_vote',
       link: 'checkers/table'
-    },
-    {
-      name: 'Тести',
-      tooltip: 'Переглянути список',
-      description: '',
-      icon: 'check_box',
-      link: 'account/table/tasks'
     },
     {
       name: 'Групи',
@@ -70,7 +63,7 @@ export class ServiceNavigationComponent implements OnInit {
       tooltip: 'Створити',
       description: '',
       icon: 'playlist_add',
-      link: 'account/add-task'
+      link: 'tasks/add'
     },
     {
       name: 'Додати тест',

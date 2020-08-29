@@ -21,11 +21,11 @@ import {SnackbarService} from '../shared/services/snackbar.service';
 import {FormService} from '../shared/services/form.service';
 
 @Component({
-  selector: 'app-add-task-page',
-  templateUrl: './add-task-page.component.html',
-  styleUrls: ['./add-task-page.component.scss']
+  selector: 'app-task-page',
+  templateUrl: './task-page.component.html',
+  styleUrls: ['./task-page.component.scss']
 })
-export class AddTaskPageComponent implements OnInit {
+export class TaskPageComponent implements OnInit {
 
   compRefLang = [];
   compRefTest = [];
