@@ -24,7 +24,7 @@ import {CompareValidatorDirective} from './shared/directives/compare-validator.d
 import {MatDialogModule} from '@angular/material/dialog';
 import { UserChangeInfoDialogComponent } from './user-change-info-dialog/user-change-info-dialog.component';
 import { AddTaskPageComponent } from './add-task-page/add-task-page.component';
-import { AddCategoryPageComponent } from './add-category-page/add-category-page.component';
+import { CategoryPageComponent } from './category-page/category-page.component';
 import {CheckerPageComponent} from './checker-page/checker-page.component';
 import { GroupPageComponent } from './group-page/group-page.component';
 import { LanguagePageComponent } from './language-page/language-page.component';
@@ -71,7 +71,7 @@ import { UploadsListComponent } from './uploads-list/uploads-list.component';
     CompareValidatorDirective,
     UserChangeInfoDialogComponent,
     AddTaskPageComponent,
-    AddCategoryPageComponent,
+    CategoryPageComponent,
     CheckerPageComponent,
     GroupPageComponent,
     LanguagePageComponent,

@@ -6,7 +6,7 @@ import { MainComponent } from './main/main.component';
 import { AuthComponent } from './auth/auth.component';
 import { EditorComponent } from './editor/editor.component';
 import {AddTaskPageComponent} from './add-task-page/add-task-page.component';
-import {AddCategoryPageComponent} from './add-category-page/add-category-page.component';
+import {CategoryPageComponent} from './category-page/category-page.component';
 import {CheckerPageComponent} from './checker-page/checker-page.component';
 import {GroupPageComponent} from './group-page/group-page.component';
 import {LanguagePageComponent} from './language-page/language-page.component';
@@ -104,6 +104,27 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'categories',
+    canActivate: [AuthGuardService],
+    children: [
+      {
+        path: 'table',
+        canActivate: [AuthGuardAdminService],
+        component: CategoriesTableComponent
+      },
+      {
+        path: 'add',
+        canActivate: [AuthGuardAdminService],
+        component: CategoryPageComponent
+      },
+      {
+        path: 'edit/:id',
+        canActivate: [AuthGuardAdminService],
+        component: CategoryPageComponent
+      },
+    ]
+  },
+  {
     path: 'account', component: ProfilePageComponent,
     canActivate: [AuthGuardService],
     children: [
@@ -121,17 +142,9 @@ const routes: Routes = [
         canActivate: [AuthGuardService],
         component: TasksTableComponent
       },
-      { path: 'table/categories',
-        canActivate: [AuthGuardAdminService],
-        component: CategoriesTableComponent
-      },
       { path: 'add-task',
         canActivate: [AuthGuardAdminService],
         component: AddTaskPageComponent
-      },
-      { path: 'add-category',
-        canActivate: [AuthGuardAdminService],
-        component: AddCategoryPageComponent
       },
       { path: 'add-task-for-users',
         canActivate: [AuthGuardAdminService],

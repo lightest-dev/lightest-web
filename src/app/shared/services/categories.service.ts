@@ -16,11 +16,11 @@ export class CategoriesService {
     return this.http.get<Category[]>(`${API_URL}/categories`);
   }
 
-  addCategory(category: Category) {
+  addCategory(category: Category): Observable<Category> {
     if (!category.parentId) {
       delete category.parentId;
     }
-    return this.http.post(`${API_URL}/categories`, category);
+    return this.http.post<Category>(`${API_URL}/categories`, category);
   }
 
   getCategory(id): Observable<Category> {

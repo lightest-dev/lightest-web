@@ -49,14 +49,14 @@ export class ServiceNavigationComponent implements OnInit {
       tooltip: 'Переглянути список',
       description: '',
       icon: 'category',
-      link: 'account/table/categories'
+      link: 'categories/table'
     },
     {
       name: 'Додати категорію',
       tooltip: 'Створити',
       description: '',
       icon: 'category',
-      link: 'account/add-category'
+      link: 'categories/add'
     },
     {
       name: 'Додати групу',
