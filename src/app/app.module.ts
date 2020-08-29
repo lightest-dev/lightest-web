@@ -26,7 +26,7 @@ import { UserChangeInfoDialogComponent } from './user-change-info-dialog/user-ch
 import { AddTaskPageComponent } from './add-task-page/add-task-page.component';
 import { AddCategoryPageComponent } from './add-category-page/add-category-page.component';
 import {CheckerPageComponent} from './checker-page/checker-page.component';
-import { AddGroupPageComponent } from './add-group-page/add-group-page.component';
+import { GroupPageComponent } from './group-page/group-page.component';
 import { LanguagePageComponent } from './language-page/language-page.component';
 import {DomService} from './shared/services/dom.service';
 import {LanguageFormComponent} from './add-task-page/language-form/language-form.component';
@@ -73,7 +73,7 @@ import { UploadsListComponent } from './uploads-list/uploads-list.component';
     AddTaskPageComponent,
     AddCategoryPageComponent,
     CheckerPageComponent,
-    AddGroupPageComponent,
+    GroupPageComponent,
     LanguagePageComponent,
     LanguageFormComponent,
     TestFormComponent,

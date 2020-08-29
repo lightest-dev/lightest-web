@@ -8,7 +8,7 @@ import { EditorComponent } from './editor/editor.component';
 import {AddTaskPageComponent} from './add-task-page/add-task-page.component';
 import {AddCategoryPageComponent} from './add-category-page/add-category-page.component';
 import {CheckerPageComponent} from './checker-page/checker-page.component';
-import {AddGroupPageComponent} from './add-group-page/add-group-page.component';
+import {GroupPageComponent} from './group-page/group-page.component';
 import {LanguagePageComponent} from './language-page/language-page.component';
 import {TestPageComponent} from './test-page/test-page.component';
 import {ProfilePageComponent} from './user/profilePage.component';
@@ -83,6 +83,27 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'groups',
+    canActivate: [AuthGuardService],
+    children: [
+      {
+        path: 'table',
+        canActivate: [AuthGuardAdminService],
+        component: GroupsTableComponent
+      },
+      {
+        path: 'add',
+        canActivate: [AuthGuardAdminService],
+        component: GroupPageComponent
+      },
+      {
+        path: 'edit/:id',
+        canActivate: [AuthGuardAdminService],
+        component: GroupPageComponent
+      },
+    ]
+  },
+  {
     path: 'account', component: ProfilePageComponent,
     canActivate: [AuthGuardService],
     children: [
@@ -104,10 +125,6 @@ const routes: Routes = [
         canActivate: [AuthGuardAdminService],
         component: CategoriesTableComponent
       },
-      { path: 'table/groups',
-        canActivate: [AuthGuardAdminService],
-        component: GroupsTableComponent
-      },
       { path: 'add-task',
         canActivate: [AuthGuardAdminService],
         component: AddTaskPageComponent
@@ -115,10 +132,6 @@ const routes: Routes = [
       { path: 'add-category',
         canActivate: [AuthGuardAdminService],
         component: AddCategoryPageComponent
-      },
-      { path: 'add-group',
-        canActivate: [AuthGuardAdminService],
-        component: AddGroupPageComponent
       },
       { path: 'add-task-for-users',
         canActivate: [AuthGuardAdminService],

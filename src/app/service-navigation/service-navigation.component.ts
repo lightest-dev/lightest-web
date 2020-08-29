@@ -42,7 +42,7 @@ export class ServiceNavigationComponent implements OnInit {
       tooltip: 'Переглянути список',
       description: '',
       icon: 'group',
-      link: 'account/table/groups'
+      link: 'groups/table'
     },
     {
       name: 'Категорї',
@@ -63,7 +63,7 @@ export class ServiceNavigationComponent implements OnInit {
       tooltip: 'Створити',
       description: '',
       icon: 'group_add',
-      link: 'account/add-group'
+      link: 'groups/add'
     },
     {
       name: 'Додати завдання',
