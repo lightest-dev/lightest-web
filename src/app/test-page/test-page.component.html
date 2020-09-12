@@ -5,18 +5,20 @@
     </div>
 
     <mat-form-field>
-      <input matInput
+      <textarea matInput
              placeholder="Input"
              name="inputTest"
              formControlName="inputTest">
+      </textarea>
       <mat-error *ngIf="formErrors.inputTest">{{formErrors.inputTest}}</mat-error>
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput
+      <textarea matInput
              placeholder="Output"
              name="outputTest"
              formControlName="outputTest">
+      </textarea>
       <mat-error *ngIf="formErrors.outputTest">{{formErrors.outputTest}}</mat-error>
     </mat-form-field>
 
