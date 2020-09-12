@@ -1,5 +1,5 @@
 import {ApplicationRef, Component, ComponentFactoryResolver, EmbeddedViewRef, OnInit, ViewChild} from '@angular/core';
-import {Router} from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TaskService} from '../shared/services/task.service';
 import {TaskShort} from '../shared/models/tasks/TaskShort';
@@ -29,7 +29,8 @@ export class TaskPageComponent implements OnInit {
 
   compRefLang = [];
   compRefTest = [];
-  taskId;
+  taskId: string;
+  isEdit: boolean;
   message: Message = {message: '', isError: false};
   checkers: CheckerShort[];
   categories: Category[];
@@ -116,13 +117,54 @@ export class TaskPageComponent implements OnInit {
     public snackBar: SnackbarService,
     public domService: DomService,
     private formService: FormService,
+    private activatedRoute: ActivatedRoute,
   ) { }
 
   ngOnInit() {
+    this.taskId = this.activatedRoute.snapshot.params.id;
+    this.isEdit = !!this.taskId;
+
     this.getCheckers();
     this.getCategories();
     this.getLanguages();
     this.initForms();
+
+    if (this.isEdit) {
+      this.taskService.getTask(this.taskId).subscribe((task) => {
+        this.taskForm.patchValue({
+          'taskName': task.name,
+          'taskPoints': task.points,
+          'publicTask': task.public,
+          'category': task.category.id,
+          'checker': task.checker.id,
+          'taskDescription': task.description,
+          'examples': task.examples
+        });
+
+        if (task.tests.length > 0) {
+          this.testForm.patchValue({
+            'inputTest': task.tests[0].input,
+            'outputTest': task.tests[0].output
+          });
+
+          task.tests.slice(1).forEach((test) => {
+            this.addTestForm(test);
+          });
+        }
+
+        if (task.languages.length > 0) {
+          this.languageForm.patchValue({
+            'language': task.languages[0].id,
+            'timeLimit': task.languages[0].timeLimit,
+            'memoryLimit': task.languages[0].memoryLimit
+          });
+
+          task.languages.slice(1).forEach((language) => {
+            this.addLanguageForm(language);
+          });
+        }
+      })
+    }
   }
 
   getCheckers() {
@@ -142,7 +184,6 @@ export class TaskPageComponent implements OnInit {
   getLanguages() {
     this.languageService.getLanguages()
       .subscribe(data => {
-        console.log(data);
         this.languages = data;
       });
   }
@@ -303,19 +344,34 @@ export class TaskPageComponent implements OnInit {
     this.snackBar.showSnackBar(message);
   }
 
-  addLanguageForm() {
+  addLanguageForm(language?) {
     this.languageFormsCount ++;
-    this.languageForms.push({data: {}, id: this.languageFormsCount, valid: false});
-    console.log(this.languageForms);
+    this.languageForms.push({
+      data: {
+        language: language?.id,
+        timeLimit: language?.timeLimit,
+        memoryLimit: language?.memoryLimit
+      },
+      id: this.languageFormsCount,
+      valid: !!language
+    });
 
-    const compRef = this.domService.appendComponent(LanguageFormComponent, '.dynamic-language-forms', {languages: this.languages, id: this.languageFormsCount});
+    const compRef = this.domService.appendComponent(LanguageFormComponent, '.dynamic-language-forms',
+    {
+      languages: this.languages,
+      id: this.languageFormsCount,
+      languageId: language?.id,
+      timeLimit: language?.timeLimit,
+      memoryLimit: language?.memoryLimit
+    });
+
     compRef.instance['form'].subscribe(result => {
       this.compRefLang.push({ref: compRef, id: result.id});
 
-        result.delete ?
-          this.deleteLanguage(result.id, compRef) :
-          this.handleLanguageForms(result);
-      });
+      result.delete ?
+        this.deleteLanguage(result.id, compRef) :
+        this.handleLanguageForms(result);
+    });
   }
 
   deleteLanguage (id, compRef) {
@@ -371,18 +427,29 @@ export class TaskPageComponent implements OnInit {
   }
 
 
-  addTestForm() {
+  addTestForm(test?: Test) {
     this.testFormsCount ++;
-    this.testForms.push({data: {}, id: this.testFormsCount, valid: false});
+    this.testForms.push({
+      data: {
+        input: test?.input,
+        output: test?.output,
+      },
+      id: this.testFormsCount,
+      valid: !!test});
 
-    const compRef = this.domService.appendComponent(TestFormComponent, '.dynamic-test-forms', {id: this.testFormsCount});
-      compRef.instance['form'].subscribe(result => {
-        this.compRefTest.push({ref: compRef, id: result.id});
+    const compRef = this.domService.appendComponent(TestFormComponent, '.dynamic-test-forms',
+    {
+      id: this.testFormsCount,
+      input : test?.input,
+      output: test?.output
+    });
+    compRef.instance['form'].subscribe(result => {
+      this.compRefTest.push({ref: compRef, id: result.id});
 
-        result.delete ?
-          this.deleteTest(result.id, compRef) :
-          this.handleTestForms(result);
-      });
+      result.delete ?
+        this.deleteTest(result.id, compRef) :
+        this.handleTestForms(result);
+    });
   }
 
   deleteTest(id, compRef) {

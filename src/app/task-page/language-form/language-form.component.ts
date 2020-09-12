@@ -41,13 +41,13 @@ export class LanguageFormComponent implements OnInit {
 
   initLanguageForm() {
     this.languageForm = this.formBuilder.group({
-      language: ['', [
+      language: [this.data.languageId || '', [
         Validators.required
       ]],
-      timeLimit: ['', [
+      timeLimit: [this.data.timeLimit || '', [
         Validators.required
       ]],
-      memoryLimit: ['', [
+      memoryLimit: [this.data.memoryLimit || '', [
         Validators.required
       ]]
     });
