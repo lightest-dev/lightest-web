@@ -1,7 +1,8 @@
 <div class="wrapper">
   <form [formGroup]="taskForm">
     <div class="form-header">
-      <p>Форма створення нового завдання</p>
+      <p *ngIf="!isEdit">Створити завдання</p>
+      <p *ngIf="isEdit">Редагувати завдання</p>
     </div>
 
      <div class="double-inputs">

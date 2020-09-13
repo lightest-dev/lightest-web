@@ -45,42 +45,42 @@ export class ServiceNavigationComponent implements OnInit {
       link: 'l/categories/table'
     },
     {
-      name: 'Додати категорію',
+      name: 'Створити категорію',
       tooltip: 'Створити',
       description: '',
       icon: 'category',
       link: 'l/categories/add'
     },
     {
-      name: 'Додати групу',
+      name: 'Створити групу',
       tooltip: 'Створити',
       description: '',
       icon: 'group_add',
       link: 'l/groups/add'
     },
     {
-      name: 'Додати завдання',
+      name: 'Створити завдання',
       tooltip: 'Створити',
       description: '',
       icon: 'playlist_add',
       link: 'l/tasks/add'
     },
     {
-      name: 'Додати тест',
+      name: 'Створити тест',
       tooltip: 'Створити',
       description: '',
       icon: 'check_box',
       link: 'l/tests/add'
     },
     {
-      name: 'Додати програму перевірки',
+      name: 'Створити програму перевірки',
       tooltip: 'Створити',
       description: '',
       icon: 'how_to_vote',
       link: 'l/checkers/add'
     },
     {
-      name: 'Додати мову',
+      name: 'Створити мову',
       tooltip: 'Створити',
       description: '',
       icon: 'language',
@@ -88,21 +88,21 @@ export class ServiceNavigationComponent implements OnInit {
     },
     {
       name: 'Додати завдання студентам',
-      tooltip: 'Створити',
+      tooltip: 'Додати',
       description: '',
       icon: 'playlist_add',
       link: 'l/add-task-for-users'
     },
     {
       name: 'Додати студентів до груп',
-      tooltip: 'Створити',
+      tooltip: 'Додати',
       description: '',
       icon: 'group_add',
       link: 'l/add-users-to-group'
     },
     {
       name: 'Додати студентів до курсів',
-      tooltip: 'Створити',
+      tooltip: 'Додати',
       description: '',
       icon: 'category',
       link: 'l/add-users-to-categories'

@@ -274,6 +274,7 @@ export class TaskPageComponent implements OnInit {
           concatMap(data =>
             {
               this.taskId = this.taskId || data['id'];
+              this.isEdit = !!this.taskId;
               return forkJoin([
                 this.taskService.addTestsForTask(this.taskId, this.getTestObj()),
                 this.taskService.addLanguagesForTask(this.taskId, this.getLanguagesObj())

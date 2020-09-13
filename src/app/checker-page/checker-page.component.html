@@ -1,7 +1,8 @@
 <div class="wrapper">
   <form [formGroup]="checkerForm" (ngSubmit)="submit()">
     <div class="form-header">
-      <p>Форма створення нової програми перевірки</p>
+      <p *ngIf="!isEdit">Створити програму перевірки</p>
+      <p *ngIf="isEdit">Редагувати програму перевірки</p>
     </div>
 
     <mat-form-field>

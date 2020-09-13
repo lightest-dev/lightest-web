@@ -1,7 +1,8 @@
 <div class="wrapper">
   <form [formGroup]="testForm" (ngSubmit)="submit()">
     <div class="form-header">
-      <p>Форма створення нового тесту</p>
+      <p *ngIf="!isEdit">Створити тест</p>
+      <p *ngIf="isEdit">Редагувати тест</p>
     </div>
 
     <mat-form-field>
