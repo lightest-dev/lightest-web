@@ -36,10 +36,10 @@ export class TestFormComponent implements OnInit {
 
   initTestForm() {
     this.testForm = this.formBuilder.group({
-      inputTest: [this.data.input || '', [
+      inputTest: [this.data.inputTest || '', [
         Validators.required
       ]],
-      outputTest: [this.data.output || '', [
+      outputTest: [this.data.outputTest || '', [
         Validators.required
       ]]
     });

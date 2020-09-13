@@ -12,9 +12,9 @@ import {Test} from '../shared/models/Test';
 import {LanguageForTask} from '../shared/models/LanguageForTask';
 import {LanguageService} from '../shared/services/language.service';
 import {Language} from '../shared/models/Language';
-import { mergeMap } from 'rxjs/operators';
+import { mergeMap, concatMap } from 'rxjs/operators';
 import {DomService} from '../shared/services/dom.service';
-import {merge} from 'rxjs';
+import {merge, concat, Observable, forkJoin} from 'rxjs';
 import {LanguageFormComponent} from './language-form/language-form.component';
 import {TestFormComponent} from './test-form/test-form.component';
 import {SnackbarService} from '../shared/services/snackbar.service';
@@ -150,6 +150,7 @@ export class TaskPageComponent implements OnInit {
           task.tests.slice(1).forEach((test) => {
             this.addTestForm(test);
           });
+          debugger
         }
 
         if (task.languages.length > 0) {
@@ -260,26 +261,31 @@ export class TaskPageComponent implements OnInit {
 
   submit() {
     if (this.isValidForms()) {
-      this.taskService.addNewTask(this.loadTaskObject(this.taskForm.value))
+      let request: Observable<any>;
+      if (this.isEdit) {
+        request = 
+          this.taskService.changeTask(this.taskId, this.loadTaskObject(this.taskForm.value));
+      } else {
+        request = 
+          this.taskService.addNewTask(this.loadTaskObject(this.taskForm.value));
+      }
+      request
         .pipe(
-          mergeMap(data =>
-            merge(
-              this.taskId = data['id'],
-              this.taskService.addTestsForTask(data['id'], this.getTestObj()),
-              this.taskService.addLanguagesForTask(data['id'], this.getLanguagesObj())
-            )
+          concatMap(data =>
+            {
+              this.taskId = this.taskId || data['id'];
+              return forkJoin([
+                this.taskService.addTestsForTask(this.taskId, this.getTestObj()),
+                this.taskService.addLanguagesForTask(this.taskId, this.getLanguagesObj())
+              ]);
+            }
           )
-        ).subscribe(res => {
+        ).subscribe(() => {
           this.openSnackBar({message: 'Успішно', isError: false});
-          this.taskForm.reset();
-          this.languageForm.reset();
-          this.testForm.reset();
-          this.deleteDynamicForms();
+          this.router.navigate([`tasks/edit/${this.taskId}`]);
         },
-        error1 => {
-          if (error1) {
-            this.openSnackBar({message: 'Помилка', isError: true});
-          }
+        () => {
+          this.openSnackBar({message: 'Помилка', isError: true});
         });
     } else {
       this.openSnackBar({message: 'Заповніть необхідні поля форми', isError: true});
@@ -288,6 +294,7 @@ export class TaskPageComponent implements OnInit {
 
   loadTaskObject(currentTask): TaskShort {
     const task: TaskShort = {
+      id: this.taskId,
       name: currentTask.taskName,
       points: currentTask.taskPoints,
       public: currentTask.publicTask,
@@ -360,7 +367,7 @@ export class TaskPageComponent implements OnInit {
     {
       languages: this.languages,
       id: this.languageFormsCount,
-      languageId: language?.id,
+      language: language?.id,
       timeLimit: language?.timeLimit,
       memoryLimit: language?.memoryLimit
     });
@@ -431,8 +438,8 @@ export class TaskPageComponent implements OnInit {
     this.testFormsCount ++;
     this.testForms.push({
       data: {
-        input: test?.input,
-        output: test?.output,
+        inputTest: test?.input,
+        outputTest: test?.output,
       },
       id: this.testFormsCount,
       valid: !!test});
@@ -440,8 +447,8 @@ export class TaskPageComponent implements OnInit {
     const compRef = this.domService.appendComponent(TestFormComponent, '.dynamic-test-forms',
     {
       id: this.testFormsCount,
-      input : test?.input,
-      output: test?.output
+      inputTest : test?.input,
+      outputTest: test?.output
     });
     compRef.instance['form'].subscribe(result => {
       this.compRefTest.push({ref: compRef, id: result.id});

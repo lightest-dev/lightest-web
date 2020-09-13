@@ -41,7 +41,7 @@ export class LanguageFormComponent implements OnInit {
 
   initLanguageForm() {
     this.languageForm = this.formBuilder.group({
-      language: [this.data.languageId || '', [
+      language: [this.data.language || '', [
         Validators.required
       ]],
       timeLimit: [this.data.timeLimit || '', [
