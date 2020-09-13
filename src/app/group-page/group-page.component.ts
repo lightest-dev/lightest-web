@@ -96,7 +96,7 @@ export class GroupPageComponent implements OnInit {
         .subscribe(data => {
           if(data) {
             showMessage();
-            this.router.navigate([`groups/edit/${data.id}`]);
+            this.router.navigate([`l/groups/edit/${data.id}`]);
           }
         }, errorHandler);
     }

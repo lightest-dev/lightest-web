@@ -49,7 +49,7 @@ export class UploadsListComponent implements OnInit {
   }
 
   doExcercise(taskId) {
-    this.router.navigate([`account/editor/${taskId}`]);
+    this.router.navigate([`l/editor/${taskId}`]);
   }
 
 }

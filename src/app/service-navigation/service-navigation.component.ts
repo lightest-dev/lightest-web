@@ -14,98 +14,98 @@ export class ServiceNavigationComponent implements OnInit {
       tooltip: 'Переглянути список',
       description: '',
       icon: 'people_outline',
-      link: 'account/table/users'
+      link: 'l/table/users'
     },
     {
       name: 'Завдання',
       tooltip: 'Переглянути список',
       description: '',
       icon: 'format_list_numbered',
-      link: 'tasks/table'
+      link: 'l/tasks/table'
     },
     {
       name: 'Програми перевірки',
       tooltip: 'Переглянути список',
       description: '',
       icon: 'how_to_vote',
-      link: 'checkers/table'
+      link: 'l/checkers/table'
     },
     {
       name: 'Групи',
       tooltip: 'Переглянути список',
       description: '',
       icon: 'group',
-      link: 'groups/table'
+      link: 'l/groups/table'
     },
     {
       name: 'Категорї',
       tooltip: 'Переглянути список',
       description: '',
       icon: 'category',
-      link: 'categories/table'
+      link: 'l/categories/table'
     },
     {
       name: 'Додати категорію',
       tooltip: 'Створити',
       description: '',
       icon: 'category',
-      link: 'categories/add'
+      link: 'l/categories/add'
     },
     {
       name: 'Додати групу',
       tooltip: 'Створити',
       description: '',
       icon: 'group_add',
-      link: 'groups/add'
+      link: 'l/groups/add'
     },
     {
       name: 'Додати завдання',
       tooltip: 'Створити',
       description: '',
       icon: 'playlist_add',
-      link: 'tasks/add'
+      link: 'l/tasks/add'
     },
     {
       name: 'Додати тест',
       tooltip: 'Створити',
       description: '',
       icon: 'check_box',
-      link: 'tests/add'
+      link: 'l/tests/add'
     },
     {
       name: 'Додати програму перевірки',
       tooltip: 'Створити',
       description: '',
       icon: 'how_to_vote',
-      link: 'checkers/add'
+      link: 'l/checkers/add'
     },
     {
       name: 'Додати мову',
       tooltip: 'Створити',
       description: '',
       icon: 'language',
-      link: 'languages/add'
+      link: 'l/languages/add'
     },
     {
       name: 'Додати завдання студентам',
       tooltip: 'Створити',
       description: '',
       icon: 'playlist_add',
-      link: 'account/add-task-for-users'
+      link: 'l/add-task-for-users'
     },
     {
       name: 'Додати студентів до груп',
       tooltip: 'Створити',
       description: '',
       icon: 'group_add',
-      link: 'account/add-users-to-group'
+      link: 'l/add-users-to-group'
     },
     {
       name: 'Додати студентів до курсів',
       tooltip: 'Створити',
       description: '',
       icon: 'category',
-      link: 'account/add-users-to-categories'
+      link: 'l/add-users-to-categories'
     },
   ];
 

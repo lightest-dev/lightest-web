@@ -81,7 +81,7 @@ export class CategoryPageComponent implements OnInit {
         .subscribe(data => {
             if (data) {
               showMessage();
-              this.router.navigate([`categories/edit/${data.id}`]);
+              this.router.navigate([`l/categories/edit/${data.id}`]);
             }
         }, errorHandler);
     }

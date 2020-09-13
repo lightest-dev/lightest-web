@@ -282,7 +282,7 @@ export class TaskPageComponent implements OnInit {
           )
         ).subscribe(() => {
           this.openSnackBar({message: 'Успішно', isError: false});
-          this.router.navigate([`tasks/edit/${this.taskId}`]);
+          this.router.navigate([`l/tasks/edit/${this.taskId}`]);
         },
         () => {
           this.openSnackBar({message: 'Помилка', isError: true});

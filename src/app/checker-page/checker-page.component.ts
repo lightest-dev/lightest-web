@@ -94,7 +94,7 @@ export class CheckerPageComponent implements OnInit {
       this.checkerService.addChecker(checker)
         .subscribe(data => {
           showMessage();
-          this.router.navigate([`checkers/edit/${data.id}`]);
+          this.router.navigate([`l/checkers/edit/${data.id}`]);
         }, errorHandler);
     }
   }

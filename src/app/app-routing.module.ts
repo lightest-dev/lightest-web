@@ -28,156 +28,180 @@ import {AddUsersToCategoriesComponent} from './add-users-to-categories/add-users
 import {UploadsListComponent} from './uploads-list/uploads-list.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', component: AuthComponent, },
-  { path: 'main', component: MainComponent},
-  { path: 'login', component: LoginComponent},
-  { path: 'registration', component: RegistrationComponent},
-  { 
-    path: 'tests',
-    canActivate: [AuthGuardService],
-    children: [
-      {
-        path: 'table',
-        canActivate: [AuthGuardAdminService],
-        component: TestsTableComponent
-      },
-      {
-        path: 'add',
-        component: TestPageComponent
-      },
-      {
-        path: 'edit/:id',
-        component: TestPageComponent
-      },
-    ]
+  {
+    path: '',
+    pathMatch: 'full',
+    component: AuthComponent,
   },
   {
-    path: 'checkers',
-    canActivate: [AuthGuardService],
-    children: [
-      {
-        path: 'table',
-        canActivate: [AuthGuardAdminService],
-        component: CheckersTableComponent
-      },
-      {
-        path: 'add',
-        canActivate: [AuthGuardAdminService],
-        component: CheckerPageComponent
-      },
-      {
-        path: 'edit/:id',
-        component: CheckerPageComponent
-      },
-    ]
+    path: 'main',
+    component: MainComponent
   },
   {
-    path: 'languages',
-    canActivate: [AuthGuardService],
-    children: [
-      {
-        path: 'add',
-        canActivate: [AuthGuardAdminService],
-        component: LanguagePageComponent
-      },
-    ]
+    path: 'login',
+    component: LoginComponent
   },
   {
-    path: 'groups',
-    canActivate: [AuthGuardService],
-    children: [
-      {
-        path: 'table',
-        canActivate: [AuthGuardAdminService],
-        component: GroupsTableComponent
-      },
-      {
-        path: 'add',
-        canActivate: [AuthGuardAdminService],
-        component: GroupPageComponent
-      },
-      {
-        path: 'edit/:id',
-        canActivate: [AuthGuardAdminService],
-        component: GroupPageComponent
-      },
-    ]
+    path: 'registration',
+    component: RegistrationComponent
   },
   {
-    path: 'categories',
+    path: 'l',
+    component: ProfilePageComponent,
     canActivate: [AuthGuardService],
     children: [
       {
-        path: 'table',
-        canActivate: [AuthGuardAdminService],
-        component: CategoriesTableComponent
+        path: 'account',
+        component: UserInfoComponent
       },
       {
-        path: 'add',
-        canActivate: [AuthGuardAdminService],
-        component: CategoryPageComponent
-      },
-      {
-        path: 'edit/:id',
-        canActivate: [AuthGuardAdminService],
-        component: CategoryPageComponent
-      },
-    ]
-  },
-  {
-    path: 'tasks',
-    canActivate: [AuthGuardService],
-    children: [
-      // TODO: should be accessible only by teachers/admins
-      {
-        path: 'table',
-        canActivate: [AuthGuardService],
-        component: TasksTableComponent
-      },
-      {
-        path: 'add',
-        canActivate: [AuthGuardAdminService],
-        component: TaskPageComponent
-      },
-      {
-        path: 'edit/:id',
-        canActivate: [AuthGuardAdminService],
-        component: TaskPageComponent
-      },
-    ]
-  },
-  {
-    path: 'account', component: ProfilePageComponent,
-    canActivate: [AuthGuardService],
-    children: [
-      { path: '', component: UserInfoComponent },
-      { path: 'editor/:id',
+        path: 'editor/:id',
         canActivate: [AuthGuardService],
         component: EditorComponent
       },
-      { path: 'table/users',
+      {
+        path: 'table/users',
         canActivate: [AuthGuardAdminService],
         component: UsersTableComponent
       },
-      { path: 'add-task-for-users',
+      {
+        path: 'add-task-for-users',
         canActivate: [AuthGuardAdminService],
         component: AddTaskToUsersPageComponent
       },
-      { path: 'add-users-to-group',
+      {
+        path: 'add-users-to-group',
         canActivate: [AuthGuardAdminService],
         component: AddUsersToGroupComponent
       },
-      { path: 'add-users-to-categories',
+      {
+        path: 'add-users-to-categories',
         canActivate: [AuthGuardAdminService],
         component: AddUsersToCategoriesComponent
       },
-      { path: 'service-navigation',
+      {
+        path: 'service-navigation',
         canActivate: [AuthGuardAdminService],
         component: ServiceNavigationComponent
       },
-      { path: 'uploads/:id',
+      {
+        path: 'uploads/:id',
         canActivate: [AuthGuardService],
         component: UploadsListComponent
+      },
+      {
+        path: 'tests',
+        canActivate: [AuthGuardService],
+        children: [
+          {
+            path: 'table',
+            canActivate: [AuthGuardAdminService],
+            component: TestsTableComponent
+          },
+          {
+            path: 'add',
+            component: TestPageComponent
+          },
+          {
+            path: 'edit/:id',
+            component: TestPageComponent
+          },
+        ]
+      },
+      {
+        path: 'checkers',
+        canActivate: [AuthGuardService],
+        children: [
+          {
+            path: 'table',
+            canActivate: [AuthGuardAdminService],
+            component: CheckersTableComponent
+          },
+          {
+            path: 'add',
+            canActivate: [AuthGuardAdminService],
+            component: CheckerPageComponent
+          },
+          {
+            path: 'edit/:id',
+            component: CheckerPageComponent
+          },
+        ]
+      },
+      {
+        path: 'languages',
+        canActivate: [AuthGuardService],
+        children: [
+          {
+            path: 'add',
+            canActivate: [AuthGuardAdminService],
+            component: LanguagePageComponent
+          },
+        ]
+      },
+      {
+        path: 'groups',
+        canActivate: [AuthGuardService],
+        children: [
+          {
+            path: 'table',
+            canActivate: [AuthGuardAdminService],
+            component: GroupsTableComponent
+          },
+          {
+            path: 'add',
+            canActivate: [AuthGuardAdminService],
+            component: GroupPageComponent
+          },
+          {
+            path: 'edit/:id',
+            canActivate: [AuthGuardAdminService],
+            component: GroupPageComponent
+          },
+        ]
+      },
+      {
+        path: 'categories',
+        canActivate: [AuthGuardService],
+        children: [
+          {
+            path: 'table',
+            canActivate: [AuthGuardAdminService],
+            component: CategoriesTableComponent
+          },
+          {
+            path: 'add',
+            canActivate: [AuthGuardAdminService],
+            component: CategoryPageComponent
+          },
+          {
+            path: 'edit/:id',
+            canActivate: [AuthGuardAdminService],
+            component: CategoryPageComponent
+          },
+        ]
+      },
+      {
+        // TODO: should be accessible only by teachers/admins
+        path: 'tasks',
+        canActivate: [AuthGuardService],
+        children: [
+          {
+            path: 'table',
+            canActivate: [AuthGuardService],
+            component: TasksTableComponent
+          },
+          {
+            path: 'add',
+            canActivate: [AuthGuardAdminService],
+            component: TaskPageComponent
+          },
+          {
+            path: 'edit/:id',
+            canActivate: [AuthGuardAdminService],
+            component: TaskPageComponent
+          },
+        ]
       },
     ]
   },

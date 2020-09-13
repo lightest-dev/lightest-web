@@ -116,7 +116,7 @@ export class TestPageComponent implements OnInit {
     } else {
       this.testService.addTest(test).subscribe(data => {
         showMessage();
-        this.router.navigate([`tests/edit/${data.id}`]);
+        this.router.navigate([`l/tests/edit/${data.id}`]);
     }, errorHandler);
     }
   }
