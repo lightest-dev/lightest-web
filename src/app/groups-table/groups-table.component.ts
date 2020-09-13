@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {GroupService} from '../shared/services/group.service';
 import {SnackbarService} from '../shared/services/snackbar.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-groups-table',
@@ -13,7 +14,8 @@ export class GroupsTableComponent implements OnInit {
   groups;
 
   constructor(private groupService: GroupService,
-              private messageService: SnackbarService) { }
+              private messageService: SnackbarService,
+              private router: Router) { }
 
   ngOnInit() {
     this.getGroups();
@@ -75,5 +77,13 @@ export class GroupsTableComponent implements OnInit {
           isError: true
         });
       });
+  }
+
+  edit(data) {
+    this.router.navigate([`l/groups/edit/${data.id}`])
+  }
+
+  view(data) {
+    this.edit(data);
   }
 }

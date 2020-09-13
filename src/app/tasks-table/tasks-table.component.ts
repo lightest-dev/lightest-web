@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {TaskService} from '../shared/services/task.service';
 import {SnackbarService} from '../shared/services/snackbar.service';
 import {combineLatest} from 'rxjs';
-import {map} from 'rxjs/operators';
 import {CheckerService} from '../shared/services/checker.service';
 import {CategoriesService} from '../shared/services/categories.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tasks-table',
@@ -21,7 +21,8 @@ export class TasksTableComponent implements OnInit {
   constructor(private taskService: TaskService,
               private messageService: SnackbarService,
               private checkerService: CheckerService,
-              private categoryService: CategoriesService) { }
+              private categoryService: CategoriesService,
+              private router: Router) { }
 
   ngOnInit() {
    this.getTasks();
@@ -31,7 +32,7 @@ export class TasksTableComponent implements OnInit {
     this.taskService.getTasks()
       .subscribe(data => {
         this.tasks = data;
-      }, error1 => {
+      }, () => {
         this.messageService.showSnackBar({
           message: 'Не вдалось отримати користувачів',
           isError: true
@@ -52,7 +53,7 @@ export class TasksTableComponent implements OnInit {
     const combined = combineLatest($checkerOservers);
     combined.subscribe(data => {
       this.checkers = data;
-    }, error1 => {},
+    }, () => {},
       () => {
         for (let i = 0; i < this.tasks.length; i++) {
           this.tasks[i].checkerId = this.checkers[i].name;
@@ -70,7 +71,7 @@ export class TasksTableComponent implements OnInit {
     const combined = combineLatest($categoriesOservers);
     combined.subscribe(data => {
         this.categories = data;
-      }, error1 => {},
+      }, () => {},
       () => {
         for (let i = 0; i < this.tasks.length; i++) {
           this.tasks[i].categoryId = this.categories[i].name;
@@ -82,7 +83,7 @@ export class TasksTableComponent implements OnInit {
 
   loadObjForTable() {
     this.userTableObj = {
-      labels: ['number', 'name', 'categoryId', 'checkerId', 'public', 'details', 'delete'],
+      labels: ['number', 'name', 'categoryId', 'checkerId', 'public', 'details', 'delete', 'edit'],
       labelsName: {
         number: '№',
         name: 'Ім\'я',
@@ -90,7 +91,8 @@ export class TasksTableComponent implements OnInit {
         checkerId: 'Програма перевірки',
         public: 'Публічне',
         details: 'Деталі',
-        delete: 'Видалити'
+        delete: 'Видалити',
+        edit: 'Редагувати'
       },
       data: this.tasks
     };
@@ -101,6 +103,7 @@ export class TasksTableComponent implements OnInit {
       task.number = index + 1;
       task.details = 'Деталі';
       task.delete = 'Видалити';
+      task.edit = true;
     });
   }
 
@@ -122,5 +125,11 @@ export class TasksTableComponent implements OnInit {
       });
   }
 
+  edit(data) {
+    this.router.navigate([`l/tasks/edit/${data.id}`])
+  }
 
+  view(data) {
+    this.edit(data);
+  }
 }

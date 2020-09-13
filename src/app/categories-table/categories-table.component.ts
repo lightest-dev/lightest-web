@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {CategoriesService} from '../shared/services/categories.service';
 import {SnackbarService} from '../shared/services/snackbar.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-categories-table',
@@ -13,7 +14,8 @@ export class CategoriesTableComponent implements OnInit {
   tableObj;
 
   constructor(private categoriesService: CategoriesService,
-              private messageService: SnackbarService) { }
+              private messageService: SnackbarService,
+              private router: Router) { }
 
   ngOnInit() {
     this.getCategories();
@@ -75,4 +77,11 @@ export class CategoriesTableComponent implements OnInit {
       });
   }
 
+  edit(data) {
+    this.router.navigate([`l/categories/edit/${data.id}`])
+  }
+
+  view(data) {
+    this.edit(data);
+  }
 }

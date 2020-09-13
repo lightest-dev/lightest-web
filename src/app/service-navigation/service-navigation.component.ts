@@ -38,7 +38,7 @@ export class ServiceNavigationComponent implements OnInit {
       link: 'l/groups/table'
     },
     {
-      name: 'Категорї',
+      name: 'Категорії',
       tooltip: 'Переглянути список',
       description: '',
       icon: 'category',

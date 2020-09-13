@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {CheckerService} from '../shared/services/checker.service';
 import {SnackbarService} from '../shared/services/snackbar.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-checkers-table',
@@ -13,7 +14,8 @@ export class CheckersTableComponent implements OnInit {
   tableObj;
 
   constructor(private checkerService: CheckerService,
-              private messageService:SnackbarService) { }
+              private messageService: SnackbarService,
+              private router: Router) { }
 
   ngOnInit() {
     this.getCheckers();
@@ -77,4 +79,11 @@ export class CheckersTableComponent implements OnInit {
       });
   }
 
+  edit(data) {
+    this.router.navigate([`l/checkers/edit/${data.id}`])
+  }
+
+  view(data) {
+    this.edit(data);
+  }
 }

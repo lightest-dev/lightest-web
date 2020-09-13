@@ -18,7 +18,9 @@ export class TableBaseComponent implements OnInit {
   displayedColumns;
 
   @Input() tableData;
-  @Output() itemDelete = new EventEmitter();
+  @Output() deleteItem = new EventEmitter();
+  @Output() editItem = new EventEmitter();
+  @Output() viewItem = new EventEmitter();
 
   constructor() {}
 
@@ -43,7 +45,14 @@ export class TableBaseComponent implements OnInit {
   }
 
   handleDelete(event) {
-    this.itemDelete.emit(event);
+    this.deleteItem.emit(event);
   }
 
+  handleEdit(event) {
+    this.editItem.emit(event);
+  }
+
+  handleView(event) {
+    this.viewItem.emit(event);
+  }
 }
