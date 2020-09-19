@@ -25,7 +25,7 @@ export class ProfilePageComponent implements OnInit {
     {
       name: 'Моя сторінка',
       icon: 'account_circle',
-      link: 'l/user'
+      link: '/l/account'
     },
   ];
 
