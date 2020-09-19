@@ -17,7 +17,7 @@ export class CheckerService {
   }
 
   addChecker(checker: CheckerShort) {
-    return this.http.post(`${API_URL}/checkers`, checker);
+    return this.http.post<Checker>(`${API_URL}/checkers`, checker);
   }
 
   getChecker(id) :Observable<Checker>{

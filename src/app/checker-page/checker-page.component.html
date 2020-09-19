@@ -1,7 +1,8 @@
 <div class="wrapper">
   <form [formGroup]="checkerForm" (ngSubmit)="submit()">
     <div class="form-header">
-      <p>Форма створення нової програми перевірки</p>
+      <p *ngIf="!isEdit">Створити програму перевірки</p>
+      <p *ngIf="isEdit">Редагувати програму перевірки</p>
     </div>
 
     <mat-form-field>
@@ -22,7 +23,7 @@
       <mat-error *ngIf="formErrors.checkerCode">{{formErrors.checkerCode}}</mat-error>
     </mat-form-field>
 
-    <button mat-button type="submit" class="c-button" [disabled]="checkerForm.invalid" >Додати</button>
+    <button mat-button type="submit" class="c-button" [disabled]="checkerForm.invalid" >Зберегти</button>
 
   </form>
 </div>

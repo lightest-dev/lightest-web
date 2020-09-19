@@ -1,7 +1,8 @@
 <div class="wrapper">
     <form [formGroup]="categoryForm" (ngSubmit)="submit()">
         <div class="form-header">
-            <p>Форма створення нової категорії</p>
+            <p *ngIf="!isEdit">Створити категорію (курс)</p>
+            <p *ngIf="isEdit">Редагувати категорію (курс)</p>
         </div>
 
         <mat-form-field>
@@ -15,7 +16,7 @@
 
         <mat-checkbox name="publicCategory" formControlName="publicCategory">Публічна категорія</mat-checkbox>
 
-        <button mat-button type="submit" class="c-button" [disabled]="categoryForm.invalid" >Додати</button>
+        <button mat-button type="submit" class="c-button" [disabled]="categoryForm.invalid" >Зберегти</button>
 
     </form>
 </div>

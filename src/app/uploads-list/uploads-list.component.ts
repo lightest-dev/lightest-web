@@ -28,6 +28,7 @@ export class UploadsListComponent implements OnInit {
             .subscribe(data => {
               this.task = data;
              if (this.task.points > 0) {
+               // TODO: cleanup, completed is returned from server
                this.task.completed = true;
              }
             });
@@ -48,7 +49,7 @@ export class UploadsListComponent implements OnInit {
   }
 
   doExcercise(taskId) {
-    this.router.navigate([`account/editor/${taskId}`]);
+    this.router.navigate([`l/editor/${taskId}`]);
   }
 
 }

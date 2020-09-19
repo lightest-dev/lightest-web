@@ -29,7 +29,7 @@ export class GroupService {
   }
 
   changeGroupInfo(id, group: GroupShort) {
-    return this.http.put<GroupShort>(`${API_URL}/groups`, group);
+    return this.http.put<GroupShort>(`${API_URL}/groups/${id}`, group);
   }
 
   deleteGroup(id) {

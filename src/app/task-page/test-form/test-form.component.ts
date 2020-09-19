@@ -3,58 +3,50 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {FormService} from '../../shared/services/form.service';
 
 @Component({
-  selector: 'app-language-form',
-  templateUrl: './language-form.component.html',
-  styleUrls: ['./language-form.component.scss']
+  selector: 'app-test-form',
+  templateUrl: './test-form.component.html',
+  styleUrls: ['./test-form.component.scss']
 })
-export class LanguageFormComponent implements OnInit {
+export class TestFormComponent implements OnInit {
 
-  formErrorsLanguageForm = {
-    'language': '',
-    'timeLimit': '',
-    'memoryLimit': ''
+  formErrorsTestForm = {
+    'inputTest': '',
+    'outputTest': ''
   };
-
-  validationMessagesLanguageForm = {
-    'language': {
+  validationMessagesTestForm = {
+    'inputTest': {
       'required': `Обов'язкове поле`
     },
-    'timeLimit': {
-      'required': `Обов'язкове поле`
-    },
-    'memoryLimit': {
+    'outputTest': {
       'required': `Обов'язкове поле`
     }
   };
 
-  deleteFlag = false ;
-  languageForm: FormGroup;
-  @Input() data: any;
+  deleteFlag = false;
+  testForm: FormGroup;
+  @Input() data;
   @Output() form = new EventEmitter();
 
   constructor(private formBuilder: FormBuilder,
               private formService: FormService) { }
 
   ngOnInit() {
-    this.initLanguageForm();
+    this.initTestForm();
   }
 
-  initLanguageForm() {
-    this.languageForm = this.formBuilder.group({
-      language: ['', [
+  initTestForm() {
+    this.testForm = this.formBuilder.group({
+      inputTest: [this.data.inputTest || '', [
         Validators.required
       ]],
-      timeLimit: ['', [
-        Validators.required
-      ]],
-      memoryLimit: ['', [
+      outputTest: [this.data.outputTest || '', [
         Validators.required
       ]]
     });
 
-    this.languageForm.valueChanges
+    this.testForm.valueChanges
       .subscribe(() => {
-        this.onValueChanged(this.languageForm, this.formErrorsLanguageForm, this.validationMessagesLanguageForm);
+        this.onValueChanged(this.testForm, this.formErrorsTestForm, this.validationMessagesTestForm);
         this.emitData();
       });
   }
@@ -63,7 +55,7 @@ export class LanguageFormComponent implements OnInit {
     if (this.deleteFlag) {
       this.form.emit({delete: true, id: this.data.id});
     } else {
-      this.form.emit({data: this.languageForm.value, valid: this.languageForm.valid, id: this.data.id});
+      this.form.emit({data: this.testForm.value, valid: this.testForm.valid, id: this.data.id});
     }
   }
 

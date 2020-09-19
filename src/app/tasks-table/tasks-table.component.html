@@ -1,3 +1,5 @@
 <ng-container *ngIf="userTableObj">
-  <app-table-base [tableData]="userTableObj" (itemDelete)="deleteTask($event)"></app-table-base>
+  <app-table-base [tableData]="userTableObj" (deleteItem)="deleteTask($event)"
+    (editItem)="edit($event)" (viewItem)="view($event)">
+  </app-table-base>
 </ng-container>

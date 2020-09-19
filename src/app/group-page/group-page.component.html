@@ -1,7 +1,8 @@
 <div class="wrapper">
   <form [formGroup]="groupForm" (ngSubmit)="submit()">
     <div class="form-header">
-      <p>Форма створення нової групи</p>
+      <p *ngIf="!isEdit">Створити групу</p>
+      <p *ngIf="isEdit">Редагувати групу</p>
     </div>
 
     <mat-form-field>
@@ -15,7 +16,7 @@
 
     <mat-checkbox name="publicGroup" formControlName="publicGroup">Публічна група</mat-checkbox>
 
-    <button mat-button type="submit" class="c-button" [disabled]="groupForm.invalid" >Додати</button>
+    <button mat-button type="submit" class="c-button" [disabled]="groupForm.invalid" >Зберегти</button>
 
   </form>
 </div>

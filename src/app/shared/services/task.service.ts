@@ -27,8 +27,8 @@ export class TaskService {
     return this.http.get<Task>(`${API_URL}/tasks/${id}`);
   }
 
-  changeTask(id, task: TaskShort): void{
-     this.http.put(`${API_URL}/tasks/${id}`, task);
+  changeTask(id, task: TaskShort): Observable<void>{
+     return this.http.put<void>(`${API_URL}/tasks/${id}`, task);
   }
 
   deleteTask(id) {

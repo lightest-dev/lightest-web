@@ -25,7 +25,7 @@ export class ProfilePageComponent implements OnInit {
     {
       name: 'Моя сторінка',
       icon: 'account_circle',
-      link: 'account/user'
+      link: 'l/user'
     },
   ];
 
@@ -74,6 +74,6 @@ export class ProfilePageComponent implements OnInit {
   }
 
   goToService() {
-    this.routerLink.navigate(['account/service-navigation']);
+    this.routerLink.navigate(['l/service-navigation']);
   }
 }

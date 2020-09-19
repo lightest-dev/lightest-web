@@ -28,11 +28,11 @@ export class TaskComponent implements OnInit {
   }
 
   doExcercise(taskId) {
-    this.router.navigate([`account/editor/${taskId}`]);
+    this.router.navigate([`l/editor/${taskId}`]);
   }
 
   openUploads(taskId) {
-    this.router.navigate([`account/uploads/${taskId}`]);
+    this.router.navigate([`l/uploads/${taskId}`]);
   }
 
 }

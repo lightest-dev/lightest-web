@@ -21,7 +21,7 @@
       <ng-container *ngIf="label=='edit'">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>{{labelsName[label]}}</th>
         <td mat-cell *matCellDef="let data">
-          <button mat-button (click)="handleDelete(data)">
+          <button mat-button (click)="handleEdit(data)">
             <i class="material-icons" matTooltip="{{labelsName[label]}}">edit</i>
           </button>
         </td>
@@ -29,7 +29,7 @@
       <ng-container *ngIf="label=='details'">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>{{labelsName[label]}}</th>
         <td mat-cell *matCellDef="let data">
-          <button mat-button>
+          <button mat-button (click)=handleView(data)>
             <i matTooltip="{{labelsName[label]}}" class="material-icons">info</i>
           </button>
         </td>

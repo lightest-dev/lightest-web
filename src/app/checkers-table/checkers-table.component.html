@@ -1,4 +1,6 @@
 <ng-container *ngIf="tableObj">
-  <app-table-base [tableData]="tableObj" (itemDelete)="delete($event)"></app-table-base>
+  <app-table-base [tableData]="tableObj" (deleteItem)="delete($event)"
+    (editItem)="edit($event)" (viewItem)="view($event)">
+  </app-table-base>
 </ng-container>
 

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddGroupPageComponent } from './add-group-page.component';
+import { TaskPageComponent } from './task-page.component';
 
-describe('AddGroupPageComponent', () => {
-  let component: AddGroupPageComponent;
-  let fixture: ComponentFixture<AddGroupPageComponent>;
+describe('AddTaskPageComponent', () => {
+  let component: TaskPageComponent;
+  let fixture: ComponentFixture<TaskPageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddGroupPageComponent ]
+      declarations: [ TaskPageComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddGroupPageComponent);
+    fixture = TestBed.createComponent(TaskPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

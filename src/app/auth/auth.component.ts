@@ -26,11 +26,11 @@ export class AuthComponent implements OnInit {
           // todo: should be changed to actual main page after login
           let userInfo = this.authService.getUserInfo();
           if (userInfo.isTeacher) {
-            this.router.navigate([`/account`]);
+            this.router.navigate([`/l/account`]);
           } else if (userInfo.isAdmin) {
-            this.router.navigate([`/account`]);
+            this.router.navigate([`/l/account`]);
           } else {
-            this.router.navigate([`/account`]);
+            this.router.navigate([`/l/account`]);
           }
         }
       });

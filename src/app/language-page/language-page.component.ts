@@ -7,11 +7,11 @@ import {SnackbarService} from '../shared/services/snackbar.service';
 import {FormService} from '../shared/services/form.service';
 
 @Component({
-  selector: 'app-add-language-page',
-  templateUrl: './add-language-page.component.html',
-  styleUrls: ['./add-language-page.component.scss']
+  selector: 'app-language-page',
+  templateUrl: './language-page.component.html',
+  styleUrls: ['./language-page.component.scss']
 })
-export class AddLanguagePageComponent implements OnInit {
+export class LanguagePageComponent implements OnInit {
 
   message: Message = {message: '', isError: false};
   languageForm: FormGroup;

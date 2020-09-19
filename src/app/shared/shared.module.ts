@@ -14,26 +14,17 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
-import { MatToolbar, MatToolbarModule } from '@angular/material/toolbar';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatCardModule } from '@angular/material/card';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import {AddTestPageComponent} from '../add-test-page/add-test-page.component';
-import {EditorComponent} from '../editor/editor.component';
-import {AddTaskToUsersPageComponent} from '../add-task-to-users-page/add-task-to-users-page.component';
-import {TaskToUsersFormComponent} from '../add-task-to-users-page/task-to-users-form/task-to-users-form.component';
-import {MessageComponent} from '../message/message.component';
-import {UserChangeInfoDialogComponent} from '../user-change-info-dialog/user-change-info-dialog.component';
-import {LanguageFormComponent} from '../add-task-page/language-form/language-form.component';
-import {TestFormComponent} from '../add-task-page/test-form/test-form.component';
 
 @NgModule({
   imports: [

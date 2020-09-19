@@ -3,7 +3,8 @@ import {TestService} from '../shared/services/test.service';
 import {SnackbarService} from '../shared/services/snackbar.service';
 import {TaskService} from '../shared/services/task.service';
 import {combineLatest} from 'rxjs';
-import {map, mapTo, mergeMap, subscribeOn} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -19,7 +20,8 @@ export class TestsTableComponent implements OnInit {
 
   constructor(private taskService: TaskService,
               private testService: TestService,
-              private messageService: SnackbarService) { }
+              private messageService: SnackbarService,
+              private router: Router) { }
 
   ngOnInit() {
     this.getData();
@@ -29,7 +31,7 @@ export class TestsTableComponent implements OnInit {
     this.taskService.getTasks()
       .subscribe(data => {
         this.tasks = data;
-      }, error1 => {
+      }, () => {
         this.messageService.showSnackBar({
             message: 'Не вдалось отримати дані',
             isError: true,
@@ -56,7 +58,7 @@ export class TestsTableComponent implements OnInit {
           this.tests.push(el);
         });
       });
-    }, error1 => {},
+    }, () => {},
       () => {
         this.setTasksName();
         this.moderateData();
@@ -120,4 +122,11 @@ export class TestsTableComponent implements OnInit {
       });
   }
 
+  edit(data) {
+    this.router.navigate([`l/tests/edit/${data.id}`])
+  }
+
+  view(data) {
+    this.edit(data);
+  }
 }

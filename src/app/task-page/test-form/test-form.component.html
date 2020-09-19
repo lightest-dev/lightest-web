@@ -6,18 +6,20 @@
 
     <span class="counter">{{data.id + 1}}.</span>
 
-    <input matInput
+    <textarea matInput
            placeholder="Input"
            name="inputTest"
            formControlName="inputTest">
+    </textarea>
     <mat-error *ngIf="formErrorsTestForm.inputTest">{{formErrorsTestForm.inputTest}}</mat-error>
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput
+    <textarea matInput
            placeholder="Output"
            name="outputTest"
            formControlName="outputTest">
+    </textarea>
     <mat-error *ngIf="formErrorsTestForm.outputTest">{{formErrorsTestForm.outputTest}}</mat-error>
   </mat-form-field>
   <i (click)="delete()"

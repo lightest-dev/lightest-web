@@ -1,6 +1,7 @@
 export class Group {
   id: string;
   name: string;
+  public: boolean;
   parent: {
     id: string;
     name: string;

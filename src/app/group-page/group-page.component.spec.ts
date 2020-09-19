@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddCheckerPageComponent } from './add-checker-page.component';
+import { GroupPageComponent } from './group-page.component';
 
-describe('AddCheckerPageComponent', () => {
-  let component: AddCheckerPageComponent;
-  let fixture: ComponentFixture<AddCheckerPageComponent>;
+describe('GroupPageComponent', () => {
+  let component: GroupPageComponent;
+  let fixture: ComponentFixture<GroupPageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddCheckerPageComponent ]
+      declarations: [ GroupPageComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddCheckerPageComponent);
+    fixture = TestBed.createComponent(GroupPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
