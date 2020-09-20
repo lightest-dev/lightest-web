@@ -6,7 +6,7 @@ export const AUTH_CONFIG: AuthConfig = {
   issuer: LOGIN_URL,
   requireHttps: false,
   // URL of the SPA to redirect the user to after login
-  redirectUri: 'http://localhost:4200',
+  redirectUri: 'https://lightest.xyz',
   strictDiscoveryDocumentValidation: false,
 
   // URL of the SPA to redirect the user after silent refresh
