@@ -12,24 +12,20 @@ export class UploadService {
 
   constructor(private http: HttpClient) { }
 
-  getTaskUploads(taskId): Observable<TaskResult[]> {
+  getCurrentUserUploads(taskId: string): Observable<TaskResult[]> {
     return this.http.get<TaskResult[]>(`${API_URL}/uploads/${taskId}`);
   }
 
-  getTaskUploadsAll(taskId): Observable<TaskResult[]> {
-    return this.http.get<TaskResult[]>(`${API_URL}/uploads/${taskId}/all`);
+  getTaskUploads(taskId: string, userId?: string): Observable<TaskResult[]> {
+    return this.http.get<TaskResult[]>(`${API_URL}/uploads/${taskId}/all/${userId || ''}`);
   }
 
-  getTaskResult(taskId): Observable<TaskResult> {
-    return this.http.get<TaskResult>(`${API_URL}/uploads/code/${taskId}/result`);
+  getUploadStatus(uploadId: string): Observable<TaskResult> {
+    return this.http.get<TaskResult>(`${API_URL}/uploads/${uploadId}/result`);
   }
 
-  getTaskUploadsAllUsers(taskId): Observable<TaskResult[]> {
-    return this.http.get<TaskResult[]>(`${API_URL}/uploads/code/${taskId}/result`);
-  }
-
-  uploadTaskSolution(taskSolution: TaskSolution) {
-    return this.http.post(`${API_URL}/uploads/code`, taskSolution);
+  uploadTaskSolution(taskSolution: TaskSolution): Observable<string> {
+    return this.http.post<string>(`${API_URL}/uploads/code`, taskSolution);
   }
 
 

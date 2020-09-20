@@ -25,6 +25,8 @@ export class EditorComponent implements OnInit {
   task;
   languages;
 
+  uploadId: string;
+
   themes;
   code = `/* write your code here*/ `;
   activeLanguage = {name: 'cpp', id: ''};
@@ -98,28 +100,21 @@ export class EditorComponent implements OnInit {
 
   upload() {
     if (this.editorOptionsForm.valid) {
-      let uploadId;
       this.uploadService.uploadTaskSolution(this.loadObjectForUpload())
         .subscribe(data => {
-            uploadId = data;
-          }, error1 => {},
-          () => {
+            this.uploadId = data;
             this.getResult();
+          },
+          error => {
+            console.error(error);
           });
     }
   }
 
   getResult() {
-    this.uploadService.getTaskUploads(this.task.id)
+    this.uploadService.getUploadStatus(this.uploadId)
       .subscribe(data => {
-        if (data[0]['status'] === 'TESTING' || data[0]['status'] === 'NEW' || data[0]['status'] === 'QUEUE') {
-          console.log('loading');
-         this.getResult();
-        }  else if (data[0]['OK']) {
-          this.openInfoDialog(data[0], 'Завдання пройшло перевірку', true);
-        } else {
-          this.openInfoDialog(data[0], 'Помилка', false);
-        }
+          this.openInfoDialog(data, 'Стан завдання', true);
       });
   }
 
@@ -156,6 +151,5 @@ export class EditorComponent implements OnInit {
 
   openTaskDescription(func) {
     func.toggle();
-
   }
 }

@@ -20,7 +20,7 @@ export class UploadsListComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
-      this.uploadService.getTaskUploads(params.get('id')).subscribe(data => {
+      this.uploadService.getCurrentUserUploads(params.get('id')).subscribe(data => {
           this.uploads = data;
         }, error1 => {},
         () => {
