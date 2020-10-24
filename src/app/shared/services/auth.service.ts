@@ -68,20 +68,6 @@ export class AuthService {
     return result;
   }
 
-  register(userName: string, password: string, email: string): Observable<Object> {
-    const options = {
-      withCredentials: true
-    };
-    return this.http.post(`${LOGIN_URL}/account/register`, this.loadRegisterObject(userName, password, email), options)
-                    .pipe(
-                      catchError((err: HttpErrorResponse) => {
-                        if (err.status === 400) {
-                          return throwError('Bad Request');
-                        }
-                      })
-                    );
-  }
-
   logout(): Observable<Object> {
     const options = {
         withCredentials: true
@@ -93,24 +79,5 @@ export class AuthService {
     this.loggedInTime = 0;
     this.oauthService.logOut(true);
     return this.http.post(`${LOGIN_URL}/Account/Logout`, data, options);
-  }
-
-  loadRegisterObject(userName: string, password: string, email: string) {
-    return {
-      'username': userName,
-      'password': password,
-      'email': email
-    };
-  }
-
-  addToRole(data: {
-    userId: string,
-    role: string,
-  }): Observable<any> {
-    const options = {
-      withCredentials: true
-    };
-
-    return this.http.post(`${LOGIN_URL}/account/role`, data, options);
   }
 }

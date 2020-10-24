@@ -58,6 +58,7 @@ import {AuthGuardAdminService} from './shared/guards/auth-guard-admin.service';
 import {AuthGuardTeacherService} from './shared/guards/auth-guard-teacher.service';
 import { UploadsListComponent } from './uploads-list/uploads-list.component';
 import { AddToRoleDialogComponent } from './add-to-role-dialog/add-to-role-dialog.component';
+import { AccountService } from './shared/services/account.service';
 
 @NgModule({
   declarations: [
@@ -118,6 +119,7 @@ import { AddToRoleDialogComponent } from './add-to-role-dialog/add-to-role-dialo
   ],
   providers: [
     AuthService,
+    AccountService,
     AuthGuardService,
     AuthGuardAdminService,
     AuthGuardTeacherService,

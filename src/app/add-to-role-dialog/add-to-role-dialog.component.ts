@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UserShort } from '../shared/models/UserShort';
+import { AccountService } from '../shared/services/account.service';
 import { AuthService } from '../shared/services/auth.service';
 import { FormService } from '../shared/services/form.service';
 import { SnackbarService } from '../shared/services/snackbar.service';
@@ -44,7 +45,7 @@ export class AddToRoleDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: AddToRoleData,
     private formBuilder: FormBuilder,
     private formService: FormService,
-    private authService: AuthService,
+    private accountService: AccountService,
     private messageService: SnackbarService,) { 
       this.userId = data.users[0].id;
       this.roles = [
@@ -81,7 +82,7 @@ export class AddToRoleDialogComponent implements OnInit {
 
   submit(): void {
     this.inProgress = true;
-    this.authService.addToRole({
+    this.accountService.addToRole({
       userId: this.userId,
       role: this.role,
     }).subscribe(() => {

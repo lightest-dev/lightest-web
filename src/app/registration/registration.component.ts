@@ -7,6 +7,7 @@ import {Message} from '../shared/models/Message';
 import {ProfileService} from '../shared/services/profile.service';
 import {SnackbarService} from '../shared/services/snackbar.service';
 import {FormService} from '../shared/services/form.service';
+import { AccountService } from '../shared/services/account.service';
 
 @Component({
   selector: 'app-registration',
@@ -50,9 +51,10 @@ export class RegistrationComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private authService: AuthService,
+    private accountService: AccountService,
     private authErrorMsgService: AuthErrorMsgService,
     public snackBar: SnackbarService,
-    public accountService: ProfileService,
+    public profileService: ProfileService,
     private formService: FormService
   ) { }
 
@@ -91,7 +93,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   register() {
-    this.authService.register(this.registrationUserForm.value.login,
+    this.accountService.register(this.registrationUserForm.value.login,
                               this.registrationUserForm.value.password,
                               this.registrationUserForm.value.email)
     .subscribe(() => {
