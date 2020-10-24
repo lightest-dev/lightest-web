@@ -42,4 +42,14 @@ export class AccountService {
 
     return this.http.post(`${LOGIN_URL}/account/role`, data, options);
   }
+
+  changePassword(data : {
+    newPassword: string,
+  }): Observable<any> {
+    const options = {
+      withCredentials: true
+    };
+
+    return this.http.post(`${LOGIN_URL}/account/change-password`, data, options);
+  }
 }

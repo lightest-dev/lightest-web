@@ -4,10 +4,13 @@
       <i class="material-icons">account_circle</i>
     </div>
     <div class="uinitials-wrapper">
-      <button mat-button (click)="openDialog()">Змінити</button>
       <div class="title-name" *ngIf="user.name && user.surname">
         <h3>{{user.name}} {{user.surname}}</h3>
       </div>
+    </div>
+    <div class="actions">
+      <button mat-button (click)="openPersonalInfoDialog()">Змінити ім'я</button>
+      <button mat-button (click)="openChangePasswordDialog()">Змінити пароль</button>
     </div>
   </div>
   <div class="work-info">

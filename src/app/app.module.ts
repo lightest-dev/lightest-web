@@ -59,6 +59,7 @@ import {AuthGuardTeacherService} from './shared/guards/auth-guard-teacher.servic
 import { UploadsListComponent } from './uploads-list/uploads-list.component';
 import { AddToRoleDialogComponent } from './add-to-role-dialog/add-to-role-dialog.component';
 import { AccountService } from './shared/services/account.service';
+import { ChangePasswordDialogComponent } from './change-password-dialog/change-password-dialog.component';
 
 @NgModule({
   declarations: [
@@ -100,7 +101,8 @@ import { AccountService } from './shared/services/account.service';
     AddUsersToGroupComponent,
     AddUsersToCategoriesComponent,
     UploadsListComponent,
-    AddToRoleDialogComponent
+    AddToRoleDialogComponent,
+    ChangePasswordDialogComponent
   ],
   imports: [
     AppRoutingModule,

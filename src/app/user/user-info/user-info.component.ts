@@ -7,6 +7,7 @@ import {ProfileService} from '../../shared/services/profile.service';
 import { MatDialog } from '@angular/material/dialog';
 import {TaskService} from '../../shared/services/task.service';
 import { AssignmentService } from 'src/app/shared/services/assignment.service';
+import { ChangePasswordDialogComponent } from 'src/app/change-password-dialog/change-password-dialog.component';
 
 @Component({
   selector: 'app-student-info',
@@ -80,7 +81,7 @@ export class UserInfoComponent implements OnInit {
       () => {
         this.getTasks();
         if (this.user.name === null && this.user.surname === null) {
-          this.openDialog();
+          this.openPersonalInfoDialog();
         }
       });
   }
@@ -104,7 +105,7 @@ export class UserInfoComponent implements OnInit {
     });
   }
 
-  openDialog(): void {
+  openPersonalInfoDialog(): void {
     const dialogRef = this.dialog.open(UserChangeInfoDialogComponent, {
       width: '375px'
     });
@@ -118,6 +119,10 @@ export class UserInfoComponent implements OnInit {
           }
         );
     });
+  }
+
+  openChangePasswordDialog(): void {
+    const dialogRef = this.dialog.open(ChangePasswordDialogComponent);
   }
 
 }
