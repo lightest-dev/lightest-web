@@ -4,11 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../shared/services/auth.service';
 import {AuthErrorMsgService} from '../shared/services/authErrorMsg.service';
 import {Message} from '../shared/models/Message';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import {MessageComponent} from '../message/message.component';
-import {Observable} from 'rxjs';
-import {AccountService} from '../shared/services/account.service';
-import {tap} from 'rxjs/operators';
+import {ProfileService} from '../shared/services/profile.service';
 import {SnackbarService} from '../shared/services/snackbar.service';
 import {FormService} from '../shared/services/form.service';
 
@@ -56,7 +52,7 @@ export class RegistrationComponent implements OnInit {
     private authService: AuthService,
     private authErrorMsgService: AuthErrorMsgService,
     public snackBar: SnackbarService,
-    public accountService: AccountService,
+    public accountService: ProfileService,
     private formService: FormService
   ) { }
 
@@ -107,7 +103,7 @@ export class RegistrationComponent implements OnInit {
 
   login() {
       this.authService.login({login: this.registrationUserForm.value.login, password: this.registrationUserForm.value.password})
-        .subscribe(data => {
+        .subscribe(() => {
           this.authService.confirmLogin();
           this.messageInfo.message = 'Успішно';
           this.messageInfo.isError = false;

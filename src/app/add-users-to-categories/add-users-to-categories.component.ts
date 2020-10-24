@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {GroupService} from '../shared/services/group.service';
 import {SnackbarService} from '../shared/services/snackbar.service';
-import {AccountService} from '../shared/services/account.service';
-import {DomService} from '../shared/services/dom.service';
+import {ProfileService} from '../shared/services/profile.service';
 import {FormService} from '../shared/services/form.service';
 import {CategoriesService} from '../shared/services/categories.service';
 
@@ -36,7 +34,7 @@ export class AddUsersToCategoriesComponent implements OnInit {
 
   constructor(private categoriesService: CategoriesService,
               private messageService: SnackbarService,
-              private accountService: AccountService,
+              private profileService: ProfileService,
               private formBuilder: FormBuilder,
               private formService: FormService) {
   }
@@ -75,7 +73,7 @@ export class AddUsersToCategoriesComponent implements OnInit {
   }
 
   getUsers() {
-    this.accountService.getUsers()
+    this.profileService.getUsers()
       .subscribe(data => {
         this.users = data;
       });
@@ -84,13 +82,13 @@ export class AddUsersToCategoriesComponent implements OnInit {
   submit() {
     if (this.usersCategoryForm.valid) {
       this.categoriesService.addUsersToCategory(this.usersCategoryForm.value.categories, this.loadObj())
-        .subscribe(data => {
+        .subscribe(() => {
           this.messageService.showSnackBar({
             message: 'Успішно',
             isError: false
           });
           this.initForm();
-        }, error1 => {
+        }, () => {
           this.messageService.showSnackBar({
             message: 'Помилка',
             isError: true

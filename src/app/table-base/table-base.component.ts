@@ -1,8 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import {AccountService} from '../shared/services/account.service';
 
 @Component({
   selector: 'app-table-base',

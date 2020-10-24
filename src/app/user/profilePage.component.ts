@@ -2,8 +2,6 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { AuthService } from '../shared/services/auth.service';
 import {Router} from '@angular/router';
-import {AccountService} from '../shared/services/account.service';
-import {UserChangeInfoDialogComponent} from '../user-change-info-dialog/user-change-info-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import {User} from '../shared/models/User';
 import { Location } from '@angular/common';
@@ -36,7 +34,6 @@ export class ProfilePageComponent implements OnInit {
     media: MediaMatcher,
     private authService: AuthService,
     private routerLink: Router,
-    private accountService: AccountService,
     public dialog: MatDialog,
     private location: Location
   ) {
@@ -54,7 +51,7 @@ export class ProfilePageComponent implements OnInit {
   }
 
   logout() {
-    this.authService.logout().subscribe(data => {
+    this.authService.logout().subscribe(() => {
         this.routerLink.navigate(['/login']);
       }, (err) => {
       console.log(err.status);

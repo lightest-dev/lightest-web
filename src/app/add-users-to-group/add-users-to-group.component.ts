@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {GroupService} from '../shared/services/group.service';
 import {SnackbarService} from '../shared/services/snackbar.service';
-import {AccountService} from '../shared/services/account.service';
-import {DomService} from '../shared/services/dom.service';
+import {ProfileService} from '../shared/services/profile.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {FormService} from '../shared/services/form.service';
 
@@ -33,7 +32,7 @@ export class AddUsersToGroupComponent implements OnInit {
 
   constructor(private groupService: GroupService,
               private messageService: SnackbarService,
-              private accountService: AccountService,
+              private accountService: ProfileService,
               private formBuilder: FormBuilder,
               private formService: FormService) {
   }

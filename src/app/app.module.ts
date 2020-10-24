@@ -41,7 +41,7 @@ import {AddTaskToUsersPageComponent} from './add-task-to-users-page/add-task-to-
 import {TaskToUsersFormComponent} from './add-task-to-users-page/task-to-users-form/task-to-users-form.component';
 import {TestPageComponent} from './test-page/test-page.component';
 import {TaskComponent} from './user/task/task.component';
-import {AccountService} from './shared/services/account.service';
+import {ProfileService} from './shared/services/profile.service';
 import { InfoDialogComponent } from './info-dialog/info-dialog.component';
 import { TableBaseComponent } from './table-base/table-base.component';
 import { UsersTableComponent } from './users-table/users-table.component';
@@ -126,7 +126,7 @@ import { AddToRoleDialogComponent } from './add-to-role-dialog/add-to-role-dialo
     DomService,
     SnackbarService,
     FormService,
-    AccountService,
+    ProfileService,
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}}
     ],
   bootstrap: [AppComponent],

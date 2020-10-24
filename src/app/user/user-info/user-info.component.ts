@@ -3,11 +3,9 @@ import {User} from '../../shared/models/User';
 import {UserChangeInfoDialogComponent} from '../../user-change-info-dialog/user-change-info-dialog.component';
 import {MediaMatcher} from '@angular/cdk/layout';
 import {AuthService} from '../../shared/services/auth.service';
-import {Router} from '@angular/router';
-import {AccountService} from '../../shared/services/account.service';
+import {ProfileService} from '../../shared/services/profile.service';
 import { MatDialog } from '@angular/material/dialog';
 import {TaskService} from '../../shared/services/task.service';
-import {CategoriesService} from '../../shared/services/categories.service';
 import { AssignmentService } from 'src/app/shared/services/assignment.service';
 
 @Component({
@@ -43,7 +41,7 @@ export class UserInfoComponent implements OnInit {
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
     private authService: AuthService,
-    private accountService: AccountService,
+    private accountService: ProfileService,
     public dialog: MatDialog,
     private taskService: TaskService,
     private assignmentService: AssignmentService) {

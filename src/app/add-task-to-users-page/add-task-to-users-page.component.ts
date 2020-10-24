@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {TaskService} from '../shared/services/task.service';
-import {AccountService} from '../shared/services/account.service';
+import {ProfileService} from '../shared/services/profile.service';
 import {TaskShort} from '../shared/models/tasks/TaskShort';
 import {DomService} from '../shared/services/dom.service';
 import {TaskToUsersFormComponent} from './task-to-users-form/task-to-users-form.component';
 import {SnackbarService} from '../shared/services/snackbar.service';
-import {GroupService} from '../shared/services/group.service';
 import { AssignmentModification } from '../shared/models/assignments/AssignmentModification';
 import { AssignmentService } from '../shared/services/assignment.service';
-import { Assignment } from '../shared/models/assignments/Assignment';
 
 @Component({
   selector: 'app-add-task-to-users-page',
@@ -25,11 +23,10 @@ export class AddTaskToUsersPageComponent implements OnInit {
   data;
   formCounts = 1;
 
-  constructor(private groupService: GroupService,
-              private taskService: TaskService,
+  constructor(private taskService: TaskService,
               private assignmentService: AssignmentService,
               private messageService: SnackbarService,
-              private accountService: AccountService,
+              private accountService: ProfileService,
               private domService: DomService) { }
 
   ngOnInit() {
@@ -49,7 +46,7 @@ export class AddTaskToUsersPageComponent implements OnInit {
     this.accountService.getUsers()
       .subscribe(data => {
         this.users = data;
-      }, error1 => {},
+      }, () => {},
         () => {
           this.initFormObj();
         });
@@ -102,7 +99,7 @@ export class AddTaskToUsersPageComponent implements OnInit {
           taskId: obj[0].taskId,
           assignments: obj
         });
-        this.assignmentService.assignTaskToUsers(request).subscribe(data => {
+        this.assignmentService.assignTaskToUsers(request).subscribe(() => {
           this.messageService.showSnackBar({
             message: 'Успішно',
             isError: false

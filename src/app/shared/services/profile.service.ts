@@ -7,7 +7,7 @@ import {User} from '../models/User';
 import {UserPUT} from '../models/UserPUT';
 
 @Injectable()
-export class AccountService {
+export class ProfileService {
   constructor(private http: HttpClient) {}
 
   getUser(id): Observable<User> {

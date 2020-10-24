@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AddToRoleDialogComponent } from '../add-to-role-dialog/add-to-role-dialog.component';
-import {AccountService} from '../shared/services/account.service';
+import {ProfileService} from '../shared/services/profile.service';
 import { AuthService } from '../shared/services/auth.service';
 import {SnackbarService} from '../shared/services/snackbar.service';
 
@@ -15,7 +15,7 @@ export class UsersTableComponent implements OnInit {
   users;
   userTableObj;
 
-  constructor(private accountService: AccountService,
+  constructor(private accountService: ProfileService,
               private messageService: SnackbarService,
               private authService: AuthService,
               private dialog: MatDialog,
