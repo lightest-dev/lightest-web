@@ -6,7 +6,7 @@
 <div class="table-wrapper">
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <ng-container *ngFor="let label of labels" matColumnDef="{{label}}">
-      <ng-container *ngIf="label!=='delete' && label!=='details' && label!=='edit'">
+      <ng-container *ngIf="label!=='delete' && label!=='details' && label!=='edit' && !customButtons[label]">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>{{labelsName[label]}}</th>
         <td mat-cell *matCellDef="let data"> {{data[label]}} </td>
       </ng-container>
@@ -31,6 +31,16 @@
         <td mat-cell *matCellDef="let data">
           <button mat-button (click)=handleView(data)>
             <i matTooltip="{{labelsName[label]}}" class="material-icons">info</i>
+          </button>
+        </td>
+      </ng-container>
+      <ng-container *ngIf="label.includes('Button')">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{labelsName[label]}}</th>
+        <td mat-cell *matCellDef="let data">
+          <button mat-button (click)="customButtons[label].handler(data)">
+            <i matTooltip="{{labelsName[label]}}" class="material-icons"
+              *ngIf="customButtons[label].icon">{{label}}</i>
+            {{customButtons[label].icon ? '' : labelsName[label]}}
           </button>
         </td>
       </ng-container>

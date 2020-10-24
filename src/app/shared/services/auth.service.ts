@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHandler, HttpHeaders, HttpErrorResponse, HttpParams} from '@angular/common/http';
-import {Observable, throwError, of, pipe} from 'rxjs';
-import {retry, tap, map, filter, catchError, pluck} from 'rxjs/operators';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {Observable, throwError} from 'rxjs';
+import {catchError} from 'rxjs/operators';
 import { OAuthService, AuthConfig } from 'angular-oauth2-oidc';
 import { JwksValidationHandler } from 'angular-oauth2-oidc-jwks';
 import { UserRoleInfo } from '../models/UserRoleInfo';
@@ -101,5 +101,16 @@ export class AuthService {
       'password': password,
       'email': email
     };
+  }
+
+  addToRole(data: {
+    userId: string,
+    role: string,
+  }): Observable<any> {
+    const options = {
+      withCredentials: true
+    };
+
+    return this.http.post(`${LOGIN_URL}/account/role`, data, options);
   }
 }

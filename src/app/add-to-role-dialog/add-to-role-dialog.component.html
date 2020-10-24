@@ -1,0 +1,26 @@
+<h2 mat-dialog-title>Додати користувача у роль</h2>
+
+<div mat-dialog-content class="dialog-window">
+    <form [formGroup]="roleForm">
+        <mat-form-field>
+            <mat-label>Користувач</mat-label>
+            <mat-select name="userId" formControlName="userId" [(value)]="userId">
+                <mat-option *ngFor="let user of data.users" value="{{user.id}}">{{user.name}} {{user.surname}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="formErrors.role">{{formErrors.role}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Роль</mat-label>
+            <mat-select name="role" formControlName="role">
+                <mat-option *ngFor="let role of roles" value="{{role.name}}">{{role.label}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="formErrors.role">{{formErrors.role}}</mat-error>
+        </mat-form-field>
+
+        <div class="actions" mat-dialog-actions>
+            <button class="mat-raised-button" (click)="close()">Закрити</button>
+            <button class="mat-raised-button mat-primary" [disabled]="roleForm.invalid || inProgress" (click)="submit()">Зберегти</button>
+        </div>
+    </form>
+</div>

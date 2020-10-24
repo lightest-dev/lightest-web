@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { AddToRoleDialogComponent } from '../add-to-role-dialog/add-to-role-dialog.component';
 import {AccountService} from '../shared/services/account.service';
+import { AuthService } from '../shared/services/auth.service';
 import {SnackbarService} from '../shared/services/snackbar.service';
 
 @Component({
@@ -13,7 +16,10 @@ export class UsersTableComponent implements OnInit {
   userTableObj;
 
   constructor(private accountService: AccountService,
-              private messageService: SnackbarService) { }
+              private messageService: SnackbarService,
+              private authService: AuthService,
+              private dialog: MatDialog,
+              ) { }
 
   ngOnInit() {
     this.accountService.getUsers()
@@ -25,7 +31,7 @@ export class UsersTableComponent implements OnInit {
           isError: true
         });
       }, () => {
-        this.modarateData();
+        this.moderateData();
         this.loadObjForUsersTable();
       });
   }
@@ -38,16 +44,27 @@ export class UsersTableComponent implements OnInit {
         name: 'Ім\'я',
         surname: 'Прізвище',
         email: 'E-mail',
-        details: 'Деталі'
+        details: 'Деталі',
+        addToRoleButton: 'Додати в роль'
       },
-      data: this.users
+      data: this.users,
+      customButtons: {
+        addToRoleButton: {
+          handler: (data) => this.addToRole(data),
+        }
+      }
     };
+
+    if (this.authService.getUserInfo().isAdmin) {
+      this.userTableObj.labels.push('addToRoleButton');
+    }
   }
 
-  modarateData() {
+  moderateData() {
     this.users.map((user, index) => {
       user.number = index + 1;
       user.details = 'Деталі';
+      user.addToRoleButton = true;
     });
   }
 
@@ -55,4 +72,11 @@ export class UsersTableComponent implements OnInit {
     console.log(user);
   }
 
+  addToRole(user) {
+    this.dialog.open(AddToRoleDialogComponent, {
+      data: {
+        users: [user]
+      }
+    });
+  }
 }
