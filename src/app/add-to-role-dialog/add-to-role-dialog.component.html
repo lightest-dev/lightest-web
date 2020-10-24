@@ -4,7 +4,7 @@
     <form [formGroup]="roleForm">
         <mat-form-field>
             <mat-label>Користувач</mat-label>
-            <mat-select name="userId" formControlName="userId" [(value)]="userId">
+            <mat-select name="userId" formControlName="userId">
                 <mat-option *ngFor="let user of data.users" value="{{user.id}}">{{user.name}} {{user.surname}}</mat-option>
             </mat-select>
             <mat-error *ngIf="formErrors.role">{{formErrors.role}}</mat-error>

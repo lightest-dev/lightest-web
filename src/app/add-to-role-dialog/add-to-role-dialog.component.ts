@@ -83,8 +83,8 @@ export class AddToRoleDialogComponent implements OnInit {
   submit(): void {
     this.inProgress = true;
     this.accountService.addToRole({
-      userId: this.userId,
-      role: this.role,
+      userId: this.roleForm.value.userId,
+      role: this.roleForm.value.role,
     }).subscribe(() => {
       this.messageService.showSnackBar({
         isError: false,
