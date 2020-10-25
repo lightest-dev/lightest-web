@@ -39,7 +39,7 @@ export class AuthService {
     return difference < LOGIN_TIMEOUT_MS;
   }
 
-  login(data: { login: any; password: any; }): Observable<Object> {
+  login(data: { login: string; password: string; }): Observable<Object> {
     const options = {
       withCredentials: true
     };

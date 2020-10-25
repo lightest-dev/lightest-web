@@ -3,6 +3,7 @@ import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import { LOGIN_URL } from 'src/config/apiConfig';
+import { ResetPasswordResult } from '../models/ResetPasswordResult';
 
 @Injectable()
 export class AccountService {
@@ -51,5 +52,15 @@ export class AccountService {
     };
 
     return this.http.post(`${LOGIN_URL}/account/change-password`, data, options);
+  }
+
+  resetPassword(data: {
+    userName: string,
+  }): Observable<ResetPasswordResult> {
+    const options = {
+      withCredentials: true
+    };
+
+    return this.http.post<ResetPasswordResult>(`${LOGIN_URL}/account/reset-password`, data, options);
   }
 }
