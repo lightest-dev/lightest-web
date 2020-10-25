@@ -6,7 +6,7 @@ export class User {
   isTeacher?: boolean;
   name: string;
   surname: string;
-  login: string;
+  userName: string;
   email: string;
   tasks: Assignment[];
   groups: [

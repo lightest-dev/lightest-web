@@ -3,4 +3,5 @@ export class UserShort {
   name: string;
   surname: string;
   email: string;
+  userName: string;
 }
