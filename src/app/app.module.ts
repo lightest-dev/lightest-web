@@ -60,6 +60,7 @@ import { UploadsListComponent } from './uploads-list/uploads-list.component';
 import { AddToRoleDialogComponent } from './add-to-role-dialog/add-to-role-dialog.component';
 import { AccountService } from './shared/services/account.service';
 import { ChangePasswordDialogComponent } from './change-password-dialog/change-password-dialog.component';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -102,7 +103,8 @@ import { ChangePasswordDialogComponent } from './change-password-dialog/change-p
     AddUsersToCategoriesComponent,
     UploadsListComponent,
     AddToRoleDialogComponent,
-    ChangePasswordDialogComponent
+    ChangePasswordDialogComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     AppRoutingModule,
