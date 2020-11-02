@@ -4,6 +4,7 @@ import {API_URL} from '../../../config/apiConfig';
 import {Category} from '../models/Category';
 import {CategoryUser} from '../models/CategoryUser';
 import {Observable} from 'rxjs';
+import { BaseTask } from '../models/tasks/BaseTask';
 
 @Injectable({
   providedIn: 'root'
@@ -23,19 +24,29 @@ export class CategoriesService {
     return this.http.post<Category>(`${API_URL}/categories`, category);
   }
 
-  getCategory(id): Observable<Category> {
+  getCategory(id: string): Observable<Category> {
     return this.http.get<Category>(`${API_URL}/categories/${id}`);
   }
 
-  putCategory(id, newCategory: Category) {
+  getChildren(id: string): Observable<{
+    tasks: BaseTask[],
+    subCategories: Category[]
+  }> {
+    return this.http.get<{
+      tasks: BaseTask[],
+      subCategories: Category[]
+    }>(`${API_URL}/categories/${id}/children`);
+  }
+
+  putCategory(id: string, newCategory: Category) {
     return this.http.put(`${API_URL}/categories/${id}`, newCategory);
   }
 
-  deleteCategory(id) {
+  deleteCategory(id: string) {
     return this.http.delete(`${API_URL}/categories/${id}`);
   }
 
-  addUsersToCategory(id, users: CategoryUser) {
+  addUsersToCategory(id: string, users: CategoryUser) {
     return this.http.post(`${API_URL}/categories/${id}/add-users`, users);
   }
 
