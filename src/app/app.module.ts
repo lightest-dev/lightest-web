@@ -61,6 +61,7 @@ import { AddToRoleDialogComponent } from './add-to-role-dialog/add-to-role-dialo
 import { AccountService } from './shared/services/account.service';
 import { ChangePasswordDialogComponent } from './change-password-dialog/change-password-dialog.component';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import { CategoryTreeComponent } from './category-tree/category-tree.component';
 
 @NgModule({
   declarations: [
@@ -104,7 +105,8 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
     UploadsListComponent,
     AddToRoleDialogComponent,
     ChangePasswordDialogComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    CategoryTreeComponent
   ],
   imports: [
     AppRoutingModule,
