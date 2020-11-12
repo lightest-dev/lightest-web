@@ -38,7 +38,7 @@ export class TableBaseComponent implements OnInit {
     this.labels = this.tableData.labels;
     this.labelsName = this.tableData.labelsName;
     this.displayedColumns = this.labels;
-    this.customButtons = this.tableData.customButtons;
+    this.customButtons = this.tableData.customButtons || [];
     this.dataSource = new MatTableDataSource(this.data);
   }
 
