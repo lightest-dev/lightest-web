@@ -32,6 +32,16 @@ export class EditorComponent implements OnInit {
   activeLanguage = {name: 'cpp', id: ''};
   activeTheme = 'vs-dark';
 
+  // TODO: move it server? (it is client-specific though)
+  // Edit this map when adding new languages
+  nameReplacement = {
+    'c++' : 'cpp',
+    'c' : 'cpp',
+    'c#': 'csharp',
+    'python3': 'python',
+    'pas': 'pascal'
+  }
+
   editorOptionsForm: FormGroup;
   formErrors = {
     'languages': ''
@@ -92,9 +102,12 @@ export class EditorComponent implements OnInit {
   }
 
   loadEditorOptions() {
+    const lowerCaseName = this.activeLanguage.name.toLowerCase();
+    const linterName = this.nameReplacement[lowerCaseName] || lowerCaseName;
+
     this.options = {
       theme: this.activeTheme,
-      language: this.activeLanguage.name
+      language: linterName
     };
   }
 
