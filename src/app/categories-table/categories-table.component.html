@@ -1,4 +1,17 @@
 <ng-container *ngIf="tableObj">
+  <div class="header-table-wrapper">
+    <h3>Список крусів</h3>
+    <div class="align-buttons">
+      <button (click)="router.navigate(['l/categories/add'])"
+              mat-button
+              class="c-button"
+              type="button">Додати курс</button>
+      <button (click)="router.navigate(['l/add-users-to-categories'])"
+              mat-button
+              class="c-button"
+              type="button">Додати студентів до курсу</button>
+    </div>
+  </div>
   <app-table-base [tableData]="tableObj" (deleteItem)="delete($event)"
     (editItem)="edit($event)" (viewItem)="view($event)">
   </app-table-base>

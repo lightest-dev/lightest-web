@@ -1,4 +1,13 @@
 <ng-container *ngIf="tableObj">
+  <div class="header-table-wrapper">
+    <h3>Список програм перевірок</h3>
+    <div>
+      <button (click)="router.navigate(['l/checkers/add'])"
+              mat-button
+              class="c-button"
+              type="button">Додати групу</button>
+    </div>
+  </div>
   <app-table-base [tableData]="tableObj" (deleteItem)="delete($event)"
     (editItem)="edit($event)" (viewItem)="view($event)">
   </app-table-base>
