@@ -129,17 +129,6 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'languages',
-        canActivate: [AuthGuardService],
-        children: [
-          {
-            path: 'add',
-            canActivate: [AuthGuardAdminService],
-            component: LanguagePageComponent
-          },
-        ]
-      },
-      {
         path: 'groups',
         canActivate: [AuthGuardService],
         children: [

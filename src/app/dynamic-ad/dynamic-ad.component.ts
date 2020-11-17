@@ -34,7 +34,6 @@ export class DynamicAdComponent implements OnInit, OnDestroy {
     (<AdComponent>componentRef.instance).data = this.ads.data;
 
     componentRef.instance['form'].subscribe(data => {
-      console.log(data);
       this.form.emit(data);
     });
   }

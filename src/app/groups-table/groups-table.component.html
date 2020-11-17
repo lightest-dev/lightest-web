@@ -12,8 +12,9 @@
               type="button">Додати студентів до груп</button>
     </div>
   </div>
-  <app-table-base [tableData]="tableObj" (deleteItem)="delete($event)"
-    (editItem)="edit($event)" (viewItem)="view($event)">
-  </app-table-base>
+
+    <app-table-base [tableData]="tableObj" (deleteItem)="delete($event)"
+                    (editItem)="edit($event)" (viewItem)="view($event)">
+    </app-table-base>
 </ng-container>
 
