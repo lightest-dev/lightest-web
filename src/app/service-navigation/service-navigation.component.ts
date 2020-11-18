@@ -38,14 +38,14 @@ export class ServiceNavigationComponent implements OnInit {
       link: 'l/groups/table'
     },
     {
-      name: 'Категорії',
+      name: 'Курси',
       tooltip: 'Переглянути список',
       description: '',
       icon: 'category',
       link: 'l/categories/table'
     },
     {
-      name: 'Створити категорію',
+      name: 'Створити курс',
       tooltip: 'Створити',
       description: '',
       icon: 'category',
@@ -78,13 +78,6 @@ export class ServiceNavigationComponent implements OnInit {
       description: '',
       icon: 'how_to_vote',
       link: 'l/checkers/add'
-    },
-    {
-      name: 'Створити мову',
-      tooltip: 'Створити',
-      description: '',
-      icon: 'language',
-      link: 'l/languages/add'
     },
     {
       name: 'Додати завдання студентам',

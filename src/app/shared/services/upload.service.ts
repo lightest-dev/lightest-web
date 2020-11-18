@@ -17,7 +17,8 @@ export class UploadService {
   }
 
   getTaskUploads(taskId: string, userId?: string): Observable<TaskResult[]> {
-    return this.http.get<TaskResult[]>(`${API_URL}/uploads/${taskId}/all/${userId || ''}`);
+    let requestStr: string = userId ? `/uploads/${taskId}/all/${userId}` : `/uploads/${taskId}/all`
+    return this.http.get<TaskResult[]>(`${API_URL}${requestStr}`);
   }
 
   getUploadStatus(uploadId: string): Observable<TaskResult> {

@@ -1,4 +1,7 @@
 <ng-container *ngIf="userTableObj">
+  <div class="header-table-wrapper">
+    <h3>Список користувачів</h3>
+  </div>
   <app-table-base [tableData]="userTableObj" (deleteItem)="deleteUser($event)"></app-table-base>
 </ng-container>
 

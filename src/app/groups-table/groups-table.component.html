@@ -1,6 +1,20 @@
 <ng-container *ngIf="tableObj">
-  <app-table-base [tableData]="tableObj" (deleteItem)="delete($event)"
-    (editItem)="edit($event)" (viewItem)="view($event)">
-  </app-table-base>
+  <div class="header-table-wrapper">
+    <h3>Список груп студентів</h3>
+    <div class="align-buttons">
+      <button (click)="router.navigate(['l/groups/add'])"
+              mat-button
+              class="c-button"
+              type="button">Додати групу</button>
+      <button (click)="router.navigate(['l/add-users-to-group'])"
+              mat-button
+              class="c-button"
+              type="button">Додати студентів до груп</button>
+    </div>
+  </div>
+
+    <app-table-base [tableData]="tableObj" (deleteItem)="delete($event)"
+                    (editItem)="edit($event)" (viewItem)="view($event)">
+    </app-table-base>
 </ng-container>
 

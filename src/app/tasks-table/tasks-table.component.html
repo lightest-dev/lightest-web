@@ -1,4 +1,17 @@
 <ng-container *ngIf="userTableObj">
+  <div class="header-table-wrapper">
+    <h3>Список завдань</h3>
+    <div class="align-buttons">
+      <button (click)="navigateToTaskCreating()"
+              mat-button
+              class="c-button"
+              type="button">Додати завдання</button>
+      <button (click)="navigateToTaskAssignment()"
+              mat-button
+              class="c-button"
+              type="button">Присвоїти завдання студентам</button>
+    </div>
+  </div>
   <app-table-base [tableData]="userTableObj" (deleteItem)="deleteTask($event)"
     (editItem)="edit($event)" (viewItem)="view($event)">
   </app-table-base>

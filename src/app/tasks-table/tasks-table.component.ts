@@ -86,7 +86,7 @@ export class TasksTableComponent implements OnInit {
       labels: ['number', 'name', 'categoryId', 'checkerId', 'public', 'details', 'delete', 'edit'],
       labelsName: {
         number: '№',
-        name: 'Ім\'я',
+        name: 'Назва',
         categoryId: 'Категорія',
         checkerId: 'Програма перевірки',
         public: 'Публічне',
@@ -131,5 +131,13 @@ export class TasksTableComponent implements OnInit {
 
   view(data) {
     this.edit(data);
+  }
+
+  navigateToTaskCreating() {
+    this.router.navigate(['l/tasks/add']);
+  }
+
+  navigateToTaskAssignment() {
+    this.router.navigate(['l/add-task-for-users']);
   }
 }

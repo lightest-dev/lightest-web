@@ -1,4 +1,4 @@
-import {ErrorHandler, NgModule} from '@angular/core';
+import { NgModule} from '@angular/core';
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -43,7 +43,7 @@ import {TestPageComponent} from './test-page/test-page.component';
 import {TaskComponent} from './user/task/task.component';
 import {ProfileService} from './shared/services/profile.service';
 import { InfoDialogComponent } from './info-dialog/info-dialog.component';
-import { TableBaseComponent } from './table-base/table-base.component';
+import {DeleteConfirmDialog, TableBaseComponent} from './table-base/table-base.component';
 import { UsersTableComponent } from './users-table/users-table.component';
 import { CategoriesTableComponent } from './categories-table/categories-table.component';
 import { TasksTableComponent } from './tasks-table/tasks-table.component';
@@ -104,7 +104,8 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
     UploadsListComponent,
     AddToRoleDialogComponent,
     ChangePasswordDialogComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    DeleteConfirmDialog,
   ],
   imports: [
     AppRoutingModule,
@@ -142,7 +143,8 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
     UserChangeInfoDialogComponent,
     InfoDialogComponent,
     LanguageFormComponent,
-    TestFormComponent
+    TestFormComponent,
+    DeleteConfirmDialog,
   ],
 })
 
