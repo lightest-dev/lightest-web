@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-table-base',
@@ -23,7 +24,7 @@ export class TableBaseComponent implements OnInit {
   @Output() editItem = new EventEmitter();
   @Output() viewItem = new EventEmitter();
 
-  constructor() {}
+  constructor(public dialog: MatDialog,) {}
 
   ngOnInit() {
     this.initData();
@@ -47,7 +48,12 @@ export class TableBaseComponent implements OnInit {
   }
 
   handleDelete(event) {
-    this.deleteItem.emit(event);
+    const dialogRef = this.dialog.open(DeleteConfirmDialog);
+    dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        this.deleteItem.emit(event);
+      }
+    });
   }
 
   handleEdit(event) {
@@ -58,3 +64,9 @@ export class TableBaseComponent implements OnInit {
     this.viewItem.emit(event);
   }
 }
+
+@Component({
+  selector: 'delete-confirm-dialog',
+  templateUrl: 'delete-confirm-dialog.html',
+})
+export class DeleteConfirmDialog {}

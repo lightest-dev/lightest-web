@@ -27,7 +27,7 @@ export class UploadsListComponent implements OnInit {
           this.taskService.getTask(params.get('id'))
             .subscribe(data => {
               this.task = data;
-             if (this.task.points > 0) {
+              if (this.getMaxPoints() > 0) {
                // TODO: cleanup, completed is returned from server
                this.task.completed = true;
              }
@@ -52,4 +52,11 @@ export class UploadsListComponent implements OnInit {
     this.router.navigate([`l/editor/${taskId}`]);
   }
 
+  getPassedUploads() {
+    return this.uploads.filter(u => u.points > 0).length;
+  }
+
+  getMaxPoints() {
+    return Math.max(this.uploads.map(u => u.points));
+  }
 }
