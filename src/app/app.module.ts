@@ -61,6 +61,7 @@ import { AddToRoleDialogComponent } from './add-to-role-dialog/add-to-role-dialo
 import { AccountService } from './shared/services/account.service';
 import { ChangePasswordDialogComponent } from './change-password-dialog/change-password-dialog.component';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import { TasksUploadsPreviewPageComponent } from './tasks-uploads-preview-page/tasks-uploads-preview-page.component';
 
 @NgModule({
   declarations: [
@@ -106,6 +107,7 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
     ChangePasswordDialogComponent,
     ConfirmationDialogComponent,
     DeleteConfirmDialog,
+    TasksUploadsPreviewPageComponent,
   ],
   imports: [
     AppRoutingModule,
