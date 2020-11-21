@@ -9,7 +9,6 @@ import {TaskService} from '../shared/services/task.service';
   styleUrls: ['./uploads-list.component.scss']
 })
 export class UploadsListComponent implements OnInit {
-  step = -1;
   uploads;
   task;
 
@@ -27,36 +26,12 @@ export class UploadsListComponent implements OnInit {
           this.taskService.getTask(params.get('id'))
             .subscribe(data => {
               this.task = data;
-              if (this.getMaxPoints() > 0) {
-               // TODO: cleanup, completed is returned from server
-               this.task.completed = true;
-             }
             });
         });
     });
   }
 
-  setStep(index: number) {
-    this.step = index;
-  }
-
-  nextStep() {
-    this.step++;
-  }
-
-  prevStep() {
-    this.step--;
-  }
-
-  doExcercise(taskId) {
-    this.router.navigate([`l/editor/${taskId}`]);
-  }
-
-  getPassedUploads() {
-    return this.uploads.filter(u => u.points > 0).length;
-  }
-
-  getMaxPoints() {
-    return Math.max(this.uploads.map(u => u.points));
+  navigateToTaskResolve() {
+    this.router.navigate([`l/editor/${this.task.id}`])
   }
 }

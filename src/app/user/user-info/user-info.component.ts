@@ -76,7 +76,6 @@ export class UserInfoComponent implements OnInit {
   getUser(id)  {
    this.accountService.getUser(id).subscribe(data => {
         this.user = data;
-        console.log(data);
       }, () => {},
       () => {
         this.getTasks();
@@ -98,7 +97,7 @@ export class UserInfoComponent implements OnInit {
             task['languages'] = data['languages'];
         });
       });
-  
+
       this.taskTabs.done.tasks = this.taskService.findDoneTasks(this.user.tasks);
       this.taskTabs.notDone.tasks = this.taskService.findNotDoneTasks(this.user.tasks);
       this.taskTabs.all.tasks = this.taskTabs.done.tasks.concat(this.taskTabs.notDone.tasks);

@@ -1,0 +1,57 @@
+<div *ngIf="task && uploads">
+  <div class="header-table-wrapper">
+    <h3>Опис завдання</h3>
+  </div>
+  <div class="description-wrapper">
+    <app-task-preview [task]="task"></app-task-preview>
+  </div>
+  <div class="header-table-wrapper">
+    <h3>Звіт виконаної роботи</h3>
+  </div>
+  <div class="description-wrapper">
+    <div class="title-wrap"><span class="title">Статус роботи: </span>{{isCompleted() ? 'Завершено' : 'Не завершено'}}</div>
+    <br>
+    <div class="title-wrap"><span class="title">Оцінка: </span>{{getMaxPoints()}}/100</div>
+    <br>
+    <div class="title-wrap"><span class="title">Зроблено успішних спроб: </span>{{getPassedUploads()}}/{{uploads.length}}</div>
+  </div>
+  <br>
+  <div class="header-table-wrapper">
+    <h3>Список здійснених спроб</h3>
+  </div>
+
+  <mat-accordion *ngIf="uploads.length" class="example-headers-align">
+    <mat-expansion-panel *ngFor="let upload of uploads; let i = index" [expanded]="step === i" (opened)="setStep(i)" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title >
+          {{task.name}}
+        </mat-panel-title>
+        <mat-panel-description>
+          <!--        {{chosenTask.category.name}}-->
+          <span class="points">{{upload.points}} / {{task.points}}</span>
+          <mat-icon *ngIf="!isCompleted()" matTooltip="Завдання не виконано"><i class="material-icons">notifications</i></mat-icon>
+          <mat-icon *ngIf="isCompleted()" matTooltip="Виконано"><i class="material-icons">done_all</i></mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <h3>Код програми</h3>
+      <br>
+      <ngx-monaco-editor [options]="{language: 'cpp', theme: 'vs-dark', readOnly: true}" [(ngModel)]="upload.code"></ngx-monaco-editor>
+      <br>
+      <br>
+      <ng-container *ngIf="upload.message">
+        <h3>Повідомлення компіляції</h3>
+        <br>
+        <pre>{{upload.message}}</pre>
+      </ng-container>
+
+      <mat-action-row>
+        <button mat-button color="primary" (click)="prevStep()">Попереднє</button>
+        <button mat-button color="primary" (click)="nextStep()">Наступне</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <div class="no-tasks" *ngIf="!uploads.length">
+    <i class="material-icons">sentiment_dissatisfied</i>
+  </div>
+</div>

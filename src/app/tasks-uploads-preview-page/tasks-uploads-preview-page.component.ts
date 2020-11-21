@@ -16,7 +16,6 @@ export class TasksUploadsPreviewPageComponent implements OnInit {
   public users;
   public chosenTask;
   public uploads;
-  public step = -1;
   form: FormGroup;
 
   constructor(private taskService: TaskService,
@@ -55,30 +54,6 @@ export class TasksUploadsPreviewPageComponent implements OnInit {
   getUploads(taskId, userId) {
     this.uploadsService.getTaskUploads(taskId, userId).subscribe((data) => {
       this.uploads = data;
-      if (this.getMaxPoints() > 0) {
-        this.chosenTask.completed = true;
-      }
     });
   }
-
-  setStep(index: number) {
-    this.step = index;
-  }
-
-  nextStep() {
-    this.step++;
-  }
-
-  prevStep() {
-    this.step--;
-  }
-
-  getPassedUploads() {
-    return this.uploads.filter(u => u.points > 0).length;
-  }
-
-  getMaxPoints() {
-    return Math.max(this.uploads.map(u => u.points));
-  }
-
 }

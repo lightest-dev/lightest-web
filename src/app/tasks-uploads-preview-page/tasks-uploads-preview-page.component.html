@@ -1,69 +1,26 @@
-<form *ngIf="users && tasks" [formGroup]="form" id="tasks-uploads-preview">
-  <mat-select formControlName="users">
-    <mat-option name="users" disabled>Виберіть користувача</mat-option>
-    <mat-option *ngFor="let user of users" value="{{user.id}}">{{user.name}} {{user.surname}}</mat-option>
-  </mat-select>
+<div class="header-table-wrapper">
+  <div>
+    <h1>Перегляд розв'язків</h1>
+    <p class="muted">Для перегляду розв'язку, будь ласка, виберіть користувача та завдання зі списків</p>
+  </div>
+</div>
 
-  <mat-select formControlName="tasks">
-    <mat-option name="tasks" disabled>Виберіть завдання</mat-option>
-    <mat-option *ngFor="let task of tasks" value="{{task.id}}">{{task.name}}</mat-option>
-  </mat-select>
+<form *ngIf="users && tasks" [formGroup]="form" id="tasks-uploads-preview">
+  <mat-form-field>
+    <mat-label>Користувач</mat-label>
+    <mat-select name="users" formControlName="users">
+      <mat-option>Виберіть користувача</mat-option>
+      <mat-option *ngFor="let user of users" value="{{user.id}}">{{user.name}} {{user.surname}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Завдання</mat-label>
+    <mat-select name="tasks" formControlName="tasks">
+      <mat-option>Виберіть завдання</mat-option>
+      <mat-option *ngFor="let task of tasks" value="{{task.id}}">{{task.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
 </form>
 
-
-<div *ngIf="chosenTask && uploads">
-  <div class="header-table-wrapper">
-    <h3>Опис завдання</h3>
-  </div>
-  <div class="description-wrapper">
-    <div>Назва завдання: {{chosenTask.name}}</div>
-    <br>
-    <div>Опис: {{chosenTask.description}}</div>
-    <br>
-  </div>
-  <div class="header-table-wrapper">
-    <h3>Звіт</h3>
-  </div>
-  <div class="description-wrapper">
-    <div>Статус роботи: {{chosenTask.completed ? 'Завершено' : 'Не завершено'}}</div>
-    <br>
-    <div>Оцінка: {{getMaxPoints()}}/100</div>
-    <br>
-    <div>Успішних зроблено успішних спроб: {{getPassedUploads()}}/{{uploads.length}}</div>
-  </div>
-  <br>
-  <div class="header-table-wrapper">
-    <h3>Список здійснених спроб</h3>
-  </div>
-
-  <mat-accordion class="example-headers-align">
-    <mat-expansion-panel *ngFor="let upload of uploads; let i = index" [expanded]="step === i" (opened)="setStep(i)" hideToggle>
-      <mat-expansion-panel-header>
-        <mat-panel-title >
-          {{chosenTask.name}}
-        </mat-panel-title>
-        <mat-panel-description>
-          <!--        {{chosenTask.category.name}}-->
-          <span class="points">{{upload.points}} / {{chosenTask.points}}</span>
-          <mat-icon *ngIf="!chosenTask.completed" matTooltip="Завдання не виконано"><i class="material-icons">notifications</i></mat-icon>
-          <mat-icon *ngIf="chosenTask.completed" matTooltip="Виконано"><i class="material-icons">done_all</i></mat-icon>
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-
-      <h3>Код програми</h3>
-      {{upload.code}}
-      <br>
-      <br>
-      <ng-container *ngIf="upload.message">
-        <h3>Повідомлення компіляції</h3>
-        {{upload.message}}
-      </ng-container>
-
-      <mat-action-row>
-        <button mat-button color="primary" (click)="prevStep()">Попереднє</button>
-        <button mat-button color="primary" (click)="nextStep()">Наступне</button>
-      </mat-action-row>
-    </mat-expansion-panel>
-  </mat-accordion>
-
-</div>
+<app-uploads-preview [task]="chosenTask" [uploads]="uploads"></app-uploads-preview>

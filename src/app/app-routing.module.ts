@@ -58,7 +58,7 @@ const routes: Routes = [
       {
         path: 'tasks-uploads',
         component: TasksUploadsPreviewPageComponent,
-        canActivate: [AuthGuardService]
+        canActivate: [AuthGuardAdminService]
       },
       {
         path: 'editor/:id',

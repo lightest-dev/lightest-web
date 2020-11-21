@@ -10,6 +10,10 @@
               mat-button
               class="c-button"
               type="button">Присвоїти завдання студентам</button>
+      <button (click)="navigateToTaskRsults()"
+              mat-button
+              class="c-button"
+              type="button">Переглянути розв'язки</button>
     </div>
   </div>
   <app-table-base [tableData]="userTableObj" (deleteItem)="deleteTask($event)"

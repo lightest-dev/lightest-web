@@ -1,0 +1,44 @@
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.mat-panel-description {
+  position: relative;
+}
+
+.points {
+  position: absolute;
+  right: 75px;
+}
+
+.description-wrapper {
+  padding: 20px 30px;
+}
+
+.no-tasks {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+  color: #848c8a;
+
+  i {
+    font-size: 35px;
+  }
+}
+
+.title {
+  font-weight: bold;
+  padding-right: 20px;
+}
+
+.title-wrap {
+  display: flex;
+}

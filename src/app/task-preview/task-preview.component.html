@@ -1,0 +1,11 @@
+<div class="title-wrap"><span class="title">Назва завдання:</span> {{task.name}}</div>
+<br>
+<div class="title-wrap"><span class="title">Опис:</span> <pre>{{task.description}}</pre></div>
+<br>
+<div class="title-wrap"><span class="title">Приклади:</span> <pre>{{task.examples}}</pre></div>
+<br>
+<div class="title-wrap"><span class="title">Публічне:</span> <span>{{task.public ? 'Так' : 'Ні'}}</span></div>
+<ng-container *ngIf="task.checkerName">
+  <br>
+  <div class="title-wrap"><span class="title">Програма перевірки: </span> <span>{{task.checkerName}}</span></div>
+</ng-container>
