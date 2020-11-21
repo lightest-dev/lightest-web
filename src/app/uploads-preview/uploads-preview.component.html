@@ -11,7 +11,7 @@
   <div class="description-wrapper">
     <div class="title-wrap"><span class="title">Статус роботи: </span>{{isCompleted() ? 'Завершено' : 'Не завершено'}}</div>
     <br>
-    <div class="title-wrap"><span class="title">Оцінка: </span>{{getMaxPoints()}}/100</div>
+    <div class="title-wrap"><span class="title">Оцінка: </span>{{getMaxPoints()}}/{{task.points}}</div>
     <br>
     <div class="title-wrap"><span class="title">Зроблено успішних спроб: </span>{{getPassedUploads()}}/{{uploads.length}}</div>
   </div>
