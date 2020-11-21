@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {TaskService} from '../shared/services/task.service';
 import {SnackbarService} from '../shared/services/snackbar.service';
 import {combineLatest} from 'rxjs';
 import {CheckerService} from '../shared/services/checker.service';
 import {CategoriesService} from '../shared/services/categories.service';
 import { Router } from '@angular/router';
+import {DeleteConfirmDialog} from "../table-base/table-base.component";
+import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
+import {DialogData} from "../user-change-info-dialog/user-change-info-dialog.component";
 
 @Component({
   selector: 'app-tasks-table',
@@ -22,7 +25,8 @@ export class TasksTableComponent implements OnInit {
               private messageService: SnackbarService,
               private checkerService: CheckerService,
               private categoryService: CategoriesService,
-              private router: Router) { }
+              private router: Router,
+              public dialog: MatDialog,) { }
 
   ngOnInit() {
    this.getTasks();
@@ -56,7 +60,8 @@ export class TasksTableComponent implements OnInit {
     }, () => {},
       () => {
         for (let i = 0; i < this.tasks.length; i++) {
-          this.tasks[i].checkerId = this.checkers[i].name;
+          this.tasks[i].checkerId = this.checkers[i].id;
+          this.tasks[i].checkerName = this.checkers[i].name;
         }
         this.getCategories();
       });
@@ -83,12 +88,12 @@ export class TasksTableComponent implements OnInit {
 
   loadObjForTable() {
     this.userTableObj = {
-      labels: ['number', 'name', 'categoryId', 'checkerId', 'public', 'details', 'delete', 'edit'],
+      labels: ['number', 'name', 'categoryId', 'checkerName', 'public', 'details', 'delete', 'edit'],
       labelsName: {
         number: '№',
         name: 'Назва',
         categoryId: 'Категорія',
-        checkerId: 'Програма перевірки',
+        checkerName: 'Програма перевірки',
         public: 'Публічне',
         details: 'Деталі',
         delete: 'Видалити',
@@ -130,7 +135,7 @@ export class TasksTableComponent implements OnInit {
   }
 
   view(data) {
-    this.edit(data);
+    this.dialog.open(TaskPreviewDialog, { data });
   }
 
   navigateToTaskCreating() {
@@ -140,4 +145,16 @@ export class TasksTableComponent implements OnInit {
   navigateToTaskAssignment() {
     this.router.navigate(['l/add-task-for-users']);
   }
+
+  navigateToTaskRsults() {
+    this.router.navigate(['l/tasks-uploads']);
+  }
+}
+
+@Component({
+  selector: 'task-preview-dialog',
+  templateUrl: 'task-preview-dialog.html',
+})
+export class TaskPreviewDialog {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {}
 }

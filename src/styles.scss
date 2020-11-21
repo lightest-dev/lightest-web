@@ -10,6 +10,10 @@ html {
     font-family: 'Quicksand', sans-serif;
 }
 
+pre {
+  font-family: 'Quicksand', sans-serif;
+}
+
 body *{
   &::-webkit-scrollbar-track
   {
@@ -129,4 +133,8 @@ app-language-form {
   display: flex;
   justify-content: space-between;
   padding: 20px;
+}
+
+.muted {
+  color: #b9b9b9;
 }

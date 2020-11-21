@@ -46,7 +46,7 @@ import { InfoDialogComponent } from './info-dialog/info-dialog.component';
 import {DeleteConfirmDialog, TableBaseComponent} from './table-base/table-base.component';
 import { UsersTableComponent } from './users-table/users-table.component';
 import { CategoriesTableComponent } from './categories-table/categories-table.component';
-import { TasksTableComponent } from './tasks-table/tasks-table.component';
+import {TaskPreviewDialog, TasksTableComponent} from './tasks-table/tasks-table.component';
 import { CheckersTableComponent } from './checkers-table/checkers-table.component';
 import { GroupsTableComponent } from './groups-table/groups-table.component';
 import { TestsTableComponent } from './tests-table/tests-table.component';
@@ -61,6 +61,9 @@ import { AddToRoleDialogComponent } from './add-to-role-dialog/add-to-role-dialo
 import { AccountService } from './shared/services/account.service';
 import { ChangePasswordDialogComponent } from './change-password-dialog/change-password-dialog.component';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import { TasksUploadsPreviewPageComponent } from './tasks-uploads-preview-page/tasks-uploads-preview-page.component';
+import { UploadsPreviewComponent } from './uploads-preview/uploads-preview.component';
+import { TaskPreviewComponent } from './task-preview/task-preview.component';
 
 @NgModule({
   declarations: [
@@ -106,6 +109,10 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
     ChangePasswordDialogComponent,
     ConfirmationDialogComponent,
     DeleteConfirmDialog,
+    TasksUploadsPreviewPageComponent,
+    UploadsPreviewComponent,
+    TaskPreviewDialog,
+    TaskPreviewComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -145,6 +152,7 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
     LanguageFormComponent,
     TestFormComponent,
     DeleteConfirmDialog,
+    TaskPreviewDialog,
   ],
 })
 

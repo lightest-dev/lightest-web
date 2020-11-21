@@ -1,1 +1,1 @@
-export const THEMES: string[] = ['vs-dark', 'hc-black'];
+export const THEMES: string[] = ['vs', 'vs-dark', 'hc-black'];

@@ -2,12 +2,14 @@
   <mat-sidenav #sidenav mode="side" position="end">
     <div class="description" *ngIf="task && task.description">
       <h4>Опис</h4>
+      <br>
       {{task.description}}
       <br>
       <br>
       <br>
       <h4>Приклади вхідних, вихідних даних</h4>
-      {{task.examples}}
+      <br>
+      <pre>{{task.examples}}</pre>
     </div>
   </mat-sidenav>
 

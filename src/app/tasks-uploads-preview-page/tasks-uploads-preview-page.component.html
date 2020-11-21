@@ -1,0 +1,26 @@
+<div class="header-table-wrapper">
+  <div>
+    <h1>Перегляд розв'язків</h1>
+    <p class="muted">Для перегляду розв'язку, будь ласка, виберіть користувача та завдання зі списків</p>
+  </div>
+</div>
+
+<form *ngIf="users && tasks" [formGroup]="form" id="tasks-uploads-preview">
+  <mat-form-field>
+    <mat-label>Користувач</mat-label>
+    <mat-select name="users" formControlName="users">
+      <mat-option>Виберіть користувача</mat-option>
+      <mat-option *ngFor="let user of users" value="{{user.id}}">{{user.name}} {{user.surname}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Завдання</mat-label>
+    <mat-select name="tasks" formControlName="tasks">
+      <mat-option>Виберіть завдання</mat-option>
+      <mat-option *ngFor="let task of tasks" value="{{task.id}}">{{task.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>
+
+<app-uploads-preview [task]="chosenTask" [uploads]="uploads"></app-uploads-preview>

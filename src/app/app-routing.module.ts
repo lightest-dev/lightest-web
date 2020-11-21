@@ -26,6 +26,7 @@ import {AuthGuardAdminService} from './shared/guards/auth-guard-admin.service';
 import {AddUsersToGroupComponent} from './add-users-to-group/add-users-to-group.component';
 import {AddUsersToCategoriesComponent} from './add-users-to-categories/add-users-to-categories.component';
 import {UploadsListComponent} from './uploads-list/uploads-list.component';
+import {TasksUploadsPreviewPageComponent} from "./tasks-uploads-preview-page/tasks-uploads-preview-page.component";
 
 const routes: Routes = [
   {
@@ -53,6 +54,11 @@ const routes: Routes = [
       {
         path: 'account',
         component: UserInfoComponent
+      },
+      {
+        path: 'tasks-uploads',
+        component: TasksUploadsPreviewPageComponent,
+        canActivate: [AuthGuardAdminService]
       },
       {
         path: 'editor/:id',
