@@ -5,31 +5,25 @@
       <p *ngIf="isEdit">Редагувати завдання</p>
     </div>
 
-     <div class="double-inputs">
-         <mat-form-field>
-          <input matInput
-                 placeholder="Назва завдання"
-                 name="taskName"
-                 formControlName="taskName">
-             <mat-error *ngIf="formErrorstaskForm.taskName">{{formErrorstaskForm.taskName}}</mat-error>
-        </mat-form-field>
+    <div class="double-inputs">
+      <mat-form-field>
+        <input matInput placeholder="Назва завдання" name="taskName" formControlName="taskName">
+        <mat-error *ngIf="formErrorstaskForm.taskName">{{formErrorstaskForm.taskName}}</mat-error>
+      </mat-form-field>
 
-        <mat-form-field>
-          <input matInput
-                 placeholder="Максимальна кількість балів"
-                 name="taskPoints"
-                 formControlName="taskPoints"
-                 type="number" >
-            <mat-error *ngIf="formErrorstaskForm.taskPoints">{{formErrorstaskForm.taskPoints}}</mat-error>
-        </mat-form-field>
-     </div>
+      <mat-form-field>
+        <input matInput placeholder="Максимальна кількість балів" name="taskPoints" formControlName="taskPoints"
+          type="number">
+        <mat-error *ngIf="formErrorstaskForm.taskPoints">{{formErrorstaskForm.taskPoints}}</mat-error>
+      </mat-form-field>
+    </div>
 
     <mat-checkbox name="publicTask" formControlName="publicTask">Публічне завдання</mat-checkbox>
 
     <div class="double-inputs">
       <mat-form-field>
         <mat-label>Категорія</mat-label>
-        <mat-select name="category" formControlName="category" >
+        <mat-select name="category" formControlName="category">
           <mat-option>Виберіть категорію</mat-option>
           <mat-option *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</mat-option>
         </mat-select>
@@ -39,7 +33,7 @@
 
       <mat-form-field>
         <mat-label>Програма перевірки</mat-label>
-        <mat-select name="checker" formControlName="checker" >
+        <mat-select name="checker" formControlName="checker">
           <mat-option>Виберіть програму перевірки</mat-option>
           <mat-option *ngFor="let checker of checkers" value="{{checker.id}}">{{checker.name}}</mat-option>
         </mat-select>
@@ -48,27 +42,20 @@
     </div>
 
     <mat-form-field class="example-full-width">
-      <textarea matInput
-                placeholder="Опис завдання"
-                name="taskDescription"
-                formControlName="taskDescription"
-                type="text">
+      <textarea matInput placeholder="Опис завдання" name="taskDescription" formControlName="taskDescription"
+        type="text">
       </textarea>
       <mat-error *ngIf="formErrorstaskForm.taskDescription">{{formErrorstaskForm.taskDescription}}</mat-error>
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
-      <textarea matInput
-                placeholder="Приклади"
-                name="examples"
-                formControlName="examples"
-                type="text">
+      <textarea matInput placeholder="Приклади" name="examples" formControlName="examples" type="text">
       </textarea>
       <mat-error *ngIf="formErrorstaskForm.examples">{{formErrorstaskForm.examples}}</mat-error>
     </mat-form-field>
   </form>
 
-<!--  LANGUAGE -->
+  <!--  LANGUAGE -->
   <form [formGroup]="languageForm" id="language-form">
     <div class="form-header">
       <p>Мови програмування</p>
@@ -85,39 +72,26 @@
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput
-             type="number"
-             placeholder="Часове обмеження (мс)"
-             name="timeLimit"
-             formControlName="timeLimit">
+      <input matInput type="number" placeholder="Часове обмеження (мс)" name="timeLimit" formControlName="timeLimit">
       <mat-error *ngIf="formErrorsLanguageForm.timeLimit">{{formErrorsLanguageForm.timeLimit}}</mat-error>
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput
-             type="number"
-             placeholder="Обмеження в пам'яті (МБ)"
-             name="memoryLimit"
-             formControlName="memoryLimit">
+      <input matInput type="number" placeholder="Обмеження в пам'яті (МБ)" name="memoryLimit"
+        formControlName="memoryLimit">
       <mat-error *ngIf="formErrorsLanguageForm.memoryLimit">{{formErrorsLanguageForm.memoryLimit}}</mat-error>
     </mat-form-field>
   </form>
 
-   <div class="dynamic-component-wrapper dynamic-language-forms"></div>
-   <button
-     mat-button
-     matTooltip="Додати ще мову"
-     matTooltipPosition="right"
-     matTooltipClass="c-primary-tooltip"
-     class="c-button"
-     type="button"
-     (click)="addLanguageForm()">
-        <i class="material-icons">add_box</i>
-   </button>
+  <div class="dynamic-component-wrapper dynamic-language-forms"></div>
+  <button mat-button matTooltip="Додати ще мову" matTooltipPosition="right" matTooltipClass="c-primary-tooltip"
+    class="c-button" type="button" (click)="addLanguageForm()">
+    <i class="material-icons">add_box</i>
+  </button>
 
-<!-- END LANGUAGE -->
+  <!-- END LANGUAGE -->
 
-<!-- TEST -->
+  <!-- TEST -->
 
   <form [formGroup]="testForm" id="test-form">
     <div class="form-header">
@@ -128,35 +102,25 @@
 
       <span class="counter">1.</span>
 
-      <input matInput
-             placeholder="Input"
-             name="inputTest"
-             formControlName="inputTest">
+      <textarea matInput placeholder="Input" name="inputTest" formControlName="inputTest">
+      </textarea>
       <mat-error *ngIf="formErrorsTestForm.inputTest">{{formErrorsTestForm.inputTest}}</mat-error>
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput
-             placeholder="Output"
-             name="outputTest"
-             formControlName="outputTest">
+      <textarea matInput placeholder="Output" name="outputTest" formControlName="outputTest">
+      </textarea>
       <mat-error *ngIf="formErrorsTestForm.outputTest">{{formErrorsTestForm.outputTest}}</mat-error>
     </mat-form-field>
   </form>
   <div class="dynamic-component-wrapper dynamic-test-forms"></div>
-    <button
-      mat-button
-      matTooltip="Додати ще тест"
-      matTooltipPosition="right"
-      matTooltipClass="c-primary-tooltip"
-      class="c-button"
-      type="button"
-      (click)="addTestForm()">
-        <i class="material-icons">add_box</i>
-    </button>
+  <button mat-button matTooltip="Додати ще тест" matTooltipPosition="right" matTooltipClass="c-primary-tooltip"
+    class="c-button" type="button" (click)="addTestForm()">
+    <i class="material-icons">add_box</i>
+  </button>
 
-<!-- END TEST -->
+  <!-- END TEST -->
 
-    <button mat-button type="submit" class="c-button" (click)="submit()">Зберегти</button>
+  <button mat-button type="submit" class="c-button" (click)="submit()">Зберегти</button>
 
 </div>
