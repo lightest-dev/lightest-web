@@ -7,7 +7,7 @@
 
     <mat-label>Назва завдання</mat-label>
     <mat-select name="task" formControlName="task">
-      <mat-option>Виберіть назву завадння</mat-option>
+      <mat-option>Виберіть назву завдання</mat-option>
       <mat-option *ngFor="let task of data.tasks" value="{{task.id}}">{{task.name}}</mat-option>
     </mat-select>
     <mat-error *ngIf="formErrorsUsersTaskForm.task">{{formErrorsUsersTaskForm.task}}</mat-error>
