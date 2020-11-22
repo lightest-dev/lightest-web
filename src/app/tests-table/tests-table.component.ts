@@ -28,7 +28,7 @@ export class TestsTableComponent implements OnInit {
   }
 
   getData() {
-    this.taskService.getTasks()
+    this.taskService.getAccessibleTasks()
       .subscribe(data => {
         this.tasks = data;
       }, () => {

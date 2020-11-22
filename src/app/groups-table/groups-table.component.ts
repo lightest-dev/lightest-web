@@ -22,7 +22,7 @@ export class GroupsTableComponent implements OnInit {
   }
 
   getGroups() {
-    this.groupService.getGroups()
+    this.groupService.getAccesibleGroups()
       .subscribe(data => {
         this.groups = data;
       }, error1 => {

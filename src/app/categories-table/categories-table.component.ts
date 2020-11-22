@@ -22,7 +22,7 @@ export class CategoriesTableComponent implements OnInit {
   }
 
   getCategories() {
-    this.categoriesService.getCategories()
+    this.categoriesService.getAccesibleCategories()
       .subscribe(data => {
         this.categories = data;
       }, error1 => {

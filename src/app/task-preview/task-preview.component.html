@@ -5,7 +5,7 @@
 <div class="title-wrap"><span class="title">Приклади:</span> <pre>{{task.examples}}</pre></div>
 <br>
 <div class="title-wrap"><span class="title">Публічне:</span> <span>{{task.public ? 'Так' : 'Ні'}}</span></div>
-<ng-container *ngIf="task.checkerName">
+<ng-container *ngIf="task.checker?.name">
   <br>
-  <div class="title-wrap"><span class="title">Програма перевірки: </span> <span>{{task.checkerName}}</span></div>
+  <div class="title-wrap"><span class="title">Програма перевірки: </span> <span>{{task.checker.name}}</span></div>
 </ng-container>

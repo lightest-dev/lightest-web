@@ -86,7 +86,7 @@ export class TestPageComponent implements OnInit {
   }
 
   getTasks() {
-    this.taskService.getTasks()
+    this.taskService.getAccessibleTasks()
       .subscribe(data => {
         if(data) {
             this.tasks = data;

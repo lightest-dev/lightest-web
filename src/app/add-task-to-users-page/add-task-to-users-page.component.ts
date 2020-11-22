@@ -7,6 +7,7 @@ import {TaskToUsersFormComponent} from './task-to-users-form/task-to-users-form.
 import {SnackbarService} from '../shared/services/snackbar.service';
 import { AssignmentModification } from '../shared/models/assignments/AssignmentModification';
 import { AssignmentService } from '../shared/services/assignment.service';
+import { AssignedTask } from '../shared/models/tasks/AssignedTask';
 
 @Component({
   selector: 'app-add-task-to-users-page',
@@ -16,7 +17,7 @@ import { AssignmentService } from '../shared/services/assignment.service';
 export class AddTaskToUsersPageComponent implements OnInit {
 
   groups;
-  tasks: TaskShort[];
+  tasks: AssignedTask[];
   users;
   formFirst;
   allForms = [];
@@ -36,7 +37,7 @@ export class AddTaskToUsersPageComponent implements OnInit {
 
 
   getTasks() {
-    this.taskService.getTasks()
+    this.taskService.getAccessibleTasks()
       .subscribe(data => {
         this.tasks = data;
       });

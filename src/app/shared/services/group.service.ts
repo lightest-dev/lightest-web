@@ -1,30 +1,44 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {API_URL} from '../../../config/apiConfig';
-import {Observable} from 'rxjs';
-import {GroupShort} from '../models/GroupShort';
-import {Group} from '../models/Group';
-import {UserForGroup} from '../models/UserForGroup';
+import { HttpClient } from '@angular/common/http';
+import { API_URL } from '../../../config/apiConfig';
+import { Observable } from 'rxjs';
+import { GroupShort } from '../models/GroupShort';
+import { Group } from '../models/Group';
+import { UserForGroup } from '../models/UserForGroup';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GroupService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private authService: AuthService) { }
 
-  getGroups() :Observable<GroupShort[]>{
+  getAssignedGroups(): Observable<GroupShort[]> {
     return this.http.get<GroupShort[]>(`${API_URL}/groups`);
   }
 
-  addGroup(group :GroupShort) :Observable<GroupShort>{
+  // admin-only
+  getAllGroups(): Observable<GroupShort[]> {
+    return this.http.get<GroupShort[]>(`${API_URL}/groups/all`);
+  }
+
+  getAccesibleGroups(): Observable<GroupShort[]> {
+    if (this.authService.getUserInfo().isAdmin) {
+      return this.getAllGroups();
+    }
+    return this.getAssignedGroups();
+  }
+
+  addGroup(group: GroupShort): Observable<GroupShort> {
     if (!group.parentId) {
       delete group.parentId;
     }
     return this.http.post<GroupShort>(`${API_URL}/groups`, group);
   }
 
-  getGroup(id) :Observable<Group>{
+  getGroup(id): Observable<Group> {
     return this.http.get<Group>(`${API_URL}/groups/${id}`);
   }
 
