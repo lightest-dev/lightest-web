@@ -28,7 +28,4 @@ export class UploadService {
   uploadTaskSolution(taskSolution: TaskSolution): Observable<string> {
     return this.http.post<string>(`${API_URL}/uploads/code`, taskSolution);
   }
-
-
-
 }
