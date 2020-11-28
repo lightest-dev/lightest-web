@@ -33,7 +33,7 @@ export class TasksUploadsPreviewPageComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.taskService.getTasks().subscribe(data => {
+    this.taskService.getAccessibleTasks().subscribe(data => {
       this.tasks = data;
     });
 
