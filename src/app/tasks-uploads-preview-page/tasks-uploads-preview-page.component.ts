@@ -4,6 +4,8 @@ import {ProfileService} from "../shared/services/profile.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {FormService} from "../shared/services/form.service";
 import {UploadService} from "../shared/services/upload.service";
+import {CategoriesService} from "../shared/services/categories.service";
+import {LanguageService} from "../shared/services/language.service";
 
 @Component({
   selector: 'app-tasks-uploads-preview-page',
@@ -12,8 +14,11 @@ import {UploadService} from "../shared/services/upload.service";
 })
 export class TasksUploadsPreviewPageComponent implements OnInit {
 
+  public categoriesDetails;
+  public categories;
   public tasks;
   public users;
+  public languages;
   public chosenTask;
   public uploads;
   form: FormGroup;
@@ -23,9 +28,23 @@ export class TasksUploadsPreviewPageComponent implements OnInit {
               private formBuilder: FormBuilder,
               private formService: FormService,
               private uploadsService: UploadService,
+              private categoriesService: CategoriesService,
+              private languageService: LanguageService,
   ) { }
 
   ngOnInit(): void {
+    // this.categoriesService.getCategories().subscribe(data => {
+    //   this.categories = data;
+    //   console.log(data);
+    // }, () => {},
+    //   () => {
+    //   this.categories.forEach(el => {
+    //      this.categoriesService.getCategory(el.id).subscribe(data => {
+    //        this.categoriesDetails = data;
+    //     });
+    //   });
+    //   });
+
     this.taskService.getTasks().subscribe(data => {
       this.tasks = data;
     });
@@ -34,11 +53,19 @@ export class TasksUploadsPreviewPageComponent implements OnInit {
       this.users = data;
     });
 
+    // this.languageService.getLanguages().subscribe(data => {
+    //   this.languages = data;
+    //   console.log(data);
+    // });
+
     this.form = this.formBuilder.group({
       tasks: ['', [
         Validators.required
       ]],
       users: ['', [
+        Validators.required
+      ]],
+      categories: ['', [
         Validators.required
       ]],
     });
@@ -54,6 +81,12 @@ export class TasksUploadsPreviewPageComponent implements OnInit {
   getUploads(taskId, userId) {
     this.uploadsService.getTaskUploads(taskId, userId).subscribe((data) => {
       this.uploads = data;
+      // data.map((el) => {
+      //   return {
+      //     ...el,
+      //     language: this.languages.find((l) => l.id == el.languageId)?.name,
+      //   };
+      // });
     });
   }
 }

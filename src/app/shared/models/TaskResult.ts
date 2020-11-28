@@ -3,4 +3,5 @@ export class TaskResult {
   status: string;
   message: string;
   points: number;
+  languageId: number;
 }

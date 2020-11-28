@@ -26,10 +26,6 @@ export class UploadsPreviewComponent implements OnInit {
     this.step--;
   }
 
-  getPassedUploads() {
-    return this.uploads.filter(u => u.points > 0).length;
-  }
-
   getMaxPoints() {
     const maxPoint: number = Math.max(...this.uploads.map(u => u.points));
     return  maxPoint >=0 ? maxPoint : 0;
@@ -38,4 +34,10 @@ export class UploadsPreviewComponent implements OnInit {
   isCompleted() {
     return this.getMaxPoints() > 0;
   }
+  //
+  // getEditorOptions(upload) {
+  //   return {
+  //     language: upload.length, theme: 'vs-dark', readOnly: true
+  //   }
+  // }
 }

@@ -9,7 +9,6 @@ import {TaskPageComponent} from './task-page/task-page.component';
 import {CategoryPageComponent} from './category-page/category-page.component';
 import {CheckerPageComponent} from './checker-page/checker-page.component';
 import {GroupPageComponent} from './group-page/group-page.component';
-import {LanguagePageComponent} from './language-page/language-page.component';
 import {TestPageComponent} from './test-page/test-page.component';
 import {ProfilePageComponent} from './user/profilePage.component';
 import {AuthGuardService} from './shared/guards/auth-guard.service';
@@ -21,7 +20,6 @@ import {CategoriesTableComponent} from './categories-table/categories-table.comp
 import {CheckersTableComponent} from './checkers-table/checkers-table.component';
 import {TestsTableComponent} from './tests-table/tests-table.component';
 import {GroupsTableComponent} from './groups-table/groups-table.component';
-import {ServiceNavigationComponent} from './service-navigation/service-navigation.component';
 import {AuthGuardAdminService} from './shared/guards/auth-guard-admin.service';
 import {AddUsersToGroupComponent} from './add-users-to-group/add-users-to-group.component';
 import {AddUsersToCategoriesComponent} from './add-users-to-categories/add-users-to-categories.component';
@@ -86,11 +84,6 @@ const routes: Routes = [
         component: AddUsersToCategoriesComponent
       },
       {
-        path: 'service-navigation',
-        canActivate: [AuthGuardAdminService],
-        component: ServiceNavigationComponent
-      },
-      {
         path: 'uploads/:id',
         canActivate: [AuthGuardService],
         component: UploadsListComponent
@@ -103,10 +96,6 @@ const routes: Routes = [
             path: 'table',
             canActivate: [AuthGuardAdminService],
             component: TestsTableComponent
-          },
-          {
-            path: 'add',
-            component: TestPageComponent
           },
           {
             path: 'edit/:id',

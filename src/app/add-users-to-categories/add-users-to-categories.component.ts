@@ -112,5 +112,4 @@ export class AddUsersToCategoriesComponent implements OnInit {
       };
     });
   }
-
 }
