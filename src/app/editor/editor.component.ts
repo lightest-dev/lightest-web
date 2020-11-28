@@ -1,17 +1,13 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {EditorService} from '../shared/services/editor.service';
 import {UploadService} from '../shared/services/upload.service';
-import {TaskSolution} from '../shared/models/TaskSolution';
 import {LanguageService} from '../shared/services/language.service';
 import {TaskService} from '../shared/services/task.service';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import {UserChangeInfoDialogComponent} from '../user-change-info-dialog/user-change-info-dialog.component';
 import {InfoDialogComponent} from '../info-dialog/info-dialog.component';
-import {delay, first, map, pluck, repeat, timeout} from 'rxjs/operators';
 import {SnackbarService} from '../shared/services/snackbar.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {GroupService} from '../shared/services/group.service';
 import {FormService} from '../shared/services/form.service';
 
 @Component({
@@ -116,7 +112,6 @@ export class EditorComponent implements OnInit {
       this.uploadService.uploadTaskSolution(this.loadObjectForUpload())
         .subscribe(data => {
             this.uploadId = data;
-            this.getResult();
           },
           error => {
             console.error(error);

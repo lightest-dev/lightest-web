@@ -1,17 +1,28 @@
 <div class="example-container" [class.example-is-mobile]="mobileQuery.matches" >
   <mat-toolbar  class="example-toolbar">
-    <button matTooltipClass="c-primary-tooltip"
-            mat-icon-button matTooltip="Меню"
-            (click)="snav.toggle()">
-            <mat-icon>menu</mat-icon>
-    </button>
+    <div class="toolbar-nav">
+      <button matTooltipClass="c-primary-tooltip"
+              mat-icon-button matTooltip="Меню"
+              (click)="snav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
 
-    <a (click)="stepBack()"
-       class="stepBack"
+      <a (click)="stepBack()"
+         class="stepBack"
+         matTooltipClass="c-primary-tooltip"
+         matTooltip="Попередня сторінка">
+        <i class="material-icons">arrow_back</i>
+      </a>
+    </div>
+
+    <a (click)="logout()"
+       class="logout"
        matTooltipClass="c-primary-tooltip"
-       matTooltip="Попередня сторінка">
-      <i class="material-icons">arrow_back</i>
+       matTooltip="Вихід">
+      <span class="btn-label">Вихід</span>
+      <i class="material-icons">exit_to_app</i>
     </a>
+
   </mat-toolbar>
 
   <mat-sidenav-container class="example-sidenav-container"
@@ -20,17 +31,40 @@
                  [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
 
 
-      <mat-nav-list>
-        <a mat-list-item [routerLink]="[nav.link]" *ngFor="let nav of fillerNav">{{nav.name}}
-          <i class="material-icons">{{nav.icon}}</i>
-        </a>
-        <a mat-list-item *ngIf="userRole" (click)="goToService()">Навігація
-          <i class="material-icons">apps</i>
-        </a>
-        <a mat-list-item (click)="logout()">Вихід
-          <i class="material-icons">exit_to_app</i>
-        </a>
-      </mat-nav-list>
+        <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+
+            <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+              <button mat-icon-button disabled></button>
+              <ng-container *ngIf="node.checkAccess">
+                <a *ngIf="node.link && userRole" mat-list-item [routerLink]="[node.link]">{{node.name}}</a>
+              </ng-container>
+              <ng-container *ngIf="!node.checkAccess">
+                <a *ngIf="node.link" mat-list-item [routerLink]="[node.link]">{{node.name}}</a>
+              </ng-container>
+            </mat-tree-node>
+
+            <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
+              <ng-container *ngIf="node.checkAccess && userRole">
+                <button mat-icon-button matTreeNodeToggle
+                        [attr.aria-label]="'Toggle ' + node.name">
+                  <mat-icon class="mat-icon-rtl-mirror">
+                    {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                  </mat-icon>
+                </button>
+                <a *ngIf="node.link" mat-list-item [routerLink]="[node.link]">{{node.name}}</a>
+              </ng-container>
+              <ng-container *ngIf="!node.checkAccess">
+                <button mat-icon-button matTreeNodeToggle
+                        [attr.aria-label]="'Toggle ' + node.name">
+                  <mat-icon class="mat-icon-rtl-mirror">
+                    {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                  </mat-icon>
+                </button>
+                <a *ngIf="node.link" mat-list-item [routerLink]="[node.link]">{{node.name}}</a>
+              </ng-container>
+            </mat-tree-node>
+        </mat-tree>
+
     </mat-sidenav>
 
     <mat-sidenav-content class="main-content test">

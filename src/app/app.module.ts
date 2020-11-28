@@ -64,6 +64,7 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
 import { TasksUploadsPreviewPageComponent } from './tasks-uploads-preview-page/tasks-uploads-preview-page.component';
 import { UploadsPreviewComponent } from './uploads-preview/uploads-preview.component';
 import { TaskPreviewComponent } from './task-preview/task-preview.component';
+import {MatTreeModule} from "@angular/material/tree";
 
 @NgModule({
   declarations: [
@@ -127,7 +128,8 @@ import { TaskPreviewComponent } from './task-preview/task-preview.component';
     }),
     MonacoEditorModule.forRoot(),
     OverlayModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTreeModule
   ],
   providers: [
     AuthService,

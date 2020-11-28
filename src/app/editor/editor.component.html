@@ -38,6 +38,12 @@
             </mat-select>
           </mat-form-field>
 
+          <button *ngIf="uploadId" matTooltip="Переглянути результат"
+                  matTooltipClass="c-primary-tooltip"
+                  mat-button (click)="getResult()">
+            Переглянути результат
+          </button>
+
           <button matTooltip="Відправити завдання на перевірку"
                   matTooltipClass="c-primary-tooltip"
                   mat-button (click)="upload()">

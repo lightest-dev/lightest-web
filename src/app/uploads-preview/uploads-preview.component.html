@@ -13,7 +13,7 @@
     <br>
     <div class="title-wrap"><span class="title">Оцінка: </span>{{getMaxPoints()}}/{{task.points}}</div>
     <br>
-    <div class="title-wrap"><span class="title">Зроблено успішних спроб: </span>{{getPassedUploads()}}/{{uploads.length}}</div>
+    <div class="title-wrap"><span class="title">Зроблено спроб: </span>{{uploads.length}}</div>
   </div>
   <br>
   <div class="header-table-wrapper">
@@ -27,7 +27,6 @@
           {{task.name}}
         </mat-panel-title>
         <mat-panel-description>
-          <!--        {{chosenTask.category.name}}-->
           <span class="points">{{upload.points}} / {{task.points}}</span>
           <mat-icon *ngIf="!isCompleted()" matTooltip="Завдання не виконано"><i class="material-icons">notifications</i></mat-icon>
           <mat-icon *ngIf="isCompleted()" matTooltip="Виконано"><i class="material-icons">done_all</i></mat-icon>
