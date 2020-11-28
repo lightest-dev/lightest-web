@@ -176,7 +176,7 @@ export class TaskPageComponent implements OnInit {
   }
 
   getCategories() {
-    this.categoryService.getCategories()
+    this.categoryService.getAccesibleCategories()
       .subscribe(data => {
         this.categories = data;
       });

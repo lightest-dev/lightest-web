@@ -1,6 +1,6 @@
-import { BaseTask } from "../tasks/BaseTask";
+import { AssignedTask } from "../tasks/AssignedTask";
 
-export class Assignment extends BaseTask {
+export class Assignment extends AssignedTask {
   deadline?: Date;
   completed: boolean;
   highScore: number;

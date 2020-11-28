@@ -33,7 +33,7 @@ export class TasksTableComponent implements OnInit {
   }
 
   getTasks() {
-    this.taskService.getTasks()
+    this.taskService.getAccessibleTasks()
       .subscribe(data => {
         this.tasks = data;
       }, () => {
@@ -44,25 +44,6 @@ export class TasksTableComponent implements OnInit {
       }, () => {
         this.moderateData();
         this.loadObjForTable();
-        this.getCheckers();
-      });
-  }
-
-  getCheckers() {
-    const checkerIds = Object.assign([], this.tasks.map(task => task.checkerId));
-    const $checkerOservers = [];
-    checkerIds.forEach(id => {
-      $checkerOservers.push(this.checkerService.getChecker(id));
-    });
-    const combined = combineLatest($checkerOservers);
-    combined.subscribe(data => {
-      this.checkers = data;
-    }, () => {},
-      () => {
-        for (let i = 0; i < this.tasks.length; i++) {
-          this.tasks[i].checkerId = this.checkers[i].id;
-          this.tasks[i].checkerName = this.checkers[i].name;
-        }
         this.getCategories();
       });
   }
@@ -88,12 +69,11 @@ export class TasksTableComponent implements OnInit {
 
   loadObjForTable() {
     this.userTableObj = {
-      labels: ['number', 'name', 'categoryId', 'checkerName', 'public', 'details', 'delete', 'edit'],
+      labels: ['number', 'name', 'categoryId', 'public', 'details', 'delete', 'edit'],
       labelsName: {
         number: '№',
         name: 'Назва',
         categoryId: 'Категорія',
-        checkerName: 'Програма перевірки',
         public: 'Публічне',
         details: 'Деталі',
         delete: 'Видалити',
@@ -135,7 +115,9 @@ export class TasksTableComponent implements OnInit {
   }
 
   view(data) {
-    this.dialog.open(TaskPreviewDialog, { data });
+    this.taskService.getTask(data.id).subscribe(result => {
+      this.dialog.open(TaskPreviewDialog, { data: result });
+    })
   }
 
   navigateToTaskCreating() {

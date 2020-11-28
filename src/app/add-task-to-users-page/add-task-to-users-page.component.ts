@@ -7,6 +7,8 @@ import {TaskToUsersFormComponent} from './task-to-users-form/task-to-users-form.
 import {SnackbarService} from '../shared/services/snackbar.service';
 import { AssignmentModification } from '../shared/models/assignments/AssignmentModification';
 import { AssignmentService } from '../shared/services/assignment.service';
+import { AssignedTask } from '../shared/models/tasks/AssignedTask';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-add-task-to-users-page',
@@ -16,7 +18,7 @@ import { AssignmentService } from '../shared/services/assignment.service';
 export class AddTaskToUsersPageComponent implements OnInit {
 
   groups;
-  tasks: TaskShort[];
+  tasks: AssignedTask[];
   users;
   formFirst;
   allForms = [];
@@ -30,26 +32,14 @@ export class AddTaskToUsersPageComponent implements OnInit {
               private domService: DomService) { }
 
   ngOnInit() {
-    this.getTasks();
-    this.getUsers();
-  }
-
-
-  getTasks() {
-    this.taskService.getTasks()
-      .subscribe(data => {
-        this.tasks = data;
-      });
-  }
-
-  getUsers() {
-    this.accountService.getUsers()
-      .subscribe(data => {
-        this.users = data;
-      }, () => {},
-        () => {
-          this.initFormObj();
-        });
+    forkJoin({
+      tasks: this.taskService.getAccessibleTasks(),
+      users: this.accountService.getUsers()
+    }).subscribe(result => {
+      this.tasks = result.tasks;
+      this.users = result.users;
+      this.initFormObj();
+    });
   }
 
   initFormObj() {

@@ -4,16 +4,30 @@ import {API_URL} from '../../../config/apiConfig';
 import {Category} from '../models/Category';
 import {CategoryUser} from '../models/CategoryUser';
 import {Observable} from 'rxjs';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoriesService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private authService: AuthService) { }
 
-  getCategories(): Observable<Category[]> {
+  getAssignedCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(`${API_URL}/categories`);
+  }
+
+  // admin-only
+  getAllCategories(): Observable<Category[]> {
+    return this.http.get<Category[]>(`${API_URL}/categories/all`);
+  }
+
+  getAccesibleCategories(): Observable<Category[]> {
+    if (this.authService.getUserInfo().isAdmin) {
+      return this.getAllCategories();
+    }
+    return this.getAssignedCategories();
   }
 
   addCategory(category: Category): Observable<Category> {

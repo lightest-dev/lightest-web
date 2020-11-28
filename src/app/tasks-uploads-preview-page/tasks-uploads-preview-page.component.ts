@@ -33,18 +33,6 @@ export class TasksUploadsPreviewPageComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.categoriesService.getCategories().subscribe(data => {
-    //   this.categories = data;
-    //   console.log(data);
-    // }, () => {},
-    //   () => {
-    //   this.categories.forEach(el => {
-    //      this.categoriesService.getCategory(el.id).subscribe(data => {
-    //        this.categoriesDetails = data;
-    //     });
-    //   });
-    //   });
-
     this.taskService.getTasks().subscribe(data => {
       this.tasks = data;
     });

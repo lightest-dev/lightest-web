@@ -35,7 +35,7 @@ export class EditorComponent implements OnInit {
     'c' : 'cpp',
     'c#': 'csharp',
     'python3': 'python',
-    'pas': 'pascal'
+    'free pascal': 'pascal'
   }
 
   editorOptionsForm: FormGroup;

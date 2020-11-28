@@ -1,10 +1,7 @@
-import { BaseTask } from "./BaseTask";
+import { AssignedTask } from "./AssignedTask";
 
-export class TaskShort extends BaseTask {
+export class TaskShort extends AssignedTask {
   description: string;
-  categoryId: number;
-  checkerId: number;
+  checkerId: string;
   examples: string;
-  points: number;
-  public: boolean;
 }

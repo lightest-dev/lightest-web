@@ -66,7 +66,7 @@ export class AddUsersToCategoriesComponent implements OnInit {
   }
 
   getCategories() {
-    this.categoriesService.getCategories()
+    this.categoriesService.getAccesibleCategories()
       .subscribe(data => {
         this.categories = data;
       });

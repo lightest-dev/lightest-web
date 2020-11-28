@@ -6,17 +6,29 @@ import {TaskShort} from '../models/tasks/TaskShort';
 import {Task} from '../models/tasks/Task';
 import {LanguageForTask} from '../models/LanguageForTask';
 import {Test} from '../models/Test';
+import { AssignmentService } from './assignment.service';
+import { AuthService } from './auth.service';
+import { AssignedTask } from '../models/tasks/AssignedTask';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private authService: AuthService,
+    private assignmentsService: AssignmentService) { }
 
-  // TODO: review current usage and replace with getAssignedTasks for non-admin users
-  getTasks(): Observable<TaskShort[]> {
+  // admin-onlys
+  getAllTasks(): Observable<TaskShort[]> {
     return this.http.get<TaskShort[]>(`${API_URL}/tasks`);
+  }
+
+  getAccessibleTasks(): Observable<AssignedTask[]> {
+    if (this.authService.getUserInfo().isAdmin) {
+      return this.getAllTasks();
+    }
+    return this.assignmentsService.getAssignedTasks();
   }
 
   addNewTask(task: TaskShort) {
